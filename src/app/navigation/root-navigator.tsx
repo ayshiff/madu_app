@@ -5,22 +5,17 @@ import {
 } from '@react-navigation/native';
 
 import { createStackNavigator } from '@react-navigation/stack';
-// Without Expo
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Text, ViewStyle, ImageStyle } from 'react-native';
+import { ImageStyle } from 'react-native';
 import { RootParamList } from './types';
-import { PrimaryNavigator } from './primary-navigator';
-import { HomeScreen, SettingsScreen } from '../screens';
-import { OtherScreen } from '../screens/other-screen/other-screen';
+import { SettingsScreen } from '../screens';
 import { Icon } from '../components';
-import { IconTypes } from '../components/icon/icons';
-import { spacing } from '../theme';
+import { IconTypes } from '../components/atoms/icon/icons';
+import { WelcomeNavigator } from './welcome-navigator';
 
 const Stack = createStackNavigator<RootParamList>();
-// Without Expo
-// const Stack = createNativeStackNavigator<RootParamList>()
 
 const Tab = createBottomTabNavigator();
 
@@ -30,13 +25,11 @@ const RootStack = () => {
             screenOptions={{
                 headerShown: false,
                 gestureEnabled: true
-                // Without Expo
-                // stackPresentation: "modal",
             }}
         >
             <Stack.Screen
                 name="primaryStack"
-                component={PrimaryNavigator}
+                component={WelcomeNavigator}
                 options={{
                     headerShown: false
                 }}

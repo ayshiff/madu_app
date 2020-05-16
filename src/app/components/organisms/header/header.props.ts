@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { IconTypes } from '../icon/icons';
+import { IconTypes } from '../../atoms/icon/icons';
 
 export interface HeaderProps {
     /**

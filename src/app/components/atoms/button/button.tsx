@@ -5,6 +5,17 @@ import { Text } from '../text/text';
 import { viewPresets, textPresets } from './button.presets';
 import { ButtonProps } from './button.props';
 
+// import styled from 'styled-components';
+// const StyledTouchableOpacity = styled(TouchableOpacity)`
+//     padding-vertical: ${spacing[2]};
+//     padding-horizontal: ${spacing[2]};
+//     justify-content: 'center';
+//     align-items: 'center';
+//     background-color: ${color.palette.lightGrey};
+//     border-radius: 200px;
+//     height: 30px;
+//     `;
+
 /**
  * For your text displaying needs.
  *
@@ -38,6 +49,7 @@ export function Button(props: ButtonProps) {
     const content = children || <Text tx={tx} text={text} style={textStyle} />;
 
     return (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <TouchableOpacity style={viewStyle} {...rest}>
             {content}
         </TouchableOpacity>

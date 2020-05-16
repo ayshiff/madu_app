@@ -1,6 +1,4 @@
 import { AsyncStorage } from 'react-native';
-// Without Expo
-// import AsyncStorage from "@react-native-community/async-storage"
 
 /**
  * Loads a string from storage.

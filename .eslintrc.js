@@ -10,4 +10,8 @@ module.exports = {
     parserOptions: {
         project: './tsconfig.json',
     },
+    rules: {
+        "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off"
+    }
 };

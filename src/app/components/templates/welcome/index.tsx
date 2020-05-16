@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { connect } from 'react-redux';
-import { Button, Screen, Header } from '../../components';
-import { color, spacing } from '../../theme';
-import { exampleActions } from '../../actions/example.actions';
+import { Screen, Header, Button } from '../../index';
+import { color, spacing } from '../../../theme';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -31,25 +29,20 @@ const HEADER_TITLE: TextStyle = {
     textAlign: 'center',
     letterSpacing: 1.5
 };
-const OTHER: ViewStyle = {
-    paddingVertical: spacing[4],
-    paddingHorizontal: spacing[4],
-    backgroundColor: '#5D2555'
-};
 
-const OTHER_TEXT: TextStyle = {
-    ...BOLD,
-    fontSize: 13,
-    letterSpacing: 2
-};
-
-export interface HomeScreenProps {
+export interface RegisterScreenProps {
     loadContent: () => string;
     content: string;
     navigation: any;
 }
 
-export const Home: React.FunctionComponent<HomeScreenProps> = (props) => {
+export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = (
+    props
+) => {
+    const navigateToNextStep = React.useMemo(
+        () => () => props.navigation.navigate('register-step-one'),
+        [props.navigation]
+    );
     const goBack = React.useMemo(() => () => props.navigation.goBack(), [
         props.navigation
     ]);
@@ -61,29 +54,14 @@ export const Home: React.FunctionComponent<HomeScreenProps> = (props) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Home Screen"
+                    headerText="Register Screen"
+                    leftIcon="back"
+                    onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
-                <View>
-                    <Button
-                        style={OTHER}
-                        textStyle={OTHER_TEXT}
-                        text="Go Back"
-                        onPress={goBack}
-                    />
-                </View>
+                <Button text="Créer un compte" onPress={navigateToNextStep} />
             </Screen>
         </View>
     );
 };
-
-const mapStateToProps = (state: any) => ({
-    content: state.root.content
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-    loadContent: () => dispatch(exampleActions.setContent())
-});
-
-export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(Home);

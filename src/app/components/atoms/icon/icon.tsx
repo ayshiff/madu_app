@@ -4,7 +4,9 @@ import { IconProps } from './icon.props';
 import { icons } from './icons';
 
 const ROOT: ImageStyle = {
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    width: 15,
+    height: 15
 };
 
 export function Icon(props: IconProps) {

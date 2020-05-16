@@ -2,7 +2,7 @@ import { of, Observable } from 'rxjs';
 import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
-import { dependencies } from '../app.store';
+import type { dependencies } from '../app.store';
 import {
     ExampleTypes,
     ExampleActions,
@@ -18,7 +18,7 @@ export const loadExampleContent: Epic = (
 ): Observable<ExampleActions> => {
     return action$.pipe(
         ofType(ExampleTypes.SetContent),
-        concatMap((action) => {
+        concatMap(() => {
             return ajax({
                 url: MOCK_URL,
                 method: 'GET'

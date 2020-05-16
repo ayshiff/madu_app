@@ -1,18 +1,14 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-// Without Expo
-import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import { HomeScreen } from '../screens';
+import { WelcomeScreen } from '../screens';
 import { PrimaryParamList } from './types';
-import { OtherScreen } from '../screens/other-screen/other-screen';
+import { HomeScreen } from '../screens/home-screen/home-screen';
 
 const Stack = createStackNavigator<PrimaryParamList>();
-// Without Expo
-// const Stack = createNativeStackNavigator<PrimaryParamList>()
 
-export function PrimaryNavigator() {
+export function HomeNavigator() {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -20,8 +16,8 @@ export function PrimaryNavigator() {
                 gestureEnabled: true
             }}
         >
-            <Stack.Screen name="welcome" component={HomeScreen} />
-            <Stack.Screen name="other" component={OtherScreen} />
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
+            <Stack.Screen name="home" component={HomeScreen} />
         </Stack.Navigator>
     );
 }

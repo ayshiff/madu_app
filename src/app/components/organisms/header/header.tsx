@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
 import { HeaderProps } from './header.props';
-import { Button } from '../button/button';
-import { Text } from '../text/text';
-import { Icon } from '../icon/icon';
-import { spacing } from '../../theme';
+import { Button } from '../../atoms/button/button';
+import { Text } from '../../atoms/text/text';
+import { Icon } from '../../atoms/icon/icon';
+import { spacing } from '../../../theme';
 
 // static styles
 const ROOT: ViewStyle = {
@@ -30,7 +31,6 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
         rightIcon,
         leftIcon,
         headerText,
-        headerTx,
         style,
         titleStyle
     } = props;

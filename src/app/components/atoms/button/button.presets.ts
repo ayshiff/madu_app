@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { color, spacing } from '../../theme';
+import { color, spacing } from '../../../theme';
 
 /**
  * All text will start off looking like this.
@@ -27,7 +27,7 @@ export const viewPresets = {
      */
     primary: {
         ...BASE_VIEW,
-        backgroundColor: color.palette.orange
+        backgroundColor: color.palette.lightGrey
     } as ViewStyle,
 
     /**
