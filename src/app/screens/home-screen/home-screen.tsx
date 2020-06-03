@@ -3,7 +3,7 @@ import { View, ViewStyle, TextStyle } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
-import { exampleActions } from '../../actions/example.actions';
+import { registerActions } from '../../actions/register.actions';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -31,28 +31,11 @@ const HEADER_TITLE: TextStyle = {
     textAlign: 'center',
     letterSpacing: 1.5
 };
-const OTHER: ViewStyle = {
-    paddingVertical: spacing[4],
-    paddingHorizontal: spacing[4],
-    backgroundColor: '#5D2555'
-};
-
-const OTHER_TEXT: TextStyle = {
-    ...BOLD,
-    fontSize: 13,
-    letterSpacing: 2
-};
 
 export interface HomeScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
 }
-
-export const Home: React.FunctionComponent<HomeScreenProps> = (props) => {
-    const goBack = React.useMemo(() => () => props.navigation.goBack(), [
-        props.navigation
-    ]);
+const Home = (/* props: HomeScreenProps */) => {
     return (
         <View style={FULL}>
             <Screen
@@ -65,25 +48,14 @@ export const Home: React.FunctionComponent<HomeScreenProps> = (props) => {
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
-                <View>
-                    <Button
-                        style={OTHER}
-                        textStyle={OTHER_TEXT}
-                        text="Go Back"
-                        onPress={goBack}
-                    />
-                </View>
+                <View>{/* Map Compoenent */}</View>
             </Screen>
         </View>
     );
 };
 
-const mapStateToProps = (state: any) => ({
-    content: state.root.content
-});
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch: any) => ({
-    loadContent: () => dispatch(exampleActions.setContent())
-});
+const mapDispatchToProps = () => ({});
 
 export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(Home);

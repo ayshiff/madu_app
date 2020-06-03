@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle, Text } from 'react-native';
-import { connect } from 'react-redux';
+import { View, ViewStyle, TextStyle } from 'react-native';
 import { Button, Header, Screen } from '../../components';
 import { color, spacing } from '../../theme';
-import { exampleActions } from '../../actions/example.actions';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -41,19 +39,18 @@ const HEADER_TITLE: TextStyle = {
 };
 
 export interface WelcomeScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
 }
 
-export const Welcome: React.FunctionComponent<WelcomeScreenProps> = (props) => {
+export const WelcomeScreen = (props: WelcomeScreenProps) => {
+    const { navigation } = props;
     const navigateToLogin = React.useMemo(
-        () => () => props.navigation.navigate('login'),
-        [props.navigation]
+        () => () => navigation.navigate('login'),
+        [navigation]
     );
     const navigateToRegister = React.useMemo(
-        () => () => props.navigation.navigate('register'),
-        [props.navigation]
+        () => () => navigation.navigate('register'),
+        [navigation]
     );
     return (
         <View style={FULL}>
@@ -63,27 +60,9 @@ export const Welcome: React.FunctionComponent<WelcomeScreenProps> = (props) => {
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
-                <Button
-                    onPress={() => props.loadContent()}
-                    text="Load Content"
-                />
-                <Text style={CONTENT}>{props.content}</Text>
                 <Button text="S'inscrire" onPress={navigateToRegister} />
                 <Button text="J'ai déjà un compte" onPress={navigateToLogin} />
             </Screen>
         </View>
     );
 };
-
-const mapStateToProps = (state: any) => ({
-    content: state.root.content
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-    loadContent: () => dispatch(exampleActions.setContent())
-});
-
-export const WelcomeScreen = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Welcome);

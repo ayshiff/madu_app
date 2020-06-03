@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
+import { Map } from '../../components/organisms/map/map';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -30,13 +31,13 @@ const HEADER_TITLE: TextStyle = {
     letterSpacing: 1.5
 };
 
-export interface SettingsScreenProps {
+export interface MapScreenProps {
     loadContent: () => string;
     content: string;
     navigation: any;
 }
 
-export const SettingsScreen: React.FunctionComponent<SettingsScreenProps> = () => (
+export const MapScreen: React.FunctionComponent<MapScreenProps> = () => (
     <View style={FULL}>
         <Screen
             style={CONTAINER}
@@ -44,10 +45,11 @@ export const SettingsScreen: React.FunctionComponent<SettingsScreenProps> = () =
             backgroundColor={color.transparent}
         >
             <Header
-                headerText="Settings Screen"
+                headerText="Map Screen"
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
             />
+            {/* <Map /> */}
         </Screen>
     </View>
 );
