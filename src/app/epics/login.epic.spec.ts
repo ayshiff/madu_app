@@ -1,9 +1,9 @@
 import { TestScheduler } from 'rxjs/testing';
-import { exampleActions } from '../actions/example.actions';
-import { exampleContentResponseMock } from './__mocks__/example.mock';
-import { exampleEpics } from './example.epic';
+import { loginActions } from '../actions/login.actions';
+import { loginEpics } from './login.epic';
+import { loginResponseMock } from './__mocks__/login.mock';
 
-describe('example epic', () => {
+describe('Login epic', () => {
     let testScheduler: TestScheduler;
 
     beforeEach(() => {
@@ -12,27 +12,31 @@ describe('example epic', () => {
         });
     });
 
-    it('should fetch content data', () => {
+    it('should login a user', () => {
         const marbles = {
             i: '-i',
             r: '--r',
             o: '---o'
         };
 
+        const payload = {
+            email: 'string@hetic.net',
+            password: 'password'
+        };
+
         const values = {
-            i: exampleActions.setContent(),
-            r: { response: exampleContentResponseMock },
-            o: exampleActions.setContentSuccess(exampleContentResponseMock)
+            i: loginActions.login(payload),
+            r: { response: loginResponseMock },
+            o: loginActions.loginSuccess(loginResponseMock)
         };
 
         testScheduler.run(({ hot, cold, expectObservable }) => {
             const action$ = hot(marbles.i, values) as any;
             const dependencies = {
-                ajax: ({ url, method }: { url: string; method: string }) =>
-                    cold(marbles.r, values)
+                ajax: () => cold(marbles.r, values)
             };
             const state$ = null as any;
-            const output$ = exampleEpics(action$, state$, dependencies);
+            const output$ = loginEpics(action$, state$, dependencies);
             expectObservable(output$).toBe(marbles.o, values);
         });
     });
