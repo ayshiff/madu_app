@@ -1,32 +1,67 @@
 import React from 'react';
+import {
+    NavigationContainer,
+    NavigationContainerRef
+} from '@react-navigation/native';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { WelcomeScreen } from '../screens';
-import { PrimaryParamList } from './types';
-import { HomeScreen } from '../screens/home-screen/home-screen';
+import { ImageStyle } from 'react-native';
+import {
+    HomeScreen,
+    MapScreen,
+    ContentScreen,
+    ProfileScreen
+} from '../screens';
+import { Icon } from '../components';
+import { IconTypes } from '../components/atoms/icon/icons';
 
-const Stack = createStackNavigator<PrimaryParamList>();
+const Tab = createBottomTabNavigator();
 
-export function HomeNavigator() {
+const ICON: ImageStyle = {
+    width: 15,
+    height: 15
+};
+
+export const HomeNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerShown: false,
-                gestureEnabled: true
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: () => {
+                    let iconName;
+
+                    switch (route.name) {
+                        case 'Home':
+                            iconName = 'explorer';
+                            break;
+                        case 'Settings':
+                            iconName = 'profile';
+                            break;
+                        case 'Map':
+                            iconName = 'map';
+                            break;
+                        case 'Content':
+                            iconName = 'content';
+                            break;
+                        default:
+                            iconName = 'explorer';
+                            break;
+                    }
+                    return <Icon icon={iconName as IconTypes} style={ICON} />;
+                }
+            })}
+            tabBarOptions={{
+                activeTintColor: '#5D2555',
+                inactiveTintColor: 'gray'
             }}
         >
-            <Stack.Screen name="welcome" component={WelcomeScreen} />
-            <Stack.Screen name="home" component={HomeScreen} />
-        </Stack.Navigator>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Content" component={ContentScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+        </Tab.Navigator>
     );
-}
-
-/**
- * A list of routes from which we're allowed to leave the app when
- * the user presses the back button on Android.
- *
- * Anything not on this list will be a standard `back` action in
- * react-navigation.
- */
-export const exitRoutes: string[] = ['welcome'];
+});

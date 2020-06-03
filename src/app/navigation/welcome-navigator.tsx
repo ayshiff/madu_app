@@ -7,7 +7,6 @@ import {
     NavigationContainer
 } from '@react-navigation/native';
 import { WelcomeScreen } from '../screens';
-import { HomeScreen } from '../screens/home-screen/home-screen';
 import { RegisterScreen } from '../components/templates/welcome';
 import { RegisterStepOneScreen } from '../components/templates/welcome/register/step-one';
 import { RegisterStepTwoScreen } from '../components/templates/welcome/register/step-two';
@@ -16,6 +15,7 @@ import { RegisterStepFourScreen } from '../components/templates/welcome/register
 import { RegisterStepFiveScreen } from '../components/templates/welcome/register/step-five';
 import { LoginScreen } from '../components/templates/welcome/login';
 import { WelcomeParamList } from './types';
+import { HomeNavigator } from './home-navigator';
 
 const Stack = createStackNavigator<WelcomeParamList>();
 
@@ -54,7 +54,7 @@ export const WelcomeNavigator = React.forwardRef<
                     component={RegisterStepFiveScreen}
                 />
                 <Stack.Screen name="login" component={LoginScreen} />
-                <Stack.Screen name="home" component={HomeScreen} />
+                <Stack.Screen name="home" component={HomeNavigator} />
             </Stack.Navigator>
         </NavigationContainer>
     );
