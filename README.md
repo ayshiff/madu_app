@@ -1,5 +1,6 @@
 ## MADU mobile app
 ![style-airbnb--typescript-](https://img.shields.io/badge/code%20style-airbnb--typescript-blue)
+[![Coverage Status](https://coveralls.io/repos/github/ayshiff/madu_app/badge.svg?branch=master)](https://coveralls.io/github/ayshiff/madu_app?branch=master)
 
 The app is not ejected yet so you can start it using expo:
 
