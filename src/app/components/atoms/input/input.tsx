@@ -6,6 +6,13 @@ import { color, spacing, typography } from '../../../theme';
 import { Text } from '../text/text';
 import { TextFieldProps } from './input.props';
 
+// import styled from 'styled-components';
+// const styledInput = styled.input`
+//     color: #e8e8e8;
+//     minheight: 35;
+//     borderbottomwidth: 1;
+// `;
+
 // the base styling for the container
 const CONTAINER: ViewStyle = {
     paddingVertical: spacing[3]
@@ -25,7 +32,7 @@ const PRESETS: { [name: string]: ViewStyle } = {
     default: {}
 };
 
-const enhance = (style, styleOverride) => {
+const enhance = (style: any, styleOverride: any) => {
     return mergeAll(flatten([style, styleOverride]));
 };
 

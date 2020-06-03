@@ -13,7 +13,8 @@ const BASE_VIEW: ViewStyle = {
 };
 
 const BASE_TEXT: TextStyle = {
-    paddingHorizontal: spacing[3]
+    paddingHorizontal: spacing[3],
+    textTransform: 'uppercase'
 };
 
 /**
@@ -45,7 +46,7 @@ export const textPresets = {
     primary: {
         ...BASE_TEXT,
         fontSize: 9,
-        color: color.palette.white
+        color: color.palette.darkGrey
     } as TextStyle,
     link: {
         ...BASE_TEXT,

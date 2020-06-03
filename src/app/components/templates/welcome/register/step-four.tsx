@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../../index';
+import { connect } from 'react-redux';
+import { Screen, Header, Input, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
+import { RegisterScreenProps } from '..';
+import { registerActions } from '../../../../actions/register.actions';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -29,25 +32,71 @@ const HEADER_TITLE: TextStyle = {
     textAlign: 'center',
     letterSpacing: 1.5
 };
-
-export interface RegisterStepFourScreenProps {
-    loadContent: () => string;
-    content: string;
-    navigation: any;
+export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
+    setUserData: (data: IData) => void;
 }
 
-export const RegisterStepFourScreen: React.FunctionComponent<RegisterStepFourScreenProps> = () => (
-    <View style={FULL}>
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.transparent}
-        >
-            <Header
-                headerText="RegisterStepFour Screen"
-                style={HEADER}
-                titleStyle={HEADER_TITLE}
-            />
-        </Screen>
-    </View>
-);
+interface IData {
+    name: string;
+    lastname: string;
+}
+
+const RegisterFourThree = (props: RegisterStepThreeScreenProps) => {
+    const { navigation, userData, setUserData } = props;
+    const [name, setName] = React.useState(userData.name || '');
+    const [lastname, setSurname] = React.useState(userData.lastname || '');
+
+    const navigateToNextStep = React.useMemo(
+        () => () => navigation.navigate('register-step-five'),
+        [navigation]
+    );
+    const handleNavigate = () => {
+        setUserData({ name, lastname });
+        navigateToNextStep();
+    };
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+    return (
+        <View style={FULL}>
+            <Screen
+                style={CONTAINER}
+                preset="scroll"
+                backgroundColor={color.transparent}
+            >
+                <Header
+                    headerText="Register Step 4"
+                    leftIcon="back"
+                    onLeftPress={goBack}
+                    style={HEADER}
+                    titleStyle={HEADER_TITLE}
+                />
+                <h1>Complétez votre profil</h1>
+                <Input
+                    value={name}
+                    placeholder="Nom"
+                    label="Nom"
+                    onChangeText={(el: string) => setName(el)}
+                />
+                <Input
+                    value={lastname}
+                    placeholder="Prenom"
+                    label="Prenom"
+                    onChangeText={(el: string) => setSurname(el)}
+                />
+                <Button text="suivant" onPress={handleNavigate} />
+            </Screen>
+        </View>
+    );
+};
+
+const mapStateToProps = (state: any) => ({
+    userData: state.register
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
+});
+
+export const RegisterStepFourScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterFourThree);

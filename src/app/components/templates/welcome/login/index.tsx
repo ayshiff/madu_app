@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header, Input } from '../../../index';
+import { useState } from 'react';
+import { connect } from 'react-redux';
+import { Screen, Header, Input, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
+import { loginActions } from '../../../../actions/login.actions';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -31,24 +34,67 @@ const HEADER_TITLE: TextStyle = {
 };
 
 export interface LoginScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    login: (data: IData) => void;
+    userData: any;
 }
 
-export const LoginScreen: React.FunctionComponent<LoginScreenProps> = () => (
-    <View style={FULL}>
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.transparent}
-        >
-            <Header
-                headerText="Login Screen"
-                style={HEADER}
-                titleStyle={HEADER_TITLE}
-            />
-            <Input placeholder="login" label="login" />
-        </Screen>
-    </View>
-);
+interface IData {
+    email: string;
+    password: string;
+}
+
+const Login = (props: LoginScreenProps) => {
+    const { navigation, login } = props;
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const navigateToNextStep = React.useMemo(
+        () => () => navigation.navigate('home'),
+        [navigation]
+    );
+    const handleNavigate = () => {
+        login({ email, password });
+        navigateToNextStep();
+    };
+
+    return (
+        <View style={FULL}>
+            <Screen
+                style={CONTAINER}
+                preset="scroll"
+                backgroundColor={color.transparent}
+            >
+                <Header
+                    headerText="Login Screen"
+                    style={HEADER}
+                    titleStyle={HEADER_TITLE}
+                />
+                <Input
+                    placeholder="Adresse mail professionnel"
+                    label="Adresse mail professionnel"
+                    value={email}
+                    onChangeText={(el: string) => setEmail(el)}
+                />
+                <p>Mot de passe oublié ?</p>
+                <Input
+                    placeholder="Mot de passe"
+                    label="Mot de passe"
+                    value={password}
+                    onChangeText={(el: string) => setPassword(el)}
+                />
+                <Button text="Créer un compte" onPress={handleNavigate} />
+            </Screen>
+        </View>
+    );
+};
+
+const mapStateToProps = (state: any) => ({
+    userData: state.login
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    login: (data: IData) => dispatch(loginActions.login(data))
+});
+
+export const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(Login);

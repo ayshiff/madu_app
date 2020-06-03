@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../../index';
+import { Screen, Header, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 
 const FULL: ViewStyle = { flex: 1 };
@@ -36,18 +36,37 @@ export interface RegisterStepFiveScreenProps {
     navigation: any;
 }
 
-export const RegisterStepFiveScreen: React.FunctionComponent<RegisterStepFiveScreenProps> = () => (
-    <View style={FULL}>
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.transparent}
-        >
-            <Header
-                headerText="RegisterStepFive Screen"
-                style={HEADER}
-                titleStyle={HEADER_TITLE}
-            />
-        </Screen>
-    </View>
-);
+export const RegisterStepFiveScreen = (props: RegisterStepFiveScreenProps) => {
+    const { navigation } = props;
+    const navigateToNextStep = React.useMemo(
+        () => () => navigation.navigate('home'),
+        [navigation]
+    );
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+    return (
+        <View style={FULL}>
+            <Screen
+                style={CONTAINER}
+                preset="scroll"
+                backgroundColor={color.transparent}
+            >
+                <Header
+                    headerText="Register Step 5"
+                    leftIcon="back"
+                    onLeftPress={goBack}
+                    style={HEADER}
+                    titleStyle={HEADER_TITLE}
+                />
+                <h1>Complétez votre profil</h1>
+                <p>
+                    Prenez ou choississez une photo de vous et commencez à
+                    remplir votre cagnotte
+                </p>
+                <p>Prendre une photo</p>
+                <p>Choisir une photo</p>
+                <Button text="confirmer" onPress={navigateToNextStep} />
+                <Button text="passer" onPress={navigateToNextStep} />
+            </Screen>
+        </View>
+    );
+};

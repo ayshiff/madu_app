@@ -49,7 +49,6 @@ export function Button(props: ButtonProps) {
     const content = children || <Text tx={tx} text={text} style={textStyle} />;
 
     return (
-        // eslint-disable-next-line react/jsx-props-no-spreading
         <TouchableOpacity style={viewStyle} {...rest}>
             {content}
         </TouchableOpacity>

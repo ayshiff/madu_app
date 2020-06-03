@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
 import { Screen, Header, Button } from '../../index';
 import { color, spacing } from '../../../theme';
+import { IUserData } from '../../../actions/register.actions';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -31,21 +32,17 @@ const HEADER_TITLE: TextStyle = {
 };
 
 export interface RegisterScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    userData: IUserData;
 }
 
-export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = (
-    props
-) => {
+export const RegisterScreen = (props: RegisterScreenProps) => {
+    const { navigation } = props;
     const navigateToNextStep = React.useMemo(
-        () => () => props.navigation.navigate('register-step-one'),
-        [props.navigation]
+        () => () => navigation.navigate('register-step-one'),
+        [navigation]
     );
-    const goBack = React.useMemo(() => () => props.navigation.goBack(), [
-        props.navigation
-    ]);
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
         <View style={FULL}>
             <Screen

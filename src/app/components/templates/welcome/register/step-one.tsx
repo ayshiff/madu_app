@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../../index';
+import { connect } from 'react-redux';
+import { useState } from 'react';
+import { Screen, Header, Button, Input } from '../../../index';
 import { color, spacing } from '../../../../theme';
+import { registerActions } from '../../../../actions/register.actions';
+import { RegisterScreenProps } from '..';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -30,18 +34,29 @@ const HEADER_TITLE: TextStyle = {
     letterSpacing: 1.5
 };
 
-export interface RegisterStepOneScreenProps {
-    loadContent: () => string;
-    content: string;
-    navigation: any;
+export interface RegisterStepOneScreenProps extends RegisterScreenProps {
+    setUserData: (data: IData) => void;
 }
 
-export const RegisterStepOneScreen: React.FunctionComponent<RegisterStepOneScreenProps> = (
-    props
-) => {
-    const goBack = React.useMemo(() => () => props.navigation.goBack(), [
-        props.navigation
-    ]);
+interface IData {
+    email: string;
+    password: string;
+}
+
+const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
+    const { navigation, userData, setUserData } = props;
+    const [email, setEmail] = useState(userData.email || '');
+    const [password, setPassword] = useState(userData.password || '');
+
+    const navigateToNextStep = React.useMemo(
+        () => () => navigation.navigate('register-step-two'),
+        [navigation]
+    );
+    const handleNavigate = () => {
+        setUserData({ email, password });
+        navigateToNextStep();
+    };
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
         <View style={FULL}>
             <Screen
@@ -50,13 +65,39 @@ export const RegisterStepOneScreen: React.FunctionComponent<RegisterStepOneScree
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Register Step one Screen"
+                    headerText="Register Step 1"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
+                <Input
+                    placeholder="Adresse mail professionnel"
+                    label="Adresse mail professionnel"
+                    value={email}
+                    onChangeText={(el: string) => setEmail(el)}
+                />
+                <Input
+                    placeholder="Mot de passe"
+                    label="Mot de passe"
+                    value={password}
+                    onChangeText={(el: string) => setPassword(el)}
+                />
+                <Button text="Créer un compte" onPress={handleNavigate} />
             </Screen>
         </View>
     );
 };
+
+const mapStateToProps = (state: any) => ({
+    userData: state.register
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
+});
+
+export const RegisterStepOneScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterStepOne);

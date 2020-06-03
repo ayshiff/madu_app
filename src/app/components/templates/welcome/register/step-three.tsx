@@ -1,7 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../../index';
+import { connect } from 'react-redux';
+import { Screen, Header, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
+import Picker from '../../../atoms/picker/picker';
+import { registerActions } from '../../../../actions/register.actions';
+import { RegisterScreenProps } from '..';
 
 const FULL: ViewStyle = { flex: 1 };
 const TEXT: TextStyle = {
@@ -30,24 +34,70 @@ const HEADER_TITLE: TextStyle = {
     letterSpacing: 1.5
 };
 
-export interface RegisterStepThreeScreenProps {
-    loadContent: () => string;
-    content: string;
-    navigation: any;
+export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
+    setUserData: (data: IData) => void;
 }
 
-export const RegisterStepThreeScreen: React.FunctionComponent<RegisterStepThreeScreenProps> = () => (
-    <View style={FULL}>
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.transparent}
-        >
-            <Header
-                headerText="RegisterStepThree Screen"
-                style={HEADER}
-                titleStyle={HEADER_TITLE}
-            />
-        </Screen>
-    </View>
-);
+interface IData {
+    workDivision: string;
+}
+
+const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
+    const { navigation, userData, setUserData } = props;
+    const [workPlaces] = useState([
+        { label: 'test1', value: 'test1' },
+        { label: 'test2', value: 'test2' }
+    ]);
+    const [workDivision, setWorkDivision] = useState(
+        userData.workDivision || '0'
+    );
+
+    const navigateToNextStep = React.useMemo(
+        () => () => navigation.navigate('register-step-four'),
+        [navigation]
+    );
+    const handleNavigate = () => {
+        setUserData({ workDivision });
+        navigateToNextStep();
+    };
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+    return (
+        <View style={FULL}>
+            <Screen
+                style={CONTAINER}
+                preset="scroll"
+                backgroundColor={color.transparent}
+            >
+                <Header
+                    headerText="Register Step 3"
+                    leftIcon="back"
+                    onLeftPress={goBack}
+                    style={HEADER}
+                    titleStyle={HEADER_TITLE}
+                />
+                <Picker
+                    placeholder="Sélectionner un département"
+                    selectedValue={workDivision}
+                    onValueChange={(itemValue: string) =>
+                        setWorkDivision(itemValue)
+                    }
+                    items={workPlaces}
+                />
+                <Button text="suivant" onPress={handleNavigate} />
+            </Screen>
+        </View>
+    );
+};
+
+const mapStateToProps = (state: any) => ({
+    userData: state.register
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
+});
+
+export const RegisterStepThreeScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterStepThree);
