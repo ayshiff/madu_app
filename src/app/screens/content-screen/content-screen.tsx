@@ -3,7 +3,7 @@ import { View, ViewStyle, TextStyle } from 'react-native';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
 
-const FULL: ViewStyle = { flex: 1 };
+const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -24,10 +24,7 @@ const HEADER: TextStyle = {
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
-    letterSpacing: 1.5
+    textAlign: 'left'
 };
 
 export interface ContentScreenProps {
