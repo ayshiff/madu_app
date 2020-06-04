@@ -1,12 +1,17 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 
-const CAMERA_TYPE = Camera.Constants.Type.front;
-
-export default function App() {
+export const CameraComponent = ({
+    navigateToNextStep,
+    saveImage
+}: {
+    navigateToNextStep: any;
+    saveImage: any;
+}) => {
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+    const [type] = useState(Camera.Constants.Type.back);
+    const camera = React.createRef<Camera>();
 
     useEffect(() => {
         (async () => {
@@ -15,6 +20,15 @@ export default function App() {
         })();
     }, []);
 
+    const takePicture = async () => {
+        if (camera.current) {
+            const options = { quality: 1, base64: true };
+            const data = await camera.current.takePictureAsync(options);
+            saveImage({ image: data.uri });
+            navigateToNextStep(false);
+        }
+    };
+
     if (hasPermission === null) {
         return <View />;
     }
@@ -22,16 +36,41 @@ export default function App() {
         return <Text>No access to camera</Text>;
     }
     return (
-        <View style={{ flex: 1 }}>
-            <Camera style={{ flex: 1 }} type={CAMERA_TYPE}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <Camera
+                ref={camera}
+                style={{ flex: 1, backgroundColor: 'white' }}
+                type={type}
+            >
                 <View
                     style={{
                         flex: 1,
                         backgroundColor: 'transparent',
                         flexDirection: 'row'
                     }}
-                />
+                >
+                    <TouchableOpacity
+                        style={{
+                            flex: 0.1,
+                            alignSelf: 'flex-end',
+                            alignItems: 'center'
+                        }}
+                        onPress={() => {
+                            takePicture();
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 18,
+                                marginBottom: 10,
+                                color: 'white'
+                            }}
+                        >
+                            Snap
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </Camera>
         </View>
     );
-}
+};

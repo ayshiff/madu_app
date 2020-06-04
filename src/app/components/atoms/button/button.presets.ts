@@ -7,9 +7,11 @@ import { color, spacing } from '../../../theme';
 const BASE_VIEW: ViewStyle = {
     paddingVertical: spacing[2],
     paddingHorizontal: spacing[2],
-    borderRadius: 4,
+    borderRadius: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 10,
+    alignSelf: 'stretch'
 };
 
 const BASE_TEXT: TextStyle = {
@@ -28,31 +30,17 @@ export const viewPresets = {
      */
     primary: {
         ...BASE_VIEW,
-        backgroundColor: color.palette.lightGrey
-    } as ViewStyle,
-
-    /**
-     * A button without extras.
-     */
-    link: {
-        ...BASE_VIEW,
-        paddingHorizontal: 0,
-        paddingVertical: 0,
-        alignItems: 'flex-start'
+        backgroundColor: color.palette.lightGrey,
+        height: 50
     } as ViewStyle
 };
 
 export const textPresets = {
     primary: {
         ...BASE_TEXT,
-        fontSize: 9,
+        fontSize: 15,
+        // fontWeight: 500,
         color: color.palette.darkGrey
-    } as TextStyle,
-    link: {
-        ...BASE_TEXT,
-        color: color.text,
-        paddingHorizontal: 0,
-        paddingVertical: 0
     } as TextStyle
 };
 

@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
+import { Icon } from '../icon/icon';
+import { IconTypes } from '../icon/icons';
 
 interface IconButtonProps {
     text: string;
-    icon: string;
+    icon: IconTypes;
 }
 
 const IconButton = (props: IconButtonProps) => {
@@ -11,8 +13,8 @@ const IconButton = (props: IconButtonProps) => {
 
     return (
         <TouchableOpacity>
-            <p>{text}</p>
-            <p>{icon}</p>
+            <Text>{text}</Text>
+            <Icon icon={icon} />
         </TouchableOpacity>
     );
 };

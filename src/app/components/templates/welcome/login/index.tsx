@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { Screen, Header, Input, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 import { loginActions } from '../../../../actions/login.actions';
+import { Text } from '../../../atoms/text/text';
 
-const FULL: ViewStyle = { flex: 1 };
+const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -27,10 +28,7 @@ const HEADER: TextStyle = {
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
-    letterSpacing: 1.5
+    textAlign: 'left'
 };
 
 export interface LoginScreenProps {
@@ -66,7 +64,7 @@ const Login = (props: LoginScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Login Screen"
+                    headerText="Connectez-vous"
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
@@ -76,14 +74,14 @@ const Login = (props: LoginScreenProps) => {
                     value={email}
                     onChangeText={(el: string) => setEmail(el)}
                 />
-                <p>Mot de passe oublié ?</p>
                 <Input
                     placeholder="Mot de passe"
                     label="Mot de passe"
+                    secureTextEntry
                     value={password}
                     onChangeText={(el: string) => setPassword(el)}
                 />
-                <Button text="Créer un compte" onPress={handleNavigate} />
+                <Button text="Je me connecte" onPress={handleNavigate} />
             </Screen>
         </View>
     );
