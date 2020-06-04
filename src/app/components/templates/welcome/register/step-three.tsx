@@ -5,9 +5,10 @@ import { Screen, Header, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 import Picker from '../../../atoms/picker/picker';
 import { registerActions } from '../../../../actions/register.actions';
-import { RegisterScreenProps } from '..';
+import { RegisterScreenProps } from './step-one';
+import { Text } from '../../../atoms/text/text';
 
-const FULL: ViewStyle = { flex: 1 };
+const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -28,10 +29,7 @@ const HEADER: TextStyle = {
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
-    letterSpacing: 1.5
+    textAlign: 'left'
 };
 
 export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
@@ -69,14 +67,20 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Register Step 3"
+                    headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
+                <Text>
+                    Renseignez le département dans lequel vous travaillez, pour
+                    découvrir et réaliser des défis écoresponsables avec vos
+                    collègues.
+                </Text>
                 <Picker
-                    placeholder="Sélectionner un département"
+                    placeholder="Département un département"
+                    label="Lieu de travail"
                     selectedValue={workDivision}
                     onValueChange={(itemValue: string) =>
                         setWorkDivision(itemValue)

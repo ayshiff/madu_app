@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle } from 'react-native';
+import { View, ViewStyle, TextStyle, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Screen, Header, Input, Button } from '../../../index';
+import { Screen, Header, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 import { registerActions } from '../../../../actions/register.actions';
-import { Text } from '../../../atoms/text/text';
 import { RegisterScreenProps } from './step-one';
+import { Text } from '../../../atoms/text/text';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
+};
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -17,7 +22,8 @@ const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
     backgroundColor: color.transparent,
-    paddingHorizontal: spacing[4]
+    paddingHorizontal: spacing[4],
+    flex: 1
 };
 
 const HEADER: TextStyle = {
@@ -30,29 +36,29 @@ const HEADER_TITLE: TextStyle = {
     ...BOLD,
     textAlign: 'left'
 };
-export interface RegisterStepFourScreenProps extends RegisterScreenProps {
+
+export interface RegisterStepSixScreenProps extends RegisterScreenProps {
     setUserData: (data: IData) => void;
 }
 
 interface IData {
-    name: string;
-    lastname: string;
+    email: string;
+    password: string;
 }
 
-const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
-    const { navigation, userData, setUserData } = props;
-    const [name, setName] = React.useState(userData.name || '');
-    const [lastname, setSurname] = React.useState(userData.lastname || '');
+const RegisterStepSix = (props: RegisterStepSixScreenProps) => {
+    const { navigation, userData } = props;
 
     const navigateToNextStep = React.useMemo(
-        () => () => navigation.navigate('register-step-five'),
+        () => () => navigation.navigate('home'),
         [navigation]
     );
     const handleNavigate = () => {
-        setUserData({ name, lastname });
         navigateToNextStep();
     };
-    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+    const goBack = React.useMemo(() => () => navigation.goBack(''), [
+        navigation
+    ]);
     return (
         <View style={FULL}>
             <Screen
@@ -67,20 +73,26 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
-                <Text>Complétez votre profil</Text>
-                <Input
-                    value={name}
-                    placeholder="Nom"
-                    label="Nom"
-                    onChangeText={(el: string) => setName(el)}
+                <Image
+                    style={{
+                        width: 200,
+                        height: 200,
+                        borderRadius: 100
+                    }}
+                    source={{
+                        uri: userData.image
+                    }}
                 />
-                <Input
-                    value={lastname}
-                    placeholder="Prénom"
-                    label="Prénom"
-                    onChangeText={(el: string) => setSurname(el)}
-                />
-                <Button text="suivant" onPress={handleNavigate} />
+                <View>
+                    <Text preset="header">Tu as gagné 80 points</Text>
+                    {/* <Image source={} /> */}
+                </View>
+                <Text>
+                    Félicitation, vous venez de gagner vos premier points !
+                    N’hésite pas à aller voir ton avancement et classement au
+                    sein de l’entreprise sur ton profil
+                </Text>
+                <Button text="Continuer" onPress={handleNavigate} />
             </Screen>
         </View>
     );
@@ -94,7 +106,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
 });
 
-export const RegisterStepFourScreen = connect(
+export const RegisterStepSixScreen = connect(
     mapStateToProps,
     mapDispatchToProps
-)(RegisterStepFour);
+)(RegisterStepSix);

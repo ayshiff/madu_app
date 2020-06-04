@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import { Screen, Header, Button, Input } from '../../../index';
 import { color, spacing } from '../../../../theme';
-import { registerActions } from '../../../../actions/register.actions';
-import { RegisterScreenProps } from '..';
+import {
+    registerActions,
+    IUserData
+} from '../../../../actions/register.actions';
 
-const FULL: ViewStyle = { flex: 1 };
+const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -28,13 +30,14 @@ const HEADER: TextStyle = {
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
-    letterSpacing: 1.5
+    textAlign: 'left'
 };
 
-export interface RegisterStepOneScreenProps extends RegisterScreenProps {
+export interface RegisterScreenProps {
+    navigation: any;
+    userData: IUserData;
+}
+interface RegisterStepOneScreenProps extends RegisterScreenProps {
     setUserData: (data: IData) => void;
 }
 
@@ -47,6 +50,7 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const { navigation, userData, setUserData } = props;
     const [email, setEmail] = useState(userData.email || '');
     const [password, setPassword] = useState(userData.password || '');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const navigateToNextStep = React.useMemo(
         () => () => navigation.navigate('register-step-two'),
@@ -65,7 +69,7 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Register Step 1"
+                    headerText="Créer mon compte"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}
@@ -80,8 +84,16 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 <Input
                     placeholder="Mot de passe"
                     label="Mot de passe"
+                    secureTextEntry
                     value={password}
                     onChangeText={(el: string) => setPassword(el)}
+                />
+                <Input
+                    placeholder="Confirmer mot de passe"
+                    label="Confirmer mot de passe"
+                    secureTextEntry
+                    value={confirmPassword}
+                    onChangeText={(el: string) => setConfirmPassword(el)}
                 />
                 <Button text="Créer un compte" onPress={handleNavigate} />
             </Screen>

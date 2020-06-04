@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Screen, Header, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 import Picker from '../../../atoms/picker/picker';
+import { Text } from '../../../atoms/text/text';
 import { registerActions } from '../../../../actions/register.actions';
-import { RegisterScreenProps } from '..';
+import { RegisterScreenProps } from './step-one';
 
-const FULL: ViewStyle = { flex: 1 };
+const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -28,10 +29,7 @@ const HEADER: TextStyle = {
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
-    letterSpacing: 1.5
+    textAlign: 'left'
 };
 
 export interface RegisterStepTwoScreenProps extends RegisterScreenProps {
@@ -67,15 +65,20 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="Register Step 2"
+                    headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
+                <Text>
+                    Renseignez votre lieux de travail, pour découvrir des
+                    adresses écoresponsables près de votre entreprise.
+                </Text>
                 <Picker
                     placeholder="Sélectionner un lieux"
                     selectedValue={workplace}
+                    label="Lieu de travail"
                     onValueChange={(itemValue: string) =>
                         setWorkplace(itemValue)
                     }
