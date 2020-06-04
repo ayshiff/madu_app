@@ -15,6 +15,7 @@ export type WelcomeParamList = {
     'register-step-three': undefined;
     'register-step-four': undefined;
     'register-step-five': undefined;
+    'register-step-six': undefined;
     login: undefined;
     home: undefined;
 };
