@@ -31,6 +31,7 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
         rightIcon,
         leftIcon,
         headerText,
+        boldText,
         style,
         titleStyle
     } = props;
@@ -55,7 +56,16 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
                 )}
             </View>
             <View style={TITLE_MIDDLE}>
-                <Text style={{ ...TITLE, ...titleStyle }} text={header} />
+                <Text>
+                    {boldText && (
+                        <Text
+                            preset="bold"
+                            style={{ ...TITLE, width: 110 }}
+                            text={boldText}
+                        />
+                    )}{' '}
+                    <Text style={{ ...TITLE, ...titleStyle }} text={header} />
+                </Text>
             </View>
         </View>
     );

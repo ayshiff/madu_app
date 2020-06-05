@@ -10,10 +10,12 @@ import { IMAGE_CONTAINER, IMAGE } from './step-five';
 
 const FULL: ViewStyle = {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: color.background,
+    alignItems: 'center',
+    justifyContent: 'center'
 };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 

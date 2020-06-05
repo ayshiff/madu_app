@@ -9,9 +9,9 @@ import {
     IUserData
 } from '../../../../actions/register.actions';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 

@@ -21,10 +21,11 @@ const CONTAINER: ViewStyle = {
 // the base styling for the TextInput
 const INPUT: TextStyle = {
     fontFamily: typography.primary,
-    color: color.text,
+    color: color.dark_1,
     minHeight: 44,
     fontSize: 18,
-    backgroundColor: color.palette.white
+    backgroundColor: color.palette.white,
+    padding: spacing[2]
 };
 
 // currently we have no presets, but that changes quickly when you build your app.
@@ -62,8 +63,8 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
             <Text preset="fieldLabel" tx={labelTx} text={label} />
             <TextInput
                 placeholder={placeholder}
-                placeholderTextColor={color.palette.lighterGrey}
-                underlineColorAndroid={color.palette.lightGrey}
+                placeholderTextColor={color.palette.dark_2}
+                underlineColorAndroid="transparent"
                 {...rest}
                 style={inputStyle}
                 ref={forwardedRef}

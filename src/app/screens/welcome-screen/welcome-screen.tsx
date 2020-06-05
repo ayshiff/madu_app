@@ -1,18 +1,14 @@
 import * as React from 'react';
-import { View, ViewStyle, Image, ImageStyle } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { Button } from '../../components';
 import { Text } from '../../components/atoms/text/text';
+import { color } from '../../theme/color';
 
 const FULL: ViewStyle = {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-};
-
-const IMAGE: ImageStyle = {
-    width: 250,
-    height: 250,
-    resizeMode: 'contain'
+    justifyContent: 'center',
+    backgroundColor: color.background
 };
 
 export interface WelcomeScreenProps {

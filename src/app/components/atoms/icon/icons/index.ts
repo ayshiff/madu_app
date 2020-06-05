@@ -6,7 +6,8 @@ export const icons = {
     map: require('./map.png'),
     content: require('./content.png'),
     profile: require('./profile.png'),
-    explorer: require('./explorer.png')
+    explorer: require('./explorer.png'),
+    logout: require('./logout.png')
 };
 
 export type IconTypes = keyof typeof icons;

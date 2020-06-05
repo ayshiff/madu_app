@@ -12,7 +12,7 @@ import { RegisterScreenProps } from './step-one';
 
 const FULL: ViewStyle = {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: color.background
 };
 export const IMAGE_CONTAINER: ViewStyle = {
     flex: 1,
@@ -26,7 +26,7 @@ export const IMAGE = {
     borderRadius: 100
 };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
