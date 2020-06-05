@@ -1,4 +1,4 @@
-## MADU mobile app
+## MADU mobile app [expo link](https://expo.io/@ayshiff/madu)
 ![style-airbnb--typescript-](https://img.shields.io/badge/code%20style-airbnb--typescript-blue)
 [![Coverage Status](https://coveralls.io/repos/github/ayshiff/madu_app/badge.svg?branch=master)](https://coveralls.io/github/ayshiff/madu_app?branch=master)
 
@@ -7,10 +7,6 @@ The app is not ejected yet so you can start it using expo:
 ```
 yarn install && yarn [web | start | android | ios | web | test | eject]
 ```
-
-<div align="center">
-<img height="300" src="./assets/demo.gif" >
-</div>
 
 ## Redux & Actions
 
