@@ -14,14 +14,13 @@ const FULL: ViewStyle = {
     flex: 1,
     backgroundColor: 'white'
 };
-const IMAGE_CONTAINER: ViewStyle = {
+export const IMAGE_CONTAINER: ViewStyle = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
 };
-const IMAGE = {
+export const IMAGE = {
     flex: 1,
-    backgroundColor: 'white',
     width: 200,
     height: 200,
     borderRadius: 100

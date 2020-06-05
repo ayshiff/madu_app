@@ -31,14 +31,7 @@ export const WelcomeScreen = (props: WelcomeScreenProps) => {
     );
     return (
         <View style={FULL}>
-            <Image
-                source={{
-                    uri:
-                        'https://www.dzmob.com/wp-content/uploads/2018/09/React-Native.png'
-                }}
-                style={IMAGE}
-            />
-            <Text preset="header" style={{ textAlign: 'center' }}>
+            <Text preset="header" style={{ textAlign: 'left' }}>
                 Bienvenue sur l’app qui contribue à un monde plus durable
             </Text>
             <Button text="S'inscrire" onPress={navigateToRegister} />

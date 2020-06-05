@@ -6,12 +6,11 @@ import { color, spacing } from '../../../../theme';
 import { registerActions } from '../../../../actions/register.actions';
 import { RegisterScreenProps } from './step-one';
 import { Text } from '../../../atoms/text/text';
+import { IMAGE_CONTAINER, IMAGE } from './step-five';
 
 const FULL: ViewStyle = {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: 'white'
 };
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -22,8 +21,7 @@ const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
     backgroundColor: color.transparent,
-    paddingHorizontal: spacing[4],
-    flex: 1
+    paddingHorizontal: spacing[4]
 };
 
 const HEADER: TextStyle = {
@@ -73,16 +71,14 @@ const RegisterStepSix = (props: RegisterStepSixScreenProps) => {
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />
-                <Image
-                    style={{
-                        width: 200,
-                        height: 200,
-                        borderRadius: 100
-                    }}
-                    source={{
-                        uri: userData.image
-                    }}
-                />
+                <View style={IMAGE_CONTAINER}>
+                    <Image
+                        style={IMAGE}
+                        source={{
+                            uri: userData.image
+                        }}
+                    />
+                </View>
                 <View>
                     <Text preset="header">Tu as gagné 80 points</Text>
                     {/* <Image source={} /> */}
