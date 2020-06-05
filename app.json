@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Madu",
-    "slug": "Madu",
+    "slug": "madu",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "MADU app",
+    "githubUrl": "https://github.com/ayshiff/madu_app"
   }
 }

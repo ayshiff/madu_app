@@ -1,5 +1,4 @@
-import { AnyAction, applyMiddleware, compose, createStore, Store } from 'redux';
-import { createLogger } from 'redux-logger';
+import { applyMiddleware, compose, createStore, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import { rootEpic } from './epics/root.epic';

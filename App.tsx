@@ -15,14 +15,11 @@ import { Provider } from 'react-redux';
 import * as storage from './src/app/utils/storage';
 import { initFonts } from './src/app/theme/fonts';
 
-import {
-    exitRoutes,
-    setRootNavigation,
-    TabNavigator
-} from './src/app/navigation';
-import { useBackButtonHandler } from './src/app/navigation/use-back-button-handler';
-import getActiveRouteName from './src/app/navigation/get-active-routename';
+import { exitRoutes, setRootNavigation } from './src/app/navigation';
+import { useBackButtonHandler } from './src/app/navigation/utils/use-back-button-handler';
+import getActiveRouteName from './src/app/navigation/utils/get-active-routename';
 import { store } from './src/app/app.store';
+import { WelcomeNavigator } from './src/app/navigation/welcome-navigator';
 // import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
@@ -122,7 +119,7 @@ const App: React.FunctionComponent<{}> = () => {
             <SafeAreaProvider
                 initialSafeAreaInsets={initialWindowSafeAreaInsets}
             >
-                <TabNavigator
+                <WelcomeNavigator
                     ref={navigationRef}
                     initialState={initialNavigationState}
                     onStateChange={onNavigationStateChange}

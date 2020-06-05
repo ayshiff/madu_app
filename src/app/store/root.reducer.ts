@@ -1,10 +1,13 @@
 import { combineReducers, Reducer } from 'redux';
-import { exampleReducer } from './example.reducer';
+import { registerReducer } from './register.reducer';
+import { loginReducer } from './login.reducer';
 
 export interface AppStore {
-    root: ReturnType<typeof exampleReducer>;
+    register: ReturnType<typeof registerReducer>;
+    login: ReturnType<typeof loginReducer>;
 }
 
 export const rootReducer: Reducer<AppStore> = combineReducers({
-    root: exampleReducer
+    register: registerReducer,
+    login: loginReducer
 });
