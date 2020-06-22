@@ -55,6 +55,8 @@ const Login = (props: LoginScreenProps) => {
         navigateToNextStep();
     };
 
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+
     return (
         <View style={FULL}>
             <Screen
@@ -64,6 +66,8 @@ const Login = (props: LoginScreenProps) => {
             >
                 <Header
                     headerText="Connectez-vous"
+                    leftIcon="back"
+                    onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />

@@ -42,10 +42,7 @@ interface IData {
 
 const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const [workPlaces] = useState([
-        { label: 'test1', value: 'test1' },
-        { label: 'test2', value: 'test2' }
-    ]);
+    const [workPlaces] = useState([{ label: 'Paris', value: 'Paris' }]);
     const [workplace, setWorkplace] = useState(userData.workplace || '');
 
     const navigateToNextStep = React.useMemo(

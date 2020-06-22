@@ -15,7 +15,7 @@ const TEXT: TextStyle = {
 
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
-const CONTAINER: ViewStyle = {
+export const CONTAINER: ViewStyle = {
     backgroundColor: color.transparent,
     paddingHorizontal: spacing[4]
 };
