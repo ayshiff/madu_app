@@ -1,6 +1,6 @@
-import React from 'react';
-import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useState, useRef } from 'react';
+import MapView, { Circle, Marker, Callout } from 'react-native-maps';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,13 +14,58 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height
     }
 });
-// eslint-disable-next-line react/prefer-stateless-function
-export class Map extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <MapView style={styles.mapStyle} />
-            </View>
-        );
-    }
+
+const PARIS_LOCATION = {
+    latitude: 48.8534,
+    longitude: 2.3488,
+    latitudeDelta: 0.19,
+    longitudeDelta: 0.19
+};
+
+export interface MapProps {
+    navigation: any;
 }
+
+export const Map = (props: MapProps) => {
+    const { navigation } = props;
+    const [centerPoint, setCenterPoint] = useState<{
+        latitude: number;
+        longitude: number;
+        latitudeDelta: number;
+        longitudeDelta: number;
+    }>(PARIS_LOCATION);
+    const map = useRef(null);
+
+    const navigateToDetailScreen = React.useMemo(
+        () => () => navigation.navigate('detail'),
+        [navigation]
+    );
+
+    return (
+        <View style={styles.container}>
+            <MapView region={centerPoint} ref={map} style={styles.mapStyle}>
+                {/* Circle */}
+                <Circle
+                    center={centerPoint}
+                    radius={700}
+                    strokeWidth={1.5}
+                    strokeColor="#FAAD14"
+                    fillColor="rgba(250, 173, 20, 0.1);"
+                />
+                <Marker
+                    key="test"
+                    title="title"
+                    description="description"
+                    coordinate={{
+                        latitude: 48.8534,
+                        longitude: 2.3488
+                    }}
+                    onPress={(e) => {
+                        e.stopPropagation();
+                        navigateToDetailScreen();
+                    }}
+                />
+            </MapView>
+        </View>
+    );
+};
