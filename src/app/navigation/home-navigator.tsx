@@ -12,7 +12,8 @@ import {
     HomeScreen,
     MapScreen,
     ContentScreen,
-    ProfileScreen
+    ProfileScreen,
+    ChallengeScreen
 } from '../screens';
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
@@ -67,6 +68,9 @@ export const HomeNavigator = React.forwardRef<
                         case 'Content':
                             iconName = 'content';
                             break;
+                        case 'Challenge':
+                            iconName = 'content';
+                            break;
                         default:
                             iconName = 'explorer';
                             break;
@@ -82,6 +86,7 @@ export const HomeNavigator = React.forwardRef<
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Map" component={MapNavigator} />
             <Tab.Screen name="Content" component={ContentScreen} />
+            <Tab.Screen name="Challenge" component={ChallengeScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
