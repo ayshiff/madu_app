@@ -7,7 +7,10 @@ export const icons = {
     content: require('./content.png'),
     profile: require('./profile.png'),
     explorer: require('./explorer.png'),
-    close: require('./close.png')
+    close: require('./close.png'),
+    phone: require('./phone.png'),
+    pin: require('./pin.png'),
+    website: require('./website.png')
 };
 
 export type IconTypes = keyof typeof icons;

@@ -17,7 +17,8 @@ import {
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
 import { MapParamList } from './types';
-import { DetailScreen } from '../screens/detail-screen/detail-screen';
+import { PoiScreen } from '../screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
@@ -39,7 +40,8 @@ const MapNavigator = React.forwardRef<
             }}
         >
             <Stack.Screen name="map" component={MapScreen} />
-            <Stack.Screen name="detail" component={DetailScreen} />
+            <Stack.Screen name="poi" component={PoiScreen} />
+            <Stack.Screen name="poi-success" component={PoiSuccessScreen} />
         </Stack.Navigator>
     );
 });

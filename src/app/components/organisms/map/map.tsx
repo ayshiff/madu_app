@@ -37,7 +37,7 @@ export const Map = (props: MapProps) => {
     const map = useRef(null);
 
     const navigateToDetailScreen = React.useMemo(
-        () => () => navigation.navigate('detail'),
+        () => () => navigation.navigate('poi'),
         [navigation]
     );
 

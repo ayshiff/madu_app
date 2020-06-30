@@ -23,4 +23,6 @@ export type WelcomeParamList = {
 export type MapParamList = {
     map: undefined;
     detail: undefined;
+    poi: undefined;
+    'poi-success': undefined;
 };
