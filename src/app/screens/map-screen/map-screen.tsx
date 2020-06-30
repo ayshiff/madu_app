@@ -14,7 +14,5 @@ export interface MapScreenProps {
 export const MapScreen: React.FunctionComponent<MapScreenProps> = ({
     navigation
 }: MapScreenProps) => (
-    <View style={FULL}>
-        {/* <Map navigation={navigation} /> */}
-    </View>
+    <View style={FULL}>{ <Map navigation={navigation} /> }</View>
 );

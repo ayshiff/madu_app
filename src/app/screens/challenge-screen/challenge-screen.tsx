@@ -14,21 +14,21 @@ const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 
 const BLACK_TEXT: TextStyle = {
     marginTop: 20,
-    color: "#000000",
+    color: '#000000',
     marginLeft: 24,
     marginRight: 24
-}
+};
 
 const GREY_TEXT: TextStyle = {
     marginTop: 25,
-    color: "#8E8E93",
+    color: '#8E8E93',
     marginLeft: 24,
     marginRight: 24
-}
+};
 
 const TEXT_CONTAINER: ViewStyle = {
     marginBottom: 63
-}
+};
 
 const IMAGE_BACKGROUND: ViewStyle = {
     width: '100%',
@@ -51,12 +51,12 @@ const TEXT_IMAGE_BACKGROUND: TextStyle = {
 
 const INFORMATION_CONTAINER: ViewStyle = {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
 };
 
 const POINT_WRAPPER: ViewStyle = {
     flexDirection: 'row',
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginBottom: 22,
     paddingLeft: 24,
     paddingRight: 40
@@ -79,7 +79,7 @@ const ENERGY_TAG: ViewStyle = {
 
 const ENERGY_TEXT: TextStyle = {
     color: '#007AFF',
-    fontWeight: "bold"
+    fontWeight: 'bold'
 };
 
 const POINTS_TAG: ViewStyle = {
@@ -100,7 +100,7 @@ export interface ChallengeScreenProps {
     navigation: any;
 }
 
-const Challenge = ( props: ChallengeScreenProps ) => {
+const Challenge = (props: ChallengeScreenProps) => {
     const { navigation } = props;
 
     const navigateToChallengePictureStep = React.useMemo(
@@ -161,7 +161,10 @@ const Challenge = ( props: ChallengeScreenProps ) => {
                         achetés séparément…
                     </Text>
                 </View>
-                <Button text="J'ai réussi !" onPress={navigateToChallengePictureStep}/>
+                <Button
+                    text="J'ai réussi !"
+                    onPress={navigateToChallengePictureStep}
+                />
             </Screen>
         </View>
     );

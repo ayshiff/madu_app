@@ -14,8 +14,8 @@ const ChallengePictureStep = (props: ChallengePictureStepScreenProps) => {
         <View>
             <Text>GG</Text>
         </View>
-    )
-}
+    );
+};
 
 const mapStateToProps = () => ({});
 
@@ -24,4 +24,4 @@ const mapDispatchToProps = () => ({});
 export const ChallengePictureStepScreen = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ChallengePictureStep)
+)(ChallengePictureStep);

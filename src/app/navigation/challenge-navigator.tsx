@@ -6,9 +6,9 @@ import {
     NavigationContainer
 } from '@react-navigation/native';
 
-import { ChallengePictureStepScreen } from '../components/templates/challenge/challenge-picture-step'
-import { ChallengeScreen } from '../screens/challenge-screen/challenge-screen'
-import { ChallengeParamList } from './types'
+import { ChallengePictureStepScreen } from '../components/templates/challenge/challenge-picture-step';
+import { ChallengeScreen } from '../screens/challenge-screen/challenge-screen';
+import { ChallengeParamList } from './types';
 
 const Stack = createStackNavigator<ChallengeParamList>();
 
@@ -22,12 +22,9 @@ export const ChallengeNavigator = React.forwardRef<
                 screenOptions={{
                     headerShown: false,
                     gestureEnabled: true
-                }}            
+                }}
             >
-                <Stack.Screen
-                    name="challenge"
-                    component={ChallengeScreen}
-                />
+                <Stack.Screen name="challenge" component={ChallengeScreen} />
                 <Stack.Screen
                     name="picture"
                     component={ChallengePictureStepScreen}
@@ -38,4 +35,3 @@ export const ChallengeNavigator = React.forwardRef<
 });
 
 export const exitRoutes: string[] = ['picture'];
-
