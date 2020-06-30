@@ -7,7 +7,6 @@ export const icons = {
     content: require('./content.png'),
     profile: require('./profile.png'),
     explorer: require('./explorer.png'),
-    logout: require('./logout.png'),
     close: require('./close.png')
 };
 
