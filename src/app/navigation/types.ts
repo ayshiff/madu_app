@@ -19,3 +19,8 @@ export type WelcomeParamList = {
     login: undefined;
     home: undefined;
 };
+
+export type MapParamList = {
+    map: undefined;
+    detail: undefined;
+};
