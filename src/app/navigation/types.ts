@@ -20,6 +20,11 @@ export type WelcomeParamList = {
     home: undefined;
 };
 
+export type ChallengeParamList = {
+    challenge: undefined;
+    picture: undefined;
+}
+
 export type MapParamList = {
     map: undefined;
     detail: undefined;

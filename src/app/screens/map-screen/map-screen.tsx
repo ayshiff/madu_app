@@ -15,6 +15,6 @@ export const MapScreen: React.FunctionComponent<MapScreenProps> = ({
     navigation
 }: MapScreenProps) => (
     <View style={FULL}>
-        <Map navigation={navigation} />
+        {/* <Map navigation={navigation} /> */}
     </View>
 );
