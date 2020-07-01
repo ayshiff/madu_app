@@ -1,6 +1,5 @@
 import * as React from "react";
 import { View, ViewStyle, Image, ImageStyle } from "react-native";
-import { useNavigation } from "react-navigation-hooks";
 
 import { Button } from "../../components";
 import { Text } from "../../components/atoms/text/text";
@@ -17,9 +16,7 @@ const IMAGE: ImageStyle = {
   resizeMode: "contain",
 };
 
-export const WelcomeScreen = () => {
-  const navigation = useNavigation();
-
+export const WelcomeScreen = ({ navigation }: { navigation: any }) => {
   const navigateToLogin = () => {
     navigation.navigate("login");
   };

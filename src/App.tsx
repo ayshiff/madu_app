@@ -8,7 +8,7 @@ import {
   initialWindowSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-import { RootNavigatorManager } from "./app/navigation/welcome-navigator";
+import { WelcomeNavigator } from "./app/navigation/welcome-navigator";
 import { store } from "./app/app.store";
 
 const App = () => {
@@ -36,7 +36,7 @@ const App = () => {
   return (
     <Provider store={store as any}>
       <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-        <RootNavigatorManager />
+        <WelcomeNavigator />
       </SafeAreaProvider>
     </Provider>
   );

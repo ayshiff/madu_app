@@ -2,6 +2,8 @@ import * as React from "react";
 import { View, ViewStyle, TextStyle, Image } from "react-native";
 import { useState } from "react";
 import { connect } from "react-redux";
+import { useNavigation } from "react-navigation-hooks";
+
 import { Screen, Header, Button } from "../../../index";
 import { color, spacing } from "../../../../theme";
 import { ImagePickerRegister } from "../../../molecules/image-picker/image-picker";
@@ -65,22 +67,18 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
   const { navigation, setUserData, userData } = props;
   const [isTakingImage, setTakingImage] = useState(false);
   const [isChosingImage, setChosingImage] = useState(false);
-  const navigateToNextStep = React.useMemo(
-    () => () => {
-      navigation.navigate("register-step-six");
-      setTakingImage(false);
-      setChosingImage(false);
-    },
-    [navigation]
-  );
-  const navigateToHome = React.useMemo(
-    () => () => {
-      navigation.navigate("home");
-      setTakingImage(false);
-      setChosingImage(false);
-    },
-    [navigation]
-  );
+  const navigateToNextStep = () => {
+    navigation.navigate("registerStepSix");
+    setTakingImage(false);
+    setChosingImage(false);
+  };
+
+  const navigateToHome = () => {
+    navigation.navigate("home");
+    setTakingImage(false);
+    setChosingImage(false);
+  };
+
   const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
   return (
     <View style={FULL}>
