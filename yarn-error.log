@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/enzo/.nvm/versions/node/v10.18.1/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @react-native-community-masked-view
+  /Users/enzo/.nvm/versions/node/v10.18.1/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add -D format:check
 
 PATH: 
   /Users/enzo/.nvm/versions/node/v10.18.1/bin:/Users/enzo/.poetry/bin:/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/enzo/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
@@ -14,50 +14,70 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-native-community-masked-view: Request "https://registry.yarnpkg.com/@react-native-community-masked-view" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66996:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141720:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141642:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1145:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: format:check: Invalid protocol: format:
+      at Request.module.exports.Request.init (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141017:31)
+      at new Request (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140690:8)
+      at request (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:137596:10)
+      at RequestManager.execute (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:67039:15)
+      at RequestManager.shiftQueue (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:67077:10)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66746:13
+      at new Promise (<anonymous>)
+      at new F (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:5301:28)
+      at RequestManager.request (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66744:19)
+      at NpmRegistry.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:31704:42)
 
 npm manifest: 
   {
-    "main": "./src/App.tsx",
-    "scripts": {
-      "start": "expo start",
-      "android": "expo start --android",
-      "ios": "expo start --ios",
-      "web": "expo start --web",
-      "eject": "expo eject"
-    },
-    "dependencies": {
-      "expo": "~38.0.8",
-      "expo-status-bar": "^1.0.2",
-      "react": "~16.11.0",
-      "react-dom": "~16.11.0",
-      "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.1.tar.gz",
-      "react-native-gesture-handler": "^1.6.1",
-      "react-native-web": "~0.11.7",
-      "react-navigation": "^4.4.0",
-      "react-navigation-stack": "^2.8.2",
-      "react-redux": "^7.2.0",
-      "redux-observable": "^1.2.0",
-      "rxjs": "^6.5.5"
-    },
-    "devDependencies": {
-      "@babel/core": "^7.8.6",
-      "@types/react": "~16.9.41",
-      "@types/react-native": "~0.62.13",
-      "@types/react-redux": "^7.1.9",
-      "typescript": "~3.9.5"
-    },
-    "private": true
+      "main": "./src/App.tsx",
+      "scripts": {
+          "start": "expo start",
+          "format": "npx prettier --write **/*.{js,ts,tsx,json}",
+          "lint": "tsc --noEmit && eslint --ext .js,.ts,.tsx ./",
+          "format:check": "",
+          "android": "expo start --android",
+          "ios": "expo start --ios",
+          "web": "expo start --web",
+          "test": "jest --config ./jest.config.js",
+          "eject": "expo eject",
+          "coverage": "jest --config ./jest.config.js --env=jsdom --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+      },
+      "husky": {
+          "hooks": {
+              "pre-commit": "yarn format && yarn test"
+          }
+      },
+      "dependencies": {
+          "@react-native-community/masked-view": "^0.1.10",
+          "@react-navigation/bottom-tabs": "^5.6.1",
+          "@react-navigation/native": "^5.6.1",
+          "@react-navigation/stack": "^5.6.2",
+          "expo": "~38.0.8",
+          "expo-camera": "^8.3.1",
+          "expo-image-picker": "^8.3.0",
+          "expo-status-bar": "^1.0.2",
+          "ramda": "^0.27.0",
+          "react": "~16.11.0",
+          "react-dom": "~16.11.0",
+          "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.1.tar.gz",
+          "react-native-gesture-handler": "^1.6.1",
+          "react-native-maps": "^0.27.1",
+          "react-native-screens": "^2.9.0",
+          "react-native-web": "~0.11.7",
+          "react-navigation": "^4.4.0",
+          "react-navigation-hooks": "^1.1.0",
+          "react-navigation-stack": "^2.8.2",
+          "react-redux": "^7.2.0",
+          "redux-observable": "^1.2.0",
+          "rxjs": "^6.5.5"
+      },
+      "devDependencies": {
+          "@babel/core": "^7.8.6",
+          "@types/react": "~16.9.41",
+          "@types/react-native": "~0.62.13",
+          "@types/react-redux": "^7.1.9",
+          "typescript": "~3.9.5"
+      },
+      "private": true
   }
 
 yarn manifest: 
@@ -1273,6 +1293,19 @@ Lockfile:
       sudo-prompt "^9.0.0"
       wcwidth "^1.0.1"
   
+  "@react-native-community/masked-view@^0.1.10":
+    version "0.1.10"
+    resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
+    integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
+  
+  "@react-navigation/bottom-tabs@^5.6.1":
+    version "5.6.1"
+    resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.6.1.tgz#f4aa23913a0c26ec3dd4dc268cd83e3d0e5f4dc4"
+    integrity sha512-aAqA4lCaa1x3cEWwEyUJ5hBPpVuv/TR0Q0Y/hkBgI2+h27Xdv9B/ZemMIjMWTNDZTjbYXTsJ41AJbVQnPSVTrg==
+    dependencies:
+      color "^3.1.2"
+      react-native-iphone-x-helper "^1.2.1"
+  
   "@react-navigation/core@^3.7.6":
     version "3.7.6"
     resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.7.6.tgz#e0244fcdc22937825b252197f70308bbe5709c58"
@@ -1283,6 +1316,18 @@ Lockfile:
       query-string "^6.11.1"
       react-is "^16.13.0"
   
+  "@react-navigation/core@^5.11.1":
+    version "5.11.1"
+    resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.11.1.tgz#c4890910ba3d6332ee6873f0adb3d3d13cf4fa4c"
+    integrity sha512-zJ/w84msKBhgRR35/tHdY1facxdnN/WP9Ebutnjp/J9ENuv7fHXhYlxX+oIRrMn+/MnbG79RVnYcO/r4lO8OTQ==
+    dependencies:
+      "@react-navigation/routers" "^5.4.8"
+      escape-string-regexp "^4.0.0"
+      nanoid "^3.1.9"
+      query-string "^6.13.1"
+      react-is "^16.13.0"
+      use-subscription "^1.4.0"
+  
   "@react-navigation/native@^3.8.0":
     version "3.8.0"
     resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.8.0.tgz#35882c3fc2f997ea1a43c12a15088cf4c818fd92"
@@ -1290,6 +1335,29 @@ Lockfile:
     dependencies:
       hoist-non-react-statics "^3.3.2"
       react-native-safe-area-view "^0.14.9"
+  
+  "@react-navigation/native@^5.6.1":
+    version "5.6.1"
+    resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.6.1.tgz#a603b921f39fe3fcfcc27232d71b24e80effc1f2"
+    integrity sha512-jnSNEnuRzqLvG+7QcMthfB8eCZIzAE0Wku7HDgzfjFS2iA7Oa9ugeX/1qdP9heT2Mp0t9BDQ4XX4boJma9Z/xg==
+    dependencies:
+      "@react-navigation/core" "^5.11.1"
+      nanoid "^3.1.9"
+  
+  "@react-navigation/routers@^5.4.8":
+    version "5.4.8"
+    resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.8.tgz#b85ba06b2465bfa031d61167c078c2911219d877"
+    integrity sha512-7uxC24fgLQdRquxPfL8SZ8zjle5DXdAB56aYL13tH+HAdhO2YxjKVvulzhGUsfcZthMvZ/9psybhn+m4z71dUg==
+    dependencies:
+      nanoid "^3.1.9"
+  
+  "@react-navigation/stack@^5.6.2":
+    version "5.6.2"
+    resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.6.2.tgz#d2371f9ffdcf3eee26245697d0947c9722542f38"
+    integrity sha512-51Aasxg8j2eKxz4mhA0ajJXrhAyJQkk2iiNE511zcqJ3tlfxv/h70Eej3PetnbbHFMOwNsEwc2GjB3OnfQcxjQ==
+    dependencies:
+      color "^3.1.2"
+      react-native-iphone-x-helper "^1.2.1"
   
   "@types/color-name@^1.1.1":
     version "1.1.1"
@@ -2440,6 +2508,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
     integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   
+  escape-string-regexp@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
+    integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
+  
   eslint-plugin-relay@1.4.1:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/eslint-plugin-relay/-/eslint-plugin-relay-1.4.1.tgz#5af2ac13e24bd01ad17b6a4014204918d65021cd"
@@ -2514,6 +2587,16 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
   
+  expo-camera@^8.3.1:
+    version "8.3.1"
+    resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.3.1.tgz#e17c080c4aafd71f66495c2b6dfc53dcd31b0368"
+    integrity sha512-weFanDVsJKAbm5g90zWIUD4zVrXKoQq7g2BTg4zy4p24YsGfXKYRH4ja0YRgr3Ci/abGaaRNZjsPMJiNskR+tA==
+    dependencies:
+      fbjs "1.0.0"
+      invariant "2.2.4"
+      lodash "^4.6.0"
+      prop-types "^15.6.0"
+  
   expo-constants@~9.1.1:
     version "9.1.1"
     resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.1.1.tgz#bca141ee3d4550e308798128f66c6d9c6a206ca1"
@@ -2543,6 +2626,14 @@ Lockfile:
     dependencies:
       fbjs "1.0.0"
       fontfaceobserver "^2.1.0"
+  
+  expo-image-picker@^8.3.0:
+    version "8.3.0"
+    resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.3.0.tgz#5a9daacbc1afa7fdbfd31edb22818524ad0b85e2"
+    integrity sha512-HCF7SumPE4jXH+EhJ19Xw6G8Lxpms1z6Hxdq/kLlzvZGdzH4ZFBqp3NyTO7dtm0dXtjduljpNK7kQfwWtvmIWQ==
+    dependencies:
+      expo-permissions "~9.0.1"
+      uuid "7.0.2"
   
   expo-keep-awake@~8.2.1:
     version "8.2.1"
@@ -3120,7 +3211,7 @@ Lockfile:
       strip-ansi "^4.0.0"
       through "^2.3.6"
   
-  invariant@^2.2.2, invariant@^2.2.4:
+  invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4:
     version "2.2.4"
     resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
     integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -4086,6 +4177,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
     integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
   
+  nanoid@^3.1.9:
+    version "3.1.10"
+    resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.10.tgz#69a8a52b77892de0d11cede96bc9762852145bc4"
+    integrity sha512-iZFMXKeXWkxzlfmMfM91gw7YhN2sdJtixY+eZh9V6QWJWTOiurhpKhBMgr82pfzgSqglQgqYSCowEYsz8D++6w==
+  
   nanomatch@^1.2.9:
     version "1.2.13"
     resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -4553,7 +4649,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
     integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
   
-  query-string@^6.11.1:
+  query-string@^6.11.1, query-string@^6.13.1:
     version "6.13.1"
     resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.1.tgz#d913ccfce3b4b3a713989fe6d39466d92e71ccad"
     integrity sha512-RfoButmcK+yCta1+FuU8REvisx1oEzhMKwhLUNcepQTPGcNMp1sIqjnfCtfnvGSQZQEhaBHvccujtWoUV3TTbA==
@@ -4566,6 +4662,11 @@ Lockfile:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
     integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
+  
+  ramda@^0.27.0:
+    version "0.27.0"
+    resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.0.tgz#915dc29865c0800bf3f69b8fd6c279898b59de43"
+    integrity sha512-pVzZdDpWwWqEVVLshWUHjNwuVP7SfcmPraYuqocJp1yo2U1R7P+5QAfDhdItkuoGqIBnBYrtPp7rEPqDn9HlZA==
   
   range-parser@~1.2.1:
     version "1.2.1"
@@ -4619,6 +4720,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
     integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
   
+  react-native-maps@^0.27.1:
+    version "0.27.1"
+    resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
+    integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
+  
   react-native-safe-area-context@~3.0.7:
     version "3.0.7"
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.0.7.tgz#0f53de7a30d626d82936000f3f6db374ecc4b800"
@@ -4630,6 +4736,11 @@ Lockfile:
     integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
     dependencies:
       hoist-non-react-statics "^2.3.1"
+  
+  react-native-screens@^2.9.0:
+    version "2.9.0"
+    resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.9.0.tgz#ead2843107ba00fee259aa377582e457c74f1f3b"
+    integrity sha512-5MaiUD6HA3nzY3JbVI8l3V7pKedtxQF3d8qktTVI0WmWXTI4QzqOU8r8fPVvfKo3MhOXwhWBjr+kQ7DZaIQQeg==
   
   react-native-web@~0.11.7:
     version "0.11.7"
@@ -4681,6 +4792,11 @@ Lockfile:
       stacktrace-parser "^0.1.3"
       use-subscription "^1.0.0"
       whatwg-fetch "^3.0.0"
+  
+  react-navigation-hooks@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/react-navigation-hooks/-/react-navigation-hooks-1.1.0.tgz#337c41a50ebc7b9030bb9d9333cd4fd6e1f86b68"
+    integrity sha512-ZY/aiYJ88KXaOo8iOa4171O/0x6ztGhUPd2OYzdaJhLT/tP64zi5HB/RZFImuKhaBTODXjoSpFaOTA5xpePG4g==
   
   react-navigation-stack@^2.8.2:
     version "2.8.2"
@@ -5623,7 +5739,7 @@ Lockfile:
       querystringify "^2.1.1"
       requires-port "^1.0.0"
   
-  use-subscription@^1.0.0:
+  use-subscription@^1.0.0, use-subscription@^1.4.0:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/use-subscription/-/use-subscription-1.4.1.tgz#edcbcc220f1adb2dd4fa0b2f61b6cc308e620069"
     integrity sha512-7+IIwDG/4JICrWHL/Q/ZPK5yozEnvRm6vHImu0LKwQlmWGKeiF7mbAenLlK/cTNXrTtXHU/SFASQHzB6+oSJMQ==
@@ -5644,6 +5760,11 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
     integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+  
+  uuid@7.0.2:
+    version "7.0.2"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
+    integrity sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
   
   uuid@^3.3.2, uuid@^3.4.0:
     version "3.4.0"
