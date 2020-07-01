@@ -10,7 +10,12 @@ export const icons = {
     close: require('./close.png'),
     phone: require('./phone.png'),
     pin: require('./pin.png'),
-    website: require('./website.png')
+    website: require('./website.png'),
+    // Map icons
+    map_bar: require('./map_bar.png'),
+    map_experience: require('./map_experience.png'),
+    map_shop: require('./map_shop.png'),
+    map_restoration: require('./map_restoration.png')
 };
 
 export type IconTypes = keyof typeof icons;

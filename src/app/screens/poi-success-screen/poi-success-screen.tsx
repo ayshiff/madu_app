@@ -26,6 +26,10 @@ const ActionContainer = styled.View`
     text-align: center;
 `;
 
+const Description = styled(Text)`
+    text-align: center;
+`;
+
 export interface DetailScreenProps {
     loadContent: () => string;
     content: string;
@@ -37,13 +41,13 @@ export const PoiSuccessScreen = ({ navigation }: DetailScreenProps) => {
     return (
         <Container>
             <View>
-                <Text preset="default">
+                <Description preset="default">
                     Félicitations, voilà qui a du te faire monter dans le
                     classement individuel ainsi que dans celui interéquipes
-                </Text>
-                <Text preset="default">
+                </Description>
+                <Description preset="default">
                     N’hésite pas à aller voir sur ton profil !
-                </Text>
+                </Description>
                 <ActionContainer>
                     <ActionButton text="Continuer" onPress={() => goBack()} />
                 </ActionContainer>

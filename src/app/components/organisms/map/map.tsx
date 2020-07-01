@@ -1,6 +1,9 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable global-require */
+import React, { useState, useRef, useEffect } from 'react';
 import MapView, { Circle, Marker, Callout } from 'react-native-maps';
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { any } from 'ramda';
+import { IPointOfInterest } from '../../../actions/poi.actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -24,10 +27,19 @@ const PARIS_LOCATION = {
 
 export interface MapProps {
     navigation: any;
+    points: IPointOfInterest[];
 }
 
+interface CategoryMarkers {
+    [key: string]: any;
+}
+
+const categoryMarkers: CategoryMarkers = {
+    restoration: require('../../atoms/icon/icons/map_restoration.png')
+};
+
 export const Map = (props: MapProps) => {
-    const { navigation } = props;
+    const { navigation, points } = props;
     const [centerPoint, setCenterPoint] = useState<{
         latitude: number;
         longitude: number;
@@ -35,11 +47,6 @@ export const Map = (props: MapProps) => {
         longitudeDelta: number;
     }>(PARIS_LOCATION);
     const map = useRef(null);
-
-    const navigateToDetailScreen = React.useMemo(
-        () => () => navigation.navigate('poi'),
-        [navigation]
-    );
 
     return (
         <View style={styles.container}>
@@ -52,19 +59,24 @@ export const Map = (props: MapProps) => {
                     strokeColor="#FAAD14"
                     fillColor="rgba(250, 173, 20, 0.1);"
                 />
-                <Marker
-                    key="test"
-                    title="title"
-                    description="description"
-                    coordinate={{
-                        latitude: 48.8534,
-                        longitude: 2.3488
-                    }}
-                    onPress={(e) => {
-                        e.stopPropagation();
-                        navigateToDetailScreen();
-                    }}
-                />
+                {points && points.length
+                    ? points.map((point: any) => (
+                          <Marker
+                              key={point.id}
+                              title={point.name}
+                              description={point.description}
+                              icon={categoryMarkers[point.category]}
+                              coordinate={{
+                                  latitude: point.address.lat,
+                                  longitude: point.address.lng
+                              }}
+                              onCalloutPress={(e) => {
+                                  e.stopPropagation();
+                                  navigation.navigate('poi', point);
+                              }}
+                          />
+                      ))
+                    : null}
             </MapView>
         </View>
     );
