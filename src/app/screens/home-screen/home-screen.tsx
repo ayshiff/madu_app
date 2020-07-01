@@ -38,40 +38,40 @@ const HEADER: ViewStyle = {
 
 const CHALLENGE_CONTAINER: ViewStyle = {
     marginTop: -80,
-    alignItems: "center"
-}
+    alignItems: 'center'
+};
 
 const CHALLENGE_VIEW: ViewStyle = {
     height: 115,
     width: 250,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    flexDirection: "row",
-    justifyContent: "center"
-}
+    flexDirection: 'row',
+    justifyContent: 'center'
+};
 
 const CHALLENGE_INFO: ViewStyle = {
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
     marginLeft: 15,
     paddingTop: 10,
-    paddingBottom: 10,
-}
+    paddingBottom: 10
+};
 
 const CHALLENGE_PIC: ImageStyle = {
     marginTop: 20,
     height: 75,
     width: 75
-}
+};
 
 const CHALLENGE_TITLE: TextStyle = {
     marginBottom: 5,
     fontSize: 20,
-    justifyContent: "flex-start"
-}
+    justifyContent: 'flex-start'
+};
 
 const TEXT_CONTAINER: ViewStyle = {
-    marginTop: 16,
-}
+    marginTop: 16
+};
 
 const PROFILE_PIC: ImageStyle = {
     width: 64,
@@ -95,16 +95,16 @@ const POINTS_TEXT: TextStyle = {
 
 const TYPE_TAG: ViewStyle = {
     borderRadius: 20,
-    borderColor: "#FE6D1A",
+    borderColor: '#FE6D1A',
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: 100
-}
+};
 
 const TYPE_TEXT: TextStyle = {
-    justifyContent: 'center',
-}
+    justifyContent: 'center'
+};
 
 export interface HomeScreenProps {
     navigation: any;
@@ -126,8 +126,8 @@ const Home = (/* props: HomeScreenProps */) => {
                     </View>
                 </View>
 
-                    <View style={CHALLENGE_CONTAINER}> 
-                        <View>
+                <View style={CHALLENGE_CONTAINER}>
+                    <View>
                         <Text style={CHALLENGE_TITLE}>Défi de la semaine</Text>
                         <View style={CHALLENGE_VIEW}>
                             <Image
@@ -142,10 +142,10 @@ const Home = (/* props: HomeScreenProps */) => {
                                 <View style={POINTS_TAG}>
                                     <Text style={POINTS_TEXT}>80🌱</Text>
                                 </View>
-                            </View>        
+                            </View>
                         </View>
-                        </View>
-                    </View>     
+                    </View>
+                </View>
             </Screen>
         </View>
     );
