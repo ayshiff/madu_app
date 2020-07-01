@@ -1,12 +1,12 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { View, ViewStyle, TextStyle } from "react-native";
 import { connect } from "react-redux";
-import { useNavigation } from "react-navigation-hooks";
 
-import { Screen, Header, Input, Button } from "../../../index";
-import { color, spacing } from "../../../../theme";
-import { registerActions } from "../../../../actions/register.actions";
-import { Text } from "../../../atoms/text/text";
+import { Screen, Header, Button } from "madu/components";
+import { color, spacing } from "madu/theme";
+import Picker from "madu/components/atoms/picker/picker";
+import { registerActions } from "madu/actions/register.actions";
+import { Text } from "madu/components/atoms/text/text";
 import { RegisterScreenProps } from "./step-one";
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: "white" };
@@ -32,26 +32,31 @@ const HEADER_TITLE: TextStyle = {
   ...BOLD,
   textAlign: "left",
 };
-export interface RegisterStepFourScreenProps extends RegisterScreenProps {
+
+export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
   setUserData: (data: IData) => void;
 }
 
 interface IData {
-  name: string;
-  lastname: string;
+  workDivision: string;
 }
 
-const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
+const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
   const { navigation, userData, setUserData } = props;
-  const [name, setName] = React.useState(userData.name || "");
-  const [lastname, setSurname] = React.useState(userData.lastname || "");
+  const [workPlaces] = useState([
+    { label: "test1", value: "test1" },
+    { label: "test2", value: "test2" },
+  ]);
+  const [workDivision, setWorkDivision] = useState(
+    userData.workDivision || "0"
+  );
 
   const navigateToNextStep = () => {
-    navigation.navigate("registerStepFive");
+    navigation.navigate("registerStepFour");
   };
 
   const handleNavigate = () => {
-    setUserData({ name, lastname });
+    setUserData({ workDivision });
     navigateToNextStep();
   };
   const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
@@ -63,24 +68,22 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
         backgroundColor={color.transparent}
       >
         <Header
-          headerText="Complétez votre profil"
+          headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
           leftIcon="back"
           onLeftPress={goBack}
           style={HEADER}
           titleStyle={HEADER_TITLE}
         />
-        <Text>Complétez votre profil</Text>
-        <Input
-          value={name}
-          placeholder="Nom"
-          label="Nom"
-          onChangeText={(el: string) => setName(el)}
-        />
-        <Input
-          value={lastname}
-          placeholder="Prénom"
-          label="Prénom"
-          onChangeText={(el: string) => setSurname(el)}
+        <Text>
+          Renseignez le département dans lequel vous travaillez, pour découvrir
+          et réaliser des défis écoresponsables avec vos collègues.
+        </Text>
+        <Picker
+          placeholder="Département un département"
+          label="Lieu de travail"
+          selectedValue={workDivision}
+          onValueChange={(itemValue: string) => setWorkDivision(itemValue)}
+          items={workPlaces}
         />
         <Button text="suivant" onPress={handleNavigate} />
       </Screen>
@@ -96,7 +99,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   setUserData: (data: IData) => dispatch(registerActions.setUserData(data)),
 });
 
-export const RegisterStepFourScreen = connect(
+export const RegisterStepThreeScreen = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegisterStepFour);
+)(RegisterStepThree);

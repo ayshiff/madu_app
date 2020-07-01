@@ -2,14 +2,13 @@ import * as React from "react";
 import { View, ViewStyle, TextStyle, Image } from "react-native";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { useNavigation } from "react-navigation-hooks";
 
-import { Screen, Header, Button } from "../../../index";
-import { color, spacing } from "../../../../theme";
-import { ImagePickerRegister } from "../../../molecules/image-picker/image-picker";
-import { Text } from "../../../atoms/text/text";
-import { CameraComponent } from "../../../atoms/camera/camera";
-import { registerActions } from "../../../../actions/register.actions";
+import { Screen, Header, Button } from "madu/components";
+import { color, spacing } from "madu/theme";
+import { ImagePickerRegister } from "madu/components/molecules/image-picker/image-picker";
+import { Text } from "madu/components/atoms/text/text";
+import { CameraComponent } from "madu/components/atoms/camera/camera";
+import { registerActions } from "madu/actions/register.actions";
 import { RegisterScreenProps } from "./step-one";
 
 const FULL: ViewStyle = {
@@ -121,7 +120,7 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                       uri: userData.image,
                     }
                   : // eslint-disable-next-line global-require
-                    require("../../../../../assets/avatar.png")
+                    require("madu/assets/avatar.png")
               }
             />
           </View>

@@ -2,12 +2,10 @@ import * as React from "react";
 import { View, ViewStyle, TextStyle } from "react-native";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { Screen, Header, Button, Input } from "../../../index";
-import { color, spacing } from "../../../../theme";
-import {
-  registerActions,
-  IUserData,
-} from "../../../../actions/register.actions";
+
+import { Screen, Header, Button, Input } from "madu/components";
+import { color, spacing } from "madu/theme";
+import { registerActions, IUserData } from "madu/actions/register.actions";
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: "white" };
 const TEXT: TextStyle = {

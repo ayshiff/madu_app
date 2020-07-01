@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { View, ViewStyle, TextStyle } from "react-native";
 import { connect } from "react-redux";
-import { useNavigation } from "react-navigation-hooks";
 
-import { Screen, Header, Button } from "../../../index";
-import { color, spacing } from "../../../../theme";
-import Picker from "../../../atoms/picker/picker";
-import { registerActions } from "../../../../actions/register.actions";
+import { Screen, Header, Button } from "madu/components";
+import { color, spacing } from "madu/theme";
+import Picker from "madu/components/atoms/picker/picker";
+import { Text } from "madu/components/atoms/text/text";
+import { registerActions } from "madu/actions/register.actions";
+
 import { RegisterScreenProps } from "./step-one";
-import { Text } from "../../../atoms/text/text";
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: "white" };
 const TEXT: TextStyle = {
@@ -34,30 +34,28 @@ const HEADER_TITLE: TextStyle = {
   textAlign: "left",
 };
 
-export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
+export interface RegisterStepTwoScreenProps extends RegisterScreenProps {
   setUserData: (data: IData) => void;
 }
 
 interface IData {
-  workDivision: string;
+  workplace: string;
 }
 
-const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
+const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
   const { navigation, userData, setUserData } = props;
   const [workPlaces] = useState([
     { label: "test1", value: "test1" },
     { label: "test2", value: "test2" },
   ]);
-  const [workDivision, setWorkDivision] = useState(
-    userData.workDivision || "0"
-  );
+  const [workplace, setWorkplace] = useState(userData.workplace || "");
 
   const navigateToNextStep = () => {
-    navigation.navigate("registerStepFour");
+    navigation.navigate("registerStepThree");
   };
 
   const handleNavigate = () => {
-    setUserData({ workDivision });
+    setUserData({ workplace });
     navigateToNextStep();
   };
   const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
@@ -76,14 +74,14 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
           titleStyle={HEADER_TITLE}
         />
         <Text>
-          Renseignez le département dans lequel vous travaillez, pour découvrir
-          et réaliser des défis écoresponsables avec vos collègues.
+          Renseignez votre lieux de travail, pour découvrir des adresses
+          écoresponsables près de votre entreprise.
         </Text>
         <Picker
-          placeholder="Département un département"
+          placeholder="Sélectionner un lieux"
+          selectedValue={workplace}
           label="Lieu de travail"
-          selectedValue={workDivision}
-          onValueChange={(itemValue: string) => setWorkDivision(itemValue)}
+          onValueChange={(itemValue: string) => setWorkplace(itemValue)}
           items={workPlaces}
         />
         <Button text="suivant" onPress={handleNavigate} />
@@ -100,7 +98,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   setUserData: (data: IData) => dispatch(registerActions.setUserData(data)),
 });
 
-export const RegisterStepThreeScreen = connect(
+export const RegisterStepTwoScreen = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegisterStepThree);
+)(RegisterStepTwo);

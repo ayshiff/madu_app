@@ -8,8 +8,8 @@ import {
   initialWindowSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-import { WelcomeNavigator } from "./app/navigation/welcome-navigator";
-import { store } from "./app/app.store";
+import { WelcomeNavigator } from "./navigation/welcome-navigator";
+import { store } from "./app.store";
 
 const App = () => {
   const [isLoadingComplete, setLoadingState] = useState(false);
@@ -20,7 +20,7 @@ const App = () => {
 
   const startAppAsync = () => {
     return Font.loadAsync({
-      Montserrat: require("./app/theme/fonts/Montserrat-Regular.ttf"),
+      Montserrat: require("./theme/fonts/Montserrat-Regular.ttf"),
     });
   };
 
