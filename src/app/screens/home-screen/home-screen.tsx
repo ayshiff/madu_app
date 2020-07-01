@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.white };
 const TEXT: TextStyle = {
     color: color.dark_1,
     fontFamily: 'Montserrat'
@@ -47,7 +47,15 @@ const CHALLENGE_VIEW: ViewStyle = {
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+	    width: 0,
+	    height: 2,
+},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
 };
 
 const CHALLENGE_INFO: ViewStyle = {
@@ -56,6 +64,11 @@ const CHALLENGE_INFO: ViewStyle = {
     paddingTop: 10,
     paddingBottom: 10
 };
+
+const BUSINESS_NAME: TextStyle = {
+    color: '#8E8E93',
+    marginBottom: 5
+}
 
 const CHALLENGE_PIC: ImageStyle = {
     marginTop: 20,
@@ -81,7 +94,7 @@ const PROFILE_PIC: ImageStyle = {
 const POINTS_TAG: ViewStyle = {
     borderRadius: 28,
     height: 25,
-    width: 60,
+    width: 70,
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 14,
@@ -103,7 +116,8 @@ const TYPE_TAG: ViewStyle = {
 };
 
 const TYPE_TEXT: TextStyle = {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: "#FE6D1A"
 };
 
 export interface HomeScreenProps {
@@ -116,7 +130,7 @@ const Home = (/* props: HomeScreenProps */) => {
                 <View style={HEADER_CONTAINER}>
                     <View style={HEADER}>
                         <View style={TEXT_CONTAINER}>
-                            <Text>L’Oréal Paris</Text>
+                            <Text style={BUSINESS_NAME}>L’Oréal Paris</Text>
                             <Text style={BOLD}>Bonjour Élodie</Text>
                         </View>
                         <Image
