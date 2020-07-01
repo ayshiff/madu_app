@@ -16,7 +16,7 @@ import {
     ChallengeScreen
 } from '../screens';
 import { Icon } from '../components';
-import { ChallengeSuccessStepScreen } from '../components/templates/challenge/challenge-success-step'
+import { ChallengeSuccessStepScreen } from '../components/templates/challenge/challenge-success-step';
 import { IconTypes } from '../components/atoms/icon/icons';
 import { MapParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';

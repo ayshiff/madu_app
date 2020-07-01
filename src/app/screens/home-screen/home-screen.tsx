@@ -48,14 +48,14 @@ const CHALLENGE_VIEW: ViewStyle = {
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
-	    width: 0,
-	    height: 2,
-},
+        width: 0,
+        height: 2
+    },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
 };
 
 const CHALLENGE_INFO: ViewStyle = {
@@ -68,7 +68,7 @@ const CHALLENGE_INFO: ViewStyle = {
 const BUSINESS_NAME: TextStyle = {
     color: '#8E8E93',
     marginBottom: 5
-}
+};
 
 const CHALLENGE_PIC: ImageStyle = {
     marginTop: 20,
@@ -117,7 +117,7 @@ const TYPE_TAG: ViewStyle = {
 
 const TYPE_TEXT: TextStyle = {
     justifyContent: 'center',
-    color: "#FE6D1A"
+    color: '#FE6D1A'
 };
 
 export interface HomeScreenProps {

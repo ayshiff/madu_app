@@ -9,9 +9,9 @@ export interface ChallengeSuccessStepScreenProps {
 
 const CHALLENGE_SUCCESS_CONTAINER: ViewStyle = {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-}
+    justifyContent: 'center',
+    alignItems: 'center'
+};
 
 const POINTS_TAG: ViewStyle = {
     borderRadius: 28,
@@ -30,10 +30,10 @@ const POINTS_TEXT: TextStyle = {
 
 const POINT_CONTAINER: ViewStyle = {
     flex: 1,
-    flexDirection: "row-reverse",
+    flexDirection: 'row-reverse',
     marginTop: 35,
     marginRight: 25
-}
+};
 
 const ChallengeSuccessStep = (props: ChallengeSuccessStepScreenProps) => {
     const { navigation } = props;
@@ -45,9 +45,9 @@ const ChallengeSuccessStep = (props: ChallengeSuccessStepScreenProps) => {
                     <Text style={POINTS_TEXT}>2567🌱</Text>
                 </View>
             </View>
-                <View style={CHALLENGE_SUCCESS_CONTAINER}>
-                    <Text>GG</Text>
-                </View>
+            <View style={CHALLENGE_SUCCESS_CONTAINER}>
+                <Text>GG</Text>
+            </View>
         </View>
     );
 };

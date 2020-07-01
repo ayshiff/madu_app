@@ -71,7 +71,7 @@ const TYPE_TAG: ViewStyle = {
 
 const TYPE_TEXT: TextStyle = {
     justifyContent: 'center',
-    color: "#FE6D1A"
+    color: '#FE6D1A'
 };
 
 const POINTS_TAG: ViewStyle = {
@@ -112,35 +112,35 @@ const Challenge = (props: ChallengeScreenProps) => {
                     source={require('../../../../assets/meal-375-214.png')}
                 />
                 <View style={INFORMATION_CONTAINER}>
-                        <View style={POINT_WRAPPER}>
-                            <View style={POINTS_CONTAINER}>
-                                <View style={TYPE_TAG}>
-                                    <Text style={TYPE_TEXT}>Alimentation</Text>
-                                </View>
-                                <View style={POINTS_TAG}>
-                                    <Text style={POINTS_TEXT}>120🌱</Text>
-                                </View>
+                    <View style={POINT_WRAPPER}>
+                        <View style={POINTS_CONTAINER}>
+                            <View style={TYPE_TAG}>
+                                <Text style={TYPE_TEXT}>Alimentation</Text>
+                            </View>
+                            <View style={POINTS_TAG}>
+                                <Text style={POINTS_TEXT}>120🌱</Text>
                             </View>
                         </View>
                     </View>
+                </View>
                 <View style={TEXT_CONTAINER}>
-                    <Text style={BLACK_TEXT}>
-                        Lundi c’est Veggie !
+                    <Text style={BLACK_TEXT}>Lundi c’est Veggie !</Text>
+                    <Text style={GREY_TEXT}>
+                        Chaque Français consomme 87 kg de viande et 34 kg de
+                        poisson par an. À lʼéchelle mondiale, lʼélevage
+                        représente près de 15 % des émissions de gaz à effet de
+                        serre dʼorigine humaine et lʼONU estime que la
+                        consommation de viande va grimper de 76 % dʼici 2050.
                     </Text>
                     <Text style={GREY_TEXT}>
-                        Chaque Français consomme 87 kg de viande et 34 kg de poisson par an. À lʼéchelle mondiale, lʼélevage 
-                        représente près de 15 % des émissions de gaz à effet de serre dʼorigine humaine et lʼONU estime que la consommation 
-                        de viande va grimper de 76 % dʼici 2050.
-                    </Text>
-                    <Text style={GREY_TEXT}>
-                        Chaque Français consomme 87 kg de viande et 34 kg de poisson par an. À lʼéchelle mondiale, lʼélevage 
-                        représente près de 15 % des émissions de gaz à effet de serre dʼorigine humaine et lʼONU estime que la consommation 
-                        de viande va grimper de 76 % dʼici 2050.
+                        Chaque Français consomme 87 kg de viande et 34 kg de
+                        poisson par an. À lʼéchelle mondiale, lʼélevage
+                        représente près de 15 % des émissions de gaz à effet de
+                        serre dʼorigine humaine et lʼONU estime que la
+                        consommation de viande va grimper de 76 % dʼici 2050.
                     </Text>
                 </View>
-                <Button
-                    text="Je relève le défi !"
-                />
+                <Button text="Je relève le défi !" />
             </Screen>
         </View>
     );
