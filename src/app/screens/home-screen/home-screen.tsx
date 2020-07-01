@@ -19,24 +19,8 @@ const TEXT: TextStyle = {
 
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
-// const CONTAINER: ViewStyle = {
-//     backgroundColor: color.transparent,
-//     paddingHorizontal: spacing[4]
-// };
-
-// const HEADER: TextStyle = {
-//     paddingTop: spacing[3],
-//     paddingBottom: spacing[4] + spacing[1],
-//     paddingHorizontal: 0
-// };
-// const HEADER_TITLE: TextStyle = {
-//     ...TEXT,
-//     ...BOLD,
-//     textAlign: 'left'
-// };
-
-const YELLOW_BACKGROUND: ViewStyle = {
-    height: 255,
+const HEADER_CONTAINER: ViewStyle = {
+    height: 225,
     backgroundColor: '#FEC530',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30
@@ -46,16 +30,81 @@ const HEADER: ViewStyle = {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    height: 64,
     marginLeft: 15,
     marginRight: 15,
     marginTop: 34
 };
 
+const CHALLENGE_CONTAINER: ViewStyle = {
+    marginTop: -80,
+    alignItems: "center"
+}
+
+const CHALLENGE_VIEW: ViewStyle = {
+    height: 115,
+    width: 250,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center"
+}
+
+const CHALLENGE_INFO: ViewStyle = {
+    justifyContent: "space-around",
+    marginLeft: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+}
+
+const CHALLENGE_PIC: ImageStyle = {
+    marginTop: 20,
+    height: 75,
+    width: 75
+}
+
+const CHALLENGE_TITLE: TextStyle = {
+    marginBottom: 5,
+    fontSize: 20,
+    justifyContent: "flex-start"
+}
+
+const TEXT_CONTAINER: ViewStyle = {
+    marginTop: 16,
+}
+
 const PROFILE_PIC: ImageStyle = {
     width: 64,
     height: 64
 };
+
+const POINTS_TAG: ViewStyle = {
+    borderRadius: 28,
+    height: 25,
+    width: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 14,
+    paddingRight: 14,
+    backgroundColor: '#E3FFE8'
+};
+
+const POINTS_TEXT: TextStyle = {
+    color: '#70B32D'
+};
+
+const TYPE_TAG: ViewStyle = {
+    borderRadius: 20,
+    borderColor: "#FE6D1A",
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 100
+}
+
+const TYPE_TEXT: TextStyle = {
+    justifyContent: 'center',
+}
 
 export interface HomeScreenProps {
     navigation: any;
@@ -64,16 +113,11 @@ const Home = (/* props: HomeScreenProps */) => {
     return (
         <View style={FULL}>
             <Screen preset="scroll" backgroundColor={color.transparent}>
-                {/* <Header
-                    headerText="Home Screen"
-                    style={HEADER}
-                    titleStyle={HEADER_TITLE}
-                /> */}
-                <View style={YELLOW_BACKGROUND}>
+                <View style={HEADER_CONTAINER}>
                     <View style={HEADER}>
-                        <View>
+                        <View style={TEXT_CONTAINER}>
                             <Text>L’Oréal Paris</Text>
-                            <Text>Bonjour Élodie</Text>
+                            <Text style={BOLD}>Bonjour Élodie</Text>
                         </View>
                         <Image
                             style={PROFILE_PIC}
@@ -81,6 +125,27 @@ const Home = (/* props: HomeScreenProps */) => {
                         />
                     </View>
                 </View>
+
+                    <View style={CHALLENGE_CONTAINER}> 
+                        <View>
+                        <Text style={CHALLENGE_TITLE}>Défi de la semaine</Text>
+                        <View style={CHALLENGE_VIEW}>
+                            <Image
+                                style={CHALLENGE_PIC}
+                                source={require('../../../../assets/meal.png')}
+                            />
+                            <View style={CHALLENGE_INFO}>
+                                <Text>Lundi c’est Veggie !</Text>
+                                <View style={TYPE_TAG}>
+                                    <Text style={TYPE_TEXT}>Alimentation</Text>
+                                </View>
+                                <View style={POINTS_TAG}>
+                                    <Text style={POINTS_TEXT}>80🌱</Text>
+                                </View>
+                            </View>        
+                        </View>
+                        </View>
+                    </View>     
             </Screen>
         </View>
     );
