@@ -1,105 +1,52 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "format": "npx prettier --write **/*.{js,ts,tsx,json}",
-    "lint": "tsc --noEmit && eslint --ext .js,.ts,.tsx ./",
-    "format:check": "",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "test": "jest --config ./jest.config.js",
-    "eject": "expo eject",
-    "coverage": "jest --config ./jest.config.js --env=jsdom --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format && yarn test"
-    }
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "detox": {
-    "test-runner": "jest",
-    "configurations": {
-      "ios.sim": {
-        "binaryPath": "bin/Exponent.app",
-        "type": "ios.simulator",
-        "name": "iPhone 8"
-      }
-    }
-  },
-  "dependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
-    "@react-native-mapbox-gl/maps": "^8.1.0-beta.1",
-    "@react-navigation/bottom-tabs": "^5.4.2",
-    "@react-navigation/native": "^5.3.0",
-    "@react-navigation/stack": "^5.3.3",
-    "@types/ramda": "^0.27.4",
-    "@types/react-redux": "^7.1.8",
-    "@types/redux-logger": "^3.0.7",
-    "@types/styled-components": "^5.1.0",
-    "coveralls": "^3.1.0",
-    "expo": "~37.0.3",
-    "expo-camera": "^8.2.0",
-    "expo-constants": "^9.0.0",
-    "expo-image-picker": "^8.1.0",
-    "expo-splash-screen": "^0.2.3",
-    "prettier": "^2.0.5",
-    "ramda": "^0.27.0",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
-    "react-native-gesture-handler": "~1.6.0",
-    "react-native-maps": "0.27.1",
-    "react-native-safe-area-context": "^1.0.0",
-    "react-native-screens": "~2.2.0",
-    "react-native-web": "~0.11.7",
-    "react-redux": "^7.2.0",
-    "redux": "4.0.1",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-logger": "^3.0.6",
-    "redux-observable": "2.0.0-alpha.0",
-    "rxjs": "~6.4.0",
-    "styled-components": "^5.1.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "@react-native-community/eslint-config": "^1.1.0",
-    "@types/jasmine": "~3.3.8",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/jest": "^25.1.1",
-    "@types/node": "~8.9.4",
-    "@types/react": "~16.9.23",
-    "@types/react-native": "~0.61.17",
-    "@typescript-eslint/eslint-plugin": "^2.32.0",
-    "babel-preset-expo": "~8.1.0",
-    "codelyzer": "^5.0.0",
-    "detox": "^16.7.2",
-    "detox-expo-helpers": "^0.6.0",
-    "eslint": "^7.0.0",
-    "eslint-config-airbnb-typescript": "^7.2.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "expo-detox-hook": "^1.0.10",
-    "husky": "3.0.9",
-    "jasmine-core": "~3.4.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "jest": "^25.1.0",
-    "karma": "~4.1.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
-    "react-native-testing-library": "^2.0.1",
-    "react-test-renderer": "^16.13.1",
-    "ts-jest": "^25.1.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.8.3"
-  },
-  "private": true
+    "main": "./src/App.tsx",
+    "scripts": {
+        "start": "expo start",
+        "format": "npx prettier --write **/*.{js,ts,tsx,json}",
+        "lint": "tsc --noEmit && eslint --ext .js,.ts,.tsx ./",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web",
+        "test": "jest --config ./jest.config.js",
+        "eject": "expo eject",
+        "coverage": "jest --config ./jest.config.js --env=jsdom --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn format && yarn test"
+        }
+    },
+    "dependencies": {
+        "@react-native-community/masked-view": "^0.1.10",
+        "@react-navigation/bottom-tabs": "^5.6.1",
+        "@react-navigation/native": "^5.6.1",
+        "@react-navigation/stack": "^5.6.2",
+        "expo": "~38.0.8",
+        "expo-camera": "^8.3.1",
+        "expo-image-picker": "^8.3.0",
+        "expo-status-bar": "^1.0.2",
+        "ramda": "^0.27.0",
+        "react": "~16.11.0",
+        "react-dom": "~16.11.0",
+        "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.1.tar.gz",
+        "react-native-gesture-handler": "^1.6.1",
+        "react-native-maps": "^0.27.1",
+        "react-native-screens": "^2.9.0",
+        "react-native-web": "~0.11.7",
+        "react-navigation": "^4.4.0",
+        "react-navigation-hooks": "^1.1.0",
+        "react-navigation-stack": "^2.8.2",
+        "react-redux": "^7.2.0",
+        "redux-observable": "^1.2.0",
+        "rxjs": "^6.5.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.8.6",
+        "@types/react": "~16.9.41",
+        "@types/react-native": "~0.62.13",
+        "@types/react-redux": "^7.1.9",
+        "prettier": "^2.0.5",
+        "typescript": "~3.9.5"
+    },
+    "private": true
 }
