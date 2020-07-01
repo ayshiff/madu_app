@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "expo": {
         "name": "madu_test",
         "slug": "madu_test",
@@ -22,34 +21,4 @@
             "favicon": "./assets/favicon.png"
         }
     }
-=======
-  "expo": {
-    "name": "Madu",
-    "slug": "madu",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "description": "MADU app",
-    "githubUrl": "https://github.com/ayshiff/madu_app"
-  }
->>>>>>> 48a46ca856bea9db5e5f57ec15a5288758426466
 }
