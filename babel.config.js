@@ -1,6 +1,7 @@
 module.exports = function (api) {
     api.cache(true);
     return {
+<<<<<<< HEAD
         presets: ['babel-preset-expo'],
         plugins: [
             [
@@ -14,5 +15,8 @@ module.exports = function (api) {
                 }
             ]
         ]
+=======
+        presets: ['babel-preset-expo']
+>>>>>>> 48a46ca856bea9db5e5f57ec15a5288758426466
     };
 };

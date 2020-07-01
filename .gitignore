@@ -8,6 +8,13 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+<<<<<<< HEAD
+=======
+web-report/
+
+coverage/
+.expo-shared
+>>>>>>> 48a46ca856bea9db5e5f57ec15a5288758426466
 
 # macOS
 .DS_Store

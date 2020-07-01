@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
   "singleQuote": true,
   "trailingComma": "none",
   "tabWidth": 4,
   "semi": true
 }
+=======
+    "singleQuote": true,
+    "trailingComma": "none",
+    "tabWidth": 4,
+    "semi": true
+}
+>>>>>>> 48a46ca856bea9db5e5f57ec15a5288758426466

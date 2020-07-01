@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "compilerOptions": {
         "target": "esnext",
         "baseUrl": "./src",
@@ -13,4 +14,16 @@
         "skipLibCheck": true,
         "resolveJsonModule": true
     }
+=======
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true
+  }
+>>>>>>> 48a46ca856bea9db5e5f57ec15a5288758426466
 }
