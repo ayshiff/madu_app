@@ -7,7 +7,7 @@ import { Screen, Header, Button, Input } from "madu/components";
 import { color, spacing } from "madu/theme";
 import { registerActions, IUserData } from "madu/actions/register.actions";
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: "white" };
+const FULL: ViewStyle = { flex: 1};
 const TEXT: TextStyle = {
   color: color.palette.black,
   fontFamily: "Montserrat",

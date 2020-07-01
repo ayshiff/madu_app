@@ -6,6 +6,7 @@ import { Text } from "../../components/atoms/text/text";
 
 const FULL: ViewStyle = {
   flex: 1,
+  // backgroundColor:"red",
   alignItems: "center",
   justifyContent: "center",
 };
