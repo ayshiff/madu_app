@@ -88,3 +88,14 @@ export const HomeNavigator = React.forwardRef<
         </Tab.Navigator>
     );
 });
+
+export const HomeNavigatorWithContainer = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>((props, ref) => {
+    return (
+        <NavigationContainer {...props} ref={ref}>
+            <HomeNavigator />
+        </NavigationContainer>
+    );
+});

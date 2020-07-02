@@ -30,7 +30,9 @@ export const loadLoginContent: Epic = (
                 }
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
-                    return of(loginActions.loginSuccess(data.response));
+                    return of(
+                        loginActions.loginSuccess(data.response.access_token)
+                    );
                 }),
                 catchError((error: AjaxError) => {
                     return of(loginActions.loginFail(error));

@@ -46,6 +46,8 @@ const Footer = styled.View`
 const Wallpaper = styled.Image`
     width: ${Dimensions.get('window').width};
     resize-mode: cover;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 `;
 
 const ActionButton = styled(Button)`
@@ -86,13 +88,13 @@ const TagText = styled(Text)`
     color: #febfd3;
 `;
 
-const OpenStatus = styled(Text)`
+export const OpenStatus = styled(Text)`
     color: #137e73;
     margin-top: 0;
     font-size: 16;
 `;
 
-const PriceRange = styled(Text)`
+export const PriceRange = styled(Text)`
     color: #9e9e9e;
     margin-top: 0;
     font-size: 16;
@@ -112,7 +114,7 @@ const Likes = styled(Text)`
     color: #9e9e9e;
 `;
 
-const Category = styled(Text)`
+export const Category = styled(Text)`
     margin-top: 0;
 `;
 
@@ -125,7 +127,7 @@ const Community = styled.View`
     margin-right: 20px;
 `;
 
-const PriceContainer = styled.View`
+export const PriceContainer = styled.View`
     flex-direction: row;
 `;
 

@@ -16,9 +16,7 @@ export const loadPoi: Epic = (
         ofType(PoiTypes.LoadPoi),
         concatMap(() => {
             const headers = {
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyaWMucHJpb3VAaGV0aWMubmV0Iiwic3ViIjoiMmE1NjIxOGEtNDNmMi00ZmYzLWFkY2MtNjQyMTg4N2Y1NjZmIiwiaWF0IjoxNTkzNTk1MjYyLCJleHAiOjE1OTM2ODE2NjJ9.WRCElNwGwKenksg4POBWKJenhm8lszs27MuGkwD2dao'
-                // `Bearer ${state$.value.login.accessToken}`
+                Authorization: `Bearer ${state$.value.login.accessToken}`
             };
             return ajax({
                 headers,

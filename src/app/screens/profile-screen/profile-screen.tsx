@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
+import { connect } from 'react-redux';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
+import { loginActions } from '../../actions/login.actions';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
@@ -32,9 +34,10 @@ export interface SettingsScreenProps {
     loadContent: () => string;
     content: string;
     navigation: any;
+    logout: () => void;
 }
 
-export const ProfileScreen = ({ navigation }: SettingsScreenProps) => (
+export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
     <View style={FULL}>
         <Screen
             style={CONTAINER}
@@ -46,8 +49,24 @@ export const ProfileScreen = ({ navigation }: SettingsScreenProps) => (
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
                 rightIcon="logout"
-                onRightPress={() => navigation.navigate('welcome')}
+                onRightPress={() => {
+                    navigation.navigate('welcome');
+                    logout();
+                }}
             />
         </Screen>
     </View>
 );
+
+const mapStateToProps = (state: any) => ({
+    logout: state.poi.list
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    logout: () => dispatch(loginActions.logout())
+});
+
+export const ProfileScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Profile);

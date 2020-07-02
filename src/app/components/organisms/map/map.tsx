@@ -1,9 +1,23 @@
 /* eslint-disable global-require */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import MapView, { Circle, Marker, Callout } from 'react-native-maps';
-import { StyleSheet, View, Dimensions, Text } from 'react-native';
-import { any } from 'ramda';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import styled from 'styled-components/native';
 import { IPointOfInterest } from '../../../actions/poi.actions';
+import { Text } from '../../atoms/text/text';
+import {
+    Category,
+    PriceContainer,
+    OpenStatus,
+    PriceRange
+} from '../../../screens/poi-screen/poi-screen';
+
+const CustomCallout = styled(Callout)`
+    width: 250px;
+    height: 150px;
+    background: #ffffff;
+    border-radius: 50px;
+`;
 
 const styles = StyleSheet.create({
     container: {
@@ -35,7 +49,9 @@ interface CategoryMarkers {
 }
 
 const categoryMarkers: CategoryMarkers = {
-    restoration: require('../../atoms/icon/icons/map_restoration.png')
+    restoration: require('../../atoms/icon/icons/map_restoration.png'),
+    experience: require('../../atoms/icon/icons/map_experience.png'),
+    shop: require('../../atoms/icon/icons/map_shop.png')
 };
 
 export const Map = (props: MapProps) => {
@@ -74,7 +90,24 @@ export const Map = (props: MapProps) => {
                                   e.stopPropagation();
                                   navigation.navigate('poi', point);
                               }}
-                          />
+                          >
+                              <CustomCallout tooltip>
+                                  <View>
+                                      <Text preset="header">{point.name}</Text>
+                                      <Category preset="default">
+                                          {point.category}
+                                      </Category>
+                                  </View>
+                                  <PriceContainer>
+                                      <OpenStatus preset="fieldLabel">
+                                          Ouvert
+                                      </OpenStatus>
+                                      <PriceRange preset="fieldLabel">
+                                          {point.priceRange}
+                                      </PriceRange>
+                                  </PriceContainer>
+                              </CustomCallout>
+                          </Marker>
                       ))
                     : null}
             </MapView>
