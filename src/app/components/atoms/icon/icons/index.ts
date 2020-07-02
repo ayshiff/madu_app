@@ -11,6 +11,7 @@ export const icons = {
     phone: require('./phone.png'),
     pin: require('./pin.png'),
     website: require('./website.png'),
+    like: require('./like.png'),
     // Map icons
     map_bar: require('./map_bar.png'),
     map_experience: require('./map_experience.png'),

@@ -39,7 +39,7 @@ const Close = styled(TouchableOpacity)`
 `;
 
 const Footer = styled.View`
-    height: 150px;
+    height: 110px;
     margin: 20px;
 `;
 
@@ -86,6 +86,36 @@ const TagText = styled(Text)`
     color: #febfd3;
 `;
 
+const OpenStatus = styled(Text)`
+    color: #137e73;
+    margin-top: 0;
+    font-size: 16;
+`;
+
+const PriceRange = styled(Text)`
+    color: #9e9e9e;
+    margin-top: 0;
+    font-size: 16;
+`;
+
+const Description = styled(Text)`
+    margin-top: 40;
+    color: #2f4a70;
+`;
+
+const Visit = styled(Text)`
+    color: #9e9e9e;
+    text-align: right;
+`;
+
+const Likes = styled(Text)`
+    color: #9e9e9e;
+`;
+
+const Category = styled(Text)`
+    margin-top: 0;
+`;
+
 const TagList = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
@@ -107,6 +137,13 @@ const Header = styled.View`
 
 const Middle = styled.View`
     margin-top: 20px;
+`;
+
+const Like = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 `;
 
 export interface DetailScreenProps {
@@ -132,13 +169,18 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                     <ActionButton
                         onPress={() => {
                             navigateToSuccess();
-                            setCounter((count) => count + 1);
+                            setTimeout(
+                                () => setCounter((count) => count + 1),
+                                500
+                            );
                         }}
                     >
                         <Text>J'y suis</Text>
-                        <ActionButtonPlus>
-                            <Text>+ {counter}</Text>
-                        </ActionButtonPlus>
+                        {counter ? (
+                            <ActionButtonPlus>
+                                <Text>+ {counter}</Text>
+                            </ActionButtonPlus>
+                        ) : null}
                     </ActionButton>
                 </ActionContainer>
             </View>
@@ -146,18 +188,21 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                 <Header>
                     <View>
                         <Text preset="header">{point.name}</Text>
-                        <Text preset="default">{point.category}</Text>
+                        <Category preset="default">{point.category}</Category>
                     </View>
                     <Community>
-                        <Text preset="fieldLabel">28 j'aime</Text>
-                        <Text preset="fieldLabel">67 visites</Text>
+                        <Like>
+                            <IconLink icon="like" />
+                            <Likes preset="fieldLabel">28 j'aime</Likes>
+                        </Like>
+                        <Visit preset="fieldLabel">67 visites</Visit>
                     </Community>
                 </Header>
                 <PriceContainer>
-                    <Text preset="fieldLabel" style={{ color: '#137E73' }}>
-                        Ouvert
-                    </Text>
-                    <Text preset="fieldLabel">{point.priceRange}</Text>
+                    <OpenStatus preset="fieldLabel">Ouvert</OpenStatus>
+                    <PriceRange preset="fieldLabel">
+                        {point.priceRange}
+                    </PriceRange>
                 </PriceContainer>
                 <TagList>
                     {point.poiType.map((el: string) => (
@@ -166,7 +211,7 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                         </Tag>
                     ))}
                 </TagList>
-                <Text preset="default">{point.description}</Text>
+                <Description preset="default">{point.description}</Description>
             </Middle>
             <Footer>
                 {/* Address */}
