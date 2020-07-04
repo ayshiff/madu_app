@@ -8,6 +8,10 @@ export enum LoginTypes {
     Logout = '[LOGIN] LOGOUT'
 }
 
+export type ILoginResponse = {
+    access_token: string;
+};
+
 export interface IUserData {
     email: string;
     password: string;

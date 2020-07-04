@@ -2,8 +2,8 @@ import { AjaxError } from 'rxjs/ajax';
 import { ActionTypes } from '../core/actions.type';
 
 interface IDay {
-    from: string;
-    to: string;
+    from: string | null;
+    to: string | null;
 }
 
 interface Address {

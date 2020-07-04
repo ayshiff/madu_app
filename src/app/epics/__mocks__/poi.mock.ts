@@ -4,8 +4,8 @@ export const pointOfInterestMock = {
     poiType: ['restaurant'],
     address: {
         value: '',
-        lat: null,
-        lng: null
+        lat: 0,
+        lng: 0
     },
     phone: '',
     email: '',
@@ -92,5 +92,5 @@ export const pointOfInterestMock = {
     description: '',
     website: '',
     status: '',
-    greenscore: null
+    greenscore: 1
 };

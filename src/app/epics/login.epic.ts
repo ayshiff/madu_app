@@ -19,7 +19,6 @@ export const loadLoginContent: Epic = (
     return action$.pipe(
         ofType(LoginTypes.Login),
         concatMap((action: any) => {
-            // TODO: typing
             const { email, password } = action.payload;
             return ajax({
                 url: `${URL}/auth/login`,
