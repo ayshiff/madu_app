@@ -44,7 +44,7 @@ const Footer = styled.View`
 `;
 
 const Wallpaper = styled.Image`
-    width: ${Dimensions.get('window').width};
+    width: ${Dimensions.get('window').width}px;
     resize-mode: cover;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -91,17 +91,17 @@ const TagText = styled(Text)`
 export const OpenStatus = styled(Text)`
     color: #137e73;
     margin-top: 0;
-    font-size: 16;
+    font-size: 16px;
 `;
 
 export const PriceRange = styled(Text)`
     color: #9e9e9e;
     margin-top: 0;
-    font-size: 16;
+    font-size: 16px;
 `;
 
 const Description = styled(Text)`
-    margin-top: 40;
+    margin-top: 40px;
     color: #2f4a70;
 `;
 
@@ -207,9 +207,9 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                     </PriceRange>
                 </PriceContainer>
                 <TagList>
-                    {point.poiType.map((el: string) => (
-                        <Tag>
-                            <TagText>{el}</TagText>
+                    {point.poiType.map((poiType: string) => (
+                        <Tag key={poiType}>
+                            <TagText>{poiType}</TagText>
                         </Tag>
                     ))}
                 </TagList>
