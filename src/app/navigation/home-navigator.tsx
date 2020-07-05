@@ -7,21 +7,45 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ImageStyle } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
     HomeScreen,
     MapScreen,
     ContentScreen,
-    ProfileScreen
+    ProfileScreen,
+    WelcomeScreen
 } from '../screens';
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
+import { MapParamList } from './types';
+import { PoiScreen } from '../screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator<MapParamList>();
 
 const ICON: ImageStyle = {
     width: 15,
     height: 15
 };
+
+const MapNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true
+            }}
+        >
+            <Stack.Screen name="map" component={MapScreen} />
+            <Stack.Screen name="poi" component={PoiScreen} />
+            <Stack.Screen name="poi-success" component={PoiSuccessScreen} />
+        </Stack.Navigator>
+    );
+});
 
 export const HomeNavigator = React.forwardRef<
     NavigationContainerRef,
@@ -59,9 +83,21 @@ export const HomeNavigator = React.forwardRef<
             }}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Map" component={MapNavigator} />
             <Tab.Screen name="Content" component={ContentScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
+    );
+});
+
+export const HomeNavigatorWithContainer = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>((props, ref) => {
+    return (
+        <NavigationContainer {...props} ref={ref}>
+            <HomeNavigator />
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
+        </NavigationContainer>
     );
 });

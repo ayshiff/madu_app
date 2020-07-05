@@ -19,3 +19,11 @@ export type WelcomeParamList = {
     login: undefined;
     home: undefined;
 };
+
+export type MapParamList = {
+    map: undefined;
+    detail: undefined;
+    poi: undefined;
+    'poi-success': undefined;
+    welcome: undefined;
+};
