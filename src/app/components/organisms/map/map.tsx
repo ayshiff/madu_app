@@ -19,6 +19,11 @@ const CustomCallout = styled(Callout)`
     border-radius: 50px;
 `;
 
+const Visit = styled(Text)`
+    color: #9e9e9e;
+    text-align: left;
+`;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -35,8 +40,8 @@ const styles = StyleSheet.create({
 const PARIS_LOCATION = {
     latitude: 48.8534,
     longitude: 2.3488,
-    latitudeDelta: 0.19,
-    longitudeDelta: 0.19
+    latitudeDelta: 0.21,
+    longitudeDelta: 0.21
 };
 
 export interface MapProps {
@@ -56,7 +61,7 @@ const categoryMarkers: CategoryMarkers = {
 
 export const Map = (props: MapProps) => {
     const { navigation, points } = props;
-    const [centerPoint, setCenterPoint] = useState<{
+    const [centerPoint] = useState<{
         latitude: number;
         longitude: number;
         latitudeDelta: number;
@@ -106,6 +111,7 @@ export const Map = (props: MapProps) => {
                                           {point.priceRange}
                                       </PriceRange>
                                   </PriceContainer>
+                                  <Visit preset="fieldLabel">67 visites</Visit>
                               </CustomCallout>
                           </Marker>
                       ))

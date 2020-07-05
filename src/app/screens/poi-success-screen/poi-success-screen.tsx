@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { color } from '../../theme/color';
 import { Text } from '../../components/atoms/text/text';
 import { Button } from '../../components/atoms/button/button';
+import { Points } from '../../components/atoms/points/points';
 
 /** Styled components */
 
@@ -30,6 +31,12 @@ const Description = styled(Text)`
     text-align: center;
 `;
 
+const Header = styled.View`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+`;
+
 export interface DetailScreenProps {
     loadContent: () => string;
     content: string;
@@ -40,18 +47,20 @@ export const PoiSuccessScreen = ({ navigation }: DetailScreenProps) => {
     const goBack = () => navigation.goBack();
     return (
         <Container>
-            <View>
-                <Description preset="default">
-                    Félicitations, voilà qui a du te faire monter dans le
-                    classement individuel ainsi que dans celui interéquipes
-                </Description>
-                <Description preset="default">
-                    N’hésite pas à aller voir sur ton profil !
-                </Description>
-                <ActionContainer>
-                    <ActionButton text="Continuer" onPress={() => goBack()} />
-                </ActionContainer>
-            </View>
+            <Header>
+                <Points points={285} />
+            </Header>
+            <Description preset="default">
+                Félicitations, voilà qui a du te faire monter dans le classement
+                individuel ainsi que dans celui interéquipes
+            </Description>
+            <Description preset="default">
+                N’hésite pas à aller voir sur ton profil !
+            </Description>
+            <Points points={85} />
+            <ActionContainer>
+                <ActionButton text="Continuer" onPress={() => goBack()} />
+            </ActionContainer>
         </Container>
     );
 };

@@ -160,6 +160,7 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
     const [counter, setCounter] = useState(0);
 
     const point = route.params;
+
     return (
         <Container>
             <View>
@@ -197,7 +198,9 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                             <IconLink icon="like" />
                             <Likes preset="fieldLabel">28 j'aime</Likes>
                         </Like>
-                        <Visit preset="fieldLabel">67 visites</Visit>
+                        <Visit preset="fieldLabel">
+                            {point.visits || 0} visites
+                        </Visit>
                     </Community>
                 </Header>
                 <PriceContainer>
