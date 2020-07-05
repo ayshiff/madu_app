@@ -23,42 +23,43 @@ export const color = {
     /**
      * The screen background.
      */
-    background: palette.white,
+    background: palette.light_bg,
     /**
      * The main tinting color.
      */
-    primary: palette.lightGrey,
+    primary_active: palette.primary_active,
     /**
      * The main tinting color, but darker.
      */
-    primaryDarker: palette.darkGrey,
+    accent_1: palette.accent_1,
     /**
      * A subtle color used for borders and lines.
      */
-    line: palette.offWhite,
+    accent_2: palette.accent_2,
     /**
      * The default color of text in many components.
      */
-    text: palette.black,
+    primary_disable: palette.primary_disable,
     /**
      * Secondary information.
      */
-    dim: palette.lightGrey,
+    dark_1: palette.dark_1,
     /**
      * Error messages and icons.
      */
-    error: palette.angry,
+    dark_2: palette.dark_2,
 
     /**
      * Storybook background for Text stories, or any stories where
      * the text color is color.text, which is white by default, and does not show
      * in Stories against the default white background
      */
-    storybookDarkBg: palette.black,
+    light_grey_1: palette.light_grey_1,
 
     /**
      * Storybook text color for stories that display Text components against the
      * white background
      */
-    storybookTextColor: palette.black
+    light_grey_2: palette.light_grey_2,
+    white: palette.white
 };

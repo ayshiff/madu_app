@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import { Button } from '../button/button';
 
 export const CameraComponent = ({
     navigateToNextStep,
@@ -46,28 +47,35 @@ export const CameraComponent = ({
                     style={{
                         flex: 1,
                         backgroundColor: 'transparent',
-                        flexDirection: 'row'
+                        flexDirection: 'row',
+                        justifyContent: 'center'
                     }}
                 >
                     <TouchableOpacity
                         style={{
                             flex: 0.1,
                             alignSelf: 'flex-end',
-                            alignItems: 'center'
+                            justifyContent: 'center'
                         }}
                         onPress={() => {
                             takePicture();
                         }}
                     >
-                        <Text
+                        <Button
                             style={{
-                                fontSize: 18,
-                                marginBottom: 10,
-                                color: 'white'
+                                width: 60,
+                                height: 60,
+                                borderRadius: 30,
+                                backgroundColor: 'white',
+                                justifyContent: 'center',
+                                // Override default style
+                                margin: 0,
+                                marginBottom: 10
                             }}
-                        >
-                            Snap
-                        </Text>
+                            onPress={() => {
+                                takePicture();
+                            }}
+                        />
                     </TouchableOpacity>
                 </View>
             </Camera>

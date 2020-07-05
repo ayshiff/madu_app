@@ -8,9 +8,9 @@ import { registerActions } from '../../../../actions/register.actions';
 import { RegisterScreenProps } from './step-one';
 import { Text } from '../../../atoms/text/text';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
@@ -43,8 +43,8 @@ interface IData {
 const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
     const { navigation, userData, setUserData } = props;
     const [workPlaces] = useState([
-        { label: 'test1', value: 'test1' },
-        { label: 'test2', value: 'test2' }
+        { label: 'Informatique', value: 'Informatique' },
+        { label: 'Ressources humaines', value: 'Ressources humaines' }
     ]);
     const [workDivision, setWorkDivision] = useState(
         userData.workDivision || '0'
@@ -67,7 +67,8 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
+                    boldText="L’Oréal"
+                    headerText="vous souhaite la bienvenue sur l’app MADU"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}
@@ -79,8 +80,8 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                     collègues.
                 </Text>
                 <Picker
-                    placeholder="Département un département"
-                    label="Lieu de travail"
+                    placeholder="Sélectionner un département"
+                    label="Département de travail"
                     selectedValue={workDivision}
                     onValueChange={(itemValue: string) =>
                         setWorkDivision(itemValue)

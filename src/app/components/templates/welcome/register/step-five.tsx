@@ -12,22 +12,21 @@ import { RegisterScreenProps } from './step-one';
 
 const FULL: ViewStyle = {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: color.background
 };
-const IMAGE_CONTAINER: ViewStyle = {
+export const IMAGE_CONTAINER: ViewStyle = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
 };
-const IMAGE = {
+export const IMAGE = {
     flex: 1,
-    backgroundColor: 'white',
     width: 200,
     height: 200,
     borderRadius: 100
 };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 

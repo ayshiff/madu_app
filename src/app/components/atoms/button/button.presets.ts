@@ -30,7 +30,7 @@ export const viewPresets = {
      */
     primary: {
         ...BASE_VIEW,
-        backgroundColor: color.palette.lightGrey,
+        backgroundColor: color.palette.primary_active,
         height: 50
     } as ViewStyle
 };
@@ -40,7 +40,7 @@ export const textPresets = {
         ...BASE_TEXT,
         fontSize: 15,
         // fontWeight: 500,
-        color: color.palette.darkGrey
+        color: color.palette.white
     } as TextStyle
 };
 

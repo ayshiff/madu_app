@@ -11,6 +11,7 @@ export interface HeaderProps {
      * header non-i18n
      */
     headerText?: string;
+    boldText?: string;
 
     /**
      * Icon that should appear on the left

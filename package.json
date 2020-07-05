@@ -17,6 +17,19 @@
       "pre-commit": "yarn format && yarn test"
     }
   },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "bin/Exponent.app",
+        "type": "ios.simulator",
+        "name": "iPhone 8"
+      }
+    }
+  },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-mapbox-gl/maps": "^8.1.0-beta.1",
@@ -63,12 +76,15 @@
     "@typescript-eslint/eslint-plugin": "^2.32.0",
     "babel-preset-expo": "~8.1.0",
     "codelyzer": "^5.0.0",
+    "detox": "^16.7.2",
+    "detox-expo-helpers": "^0.6.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
+    "expo-detox-hook": "^1.0.10",
     "husky": "3.0.9",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -78,6 +94,8 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "react-native-testing-library": "^2.0.1",
+    "react-test-renderer": "^16.13.1",
     "ts-jest": "^25.1.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

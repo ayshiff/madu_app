@@ -11,7 +11,7 @@ module.exports = {
             functions: 60
         }
     },
-    modulePathIgnorePatterns: ['dist', 'cypress/', 'cache/'],
+    modulePathIgnorePatterns: ['dist', 'cypress/', 'cache/', 'e2e/'],
     moduleNameMapper: {
         '^@app/(.*)$': '<rootDir>/src/app/$1'
     },

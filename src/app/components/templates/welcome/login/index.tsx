@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { Screen, Header, Input, Button } from '../../../index';
 import { color, spacing } from '../../../../theme';
 import { loginActions } from '../../../../actions/login.actions';
-import { Text } from '../../../atoms/text/text';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
@@ -56,6 +55,8 @@ const Login = (props: LoginScreenProps) => {
         navigateToNextStep();
     };
 
+    const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
+
     return (
         <View style={FULL}>
             <Screen
@@ -65,6 +66,8 @@ const Login = (props: LoginScreenProps) => {
             >
                 <Header
                     headerText="Connectez-vous"
+                    leftIcon="back"
+                    onLeftPress={goBack}
                     style={HEADER}
                     titleStyle={HEADER_TITLE}
                 />

@@ -7,15 +7,15 @@ import { registerActions } from '../../../../actions/register.actions';
 import { Text } from '../../../atoms/text/text';
 import { RegisterScreenProps } from './step-one';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
-const CONTAINER: ViewStyle = {
+export const CONTAINER: ViewStyle = {
     backgroundColor: color.transparent,
     paddingHorizontal: spacing[4]
 };

@@ -8,9 +8,9 @@ import { Text } from '../../../atoms/text/text';
 import { registerActions } from '../../../../actions/register.actions';
 import { RegisterScreenProps } from './step-one';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
@@ -42,10 +42,7 @@ interface IData {
 
 const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const [workPlaces] = useState([
-        { label: 'test1', value: 'test1' },
-        { label: 'test2', value: 'test2' }
-    ]);
+    const [workPlaces] = useState([{ label: 'Paris', value: 'Paris' }]);
     const [workplace, setWorkplace] = useState(userData.workplace || '');
 
     const navigateToNextStep = React.useMemo(
@@ -65,7 +62,8 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                 backgroundColor={color.transparent}
             >
                 <Header
-                    headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
+                    boldText="L’Oréal"
+                    headerText="vous souhaite la bienvenue sur l’app MADU"
                     leftIcon="back"
                     onLeftPress={goBack}
                     style={HEADER}

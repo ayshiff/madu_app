@@ -9,9 +9,9 @@ import {
     IUserData
 } from '../../../../actions/register.actions';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
+const FULL: ViewStyle = { flex: 1, backgroundColor: color.background };
 const TEXT: TextStyle = {
-    color: color.palette.black,
+    color: color.dark_1,
     fontFamily: 'Montserrat'
 };
 
@@ -22,12 +22,12 @@ const CONTAINER: ViewStyle = {
     paddingHorizontal: spacing[4]
 };
 
-const HEADER: TextStyle = {
+export const HEADER: TextStyle = {
     paddingTop: spacing[3],
     paddingBottom: spacing[4] + spacing[1],
     paddingHorizontal: 0
 };
-const HEADER_TITLE: TextStyle = {
+export const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
     textAlign: 'left'
