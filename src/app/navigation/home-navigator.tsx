@@ -12,7 +12,8 @@ import {
     HomeScreen,
     MapScreen,
     ContentScreen,
-    ProfileScreen
+    ProfileScreen,
+    WelcomeScreen
 } from '../screens';
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
@@ -96,6 +97,7 @@ export const HomeNavigatorWithContainer = React.forwardRef<
     return (
         <NavigationContainer {...props} ref={ref}>
             <HomeNavigator />
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
         </NavigationContainer>
     );
 });

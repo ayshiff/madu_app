@@ -25,4 +25,5 @@ export type MapParamList = {
     detail: undefined;
     poi: undefined;
     'poi-success': undefined;
+    welcome: undefined;
 };
