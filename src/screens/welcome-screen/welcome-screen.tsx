@@ -1,44 +1,37 @@
-import * as React from "react";
-import { View, ViewStyle, Image, ImageStyle } from "react-native";
+import * as React from 'react';
 
-import { Button } from "../../components";
-import { Text } from "../../components/atoms/text/text";
-
-const FULL: ViewStyle = {
-  flex: 1,
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const IMAGE: ImageStyle = {
-  width: 250,
-  height: 250,
-  resizeMode: "contain",
-};
+import { Button } from 'madu/components';
+import { Text } from 'madu/components/atoms/text/text';
+import { Title } from 'madu/components/atoms/title';
+import { MainLayout } from 'madu/components/layout/main';
 
 export const WelcomeScreen = ({ navigation }: { navigation: any }) => {
-  const navigateToLogin = () => {
-    navigation.navigate("login");
-  };
+    const navigateToLogin = () => {
+        navigation.navigate('login');
+    };
 
-  const navigateToRegister = () => {
-    navigation.navigate("registerStepOne");
-  };
+    const navigateToRegister = () => {
+        navigation.navigate('registerStepOne');
+    };
 
-  return (
-    <View style={FULL}>
-      <Image
-        source={{
-          uri:
-            "https://www.dzmob.com/wp-content/uploads/2018/09/React-Native.png",
-        }}
-        style={IMAGE}
-      />
-      <Text preset="header" style={{ textAlign: "center" }}>
-        Bienvenue sur l’app qui contribue à un monde plus durable
-      </Text>
-      <Button text="S'inscrire" onPress={navigateToRegister} />
-      <Button text="J'ai déjà un compte" onPress={navigateToLogin} />
-    </View>
-  );
+    return (
+        <MainLayout>
+            <Title>
+                Bienvenue sur l’app qui contribue à un monde plus durable
+            </Title>
+            <Text textSize={16} bottom={94}>
+                Rejoignez vos collègues pour retrouver chaque semaine de
+                nouveaux défis, lieux et conseils inspirants.
+            </Text>
+
+            <Button
+                title="Se connecter"
+                onPress={navigateToLogin}
+                bottom={24}
+            />
+            <Text onPress={navigateToRegister} textAlign="center" textSize={16}>
+                J'ai déjà un compte
+            </Text>
+        </MainLayout>
+    );
 };

@@ -1,37 +1,20 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Text as ReactNativeText } from 'react-native';
-import { mergeAll, flatten } from 'ramda';
-import { presets } from './text.presets';
 import { TextProps } from './text.props';
 
-/**
- * For your text displaying needs.
- *
- * This component is a HOC over the built-in React Native one.
- */
-export function Text(props: TextProps) {
-    // grab the props
-    const {
-        preset = 'default',
-        tx,
-        txOptions,
-        text,
-        children,
-        style: styleOverride,
-        ...rest
-    } = props;
-
-    // figure out which content to use
-    const i18nText = tx;
-    const content = i18nText || text || children;
-
-    const style = mergeAll(
-        flatten([(presets[preset] as any) || presets.default, styleOverride])
-    );
-
+export const Text = ({ children, textSize, textAlign, bottom }: TextProps) => {
     return (
-        <ReactNativeText {...rest} style={style}>
-            {content}
-        </ReactNativeText>
+        <StyledText textSize={textSize} bottom={bottom} textAlign={textAlign}>
+            {children}
+        </StyledText>
     );
-}
+};
+
+const StyledText = styled(ReactNativeText)`
+    font-size: ${(props: any) =>
+        props.textSize ? props.textSize + 'px' : '10px'};
+    margin-bottom: ${(props: any) =>
+        props.bottom ? props.bottom + 'px' : '10px'};
+    text-align: ${(props: any) => props.textAlign || 'left'};
+`;
