@@ -7,7 +7,6 @@ import { loginActions } from '../../actions/login.actions';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
-    color: color.palette.black,
     fontFamily: 'Montserrat'
 };
 

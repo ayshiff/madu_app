@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import styled from 'styled-components/native';
 import { color } from '../../theme/color';
 import { Text } from '../../components/atoms/text/text';
