@@ -41,7 +41,7 @@ const ChallengeView = styled.View`
     height: 115px;
     width: 250px;
     margin-bottom: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 10px;
     flex-direction: row;
     justify-content: center;
