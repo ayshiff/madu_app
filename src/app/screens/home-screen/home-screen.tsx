@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Screen } from '../../components';
 import { color, spacing } from '../../theme';
 import styled from 'styled-components/native';
+import { Points } from '../../components/atoms/points/points'
 
 const Full = styled.View`
     flex: 1;
@@ -148,7 +149,7 @@ const Home = (/* props: HomeScreenProps */) => {
                                     <TypeText>Alimentation</TypeText>
                                 </TypeTag>
                                 <PointsTag>
-                                    <PointsText>80🌱</PointsText>
+                                    <Points points={80}/>
                                 </PointsTag>
                             </ChallengeInfo>
                         </ChallengeView>
