@@ -9,8 +9,8 @@ import {
     ImageStyle
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Screen, Button } from '../../components';
-import { color } from '../../theme';
+import { Screen, Button } from '../../../components';
+import { color } from '../../../theme';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: color.white };
 

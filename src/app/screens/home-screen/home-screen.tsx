@@ -1,167 +1,167 @@
 import * as React from 'react';
 import {
     View,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
     Text,
     Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Screen, Header } from '../../components';
+import { Screen } from '../../components';
 import { color, spacing } from '../../theme';
+import styled from 'styled-components/native'
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: color.white };
-const TEXT: TextStyle = {
-    color: color.dark_1,
-    fontFamily: 'Montserrat'
-};
+const Full = styled.View`
+    flex: 1; 
+    background-color: #FFFFFF;
+`
 
-const BOLD: TextStyle = { fontWeight: 'bold' };
+const Bold = styled.Text`
+    font-weight: bold;
+`
 
-const HEADER_CONTAINER: ViewStyle = {
-    height: 225,
-    backgroundColor: '#FEC530',
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30
-};
+const HeaderContainer = styled.View`
+    height: 225;
+    background-color: #FEC530;
+    border-bottom-left-radius: 30;
+    border-bottom-right-radius: 30;
+`
 
-const HEADER: ViewStyle = {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 64,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 34
-};
+const Header = styled.View`
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 64;
+    margin-left: 15;
+    margin-right: 15;
+    margin-top: 34    
+`
 
-const CHALLENGE_CONTAINER: ViewStyle = {
-    marginTop: -80,
-    alignItems: 'center'
-};
+const ChallengeContainer = styled.View`
+    margin-top: -80;
+    align-items: center;
+`
 
-const CHALLENGE_VIEW: ViewStyle = {
-    height: 115,
-    width: 250,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
+
+const ChallengeView = styled.View`
+    height: 115;
+    width: 250;
+    background-color: #FFFFFF;
+    border-radius: 10;
+    flex-direction: row;
+    justify-content: center;
+    shadow-color: #000000;
+    shadow-offset: {
         width: 0,
         height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-};
+    };
+    shadow-opacity: 0.25;
+    shadow-radius: 3.84;
+    elevation: 5;
+`
 
-const CHALLENGE_INFO: ViewStyle = {
-    justifyContent: 'space-around',
-    marginLeft: 15,
-    paddingTop: 10,
-    paddingBottom: 10
-};
+const ChallengeInfo = styled.View`
+    justify-content: space-around;
+    margin-left: 15;
+    padding-top: 10;
+    padding-bottom: 10;
+`
 
-const BUSINESS_NAME: TextStyle = {
-    color: '#8E8E93',
-    marginBottom: 5
-};
 
-const CHALLENGE_PIC: ImageStyle = {
-    marginTop: 20,
-    height: 75,
-    width: 75
-};
+const BusinessName = styled.Text`
+    color: #8E8E93;
+    margin-bottom: 5;
+`
 
-const CHALLENGE_TITLE: TextStyle = {
-    marginBottom: 5,
-    fontSize: 20,
-    justifyContent: 'flex-start'
-};
+const ChallengePic = styled.Image`
+    margin-top: 20;
+    height: 75;
+    width: 75;
+`
 
-const TEXT_CONTAINER: ViewStyle = {
-    marginTop: 16
-};
+const ChallengeTitle = styled.Text`
+    margin-bottom: 5;
+    font-size: 20;
+    justify-content: flex-start;
+`
 
-const PROFILE_PIC: ImageStyle = {
-    width: 64,
-    height: 64
-};
+const TextContainer = styled.View`
+    margin-top: 16;
+`
 
-const POINTS_TAG: ViewStyle = {
-    borderRadius: 28,
-    height: 25,
-    width: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: 14,
-    paddingRight: 14,
-    backgroundColor: '#E3FFE8'
-};
+const ProfilePic = styled.Image`
+    width: 64;
+    height: 64;
+`
 
-const POINTS_TEXT: TextStyle = {
-    color: '#70B32D'
-};
+const PointsTag = styled.View`
+    border-radius: 28;
+    height: 25;
+    width: 70;
+    align-items: center;
+    justify-content: center;
+    padding-left: 14;
+    padding-right: 14;
+    background-color: #E3FFE8;
+`
 
-const TYPE_TAG: ViewStyle = {
-    borderRadius: 20,
-    borderColor: '#FE6D1A',
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100
-};
+const PointsText = styled.Text`
+    color: #70B32D;
+`
 
-const TYPE_TEXT: TextStyle = {
-    justifyContent: 'center',
-    color: '#FE6D1A'
-};
+
+const TypeTag = styled.View`
+    border-radius: 20;
+    border-color: #FE6D1A;
+    border-width: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100;
+`
+
+const TypeText = styled.Text`
+    justify-content: center;
+    color: #FE6D1A
+`
 
 export interface HomeScreenProps {
     navigation: any;
 }
 const Home = (/* props: HomeScreenProps */) => {
     return (
-        <View style={FULL}>
+        <Full>
             <Screen preset="scroll" backgroundColor={color.transparent}>
-                <View style={HEADER_CONTAINER}>
-                    <View style={HEADER}>
-                        <View style={TEXT_CONTAINER}>
-                            <Text style={BUSINESS_NAME}>L’Oréal Paris</Text>
-                            <Text style={BOLD}>Bonjour Élodie</Text>
-                        </View>
-                        <Image
-                            style={PROFILE_PIC}
+                <HeaderContainer>
+                    <Header>
+                        <TextContainer>
+                            <BusinessName>L’Oréal Paris</BusinessName>
+                            <Bold>Bonjour Élodie</Bold>
+                        </TextContainer>
+                        <ProfilePic
                             source={require('../../../../assets/profile-pic.png')}
                         />
-                    </View>
-                </View>
+                    </Header>
+                </HeaderContainer>
 
-                <View style={CHALLENGE_CONTAINER}>
+                <ChallengeContainer>
                     <View>
-                        <Text style={CHALLENGE_TITLE}>Défi de la semaine</Text>
-                        <View style={CHALLENGE_VIEW}>
-                            <Image
-                                style={CHALLENGE_PIC}
+                        <ChallengeTitle>Défi de la semaine</ChallengeTitle>
+                        <ChallengeView>
+                            <ChallengePic
                                 source={require('../../../../assets/meal.png')}
                             />
-                            <View style={CHALLENGE_INFO}>
+                            <ChallengeInfo>
                                 <Text>Lundi c’est Veggie !</Text>
-                                <View style={TYPE_TAG}>
-                                    <Text style={TYPE_TEXT}>Alimentation</Text>
-                                </View>
-                                <View style={POINTS_TAG}>
-                                    <Text style={POINTS_TEXT}>80🌱</Text>
-                                </View>
-                            </View>
-                        </View>
+                                <TypeTag>
+                                    <TypeText>Alimentation</TypeText>
+                                </TypeTag>
+                                <PointsTag>
+                                    <PointsText>80🌱</PointsText>
+                                </PointsTag >
+                            </ChallengeInfo>
+                        </ChallengeView>
                     </View>
-                </View>
+                </ChallengeContainer>
             </Screen>
-        </View>
+        </Full>
     );
 };
 
