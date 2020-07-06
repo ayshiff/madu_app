@@ -8,10 +8,10 @@ module.exports = {
         'prettier/react'
     ],
     parserOptions: {
-        project: './tsconfig.json',
+        project: './tsconfig.json'
     },
     rules: {
-        "import/prefer-default-export": "off",
-        "react/jsx-props-no-spreading": "off"
+        'import/prefer-default-export': 'off',
+        'react/jsx-props-no-spreading': 'off'
     }
 };
