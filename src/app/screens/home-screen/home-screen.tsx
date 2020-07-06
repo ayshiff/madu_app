@@ -46,10 +46,6 @@ const ChallengeView = styled.View`
     flex-direction: row;
     justify-content: center;
     shadow-color: #000000;
-    shadow-offset: {
-        width: 0,
-        height: 1
-    };
     shadow-opacity: 1;
     shadow-radius: 3.84px;
     elevation: 6;
