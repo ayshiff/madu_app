@@ -9,38 +9,42 @@ const Full = styled.View`
 `;
 
 const HeaderContainer = styled.View`
-    height: 225;
+    height: 225px;
     background-color: rgba(138, 180, 255, 0.6);
-    border-bottom-left-radius: 30;
-    border-bottom-right-radius: 30;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 `;
 
 const HeaderTextContainer = styled.View`
-    margin-top: 66;
-    margin-left: 21;
+    margin-top: 66px;
+    margin-left: 21px;
 `;
 
 const HeaderTitle = styled.Text`
-    font-size: 24;
+    font-size: 24px;
     font-weight: bold;
     color: #153733;
 `;
 
 const HeaderSubtitle = styled.Text`
-    font-size: 14;
+    font-size: 14px;
     color: rgba(21, 55, 51, 0.6);
 `;
 
 const HeaderTimer = styled.Text`
-    font-size: 36;
+    font-size: 36px;
     color: #ffffff;
 `;
 
 const LeaderboardContainer = styled.View`
-    margin-top: 32;
+    margin-top: 32px;
     width: 100%;
     flex-direction: row;
     justify-content: space-around;
+`;
+
+const LeaderboardRank = styled.Text`
+    margin-left: 1.5px;
 `;
 
 const LeaderboardProfile = styled.View`
@@ -48,13 +52,13 @@ const LeaderboardProfile = styled.View`
 `;
 
 const LeaderBoardRankContainer = styled.View`
-    margin-top: 7;
-    margin-right: 11;
+    margin-top: 7px;
+    margin-right: 11px;
 `;
 
 const LeaderboardPointsContainer = styled.View`
     flex-direction: row;
-    margin-top: 10;
+    margin-top: 10px;
 `;
 
 const LeaderboardInformation = styled.View`
@@ -62,31 +66,31 @@ const LeaderboardInformation = styled.View`
 `;
 
 const LeaderboardUp = styled.Image`
-    width: 11;
-    height: 11;
+    width: 11px;
+    height: 11px;
 `;
 
 const LeaderboardProfileName = styled.Text`
-    margin-top: 4;
-    font-size: 14;
+    margin-top: 4px;
+    font-size: 14px;
     font-weight: bold;
 `;
 
 const LeaderboardProfilDepartment = styled.Text`
-    font-size: 12;
+    font-size: 12px;
 `;
 
 const LeaderboardProfilePic = styled.Image`
-    width: 48;
-    height: 48;
-    margin-right: 11;
+    width: 48px;
+    height: 48px;
+    margin-right: 11px;
 `;
 
 const LeaderboardCrown = styled.Image`
-    width: 14;
-    height: 10;
-    margin-top: 4;
-    margin-right: 5;
+    width: 14px;
+    height: 10px;
+    margin-top: 4px;
+    margin-right: 5px;
 `;
 
 export interface LeaderboardScreenProps {
@@ -108,7 +112,7 @@ export const LeaderboardScreen = ({ navigation }: LeaderboardScreenProps) => {
             <LeaderboardContainer>
                 <LeaderboardInformation>
                     <LeaderBoardRankContainer>
-                        <Text>1</Text>
+                        <LeaderboardRank>1</LeaderboardRank>
                         <LeaderboardUp
                             source={require('../../../../assets/up.png')}
                         />

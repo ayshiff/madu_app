@@ -15,85 +15,86 @@ const Bold = styled.Text`
 `;
 
 const HeaderContainer = styled.View`
-    height: 225;
+    height: 225px;
     background-color: #fec530;
-    border-bottom-left-radius: 30;
-    border-bottom-right-radius: 30;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 `;
 
 const Header = styled.View`
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
-    height: 64;
-    margin-left: 15;
-    margin-right: 15;
-    margin-top: 34;
+    height: 64px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 34px;
 `;
 
 const ChallengeContainer = styled.View`
-    margin-top: -80;
+    margin-top: -80px;
     align-items: center;
 `;
 
 const ChallengeView = styled.View`
-    height: 115;
-    width: 250;
+    height: 115px;
+    width: 250px;
+    margin-bottom: 10px;
     background-color: #FFFFFF;
-    border-radius: 10;
+    border-radius: 10px;
     flex-direction: row;
     justify-content: center;
     shadow-color: #000000;
     shadow-offset: {
         width: 0,
-        height: 2
+        height: 1
     };
-    shadow-opacity: 0.25;
-    shadow-radius: 3.84;
-    elevation: 5;
+    shadow-opacity: 1;
+    shadow-radius: 3.84px;
+    elevation: 6;
 `;
 
 const ChallengeInfo = styled.View`
     justify-content: space-around;
-    margin-left: 15;
-    padding-top: 10;
-    padding-bottom: 10;
+    margin-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 `;
 
 const BusinessName = styled.Text`
     color: #8e8e93;
-    margin-bottom: 5;
+    margin-bottom: 5px;
 `;
 
 const ChallengePic = styled.Image`
-    margin-top: 20;
-    height: 75;
-    width: 75;
+    margin-top: 20px;
+    height: 75px;
+    width: 75px;
 `;
 
 const ChallengeTitle = styled.Text`
-    margin-bottom: 5;
-    font-size: 20;
+    margin-bottom: 5px;
+    font-size: 20px;
     justify-content: flex-start;
 `;
 
 const TextContainer = styled.View`
-    margin-top: 16;
+    margin-top: 16px;
 `;
 
 const ProfilePic = styled.Image`
-    width: 64;
-    height: 64;
+    width: 64px;
+    height: 64px;
 `;
 
 const PointsTag = styled.View`
-    border-radius: 28;
-    height: 25;
-    width: 70;
+    border-radius: 28px;
+    height: 25px;
+    width: 70px;
     align-items: center;
     justify-content: center;
-    padding-left: 14;
-    padding-right: 14;
+    padding-left: 14px;
+    padding-right: 14px;
     background-color: #e3ffe8;
 `;
 
@@ -102,12 +103,12 @@ const PointsText = styled.Text`
 `;
 
 const TypeTag = styled.View`
-    border-radius: 20;
+    border-radius: 20px;
     border-color: #fe6d1a;
-    border-width: 1;
+    border-width: 1px;
     align-items: center;
     justify-content: center;
-    width: 100;
+    width: 100px;
 `;
 
 const TypeText = styled.Text`
