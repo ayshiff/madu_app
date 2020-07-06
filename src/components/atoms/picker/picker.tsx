@@ -34,7 +34,7 @@ const StyledPicker = (props: PickerPropsExtended) => {
             {label && <Text preset="fieldLabel">{label}</Text>}
             <Picker
                 selectedValue={selectedValue}
-                style={{ height: 50, alignSelf: 'stretch' }}
+                style={{ height: 50 }}
                 {...rest}
             >
                 {placeholder && <Picker.Item label={placeholder} value="0" />}

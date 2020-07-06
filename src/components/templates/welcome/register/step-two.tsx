@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, ViewStyle, TextStyle } from 'react-native';
+import { View, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Screen, Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import Picker from 'madu/components/atoms/picker/picker';
+import { DropdownMenu } from 'madu/components/molecules/drop-down';
 import { Text } from 'madu/components/atoms/text/text';
 import { registerActions } from 'madu/actions/register.actions';
 
@@ -42,10 +43,11 @@ interface IData {
 
 const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const [workPlaces] = useState([
+    const workPlaces = [
         { label: 'test1', value: 'test1' },
         { label: 'test2', value: 'test2' }
-    ]);
+    ];
+
     const [workplace, setWorkplace] = useState(userData.workplace || '');
 
     const navigateToNextStep = () => {
@@ -70,13 +72,38 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                 Renseignez votre lieux de travail, pour découvrir des adresses
                 écoresponsables près de votre entreprise.
             </Text>
-            <Picker
-                placeholder="Sélectionner un lieux"
-                selectedValue={workplace}
-                label="Lieu de travail"
-                onValueChange={(itemValue: string) => setWorkplace(itemValue)}
-                items={workPlaces}
-            />
+            <View>
+                <DropdownMenu
+                    title="Lieu de travail"
+                    component={
+                        <View>
+                            {workPlaces.map((datum, index) => (
+                                <TouchableOpacity
+                                    // onPress={onPressChoiceOrigin()}
+                                    key={index}
+                                    style={{
+                                        flexDirection: 'column',
+                                        paddingVertical: 10,
+                                        paddingHorizontal: 14,
+                                        backgroundColor: '#fff'
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            color: '#9F9F9F',
+                                            textTransform: 'uppercase',
+                                            marginBottom: 4
+                                        }}
+                                        textSize={14}
+                                    >
+                                        {datum.value}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    }
+                />
+            </View>
             <Button title="suivant" onPress={handleNavigate} />
         </Screen>
     );
