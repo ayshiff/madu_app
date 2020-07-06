@@ -2,18 +2,23 @@
 import * as React from 'react';
 import { View, TextInput, TextStyle, ViewStyle } from 'react-native';
 import { mergeAll, flatten } from 'ramda';
-import { color, spacing, typography } from '../../../theme';
-import { Text } from '../text/text';
+import styled from 'styled-components';
+
+import { color, spacing, typography } from 'madu/theme';
+import { Text } from 'madu/components/atoms/text/text';
+
 import { TextFieldProps } from './input.props';
 
-// import styled from 'styled-components';
-// const styledInput = styled.input`
-//     color: #e8e8e8;
-//     minheight: 35;
-//     borderbottomwidth: 1;
-// `;
+const InputStyle = styled(TextInput)`
+    font-family: ${typography.primary};
+    color: ${color.text};
+    border-radius: 6px;
+    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 18px;
+    background-color: ${color.palette.white};
+`;
 
-// the base styling for the container
 const CONTAINER: ViewStyle = {
     paddingVertical: spacing[3]
 };
@@ -59,8 +64,10 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
 
     return (
         <View style={containerStyle}>
-            <Text preset="fieldLabel" tx={labelTx} text={label} />
-            <TextInput
+            <Text preset="fieldLabel" textSize={15}>
+                {label}
+            </Text>
+            <InputStyle
                 placeholder={placeholder}
                 placeholderTextColor={color.palette.lighterGrey}
                 underlineColorAndroid={color.palette.lightGrey}

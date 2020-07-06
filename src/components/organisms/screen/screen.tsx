@@ -1,18 +1,16 @@
 import * as React from 'react';
 import {
     KeyboardAvoidingView,
-    Platform,
     ScrollView,
     StatusBar,
     View
 } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
+import SafeAreaView from 'react-native-safe-area-view';
 import { ScreenProps } from './screen.props';
 import { isNonScrolling, offsets, presets } from './screen.presets';
 
-const isIos = Platform.OS === 'ios';
-
-function ScreenWithoutScrolling(props: ScreenProps) {
+const ScreenWithoutScrolling = (props: ScreenProps) => {
     const insets = useSafeArea();
     const preset = presets.fixed;
     const style = props.style || {};
@@ -32,9 +30,9 @@ function ScreenWithoutScrolling(props: ScreenProps) {
             </View>
         </KeyboardAvoidingView>
     );
-}
+};
 
-function ScreenWithScrolling(props: ScreenProps) {
+const ScreenWithScrolling = (props: ScreenProps) => {
     const insets = useSafeArea();
     const preset = presets.scroll;
     const style = props.style || {};
@@ -49,26 +47,26 @@ function ScreenWithScrolling(props: ScreenProps) {
             keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}
         >
             <StatusBar barStyle={props.statusBar || 'light-content'} />
-            <View style={[preset.outer, backgroundStyle, insetStyle]}>
+            <SafeAreaView style={[preset.outer, backgroundStyle, insetStyle]}>
                 <ScrollView
                     style={[preset.outer, backgroundStyle]}
                     contentContainerStyle={[preset.inner, style]}
                 >
                     {props.children}
                 </ScrollView>
-            </View>
+            </SafeAreaView>
         </KeyboardAvoidingView>
     );
-}
+};
 
 /**
  * The starting component on every screen in the app.
  *
  * @param props The screen props
  */
-export function Screen(props: ScreenProps) {
+export const Screen = (props: ScreenProps) => {
     if (isNonScrolling(props.preset as any)) {
         return <ScreenWithoutScrolling {...props} />;
     }
     return <ScreenWithScrolling {...props} />;
-}
+};

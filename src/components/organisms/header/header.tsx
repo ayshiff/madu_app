@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
+
+import { spacing } from 'madu/theme';
+import { Text } from 'madu/components/atoms/text/text';
+import { Icon } from 'madu/components/atoms/icon/icon';
+
 import { HeaderProps } from './header.props';
-import { Text } from '../../atoms/text/text';
-import { Icon } from '../../atoms/icon/icon';
-import { spacing } from '../../../theme';
 
 // static styles
 const ROOT: ViewStyle = {
@@ -16,7 +18,6 @@ const ROOT: ViewStyle = {
     justifyContent: 'flex-start',
     margin: 10
 };
-const TITLE: TextStyle = { textAlign: 'left', fontSize: 30 };
 const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: 'center' };
 const LEFT: ViewStyle = { width: 32 };
 const RIGHT: ViewStyle = { width: 32 };
@@ -31,8 +32,7 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
         rightIcon,
         leftIcon,
         headerText,
-        style,
-        titleStyle
+        style
     } = props;
     const header = headerText || '';
 
@@ -55,7 +55,9 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
                 )}
             </View>
             <View style={TITLE_MIDDLE}>
-                <Text style={{ ...TITLE, ...titleStyle }} text={header} />
+                <Text textAlign="left" textSize={30}>
+                    {header}
+                </Text>
             </View>
         </View>
     );
