@@ -52,7 +52,9 @@ const Login = (props: LoginScreenProps) => {
     );
     const handleNavigate = () => {
         login({ email, password });
-        navigateToNextStep();
+        if (props.userData.accessToken) {
+            navigateToNextStep();
+        }
     };
 
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);

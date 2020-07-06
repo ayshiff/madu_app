@@ -12,12 +12,12 @@ describe('Login Reducer', () => {
     it('should login a user', () => {
         const action: LoginActions = {
             type: LoginTypes.LoginSuccess,
-            response: loginResponseMock
+            access_token: loginResponseMock.access_token
         };
         const newState = loginReducer(defaultState, action as LoginActions);
         expect(newState).toEqual({
             ...defaultState,
-            accessToken: action.response.access_token
+            accessToken: action.access_token
         });
     });
 });

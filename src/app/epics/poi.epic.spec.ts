@@ -1,9 +1,11 @@
 import { TestScheduler } from 'rxjs/testing';
-import { loginActions } from '../actions/login.actions';
-import { loginEpics } from './login.epic';
-import { loginResponseMock } from './__mocks__/login.mock';
+import { StateObservable } from 'redux-observable';
+import { Subject } from 'rxjs';
+import { poiActions } from '../actions/poi.actions';
+import { poiEpics } from './poi.epic';
+import { pointOfInterestMock } from './__mocks__/poi.mock';
 
-describe('Login epic', () => {
+describe('Poi epic', () => {
     let testScheduler: TestScheduler;
 
     beforeEach(() => {
@@ -12,22 +14,17 @@ describe('Login epic', () => {
         });
     });
 
-    it('should login a user', () => {
+    it('load list of poi', () => {
         const marbles = {
             i: '-i',
             r: '--r',
             o: '---o'
         };
 
-        const payload = {
-            email: 'string@hetic.net',
-            password: 'password'
-        };
-
         const values = {
-            i: loginActions.login(payload),
-            r: { response: loginResponseMock },
-            o: loginActions.loginSuccess(loginResponseMock.access_token)
+            i: poiActions.loadPoi(),
+            r: { response: [pointOfInterestMock] },
+            o: poiActions.loadPoiSuccess([pointOfInterestMock])
         };
 
         testScheduler.run(({ hot, cold, expectObservable }) => {
@@ -35,8 +32,12 @@ describe('Login epic', () => {
             const dependencies = {
                 ajax: () => cold(marbles.r, values)
             };
-            const state$ = null as any;
-            const output$ = loginEpics(action$, state$, dependencies);
+            const state$ = new StateObservable(new Subject(), {
+                login: {
+                    accessToken: 'test'
+                }
+            });
+            const output$ = poiEpics(action$, state$, dependencies);
             expectObservable(output$).toBe(marbles.o, values);
         });
     });

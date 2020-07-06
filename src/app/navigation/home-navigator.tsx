@@ -13,12 +13,15 @@ import {
     MapScreen,
     ContentScreen,
     ProfileScreen,
-    LeaderboardScreen
+    LeaderboardScreen,
+    WelcomeScreen
 } from '../screens';
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
 import { MapParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';
+import { PoiScreen } from '../screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
@@ -41,6 +44,8 @@ const MapNavigator = React.forwardRef<
         >
             <Stack.Screen name="map" component={MapScreen} />
             <Stack.Screen name="detail" component={DetailScreen} />
+            <Stack.Screen name="poi" component={PoiScreen} />
+            <Stack.Screen name="poi-success" component={PoiSuccessScreen} />
         </Stack.Navigator>
     );
 });
@@ -89,5 +94,17 @@ export const HomeNavigator = React.forwardRef<
             <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
+    );
+});
+
+export const HomeNavigatorWithContainer = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>((props, ref) => {
+    return (
+        <NavigationContainer {...props} ref={ref}>
+            <HomeNavigator />
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
+        </NavigationContainer>
     );
 });

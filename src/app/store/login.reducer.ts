@@ -13,8 +13,10 @@ export const loginReducer = (
     switch (action.type) {
         case LoginTypes.LoginSuccess:
             return {
-                accessToken: action.response.access_token
+                accessToken: action.access_token
             };
+        case LoginTypes.Logout:
+            return {};
         default:
             return loginState;
     }
