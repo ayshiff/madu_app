@@ -37,7 +37,7 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
     const header = headerText || '';
 
     return (
-        <View>
+        <View style={{ marginBottom: 40 }}>
             <View style={{ ...ROOT, ...style }}>
                 {leftIcon ? (
                     <TouchableOpacity onPress={onLeftPress}>

@@ -41,14 +41,14 @@ export const presets = {
      * Pick this one if you don't know which one you want yet.
      */
     scroll: {
-        outer: {
-            flex: 1,
-            height: '100%'
-        } as ViewStyle,
-        inner: {
-            justifyContent: 'flex-start',
-            alignItems: 'stretch'
-        } as ViewStyle
+        // outer: {
+        //     flex: 1,
+        //     height: '100%'
+        // } as ViewStyle,
+        // inner: {
+        //     justifyContent: 'flex-start',
+        //     alignItems: 'stretch'
+        // } as ViewStyle
     }
 };
 

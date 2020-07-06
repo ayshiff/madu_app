@@ -67,7 +67,7 @@ const buttonStyles = (props: ButtonProps) =>
         button: StyleSheet.flatten([
             {
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 borderRadius: 40,
                 borderWidth: 1,
                 alignSelf: 'stretch',

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { Screen, Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
-import Picker from 'madu/components/atoms/picker/picker';
 import { DropdownMenu } from 'madu/components/molecules/drop-down';
 import { Text } from 'madu/components/atoms/text/text';
 import { registerActions } from 'madu/actions/register.actions';
@@ -68,7 +67,7 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
             />
-            <Text>
+            <Text textSize={16}>
                 Renseignez votre lieux de travail, pour découvrir des adresses
                 écoresponsables près de votre entreprise.
             </Text>

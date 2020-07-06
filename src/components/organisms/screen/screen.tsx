@@ -24,7 +24,7 @@ const ScreenWithoutScrolling = (props: ScreenProps) => {
             style={[preset.outer, backgroundStyle]}
             keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}
         >
-            <StatusBar barStyle={props.statusBar || 'light-content'} />
+            <StatusBar barStyle={'dark-content'} />
             <View style={[preset.inner, style, insetStyle]}>
                 {props.children}
             </View>
