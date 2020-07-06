@@ -13,7 +13,8 @@ import {
     MapScreen,
     ContentScreen,
     ProfileScreen,
-    ChallengeScreen
+    ChallengeScreen,
+    LeaderboardScreen
 } from '../screens';
 import { Icon } from '../components';
 import { ChallengeSuccessStepScreen } from '../components/templates/challenge/challenge-success-step';
@@ -72,6 +73,9 @@ export const HomeNavigator = React.forwardRef<
                         case 'Challenge':
                             iconName = 'content';
                             break;
+                        case 'Leaderboard':
+                            iconName = 'content';
+                            break;
                         default:
                             iconName = 'explorer';
                             break;
@@ -87,7 +91,8 @@ export const HomeNavigator = React.forwardRef<
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Map" component={MapNavigator} />
             <Tab.Screen name="Content" component={ContentScreen} />
-            <Tab.Screen name="Challenge" component={ChallengeScreen} />
+            <Tab.Screen name="Challenge" component={ChallengeSuccessStepScreen} />
+            <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
