@@ -70,9 +70,6 @@ export const HomeNavigator = React.forwardRef<
                         case 'Map':
                             iconName = 'map';
                             break;
-                        case 'Content':
-                            iconName = 'content';
-                            break;
                         case 'Leaderboard':
                             iconName = 'content';
                             break;
@@ -90,7 +87,6 @@ export const HomeNavigator = React.forwardRef<
         >
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Map" component={MapNavigator} />
-            <Tab.Screen name="Content" component={ContentScreen} />
             <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
