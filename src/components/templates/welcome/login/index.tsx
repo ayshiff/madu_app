@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Screen, Header, Input, Button } from 'madu/components/index';
 import { color, spacing } from 'madu/theme';
 import { loginActions } from 'madu/actions/login.actions';
-import { Text } from 'madu/components/atoms/text/text';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
@@ -83,7 +82,7 @@ const Login = (props: LoginScreenProps) => {
                     value={password}
                     onChangeText={(el: string) => setPassword(el)}
                 />
-                <Button text="Je me connecte" onPress={handleNavigate} />
+                <Button title="Je me connecte" onPress={handleNavigate} />
             </Screen>
         </View>
     );
