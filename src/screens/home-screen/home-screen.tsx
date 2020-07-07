@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen } from 'madu/components';
 import { color, spacing } from 'madu/theme';
@@ -41,15 +41,11 @@ const ChallengeView = styled.View`
     height: 115px;
     width: 250px;
     margin-bottom: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 10px;
     flex-direction: row;
     justify-content: center;
     shadow-color: #000000;
-    shadow-offset: {
-        width: 0,
-        height: 1
-    };
     shadow-opacity: 1;
     shadow-radius: 3.84px;
     elevation: 6;
@@ -97,10 +93,6 @@ const PointsTag = styled.View`
     padding-left: 14px;
     padding-right: 14px;
     background-color: #e3ffe8;
-`;
-
-const PointsText = styled.Text`
-    color: #70b32d;
 `;
 
 const TypeTag = styled.View`
