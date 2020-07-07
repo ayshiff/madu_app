@@ -1,10 +1,9 @@
 {
-    "main": "node_modules/expo/AppEntry.js",
+    "main": "./src/App.tsx",
     "scripts": {
         "start": "expo start",
         "format": "npx prettier --write **/*.{js,ts,tsx,json}",
         "lint": "tsc --noEmit && eslint --ext .js,.ts,.tsx ./",
-        "format:check": "",
         "android": "expo start --android",
         "ios": "expo start --ios",
         "web": "expo start --web",
@@ -56,6 +55,7 @@
         "react-native-gesture-handler": "~1.6.0",
         "react-native-maps": "0.27.1",
         "react-native-safe-area-context": "^1.0.0",
+        "react-native-safe-area-view": "^1.1.1",
         "react-native-screens": "~2.2.0",
         "react-native-web": "~0.11.7",
         "react-redux": "^7.2.0",
