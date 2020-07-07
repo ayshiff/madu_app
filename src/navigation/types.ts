@@ -1,21 +1,29 @@
 export type RootParamList = {
-  primaryStack: undefined;
+    primaryStack: undefined;
 };
 
 export type PrimaryParamList = {
-  welcome: undefined;
-  home: undefined;
+    welcome: undefined;
+    home: undefined;
 };
 
 export type WelcomeParamList = {
-  welcome: undefined;
-  register: undefined;
-  registerStepOne: undefined;
-  registerStepTwo: undefined;
-  registerStepThree: undefined;
-  registerStepFour: undefined;
-  registerStepFive: undefined;
-  registerStepSix: undefined;
-  login: undefined;
-  home: undefined;
+    welcome: undefined;
+    register: undefined;
+    'register-step-one': undefined;
+    'register-step-two': undefined;
+    'register-step-three': undefined;
+    'register-step-four': undefined;
+    'register-step-five': undefined;
+    'register-step-six': undefined;
+    login: undefined;
+    home: undefined;
+};
+
+export type MapParamList = {
+    map: undefined;
+    detail: undefined;
+    poi: undefined;
+    'poi-success': undefined;
+    welcome: undefined;
 };

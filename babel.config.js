@@ -6,7 +6,14 @@ module.exports = function (api) {
             [
                 'module-resolver',
                 {
-                    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+                    extensions: [
+                        '.js',
+                        '.jsx',
+                        '.ts',
+                        '.tsx',
+                        '.json',
+                        '.spec.ts'
+                    ],
                     root: ['./src'],
                     alias: {
                         madu: './src'

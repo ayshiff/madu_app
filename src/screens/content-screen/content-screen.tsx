@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../components';
-import { color, spacing } from '../../theme';
+import { Screen, Header } from 'madu/components';
+import { color, spacing } from 'madu/theme';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {

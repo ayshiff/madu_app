@@ -2,10 +2,10 @@ import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Screen, Header, Input, Button } from '../../../index';
-import { color, spacing } from '../../../../theme';
-import { loginActions } from '../../../../actions/login.actions';
-import { Text } from '../../../atoms/text/text';
+import { Screen, Header, Input, Button } from 'madu/components/index';
+import { color, spacing } from 'madu/theme';
+import { loginActions } from 'madu/actions/login.actions';
+import { Text } from 'madu/components/atoms/text/text';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
@@ -53,7 +53,9 @@ const Login = (props: LoginScreenProps) => {
     );
     const handleNavigate = () => {
         login({ email, password });
-        navigateToNextStep();
+        if (props.userData.accessToken) {
+            navigateToNextStep();
+        }
     };
 
     return (

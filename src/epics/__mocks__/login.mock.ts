@@ -1,4 +1,4 @@
-import { ILoginResponse } from '../../actions/login.actions';
+import { ILoginResponse } from 'madu/actions/login.actions';
 
 export const loginResponseMock: ILoginResponse = {
     access_token:

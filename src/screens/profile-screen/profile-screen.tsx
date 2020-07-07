@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
-import { Screen, Header } from '../../components';
-import { color, spacing } from '../../theme';
+import { connect } from 'react-redux';
+import { Screen, Header } from 'madu/components';
+import { color, spacing } from 'madu/theme';
+import { loginActions } from 'madu/actions/login.actions';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
-    color: color.palette.black,
     fontFamily: 'Montserrat'
 };
 
@@ -31,9 +32,10 @@ export interface SettingsScreenProps {
     loadContent: () => string;
     content: string;
     navigation: any;
+    logout: () => void;
 }
 
-export const ProfileScreen: React.FunctionComponent<SettingsScreenProps> = () => (
+export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
     <View style={FULL}>
         <Screen
             style={CONTAINER}
@@ -44,7 +46,25 @@ export const ProfileScreen: React.FunctionComponent<SettingsScreenProps> = () =>
                 headerText="Profile Screen"
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
+                rightIcon="logout"
+                onRightPress={() => {
+                    navigation.navigate('welcome');
+                    logout();
+                }}
             />
         </Screen>
     </View>
 );
+
+const mapStateToProps = (state: any) => ({
+    logout: state.poi.list
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    logout: () => dispatch(loginActions.logout())
+});
+
+export const ProfileScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Profile);

@@ -1,7 +1,7 @@
 import {
     ICompanyDomainResponse,
     IregisterContentResponse
-} from '../../actions/register.actions';
+} from 'madu/actions/register.actions';
 
 export const registerContentResponseMock: IregisterContentResponse = {
     roles: ['user'],

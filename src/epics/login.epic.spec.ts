@@ -27,7 +27,7 @@ describe('Login epic', () => {
         const values = {
             i: loginActions.login(payload),
             r: { response: loginResponseMock },
-            o: loginActions.loginSuccess(loginResponseMock)
+            o: loginActions.loginSuccess(loginResponseMock.access_token)
         };
 
         testScheduler.run(({ hot, cold, expectObservable }) => {

@@ -1,28 +1,32 @@
-import { AjaxError } from "rxjs/ajax";
-import { ActionTypes } from "../core/actions.type";
+import { AjaxError } from 'rxjs/ajax';
+import { ActionTypes } from '../core/actions.type';
 
 export enum LoginTypes {
-  Login = "[LOGIN] LOGIN",
-  LoginSuccess = "[LOGIN] LOGIN_SUCCESS",
-  LoginFail = "[LOGIN] LOGIN_FAIL",
-}
-
-export interface IUserData {
-  email: string;
-  password: string;
+    Login = '[LOGIN] LOGIN',
+    LoginSuccess = '[LOGIN] LOGIN_SUCCESS',
+    LoginFail = '[LOGIN] LOGIN_FAIL',
+    Logout = '[LOGIN] LOGOUT'
 }
 
 export type ILoginResponse = {
-  access_token: string;
+    access_token: string;
 };
+
+export interface IUserData {
+    email: string;
+    password: string;
+}
 
 // Our object that produce our action creators
 export const loginActions = {
-  login: (payload: IUserData) => ({ type: LoginTypes.Login, payload } as const),
-  loginSuccess: (response: ILoginResponse) =>
-    ({ type: LoginTypes.LoginSuccess, response } as const),
-  loginFail: (error: AjaxError) =>
-    ({ type: LoginTypes.LoginFail, error } as const),
+    login: (payload: IUserData) =>
+        ({ type: LoginTypes.Login, payload } as const),
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    loginSuccess: (access_token: string) =>
+        ({ type: LoginTypes.LoginSuccess, access_token } as const),
+    loginFail: (error: AjaxError) =>
+        ({ type: LoginTypes.LoginFail, error } as const),
+    logout: () => ({ type: LoginTypes.Logout } as const)
 };
 
 // We can then type all of our actions with a single line

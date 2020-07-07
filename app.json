@@ -1,12 +1,13 @@
 {
     "expo": {
-        "name": "madu_test",
-        "slug": "madu_test",
+        "name": "Madu",
+        "slug": "madu",
+        "platforms": ["ios", "android", "web"],
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/icon.png",
+        "icon": "src/assets/icon.png",
         "splash": {
-            "image": "./assets/splash.png",
+            "image": "src/assets/splash.png",
             "resizeMode": "cover",
             "backgroundColor": "#fff"
         },
@@ -15,13 +16,9 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "infoPlist": {
-                "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
-            }
+            "supportsTablet": true
         },
-
-        "web": {
-            "favicon": "./assets/favicon.png"
-        }
+        "description": "MADU app",
+        "githubUrl": "https://github.com/ayshiff/madu_app"
     }
 }

@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { View, Image, ImageStyle } from 'react-native';
+import { View, Image } from 'react-native';
+import styled from 'styled-components/native';
 import { IconProps } from './icon.props';
 import { icons } from './icons';
 
-const ROOT: ImageStyle = {
-    resizeMode: 'contain',
-    width: 20,
-    height: 20
-};
+const StyledImage = styled(Image)`
+    resize-mode: contain;
+    width: 20px;
+    height: 20px;
+`;
 
 export function Icon(props: IconProps) {
     const { style: styleOverride, icon, containerStyle } = props;
-    const style: ImageStyle = { ...ROOT, ...styleOverride };
 
     return (
         <View style={containerStyle}>
-            <Image style={style} source={icons[icon]} />
+            <StyledImage style={styleOverride} source={icons[icon]} />
         </View>
     );
 }
