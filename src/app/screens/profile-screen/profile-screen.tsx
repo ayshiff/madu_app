@@ -6,8 +6,7 @@ import { color, spacing } from '../../theme';
 import { loginActions } from '../../actions/login.actions';
 import styled from 'styled-components/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Points }  from '../../components/atoms/points/points'
-
+import { Points } from '../../components/atoms/points/points';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
@@ -41,61 +40,61 @@ const HeaderContainer = styled.View`
 const Card = styled.View`
     width: 99px;
     height: 63px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 6px;
     margin-top: 16px;
     margin-right: 6px;
     justify-content: center;
     align-items: center;
-`
+`;
 
 const ProfilePic = styled.Image`
     height: 80px;
     width: 80px;
-`
+`;
 
 const ProfileName = styled.Text`
     font-weight: bold;
     font-size: 24px;
     margin-top: 9px;
-    color: #162D4B;
-`
+    color: #162d4b;
+`;
 const Department = styled.Text`
-    color: #EE6538;
-`
+    color: #ee6538;
+`;
 
 const ProfileInformation = styled.View`
     justify-content: center;
     align-items: center;
-`
+`;
 const CardContainer = styled.View`
     flex-direction: row;
-`
+`;
 
 const RankingText = styled.Text`
     margin-top: -7px;
-`
+`;
 
 const RankingNumberContainer = styled.Text`
     flex-direction: row;
     margin-top: 5px;
-`
+`;
 const Up = styled.Image`
     margin-top: 4px;
     margin-right: 5px;
-`
+`;
 
 const InscriptionText = styled.Text`
     margin-top: -8px;
-`
+`;
 const DateContainer = styled.View`
-    flex-direction: row; 
+    flex-direction: row;
     margin-top: 4px;
-`
+`;
 const Clock = styled.Image`
-    margin-Top: 4px; 
-    margin-Right: 4px;
-`
+    margin-top: 4px;
+    margin-right: 4px;
+`;
 
 export interface SettingsScreenProps {
     loadContent: () => string;
@@ -107,30 +106,26 @@ export interface SettingsScreenProps {
 const Tab = createMaterialTopTabNavigator();
 
 const yay = () => {
-    return(
+    return (
         <View>
             <Text>Yay !</Text>
         </View>
-    )
-}
+    );
+};
 
 const yit = () => {
-    return(
+    return (
         <View>
             <Text>Yit !</Text>
         </View>
-    )
-}
+    );
+};
 
 export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
     <View style={FULL}>
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.white}
-        >
+        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.white}>
             <Header
-                // headerText="Profile Screen"  
+                // headerText="Profile Screen"
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
                 rightIcon="logout"
@@ -145,18 +140,21 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
                         source={require('../../../../assets/profile-pic.png')}
                     />
                     <ProfileName>Élodie Five</ProfileName>
-                    <Text>Responsable Marketing <Department>Communication</Department></Text>
+                    <Text>
+                        Responsable Marketing{' '}
+                        <Department>Communication</Department>
+                    </Text>
                     <CardContainer>
                         <Card>
                             <Text>Total de point</Text>
-                            <Points points={2567}/>
+                            <Points points={2567} />
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>
                             <RankingNumberContainer>
-                                <Up 
+                                <Up
                                     source={require('../../../../assets/up.png')}
-                                    />
+                                />
                                 <Text>4</Text>
                             </RankingNumberContainer>
                         </Card>
@@ -189,14 +187,8 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
                     }
                 }}
             >
-                <Tab.Screen
-                    name="défis accomplis"
-                    component={yay}
-                />
-                <Tab.Screen
-                    name="lieux visités"
-                    component={yit}
-                />
+                <Tab.Screen name="défis accomplis" component={yay} />
+                <Tab.Screen name="lieux visités" component={yit} />
             </Tab.Navigator>
         </Screen>
     </View>
