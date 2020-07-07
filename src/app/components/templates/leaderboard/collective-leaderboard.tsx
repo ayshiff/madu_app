@@ -21,7 +21,7 @@ const LeaderboardClientContainer = styled.View`
     width: 100%;
     flex-direction: row;
     justify-content: space-around;
-    background-color : #FFEFF4;
+    background-color: #ffeff4;
     border-radius: 50px;
 `;
 
@@ -59,7 +59,6 @@ const LeaderboardDepartment = styled.Text`
     font-weight: bold;
 `;
 
-
 const LeaderboardProfilePic = styled.Image`
     width: 48px;
     height: 48px;
@@ -79,7 +78,9 @@ export interface CollectiveLeaderboardScreenProps {
     navigation: any;
 }
 
-export const CollectiveLeaderboardScreen = ({ navigation }: CollectiveLeaderboardScreenProps) => {
+export const CollectiveLeaderboardScreen = ({
+    navigation
+}: CollectiveLeaderboardScreenProps) => {
     return (
         <Full>
             <LeaderboardContainer>
@@ -107,7 +108,7 @@ export const CollectiveLeaderboardScreen = ({ navigation }: CollectiveLeaderboar
                     />
                     <Text>1567</Text>
                 </LeaderboardPointsContainer>
-        </LeaderboardContainer>
-    </Full>        
-    )
-}
+            </LeaderboardContainer>
+        </Full>
+    );
+};

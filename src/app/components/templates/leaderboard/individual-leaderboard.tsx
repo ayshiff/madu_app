@@ -21,7 +21,7 @@ const LeaderboardClientContainer = styled.View`
     width: 100%;
     flex-direction: row;
     justify-content: space-around;
-    background-color : #FFEFF4;
+    background-color: #ffeff4;
     border-radius: 50px;
 `;
 
@@ -83,38 +83,40 @@ export interface IndividualLeaderboardScreenProps {
     navigation: any;
 }
 
-export const IndividualLeaderboardScreen = ({ navigation }: IndividualLeaderboardScreenProps) => {
+export const IndividualLeaderboardScreen = ({
+    navigation
+}: IndividualLeaderboardScreenProps) => {
     return (
         <Full>
             <LeaderboardContainer>
-            <LeaderboardInformation>
-                <LeaderBoardRankContainer>
-                    <LeaderboardRank>1</LeaderboardRank>
-                    <LeaderboardUp
-                        source={require('../../../../../assets/up.png')}
+                <LeaderboardInformation>
+                    <LeaderBoardRankContainer>
+                        <LeaderboardRank>1</LeaderboardRank>
+                        <LeaderboardUp
+                            source={require('../../../../../assets/up.png')}
+                        />
+                    </LeaderBoardRankContainer>
+                    <LeaderboardProfile>
+                        <LeaderboardProfilePic
+                            source={require('../../../../../assets/profile-pic.png')}
+                        />
+                        <View>
+                            <LeaderboardProfileName>
+                                Elodie Five
+                            </LeaderboardProfileName>
+                            <LeaderboardProfilDepartment>
+                                Communication
+                            </LeaderboardProfilDepartment>
+                        </View>
+                    </LeaderboardProfile>
+                </LeaderboardInformation>
+                <LeaderboardPointsContainer>
+                    <LeaderboardCrown
+                        source={require('../../../../../assets/crown.png')}
                     />
-                </LeaderBoardRankContainer>
-                <LeaderboardProfile>
-                    <LeaderboardProfilePic
-                        source={require('../../../../../assets/profile-pic.png')}
-                    />
-                    <View>
-                        <LeaderboardProfileName>
-                            Elodie Five
-                        </LeaderboardProfileName>
-                        <LeaderboardProfilDepartment>
-                            Communication
-                        </LeaderboardProfilDepartment>
-                    </View>
-                </LeaderboardProfile>
-            </LeaderboardInformation>
-            <LeaderboardPointsContainer>
-                <LeaderboardCrown
-                    source={require('../../../../../assets/crown.png')}
-                />
-                <Text>320</Text>
-            </LeaderboardPointsContainer>
-        </LeaderboardContainer>
-    </Full>        
-    )
-}
+                    <Text>320</Text>
+                </LeaderboardPointsContainer>
+            </LeaderboardContainer>
+        </Full>
+    );
+};

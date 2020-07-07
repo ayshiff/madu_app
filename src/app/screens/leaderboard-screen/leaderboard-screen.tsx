@@ -13,7 +13,7 @@ const Full = styled.View`
 
 const HeaderContainer = styled.View`
     height: 225px;
-    background-color: #FAE3C8;
+    background-color: #fae3c8;
 `;
 
 const HeaderTextContainer = styled.View`
@@ -24,19 +24,18 @@ const HeaderTextContainer = styled.View`
 const HeaderTitle = styled.Text`
     font-size: 24px;
     font-weight: bold;
-    color: #162D4B;
+    color: #162d4b;
 `;
 
 const HeaderSubtitle = styled.Text`
     font-size: 14px;
-    color: #856B7F;
+    color: #856b7f;
 `;
 
 const HeaderTimer = styled.Text`
     font-size: 36px;
-    color: #E284A3;
+    color: #e284a3;
 `;
-
 
 export interface LeaderboardScreenProps {
     loadContent: () => string;
@@ -57,19 +56,30 @@ export const LeaderboardScreen = ({ navigation }: LeaderboardScreenProps) => {
                 </HeaderTextContainer>
             </HeaderContainer>
             <Tab.Navigator
-              tabBarOptions={{
-                activeTintColor: '#EE6538',
-                inactiveTintColor: '#856B7F',
-                indicatorStyle: {
-                    backgroundColor:'#EE6538',
-                    width:136,
-                    left:"10%"
-                },  
-                labelStyle: { fontSize: 12 },
-                style: { backgroundColor: '#FAE3C8', borderBottomLeftRadius: 30, borderBottomRightRadius: 30 },
-              }}>
-                <Tab.Screen name="individuel" component={IndividualLeaderboardScreen} />
-                <Tab.Screen name="collectif" component={CollectiveLeaderboardScreen} />
+                tabBarOptions={{
+                    activeTintColor: '#EE6538',
+                    inactiveTintColor: '#856B7F',
+                    indicatorStyle: {
+                        backgroundColor: '#EE6538',
+                        width: 136,
+                        left: '10%'
+                    },
+                    labelStyle: { fontSize: 12 },
+                    style: {
+                        backgroundColor: '#FAE3C8',
+                        borderBottomLeftRadius: 30,
+                        borderBottomRightRadius: 30
+                    }
+                }}
+            >
+                <Tab.Screen
+                    name="individuel"
+                    component={IndividualLeaderboardScreen}
+                />
+                <Tab.Screen
+                    name="collectif"
+                    component={CollectiveLeaderboardScreen}
+                />
             </Tab.Navigator>
         </Full>
     );
