@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle, Dimensions } from 'react-native';
+import { View, ViewStyle, TextStyle } from 'react-native';
 import { connect } from 'react-redux';
 import { useState } from 'react';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Button, Input } from 'madu/components';
+import { Header, Button, Input } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { registerActions, IUserData } from 'madu/actions/register.actions';
-
-const { height } = Dimensions.get('screen');
 
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -62,40 +61,44 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
 
     const goBack = () => navigation.goBack();
     return (
-        <Screen preset="scroll">
-            <View style={CONTAINER}>
-                <Header
-                    headerText="Créer mon compte"
-                    leftIcon="back"
-                    onLeftPress={goBack}
-                    style={HEADER}
-                    titleStyle={HEADER_TITLE}
-                />
-                <Input
-                    placeholder="Votre mail professionnel"
-                    label="Mail professionnel"
-                    value={email}
-                    onChangeText={(el: string) => setEmail(el)}
-                />
-                <Input
-                    placeholder="Votre mot de passe"
-                    label="Mot de passe"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={(el: string) => setPassword(el)}
-                />
-                <Input
-                    placeholder="Confirmer votre mot de passe"
-                    label="Confirmer mot de passe"
-                    secureTextEntry
-                    value={confirmPassword}
-                    onChangeText={(el: string) => setConfirmPassword(el)}
-                />
-                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <Button title="Suivant" onPress={handleNavigate} />
-                </View>
+        <SafeAreaView style={CONTAINER}>
+            <Header
+                headerText="Créer mon compte"
+                leftIcon="back"
+                onLeftPress={goBack}
+                style={HEADER}
+                titleStyle={HEADER_TITLE}
+            />
+            <Input
+                placeholder="Votre mail professionnel"
+                label="Mail professionnel"
+                value={email}
+                onChangeText={(el: string) => setEmail(el)}
+            />
+            <Input
+                placeholder="Votre mot de passe"
+                label="Mot de passe"
+                secureTextEntry
+                value={password}
+                onChangeText={(el: string) => setPassword(el)}
+            />
+            <Input
+                placeholder="Confirmer votre mot de passe"
+                label="Confirmer mot de passe"
+                secureTextEntry
+                value={confirmPassword}
+                onChangeText={(el: string) => setConfirmPassword(el)}
+            />
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
+            >
+                <Button title="Suivant" onPress={handleNavigate} />
             </View>
-        </Screen>
+        </SafeAreaView>
     );
 };
 

@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { ViewStyle, TextStyle } from 'react-native';
+import { View, ViewStyle, TextStyle } from 'react-native';
 import { connect } from 'react-redux';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Input, Button } from 'madu/components';
+import { Header, Input, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { registerActions } from 'madu/actions/register.actions';
 
 import { RegisterScreenProps } from './step-one';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -17,7 +17,7 @@ const TEXT: TextStyle = {
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
-    backgroundColor: color.transparent,
+    flex: 1,
     paddingHorizontal: spacing[4]
 };
 
@@ -56,7 +56,7 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
-        <Screen style={CONTAINER} preset="scroll">
+        <SafeAreaView style={CONTAINER}>
             <Header
                 headerText="Complétez votre profil"
                 leftIcon="back"
@@ -82,8 +82,16 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                 label="Poste"
                 onChangeText={(el: string) => setJob(el)}
             />
-            <Button title="suivant" onPress={handleNavigate} />
-        </Screen>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
+            >
+                <Button title="Suivant" onPress={handleNavigate} />
+            </View>
+        </SafeAreaView>
     );
 };
 

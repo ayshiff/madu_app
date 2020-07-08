@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, ViewStyle, TextStyle, Image } from 'react-native';
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Button } from 'madu/components';
+import { Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { ImagePickerRegister } from 'madu/components/molecules/image-picker/image-picker';
 import { Text } from 'madu/components/atoms/text/text';
@@ -12,7 +13,6 @@ import { registerActions } from 'madu/actions/register.actions';
 import { RegisterScreenProps } from './step-one';
 
 const IMAGE_CONTAINER: ViewStyle = {
-    flex: 1,
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
@@ -34,7 +34,7 @@ const TEXT: TextStyle = {
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
-    backgroundColor: color.transparent,
+    flex: 1,
     paddingHorizontal: spacing[4]
 };
 
@@ -47,11 +47,6 @@ const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
     textAlign: 'left'
-};
-const FOOTER: ViewStyle = {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
 };
 
 interface IData {
@@ -93,11 +88,7 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                 />
             )}
             {!isTakingImage && !isChosingImage && (
-                <Screen
-                    style={CONTAINER}
-                    preset="scroll"
-                    backgroundColor={color.transparent}
-                >
+                <SafeAreaView style={CONTAINER}>
                     <Header
                         headerText="Complétez votre profil"
                         leftIcon="back"
@@ -134,8 +125,16 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                         title="Prendre une photo"
                         onPress={() => setTakingImage(true)}
                     />
-                    <Button title="Terminer" onPress={navigateToHome} />
-                </Screen>
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'flex-end',
+                            marginBottom: 40
+                        }}
+                    >
+                        <Button title="Terminer" onPress={navigateToHome} />
+                    </View>
+                </SafeAreaView>
             )}
         </>
     );

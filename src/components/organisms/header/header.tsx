@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import { View, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
+import { View, ViewStyle, TouchableOpacity } from 'react-native';
 
 import { spacing } from 'madu/theme';
 import { Text } from 'madu/components/atoms/text/text';
@@ -18,7 +18,6 @@ const ROOT: ViewStyle = {
     justifyContent: 'flex-start',
     margin: 10
 };
-const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: 'center' };
 const LEFT: ViewStyle = { width: 32 };
 const RIGHT: ViewStyle = { width: 32 };
 
@@ -54,7 +53,7 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
                     <View style={RIGHT} />
                 )}
             </View>
-            <View style={TITLE_MIDDLE}>
+            <View>
                 <Text textAlign="left" textSize={30}>
                     {header}
                 </Text>
