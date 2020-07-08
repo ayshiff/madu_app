@@ -1,54 +1,95 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle, Text } from 'react-native';
+import { View, ViewStyle, TextStyle, Text, Image,TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { useState } from 'react';
+import { Points } from '../../atoms/points/points'
+import styled from 'styled-components/native';
+
+
+const Full = styled.View`
+    flex: 1;
+    background-color: #ffffff;
+`;
+
+const ChallengeSuccessContainer = styled.View`
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    margin-right: 40px;
+`
+
+const PointContainer = styled.View`
+    flex-direction: row-reverse;
+    height: 100px;
+    margin-left: 34px;
+    margin-top: 33px;
+`
+
+const Pic = styled.Image`
+    width: 200px;
+    height: 200px;
+`
+
+const PointsText = styled.Text`
+    font-size: 26px;
+    margin-top: 40px;
+`
+
+const Button = styled.TouchableOpacity`
+    background: rgba(255, 221, 231, 0.46);
+    border-radius: 50px;
+    margin-top: 45px;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 48px;
+`
+
+const ChallengeSuccessText = styled.Text`
+    text-align: center;
+    color: #8E8E93;
+    margin-top: 15px;
+`
+
+const ButtonText = styled.Text`
+    color: #EE6538;
+`
+
+const PointsNumber = styled.Text`
+    color: #97B091;
+    margin-left: 18px;
+    margin right: 4px;
+`
 
 export interface ChallengeSuccessStepScreenProps {
     navigation: any;
 }
 
-const CHALLENGE_SUCCESS_CONTAINER: ViewStyle = {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-};
-
-const POINTS_TAG: ViewStyle = {
-    borderRadius: 28,
-    height: 25,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: 14,
-    paddingRight: 14,
-    backgroundColor: '#E3FFE8'
-};
-
-const POINTS_TEXT: TextStyle = {
-    color: '#70B32D'
-};
-
-const POINT_CONTAINER: ViewStyle = {
-    flex: 1,
-    flexDirection: 'row-reverse',
-    marginTop: 35,
-    marginRight: 25
-};
-
-const ChallengeSuccessStep = (props: ChallengeSuccessStepScreenProps) => {
+export const ChallengeSuccessStep = (props: ChallengeSuccessStepScreenProps) => {
     const { navigation } = props;
 
     return (
-        <View>
-            <View style={POINT_CONTAINER}>
-                <View style={POINTS_TAG}>
-                    <Text style={POINTS_TEXT}>2567🌱</Text>
-                </View>
-            </View>
-            <View style={CHALLENGE_SUCCESS_CONTAINER}>
-                <Text>GG</Text>
-            </View>
-        </View>
+        <Full>
+            <PointContainer>
+                <Points points={2567}/>
+            </PointContainer>
+            <ChallengeSuccessContainer>
+                <Pic
+                    source={require('../../../../../assets/meal.png')}
+                />
+                <PointsText>Vous avez gagné 
+                    <PointsNumber>160</PointsNumber> 
+                    <Image
+                        source={require('../../../../../assets/leaf.png')}
+                    />
+                </PointsText>
+                <ChallengeSuccessText>Félicitations ! Voilà qui a du vous faire monter dans le classement individuel ainsi que dans celui interéquipes</ChallengeSuccessText>
+                <ChallengeSuccessText>N’hésitez pas à aller voir sur votre profil.</ChallengeSuccessText>
+                <Button>
+                    <ButtonText>Continuer</ButtonText>
+                </Button>
+            </ChallengeSuccessContainer>
+        </Full>
     );
 };
 
