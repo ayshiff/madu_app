@@ -1,16 +1,22 @@
-import * as React from 'react';
+import React, { Component, useState } from "react";
 import {
     View,
     ViewStyle,
     TextStyle,
     ImageBackground,
+    TouchableOpacity,
     Image,
     Text,
-    ImageStyle
+    ImageStyle,
+    Alert,
+    Modal,
+    TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen, Button } from '../../../components';
 import { color } from '../../../theme';
+import styled from 'styled-components/native';
+
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: color.white };
 
@@ -88,11 +94,66 @@ const POINTS_TEXT: TextStyle = {
     color: '#70B32D'
 };
 
+const ChallengeButton = styled.TouchableOpacity`
+    width: 329px;
+    height: 48px;
+    border-radius: 40px;
+    background: #EE6538;
+    justify-content: center;
+    align-items: center;
+`
+
+const ChallengeButtonContainer = styled.View`
+    justify-content: center;
+    align-items: center;
+`
+
+const ChallengeButtonText = styled.Text`
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+`
+const AttendeesSuccessfulContainer = styled.View`
+    margin-top: 30px;
+    margin-left: 24px;
+`
+const AttendeesTitle = styled.Text`
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+`
+
+const AttendeesNumber = styled.Text`
+    color: #777777;
+    margin-bottom: 25px;
+`
+
+const AttendeesProfilPicContainer = styled.View`
+    flex-direction: row;
+    width: 325px;
+`
+const AttendeesProfilPic = styled.Image`
+    width: 100px;
+    height: 100px;
+    margin-right: 17px;
+    margin-bottom: 50px;
+`
+
+// Modal test 
+const AttendeesModalContainer = styled.View`
+    height: 100%;
+    width: 100%;
+    background-color: pink;
+`
+
+//  Modal Test 
+
 export interface ChallengeScreenProps {
     navigation: any;
 }
 
 const Challenge = (props: ChallengeScreenProps) => {
+    const [modalVisible, setModalVisible] = useState(false);
     const { navigation } = props;
 
     const navigateToChallengePictureStep = React.useMemo(
@@ -102,15 +163,11 @@ const Challenge = (props: ChallengeScreenProps) => {
     return (
         <View style={FULL}>
             <Screen preset="scroll" backgroundColor={color.transparent}>
-                {/* <ImageBackground
-                    source={require('../../../../assets/electricity.png')}
-                    style={IMAGE_BACKGROUND}
-                >
-                </ImageBackground> */}
                 <Image
                     style={IMAGE_BACKGROUND}
-                    source={require('../../../../assets/meal-375-214.png')}
+                    source={require('../../../../../assets/meal-375-214.png')}
                 />
+                
                 <View style={INFORMATION_CONTAINER}>
                     <View style={POINT_WRAPPER}>
                         <View style={POINTS_CONTAINER}>
@@ -140,7 +197,47 @@ const Challenge = (props: ChallengeScreenProps) => {
                         consommation de viande va grimper de 76 % dʼici 2050.
                     </Text>
                 </View>
-                <Button text="Je relève le défi !" />
+                <ChallengeButtonContainer>
+                    <ChallengeButton>
+                        <ChallengeButtonText>Je relève le défi !</ChallengeButtonText>
+                    </ChallengeButton>
+                </ChallengeButtonContainer>
+                <Text style={GREY_TEXT}>Quand vous réalisez un défi pensez à prendre une photo ou bien vous pouvez 
+                    l’immortaliser sur le moment pour partager avec vos collègues</Text>
+
+                <AttendeesSuccessfulContainer>
+                    <AttendeesTitle>Ils l’ont fait !</AttendeesTitle>
+                    <AttendeesNumber>5 participants</AttendeesNumber>
+
+                    <AttendeesProfilPicContainer>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                        >
+                            <AttendeesModalContainer>
+                                <Text>GG</Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setModalVisible(!modalVisible);
+                                    }}                                
+                                >
+                                    <Text>Retour</Text>
+                                </TouchableOpacity>
+                            </AttendeesModalContainer>
+                        </Modal>                            
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setModalVisible(true);
+                                }}                        
+                            >
+                                <AttendeesProfilPic
+                                    source={require('../../../../../assets/lea.png')}
+                                />
+                            </TouchableOpacity>
+
+                    </AttendeesProfilPicContainer> 
+                </AttendeesSuccessfulContainer>
             </Screen>
         </View>
     );

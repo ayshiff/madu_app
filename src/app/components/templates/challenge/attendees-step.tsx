@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
-import { Points } from '../../atoms/points/points'
+import { Points } from '../../atoms/points/points';
 
 const Full = styled.View`
     flex: 1;
@@ -16,7 +16,7 @@ const HeaderContainer = styled.View`
     justify-content: center;
 `;
 
-const LeaderboardContainer = styled.View`
+const AttendeesLeaderboardContainer = styled.View`
     height: 65px;
     margin-top: 20px;
     flex-direction: row;
@@ -24,34 +24,33 @@ const LeaderboardContainer = styled.View`
     border-radius: 50px;
 `;
 
-const LeaderboardProfile = styled.View`
+const AttendeesLeaderboardProfile = styled.View`
     flex-direction: row;
 `;
 
-
-const LeaderboardPointsContainer = styled.View`
+const AttendeesLeaderboardPointsContainer = styled.View`
     flex-direction: row;
     margin-top: 19px;
 `;
 
-const LeaderboardInformation = styled.View`
+const AttendeesLeaderboardInformation = styled.View`
     flex-direction: row;
     margin-top: 9px;
 `;
 
-const LeaderboardProfilePic = styled.Image`
+const AttendeesLeaderboardProfilePic = styled.Image`
     width: 48px;
     height: 48px;
     margin-right: 11px;
 `;
 
-const LeaderboardProfileName = styled.Text`
+const AttendeesLeaderboardProfileName = styled.Text`
     margin-top: 4px;
     font-size: 14px;
     font-weight: bold;
 `;
 
-const LeaderboardProfilDepartment = styled.Text`
+const AttendeesLeaderboardProfilDepartment = styled.Text`
     font-size: 12px;
     margin-top: -4px;
 `;
@@ -60,16 +59,15 @@ const AttendeesNumberContainer = styled.View`
     flex-direction: row;
     background-color blue;
     margin-top: 20px;
-`
+`;
 
 const LeftArrow = styled.Image`
     margin-left: 20px;
     margin-right: 27%;
-`
+`;
 const AttendeesNumber = styled.Text`
     font-size: 16px;
-`
-
+`;
 
 export interface AttendeesStepProps {
     loadContent: () => string;
@@ -77,9 +75,7 @@ export interface AttendeesStepProps {
     navigation: any;
 }
 
-export const AttendeesStep = ({
-    navigation
-}: AttendeesStepProps) => {
+export const AttendeesStep = ({ navigation }: AttendeesStepProps) => {
     return (
         <Full>
             <HeaderContainer>
@@ -90,26 +86,26 @@ export const AttendeesStep = ({
                     <AttendeesNumber>5 participants</AttendeesNumber>
                 </AttendeesNumberContainer>
             </HeaderContainer>
-            <LeaderboardContainer>
-                <LeaderboardInformation>
-                    <LeaderboardProfile>
-                        <LeaderboardProfilePic
+            <AttendeesLeaderboardContainer>
+                <AttendeesLeaderboardInformation>
+                    <AttendeesLeaderboardProfile>
+                        <AttendeesLeaderboardProfilePic
                             source={require('../../../../../assets/profile-pic.png')}
                         />
                         <View>
-                        <LeaderboardProfileName>
+                            <AttendeesLeaderboardProfileName>
                                 Elodie Five
-                            </LeaderboardProfileName>
-                            <LeaderboardProfilDepartment>
+                            </AttendeesLeaderboardProfileName>
+                            <AttendeesLeaderboardProfilDepartment>
                                 Communication
-                        </LeaderboardProfilDepartment>
+                            </AttendeesLeaderboardProfilDepartment>
                         </View>
-                    </LeaderboardProfile>
-                </LeaderboardInformation>
-                <LeaderboardPointsContainer>
-                    <Points points={80}/>
-                </LeaderboardPointsContainer>
-            </LeaderboardContainer>
+                    </AttendeesLeaderboardProfile>
+                </AttendeesLeaderboardInformation>
+                <AttendeesLeaderboardPointsContainer>
+                    <Points points={80} />
+                </AttendeesLeaderboardPointsContainer>
+            </AttendeesLeaderboardContainer>
         </Full>
     );
 };
