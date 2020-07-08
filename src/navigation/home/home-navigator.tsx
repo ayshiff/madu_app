@@ -12,15 +12,14 @@ import {
     HomeScreen,
     MapScreen,
     ProfileScreen,
-    LeaderboardScreen,
-    WelcomeScreen
-} from '../screens';
-import { Icon } from '../components';
-import { IconTypes } from '../components/atoms/icon/icons';
-import { MapParamList } from '../app/navigation/types';
-import { DetailScreen } from '../screens/detail-screen/detail-screen';
-import { PoiScreen } from '../screens/poi-screen/poi-screen';
-import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
+    LeaderboardScreen
+} from 'madu/screens';
+import { Icon } from 'madu/components';
+import { IconTypes } from 'madu/components/atoms/icon/icons';
+import { DetailScreen } from 'madu/screens/detail-screen/detail-screen';
+import { PoiScreen } from 'madu/screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from 'madu/screens/poi-success-screen/poi-success-screen';
+import { MapParamList } from '../types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();

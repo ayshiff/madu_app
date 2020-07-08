@@ -14,7 +14,7 @@ import { RegisterStepFourScreen } from '../components/templates/welcome/register
 import { RegisterStepFiveScreen } from '../components/templates/welcome/register/step-five';
 import { LoginScreen } from '../components/templates/welcome/login';
 import { WelcomeParamList } from './types';
-import { HomeNavigator } from './home-navigator';
+import { HomeNavigator } from './home/home-navigator';
 import { RegisterStepSixScreen } from '../components/templates/welcome/register/step-six';
 
 const Stack = createStackNavigator<WelcomeParamList>();
