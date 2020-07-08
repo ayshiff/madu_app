@@ -12,7 +12,7 @@ export const ImagePickerRegister = ({
     saveImage: any;
 }) => {
     const pickImage = async () => {
-        const result = await ImagePicker.launchCameraAsync({
+        const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
@@ -24,6 +24,7 @@ export const ImagePickerRegister = ({
             navigateToNextStep(false);
         }
     };
+
     const getPermissionAsync = async () => {
         if (Constants?.platform?.ios) {
             const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -36,6 +37,7 @@ export const ImagePickerRegister = ({
                 );
             } else {
                 alert('work');
+                pickImage();
             }
         }
     };
