@@ -17,7 +17,7 @@ const Bold = styled.Text`
 
 const HeaderContainer = styled.View`
     height: 275px;
-    background-color: #FAE3C8;
+    background-color: #fae3c8;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 `;
@@ -57,7 +57,6 @@ const ChallengeInfo = styled.View`
     padding-top: 10px;
     padding-bottom: 10px;
 `;
-
 
 const ChallengePic = styled.Image`
     margin-top: 20px;
@@ -107,73 +106,72 @@ const TypeText = styled.Text`
 
 const WhitePointsTag = styled.View`
     margin-top: 8px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 32px;
     width: 59px;
     height: 22px;
     justify-content: center;
     align-items: center;
-`
+`;
 
 const WhitePoints = styled.Text`
-    color: #85A382;
+    color: #85a382;
     font-size: 12px;
-`
+`;
 const ChallengeSubtitle = styled.Text`
     font-size: 15px;
     line-height: 20px;
-    color: #856B7F;
+    color: #856b7f;
     margin-top: -10px;
     margin-bottom: 20px;
-`
+`;
 
 const MostVisitedPlacesContainer = styled.View`
     margin-top: 20px;
     flex-direction: row;
     width: 100%;
-`
+`;
 
 const MostVisitedPlacesTitle = styled.Text`
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
-    color: #522C48;  
+    color: #522c48;
     margin-left: 40px;
     margin-top: 40px;
-`
+`;
 const MostVisitedPlacesPic = styled.Image`
     height: 168px;
     width: 135px;
-`
+`;
 
 const MostVisitedPlacesNumberContainer = styled.View`
     width: 88px;
     height: 28px;
-    background: #FAE3C8;
+    background: #fae3c8;
     border-radius: 6px;
     justify-content: center;
     align-items: center;
     margin-left: 22px;
-    margin-top: -12px;    
-`
+    margin-top: -12px;
+`;
 const MostVisitedPlacesNumberText = styled.Text`
-    color: #522C48;
+    color: #522c48;
     font-size: 13px;
     line-height: 16px;
-`
+`;
 
 const MostVisitedPlacesCard = styled.View`
     width: 135px;
     margin-left: 10px;
-`
+`;
 
 const MostVisitedPlacesName = styled.Text`
     font-size: 12px;
     line-height: 16px;
-    color: #522C48;
+    color: #522c48;
     margin-left: 22px;
-
-`
+`;
 
 export interface HomeScreenProps {
     navigation: any;
@@ -199,7 +197,9 @@ const Home = (/* props: HomeScreenProps */) => {
                 <ChallengeContainer>
                     <View>
                         <ChallengeTitle>Défi de la semaine</ChallengeTitle>
-                        <ChallengeSubtitle>Nouveau challenge chaque dimanche soir à 18h</ChallengeSubtitle>
+                        <ChallengeSubtitle>
+                            Nouveau challenge chaque dimanche soir à 18h
+                        </ChallengeSubtitle>
                         <ChallengeView>
                             <ChallengePic
                                 source={require('../../../../assets/meal.png')}
@@ -218,34 +218,45 @@ const Home = (/* props: HomeScreenProps */) => {
                 </ChallengeContainer>
 
                 <View>
-                    <MostVisitedPlacesTitle>Lieux les plus visités</MostVisitedPlacesTitle>
+                    <MostVisitedPlacesTitle>
+                        Lieux les plus visités
+                    </MostVisitedPlacesTitle>
                     <MostVisitedPlacesContainer>
                         <MostVisitedPlacesCard>
                             <MostVisitedPlacesPic
                                 source={require('../../../../assets/place.png')}
                             />
                             <MostVisitedPlacesNumberContainer>
-                                <MostVisitedPlacesNumberText>123 visites</MostVisitedPlacesNumberText>
+                                <MostVisitedPlacesNumberText>
+                                    123 visites
+                                </MostVisitedPlacesNumberText>
                             </MostVisitedPlacesNumberContainer>
-                            <MostVisitedPlacesName>Jay and Joy</MostVisitedPlacesName>                   
+                            <MostVisitedPlacesName>
+                                Jay and Joy
+                            </MostVisitedPlacesName>
                         </MostVisitedPlacesCard>
-                    </MostVisitedPlacesContainer>       
+                    </MostVisitedPlacesContainer>
                 </View>
 
                 <View>
-                    <MostVisitedPlacesTitle>Coups de coeur</MostVisitedPlacesTitle>
+                    <MostVisitedPlacesTitle>
+                        Coups de coeur
+                    </MostVisitedPlacesTitle>
                     <MostVisitedPlacesContainer>
                         <MostVisitedPlacesCard>
                             <MostVisitedPlacesPic
                                 source={require('../../../../assets/place.png')}
                             />
                             <MostVisitedPlacesNumberContainer>
-                                <MostVisitedPlacesNumberText>123 visites</MostVisitedPlacesNumberText>
+                                <MostVisitedPlacesNumberText>
+                                    123 visites
+                                </MostVisitedPlacesNumberText>
                             </MostVisitedPlacesNumberContainer>
-                            <MostVisitedPlacesName>Jay and Joy</MostVisitedPlacesName>                   
+                            <MostVisitedPlacesName>
+                                Jay and Joy
+                            </MostVisitedPlacesName>
                         </MostVisitedPlacesCard>
                     </MostVisitedPlacesContainer>
-                    
                 </View>
             </Screen>
         </Full>

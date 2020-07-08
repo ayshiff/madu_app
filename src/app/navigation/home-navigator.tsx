@@ -22,7 +22,7 @@ import { MapParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';
 import { PoiScreen } from '../screens/poi-screen/poi-screen';
 import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
-import { ChallengePictureStep } from '../components/templates/challenge/challenge-picture-step'
+import { ChallengePictureStep } from '../components/templates/challenge/challenge-picture-step';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
