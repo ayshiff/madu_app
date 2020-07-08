@@ -50,7 +50,7 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
     ];
 
     const [workDivision, setWorkDivision] = useState(
-        userData.workDivision || '0'
+        userData.workDivision || ''
     );
 
     const navigateToNextStep = () => {
@@ -77,12 +77,14 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 collègues.
             </Text>
             <DropdownMenu
-                title="Département"
+                title={workDivision || 'Département'}
                 component={
                     <View>
                         {workPlaces.map((datum, index) => (
                             <TouchableOpacity
-                                // onPress={onPressChoiceOrigin()}
+                                onPress={() =>
+                                    setWorkDivision(workPlaces[index].value)
+                                }
                                 key={index}
                                 style={{
                                     flexDirection: 'column',
@@ -113,7 +115,11 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                     marginBottom: 40
                 }}
             >
-                <Button title="Suivant" onPress={handleNavigate} />
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!workDivision}
+                />
             </View>
         </SafeAreaView>
     );

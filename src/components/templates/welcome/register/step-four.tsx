@@ -38,6 +38,7 @@ export interface RegisterStepFourScreenProps extends RegisterScreenProps {
 interface IData {
     name: string;
     lastname: string;
+    job: string;
 }
 
 const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
@@ -51,7 +52,7 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
     };
 
     const handleNavigate = () => {
-        setUserData({ name, lastname });
+        setUserData({ name, lastname, job });
         navigateToNextStep();
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
@@ -77,7 +78,7 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                 onChangeText={(el: string) => setSurname(el)}
             />
             <Input
-                value={lastname}
+                value={job}
                 placeholder="Votre poste de travail"
                 label="Poste"
                 onChangeText={(el: string) => setJob(el)}
@@ -89,7 +90,11 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                     marginBottom: 40
                 }}
             >
-                <Button title="Suivant" onPress={handleNavigate} />
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!name || !lastname || !job}
+                />
             </View>
         </SafeAreaView>
     );

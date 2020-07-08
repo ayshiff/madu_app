@@ -28,6 +28,7 @@ const HEADER: TextStyle = {
     paddingBottom: spacing[4] + spacing[1],
     paddingHorizontal: 0
 };
+
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
@@ -75,12 +76,14 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
             </Text>
             <View>
                 <DropdownMenu
-                    title="Lieu de travail"
+                    title={workplace || 'Lieu de travail'}
                     component={
                         <View>
                             {workPlaces.map((datum, index) => (
                                 <TouchableOpacity
-                                    // onPress={onPressChoiceOrigin()}
+                                    onPress={() =>
+                                        setWorkplace(workPlaces[index].value)
+                                    }
                                     key={index}
                                     style={{
                                         flexDirection: 'column',
@@ -112,7 +115,11 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                     marginBottom: 40
                 }}
             >
-                <Button title="Suivant" onPress={handleNavigate} />
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!workplace}
+                />
             </View>
         </SafeAreaView>
     );

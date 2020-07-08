@@ -18,6 +18,13 @@ export const DropdownMenu = ({ image, title, component }: dropdown) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const contextualDropDownStyles = styles(isOpen);
+    const openPanel = () => {
+        setIsOpen(true);
+    };
+
+    const closePanel = () => {
+        setIsOpen(false);
+    };
 
     const openOrClosePanel = () => {
         if (isOpen) {
@@ -25,14 +32,6 @@ export const DropdownMenu = ({ image, title, component }: dropdown) => {
         } else {
             openPanel();
         }
-    };
-
-    const openPanel = () => {
-        setIsOpen(true);
-    };
-
-    const closePanel = () => {
-        setIsOpen(false);
     };
 
     return (

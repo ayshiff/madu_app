@@ -12,7 +12,6 @@ export const ImagePickerRegister = ({
     saveImage: any;
 }) => {
     const pickImage = async () => {
-        console.log('d');
         const result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -25,18 +24,12 @@ export const ImagePickerRegister = ({
             navigateToNextStep(false);
         }
     };
-
-    useEffect(() => {
-        getPermissionAsync();
-    }, []);
-
     const getPermissionAsync = async () => {
         if (Constants?.platform?.ios) {
             const { status } = await Permissions.askAsync(Permissions.CAMERA);
             const { status: statusroll } = await Permissions.askAsync(
                 Permissions.CAMERA_ROLL
             );
-            console.log(status, statusroll);
             if (status !== 'granted' || statusroll !== 'granted') {
                 alert(
                     'Sorry, we need camera roll permissions to make this work!'
@@ -46,6 +39,10 @@ export const ImagePickerRegister = ({
             }
         }
     };
+
+    useEffect(() => {
+        getPermissionAsync();
+    }, []);
 
     return (
         <View
