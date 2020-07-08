@@ -16,8 +16,8 @@ const Bold = styled.Text`
 `;
 
 const HeaderContainer = styled.View`
-    height: 225px;
-    background-color: #fec530;
+    height: 275px;
+    background-color: #FAE3C8;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 `;
@@ -33,13 +33,13 @@ const Header = styled.View`
 `;
 
 const ChallengeContainer = styled.View`
-    margin-top: -80px;
+    margin-top: -115px;
     align-items: center;
 `;
 
 const ChallengeView = styled.View`
     height: 115px;
-    width: 250px;
+    width: 328px;
     margin-bottom: 10px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -58,10 +58,6 @@ const ChallengeInfo = styled.View`
     padding-bottom: 10px;
 `;
 
-const BusinessName = styled.Text`
-    color: #8e8e93;
-    margin-bottom: 5px;
-`;
 
 const ChallengePic = styled.Image`
     margin-top: 20px;
@@ -76,7 +72,7 @@ const ChallengeTitle = styled.Text`
 `;
 
 const TextContainer = styled.View`
-    margin-top: 16px;
+    margin-top: 10px;
 `;
 
 const ProfilePic = styled.Image`
@@ -109,6 +105,76 @@ const TypeText = styled.Text`
     color: #fe6d1a;
 `;
 
+const WhitePointsTag = styled.View`
+    margin-top: 8px;
+    background: #FFFFFF;
+    border-radius: 32px;
+    width: 59px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+`
+
+const WhitePoints = styled.Text`
+    color: #85A382;
+    font-size: 12px;
+`
+const ChallengeSubtitle = styled.Text`
+    font-size: 15px;
+    line-height: 20px;
+    color: #856B7F;
+    margin-top: -10px;
+    margin-bottom: 20px;
+`
+
+const MostVisitedPlacesContainer = styled.View`
+    margin-top: 20px;
+    flex-direction: row;
+    width: 100%;
+`
+
+const MostVisitedPlacesTitle = styled.Text`
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    color: #522C48;  
+    margin-left: 40px;
+    margin-top: 40px;
+`
+const MostVisitedPlacesPic = styled.Image`
+    height: 168px;
+    width: 135px;
+`
+
+const MostVisitedPlacesNumberContainer = styled.View`
+    width: 88px;
+    height: 28px;
+    background: #FAE3C8;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 22px;
+    margin-top: -12px;    
+`
+const MostVisitedPlacesNumberText = styled.Text`
+    color: #522C48;
+    font-size: 13px;
+    line-height: 16px;
+`
+
+const MostVisitedPlacesCard = styled.View`
+    width: 135px;
+    margin-left: 10px;
+`
+
+const MostVisitedPlacesName = styled.Text`
+    font-size: 12px;
+    line-height: 16px;
+    color: #522C48;
+    margin-left: 22px;
+
+`
+
 export interface HomeScreenProps {
     navigation: any;
 }
@@ -119,8 +185,10 @@ const Home = (/* props: HomeScreenProps */) => {
                 <HeaderContainer>
                     <Header>
                         <TextContainer>
-                            <BusinessName>L’Oréal Paris</BusinessName>
                             <Bold>Bonjour Élodie</Bold>
+                            <WhitePointsTag>
+                                <WhitePoints>2567</WhitePoints>
+                            </WhitePointsTag>
                         </TextContainer>
                         <ProfilePic
                             source={require('../../../../assets/profile-pic.png')}
@@ -131,6 +199,7 @@ const Home = (/* props: HomeScreenProps */) => {
                 <ChallengeContainer>
                     <View>
                         <ChallengeTitle>Défi de la semaine</ChallengeTitle>
+                        <ChallengeSubtitle>Nouveau challenge chaque dimanche soir à 18h</ChallengeSubtitle>
                         <ChallengeView>
                             <ChallengePic
                                 source={require('../../../../assets/meal.png')}
@@ -147,6 +216,37 @@ const Home = (/* props: HomeScreenProps */) => {
                         </ChallengeView>
                     </View>
                 </ChallengeContainer>
+
+                <View>
+                    <MostVisitedPlacesTitle>Lieux les plus visités</MostVisitedPlacesTitle>
+                    <MostVisitedPlacesContainer>
+                        <MostVisitedPlacesCard>
+                            <MostVisitedPlacesPic
+                                source={require('../../../../assets/place.png')}
+                            />
+                            <MostVisitedPlacesNumberContainer>
+                                <MostVisitedPlacesNumberText>123 visites</MostVisitedPlacesNumberText>
+                            </MostVisitedPlacesNumberContainer>
+                            <MostVisitedPlacesName>Jay and Joy</MostVisitedPlacesName>                   
+                        </MostVisitedPlacesCard>
+                    </MostVisitedPlacesContainer>       
+                </View>
+
+                <View>
+                    <MostVisitedPlacesTitle>Coups de coeur</MostVisitedPlacesTitle>
+                    <MostVisitedPlacesContainer>
+                        <MostVisitedPlacesCard>
+                            <MostVisitedPlacesPic
+                                source={require('../../../../assets/place.png')}
+                            />
+                            <MostVisitedPlacesNumberContainer>
+                                <MostVisitedPlacesNumberText>123 visites</MostVisitedPlacesNumberText>
+                            </MostVisitedPlacesNumberContainer>
+                            <MostVisitedPlacesName>Jay and Joy</MostVisitedPlacesName>                   
+                        </MostVisitedPlacesCard>
+                    </MostVisitedPlacesContainer>
+                    
+                </View>
             </Screen>
         </Full>
     );

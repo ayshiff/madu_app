@@ -22,7 +22,7 @@ import { MapParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';
 import { PoiScreen } from '../screens/poi-screen/poi-screen';
 import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
-import { ProfileSettingsScreen } from '../components/templates/profile/profile-settings';
+import { ChallengePictureStep } from '../components/templates/challenge/challenge-picture-step'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
@@ -88,7 +88,7 @@ export const HomeNavigator = React.forwardRef<
         >
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Map" component={MapNavigator} />
-            <Tab.Screen name="Leaderboard" component={ProfileSettingsScreen} />
+            <Tab.Screen name="Leaderboard" component={ChallengePictureStep} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
