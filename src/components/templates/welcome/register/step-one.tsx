@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle } from 'react-native';
+import { View, ViewStyle, TextStyle, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { useState } from 'react';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -79,6 +79,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 placeholder="Votre mot de passe"
                 label="Mot de passe"
                 secureTextEntry
+                blurOnSubmit={false}
+                onSubmitEditing={() => Keyboard.dismiss()}
                 value={password}
                 onChangeText={(el: string) => setPassword(el)}
             />
@@ -86,6 +88,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 placeholder="Confirmer votre mot de passe"
                 label="Confirmer mot de passe"
                 secureTextEntry
+                blurOnSubmit={false}
+                onSubmitEditing={() => Keyboard.dismiss()}
                 value={confirmPassword}
                 onChangeText={(el: string) => setConfirmPassword(el)}
             />
@@ -96,7 +100,11 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                     marginBottom: 40
                 }}
             >
-                <Button title="Suivant" onPress={handleNavigate} />
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!email || !password || !confirmPassword}
+                />
             </View>
         </SafeAreaView>
     );
