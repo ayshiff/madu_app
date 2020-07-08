@@ -3,9 +3,11 @@ import { TouchableOpacity, Dimensions, View } from 'react-native';
 import styled from 'styled-components/native';
 import { useState } from 'react';
 import { color } from 'madu/theme/color';
-import { Text } from 'madu/components/atoms/text/text';
+import { OldText } from 'madu/components/atoms/old-text/old-text';
 import { Icon } from 'madu/components/atoms/icon/icon';
-import { Button } from 'madu/components/atoms/button/button';
+import { OldButton } from 'madu/components/atoms/old-button/old-button';
+import { connect } from 'react-redux';
+import { poiActions } from 'madu/actions/poi.actions';
 
 const mockCover = require('madu/assets/mock_cover.png');
 
@@ -39,6 +41,8 @@ const Close = styled(TouchableOpacity)`
 `;
 
 const Footer = styled.View`
+    position: absolute;
+    bottom: 0;
     height: 110px;
     margin: 20px;
 `;
@@ -50,9 +54,10 @@ const Wallpaper = styled.Image`
     border-bottom-right-radius: 30px;
 `;
 
-const ActionButton = styled(Button)`
+const ActionOldButton = styled(OldButton)`
     margin-top: -25px;
     width: 170px;
+    background: #ee6538;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -75,8 +80,8 @@ const Tag = styled.View`
     margin-left: 10px;
 `;
 
-const ActionButtonPlus = styled.View`
-    background: #ffa3be;
+const ActionOldButtonPlus = styled.View`
+    background: #f39272;
     border-radius: 25px;
     justify-content: center;
     align-items: center;
@@ -84,37 +89,37 @@ const ActionButtonPlus = styled.View`
     width: 55px;
 `;
 
-const TagText = styled(Text)`
-    color: #febfd3;
+const TagText = styled(OldText)`
+    color: #fe8eb1;
 `;
 
-export const OpenStatus = styled(Text)`
+export const OpenStatus = styled(OldText)`
     color: #137e73;
     margin-top: 0;
     font-size: 16px;
 `;
 
-export const PriceRange = styled(Text)`
+export const PriceRange = styled(OldText)`
     color: #9e9e9e;
     margin-top: 0;
     font-size: 16px;
 `;
 
-const Description = styled(Text)`
+const Description = styled(OldText)`
     margin-top: 40px;
     color: #2f4a70;
 `;
 
-const Visit = styled(Text)`
+const Visit = styled(OldText)`
     color: #9e9e9e;
     text-align: right;
 `;
 
-const Likes = styled(Text)`
+const Likes = styled(OldText)`
     color: #9e9e9e;
 `;
 
-export const Category = styled(Text)`
+export const Category = styled(OldText)`
     margin-top: 0;
 `;
 
@@ -123,7 +128,7 @@ const TagList = styled.View`
     flex-wrap: wrap;
 `;
 
-const Community = styled.View`
+const Community = styled.TouchableOpacity`
     margin-right: 20px;
 `;
 
@@ -138,7 +143,7 @@ const Header = styled.View`
 `;
 
 const Middle = styled.View`
-    margin-top: 20px;
+    margin-top: 25px;
 `;
 
 const Like = styled.View`
@@ -153,11 +158,18 @@ export interface DetailScreenProps {
     content: string;
     navigation: any;
     route: any;
+    visitPoi: (arg: string) => void;
+    likePoi: (arg: string) => void;
 }
 
-export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
+export const Poi = ({
+    navigation,
+    route,
+    visitPoi,
+    likePoi
+}: DetailScreenProps) => {
     const navigateToSuccess = () => navigation.navigate('poi-success');
-    const [counter, setCounter] = useState(0);
+    // const [counter, setCounter] = useState(0);
 
     const point = route.params;
 
@@ -169,34 +181,34 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                     <Icon style={StyledIcon} icon="close" />
                 </Close>
                 <ActionContainer>
-                    <ActionButton
+                    <ActionOldButton
                         onPress={() => {
                             navigateToSuccess();
-                            setTimeout(
-                                () => setCounter((count) => count + 1),
-                                500
-                            );
+                            setTimeout(() => {
+                                // setCounter((count) => count + 1)
+                                visitPoi(point.id);
+                            }, 500);
                         }}
                     >
-                        <Text>J&aposy suis</Text>
-                        {counter ? (
-                            <ActionButtonPlus>
-                                <Text>+ {counter}</Text>
-                            </ActionButtonPlus>
+                        <OldText>J'y suis</OldText>
+                        {point.visits ? (
+                            <ActionOldButtonPlus>
+                                <OldText>{point.visits}</OldText>
+                            </ActionOldButtonPlus>
                         ) : null}
-                    </ActionButton>
+                    </ActionOldButton>
                 </ActionContainer>
             </View>
             <Middle>
                 <Header>
                     <View>
-                        <Text preset="header">{point.name}</Text>
+                        <OldText preset="header">{point.name}</OldText>
                         <Category preset="default">{point.category}</Category>
                     </View>
-                    <Community>
+                    <Community onPress={() => likePoi(point.id)}>
                         <Like>
-                            <IconLink icon="like" />
-                            <Likes preset="fieldLabel">28 j&aposaime</Likes>
+                            <IconLink icon="like2" />
+                            <Likes preset="fieldLabel">28 j'aime</Likes>
                         </Like>
                         <Visit preset="fieldLabel">
                             {point.visits || 0} visites
@@ -222,19 +234,34 @@ export const PoiScreen = ({ navigation, route }: DetailScreenProps) => {
                 {/* Address */}
                 <Contact>
                     <IconLink icon="pin" />
-                    <Text preset="default">{point.address.value}</Text>
+                    <OldText preset="default">{point.address.value}</OldText>
                 </Contact>
                 {/* Web */}
                 <Contact>
                     <IconLink icon="website" />
-                    <Text preset="default">{point.website}</Text>
+                    <OldText style={{ color: '#EE6538' }} preset="default">
+                        {point.website}
+                    </OldText>
                 </Contact>
                 {/* Phone */}
                 <Contact>
                     <IconLink icon="phone" />
-                    <Text preset="default">{point.phone}</Text>
+                    <OldText style={{ color: '#EE6538' }} preset="default">
+                        {point.phone}
+                    </OldText>
                 </Contact>
             </Footer>
         </Container>
     );
 };
+
+const mapStateToProps = (state: any) => ({
+    points: state.poi.list
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    likePoi: (poiId: string) => dispatch(poiActions.likePoi(poiId)),
+    visitPoi: (poiId: string) => dispatch(poiActions.visitPoi(poiId))
+});
+
+export const PoiScreen = connect(mapStateToProps, mapDispatchToProps)(Poi);

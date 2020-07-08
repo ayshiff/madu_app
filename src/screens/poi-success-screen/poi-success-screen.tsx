@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import { color } from 'madu/theme/color';
-import { Text } from 'madu/components/atoms/text/text';
-import { Button } from 'madu/components/atoms/button/button';
+import { OldText } from 'madu/components/atoms/old-text/old-text';
+import { OldButton } from 'madu/components/atoms/old-button/old-button';
 import { Points } from 'madu/components/atoms/points/points';
 
 /** Styled components */
@@ -14,9 +14,11 @@ const Container = styled.View`
     justify-content: center;
 `;
 
-const ActionButton = styled(Button)`
+const ActionButton = styled(OldButton)`
     width: 170px;
     text-align: center;
+    background: rgba(255, 221, 231, 0.46);
+    color: #ee6538;
 `;
 
 const ActionContainer = styled.View`
@@ -26,7 +28,7 @@ const ActionContainer = styled.View`
     text-align: center;
 `;
 
-const Description = styled(Text)`
+const Description = styled(OldText)`
     text-align: center;
 `;
 

@@ -3,7 +3,6 @@ import { View, ViewStyle } from 'react-native';
 import { connect } from 'react-redux';
 import { poiActions, IPointOfInterest } from 'madu/actions/poi.actions';
 import { Map } from 'madu/components/organisms/map/map';
-import { color } from 'madu/theme/color';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 

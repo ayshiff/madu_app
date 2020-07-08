@@ -1,8 +1,9 @@
+/* eslint-disable global-require */
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen } from 'madu/components';
-import { color, spacing } from 'madu/theme';
+import { color } from 'madu/theme';
 import styled from 'styled-components/native';
 import { Points } from 'madu/components/atoms/points/points';
 
