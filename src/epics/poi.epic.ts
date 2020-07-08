@@ -2,10 +2,9 @@ import { of, Observable } from 'rxjs';
 import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
+import { BACKEND_SERVICE_URL } from 'madu/const';
 import type { dependencies } from '../app.store';
 import { PoiTypes, poiActions, PoiActions } from '../actions/poi.actions';
-
-const URL = 'http://madu.mrfvrl.fr:3000';
 
 export const loadPoi: Epic = (
     action$: Observable<PoiActions>,
@@ -20,7 +19,7 @@ export const loadPoi: Epic = (
             };
             return ajax({
                 headers,
-                url: `${URL}/poi`,
+                url: `${BACKEND_SERVICE_URL}/poi`,
                 method: 'GET'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
@@ -43,7 +42,7 @@ export const loadPoiById: Epic = (
         ofType(PoiTypes.LoadPoiById),
         concatMap((action: any) => {
             return ajax({
-                url: `${URL}/${action.payload}`,
+                url: `${BACKEND_SERVICE_URL}/${action.payload}`,
                 method: 'GET'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
@@ -57,4 +56,50 @@ export const loadPoiById: Epic = (
     );
 };
 
-export const poiEpics = combineEpics(loadPoi, loadPoiById);
+export const likePoi: Epic = (
+    action$: Observable<PoiActions>,
+    state$: Observable<any>,
+    { ajax }: typeof dependencies
+): Observable<PoiActions> => {
+    return action$.pipe(
+        ofType(PoiTypes.LikePoi),
+        concatMap((action: any) => {
+            return ajax({
+                url: `${BACKEND_SERVICE_URL}/poi/${action.poiId}/like`,
+                method: 'POST'
+            }).pipe(
+                mergeMap((data: AjaxResponse) => {
+                    return of(poiActions.likePoiSuccess(data.response));
+                }),
+                catchError((error: AjaxError) => {
+                    return of(poiActions.likePoiFail(error));
+                })
+            );
+        })
+    );
+};
+
+export const visitPoi: Epic = (
+    action$: Observable<PoiActions>,
+    state$: Observable<any>,
+    { ajax }: typeof dependencies
+): Observable<PoiActions> => {
+    return action$.pipe(
+        ofType(PoiTypes.VisitPoi),
+        concatMap((action: any) => {
+            return ajax({
+                url: `${BACKEND_SERVICE_URL}/poi/${action.poiId}/visited`,
+                method: 'POST'
+            }).pipe(
+                mergeMap((data: AjaxResponse) => {
+                    return of(poiActions.visitPoiSuccess(data.response));
+                }),
+                catchError((error: AjaxError) => {
+                    return of(poiActions.visitPoiFail(error));
+                })
+            );
+        })
+    );
+};
+
+export const poiEpics = combineEpics(loadPoi, loadPoiById, likePoi);

@@ -9,7 +9,7 @@ export type IPoiState = {
 };
 
 export const poiReducer = (
-    loginState: IPoiState = defaultState,
+    poiState: IPoiState = defaultState,
     action: PoiActions
 ): IPoiState => {
     switch (action.type) {
@@ -18,6 +18,6 @@ export const poiReducer = (
                 list: action.payload
             };
         default:
-            return loginState;
+            return poiState;
     }
 };

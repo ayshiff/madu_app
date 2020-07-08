@@ -21,22 +21,17 @@ export interface IUserData {
     image?: string;
 }
 
-export type ICompanyDomainResponse = {
-    address: {
-        value: string;
-        lat: number;
-        lng: number;
-    };
-    companyName: string;
-    domainName: string;
-    workplace: string[];
-    department: string[];
-    employees: string;
+interface department {
     name: string;
-    lastName: string;
-    email: string;
+    points: number;
+}
+
+export type ICompanyDataResponse = {
+    workplaces: string;
+    name: string;
+    domainName: string;
+    departments: department[];
     id: string;
-    status: string;
 };
 
 export type IregisterContentResponse = {
@@ -46,7 +41,11 @@ export type IregisterContentResponse = {
     lastname: string;
     workplace: string;
     department: string;
+    companyPosition: string;
+    challenges: any[];
+    visits: any[];
     id: string;
+    points: number;
     company_id: string;
     job: string;
 };
@@ -55,15 +54,15 @@ export type IregisterContentResponse = {
 export const registerActions = {
     setUserData: (data: IUserData) =>
         ({ type: RegisterTypes.SetUserData, data } as const),
-    register: (data: IUserData) =>
-        ({ type: RegisterTypes.Register, data } as const),
+    register: (payload: IUserData) =>
+        ({ type: RegisterTypes.Register, payload } as const),
     registerSuccess: (response: IregisterContentResponse) =>
         ({ type: RegisterTypes.RegisterSuccess, response } as const),
     registerFail: (error: AjaxError) =>
         ({ type: RegisterTypes.RegisterFail, error } as const),
     fetchCompany: ({ company }: { company: string }) =>
         ({ type: RegisterTypes.FetchCompany, payload: { company } } as const),
-    fetchCompanySuccess: (response: ICompanyDomainResponse) =>
+    fetchCompanySuccess: (response: ICompanyDataResponse) =>
         ({ type: RegisterTypes.FetchCompanySuccess, response } as const),
     fetchCompanyFail: (error: AjaxError) =>
         ({ type: RegisterTypes.FetchCompanyFail, error } as const)
