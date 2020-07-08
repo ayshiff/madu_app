@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 import { Points } from '../../../components/atoms/points/points';
 
-
 const Full = styled.View`
     flex: 1;
     background-color: #ffffff;
@@ -77,7 +76,7 @@ const Clock = styled.Image`
 
 const ChalengePointsAndTimeContainer = styled.View`
     flex-direction: row;
-`
+`;
 
 export interface ChallengeDoneScreenProps {
     loadContent: () => string;
@@ -90,32 +89,32 @@ export const ChallengeDoneScreen = ({
 }: ChallengeDoneScreenProps) => {
     return (
         <Full>
-                <ChallengeContainer>
-                    <View>
-                        <ChallengeView>
-                            <ChallengePic
-                                source={require('../../../../../assets/meal.png')}
-                            />
-                            <ChallengeInfo>
-                                <Text>Lundi c’est Veggie !</Text>
-                                <TypeTag>
-                                    <TypeText>Alimentation</TypeText>
-                                </TypeTag>
-                                <ChalengePointsAndTimeContainer>
-                                    <PointsTag>
-                                        <Points points={80} />
-                                    </PointsTag>
-                                    <DateContainer>
+            <ChallengeContainer>
+                <View>
+                    <ChallengeView>
+                        <ChallengePic
+                            source={require('../../../../../assets/meal.png')}
+                        />
+                        <ChallengeInfo>
+                            <Text>Lundi c’est Veggie !</Text>
+                            <TypeTag>
+                                <TypeText>Alimentation</TypeText>
+                            </TypeTag>
+                            <ChalengePointsAndTimeContainer>
+                                <PointsTag>
+                                    <Points points={80} />
+                                </PointsTag>
+                                <DateContainer>
                                     <Clock
                                         source={require('../../../../../assets/clock.png')}
                                     />
                                     <Text>12/09/20</Text>
-                                    </DateContainer>
-                                </ChalengePointsAndTimeContainer>
-                            </ChallengeInfo>
-                        </ChallengeView>
-                    </View>
-                </ChallengeContainer>
+                                </DateContainer>
+                            </ChalengePointsAndTimeContainer>
+                        </ChallengeInfo>
+                    </ChallengeView>
+                </View>
+            </ChallengeContainer>
         </Full>
     );
 };

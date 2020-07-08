@@ -19,12 +19,11 @@ const VisitedPlacesInformation = styled.View`
     flex-direction: row;
 `;
 
-
 const VisitedPlacesNumberContainer = styled.View`
     margin-top: 19px;
     width: 69px;
     height: 29px;
-    background-color: #FFEDF3;
+    background-color: #ffedf3;
     border-radius: 2px;
     align-items: center;
     justify-content: center;
@@ -60,8 +59,8 @@ export interface VisitedPlacesScreenProps {
 }
 
 const VisitedPlacesNumber = styled.Text`
-    color: #FE8EB1;
-`
+    color: #fe8eb1;
+`;
 
 export const VisitedPlacesScreen = ({
     navigation
@@ -75,9 +74,7 @@ export const VisitedPlacesScreen = ({
                             source={require('../../../../../assets/profile-pic.png')}
                         />
                         <View>
-                            <VisitedPlacesName>
-                                Kapunka 
-                            </VisitedPlacesName>
+                            <VisitedPlacesName>Kapunka</VisitedPlacesName>
                             <VisitedPlacesType>
                                 Restaurant thai vegan
                             </VisitedPlacesType>

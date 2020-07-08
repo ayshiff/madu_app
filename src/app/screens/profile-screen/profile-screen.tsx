@@ -84,7 +84,7 @@ const RankingNumberContainer = styled.Text`
 
 const RankingNumber = styled.Text`
     margin-left: 4px;
-`
+`;
 const Up = styled.Image`
     margin-top: 4px;
     margin-right: 5px;
@@ -177,8 +177,14 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
                     }
                 }}
             >
-                <Tab.Screen name="défis accomplis" component={ChallengeDoneScreen} />
-                <Tab.Screen name="lieux visités" component={VisitedPlacesScreen} />
+                <Tab.Screen
+                    name="défis accomplis"
+                    component={ChallengeDoneScreen}
+                />
+                <Tab.Screen
+                    name="lieux visités"
+                    component={VisitedPlacesScreen}
+                />
             </Tab.Navigator>
         </Screen>
     </View>
