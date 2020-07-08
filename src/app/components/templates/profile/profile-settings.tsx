@@ -3,10 +3,9 @@ import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
 import { Screen } from '../../../components';
 
-
 const Full = styled.View`
     flex: 1;
-    background-color: #FFF5EB;
+    background-color: #fff5eb;
 `;
 
 const Header = styled.View`
@@ -16,53 +15,51 @@ const Header = styled.View`
     margin-right: 21px;
     margin-top: 15px;
     margin-bottom: 24px;
-`
+`;
 
 const ProfilContainer = styled.View`
     margin-left: 22px;
-`
+`;
 
 const ProfilPic = styled.Image`
     align-self: center;
     margin-top: 20px;
     margin-bottom: 28px;
-`
+`;
 
 const ProfilTitle = styled.Text`
     font-weight: bold;
     font-size: 24px;
     line-height: 23px;
     color: #153733;
-`
+`;
 
 const Save = styled.Text`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-    color: #F39272;
-`
+    color: #f39272;
+`;
 
-const InputContainer = styled.View`
-`
+const InputContainer = styled.View``;
 
 const InputName = styled.Text`
     font-weight: bold;
     font-size: 15px;
     line-height: 20px;
-    color: #162D4B;
+    color: #162d4b;
     margin-left: 22px;
     margin-bottom: 5px;
-
-`
+`;
 const ProfilInput = styled.TextInput`
     border-radius: 6px;
-    border: 1px solid #FAE3C8;
-    background: #FFFFFF;
+    border: 1px solid #fae3c8;
+    background: #ffffff;
     width: 330px;
     height: 40px;
     align-self: center;
     margin-bottom: 8px;
-`
+`;
 
 const ChallengeButton = styled.TouchableOpacity`
     width: 329px;
@@ -82,7 +79,6 @@ const ChallengeButtonText = styled.Text`
     font-size: 16px;
 `;
 
-
 export interface ProfileSettingsScreenProps {
     loadContent: () => string;
     content: string;
@@ -94,7 +90,7 @@ export const ProfileSettingsScreen = ({
 }: ProfileSettingsScreenProps) => {
     return (
         <Full>
-            <Screen preset="scroll" style={{backgroundColor: '#FFF5EB'}}>
+            <Screen preset="scroll" style={{ backgroundColor: '#FFF5EB' }}>
                 <Header>
                     <Image
                         source={require('../../../../../assets/arrow-left.png')}
@@ -109,20 +105,18 @@ export const ProfileSettingsScreen = ({
                 </ProfilContainer>
                 <InputContainer>
                     <InputName>Prénom Nom</InputName>
-                    <ProfilInput/>
+                    <ProfilInput />
                     <InputName>Poste</InputName>
-                    <ProfilInput/>
+                    <ProfilInput />
                     <InputName>Département</InputName>
-                    <ProfilInput/>
+                    <ProfilInput />
                     <InputName>Adresse mail professionnelle</InputName>
-                    <ProfilInput/>
+                    <ProfilInput />
                     <InputName>Lieu de travail</InputName>
-                    <ProfilInput/>
+                    <ProfilInput />
                 </InputContainer>
                 <ChallengeButton>
-                    <ChallengeButtonText>
-                        Deconnexion
-                    </ChallengeButtonText>
+                    <ChallengeButtonText>Deconnexion</ChallengeButtonText>
                 </ChallengeButton>
             </Screen>
         </Full>

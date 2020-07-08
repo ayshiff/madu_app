@@ -15,7 +15,7 @@ import {
 import { connect } from 'react-redux';
 import { Screen, Button } from '../../../components';
 import { color } from '../../../theme';
-import { Points } from "../../atoms//points/points";
+import { Points } from '../../atoms//points/points';
 
 import styled from 'styled-components/native';
 
@@ -153,37 +153,36 @@ const AttendeesModalProfilPic = styled.Image`
     margin-top: 46px;
     margin-bottom: 36px;
     align-self: center;
-`
+`;
 const PointsContainer = styled.View`
     align-self: center;
-`
+`;
 
 const AttendeesModalName = styled.Text`
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 24px;
-    line-height: 22px; 
+    line-height: 22px;
     margin-top: 58px;
-    margin-bottom:18px;  
+    margin-bottom: 18px;
     align-self: center;
-
-`
+`;
 const AttendeesModalPreviousText = styled.Text`
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 17px;
     line-height: 22px;
-`
+`;
 const AttendeesModalSeeProfilText = styled.Text`
-    color: #EE6538;
+    color: #ee6538;
     font-size: 17px;
-    line-height: 22px;    
-`
+    line-height: 22px;
+`;
 
 const AttendeesButtonContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
-`
+`;
 //  Modal Test
 
 export interface ChallengeScreenProps {
@@ -253,36 +252,41 @@ const Challenge = (props: ChallengeScreenProps) => {
                     <AttendeesNumber>5 participants</AttendeesNumber>
 
                     <AttendeesProfilPicContainer>
-
                         <Modal
                             animationType="slide"
                             transparent={true}
                             visible={modalVisible}
                         >
                             <AttendeesModalContainer>
-                                <AttendeesModalName>Léa Gouvier</AttendeesModalName>
+                                <AttendeesModalName>
+                                    Léa Gouvier
+                                </AttendeesModalName>
                                 <PointsContainer>
-                                    <Points points={80}/>
+                                    <Points points={80} />
                                 </PointsContainer>
                                 <AttendeesModalProfilPic
-                                source={require('../../../../../assets/lea-358-358.png')}
-                            />
-                            <AttendeesButtonContainer>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setModalVisible(!modalVisible);
-                                    }}
-                                >
-                                    <AttendeesModalPreviousText>Retour</AttendeesModalPreviousText>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setModalVisible(!modalVisible);
-                                    }}
-                                >
-                                    <AttendeesModalSeeProfilText>Voir le profil</AttendeesModalSeeProfilText>
-                                </TouchableOpacity>                                
-                            </AttendeesButtonContainer>    
+                                    source={require('../../../../../assets/lea-358-358.png')}
+                                />
+                                <AttendeesButtonContainer>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setModalVisible(!modalVisible);
+                                        }}
+                                    >
+                                        <AttendeesModalPreviousText>
+                                            Retour
+                                        </AttendeesModalPreviousText>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setModalVisible(!modalVisible);
+                                        }}
+                                    >
+                                        <AttendeesModalSeeProfilText>
+                                            Voir le profil
+                                        </AttendeesModalSeeProfilText>
+                                    </TouchableOpacity>
+                                </AttendeesButtonContainer>
                             </AttendeesModalContainer>
                         </Modal>
 

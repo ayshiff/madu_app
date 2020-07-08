@@ -22,7 +22,7 @@ import { MapParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';
 import { PoiScreen } from '../screens/poi-screen/poi-screen';
 import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
-import { ProfileSettingsScreen } from '../components/templates/profile/profile-settings'
+import { ProfileSettingsScreen } from '../components/templates/profile/profile-settings';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
