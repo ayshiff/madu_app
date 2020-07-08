@@ -3,7 +3,8 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 export type ButtonProps = {
     onPress: () => void;
-    title: string;
+    children?: any;
+    title?: string;
     iconName?: string;
     iconColor?: string;
     borderColor?: string;
@@ -46,19 +47,6 @@ export const ButtonWrapper = React.memo((props: ButtonWrapperProps) => {
                 return child && <ButtonContainer>{child}</ButtonContainer>;
             })}
         </View>
-    );
-});
-
-export const Button = React.memo((props: ButtonProps) => {
-    const contextualButtonStyles = buttonStyles(props);
-    return (
-        <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
-            <View style={contextualButtonStyles.button}>
-                <Text style={contextualButtonStyles.buttonText}>
-                    {props.title}
-                </Text>
-            </View>
-        </TouchableOpacity>
     );
 });
 
@@ -118,3 +106,20 @@ const buttonStyles = (props: ButtonProps) =>
                 : null
         ])
     });
+
+export const Button = React.memo((props: ButtonProps) => {
+    const contextualButtonStyles = buttonStyles(props);
+    return (
+        <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
+            <View style={contextualButtonStyles.button}>
+                {props.title ? (
+                    <Text style={contextualButtonStyles.buttonText}>
+                        {props.title}
+                    </Text>
+                ) : (
+                    props.children
+                )}
+            </View>
+        </TouchableOpacity>
+    );
+});

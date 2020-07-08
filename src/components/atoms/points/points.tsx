@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { Text } from '../text/text';
+import { OldText } from '../old-text/old-text';
 
 const Container = styled.View`
     width: 85px;
@@ -11,7 +11,7 @@ const Container = styled.View`
     align-items: center;
 `;
 
-const StyledText = styled(Text)`
+const StyledText = styled(OldText)`
     text-align: center;
     letter-spacing: -0.15px;
     color: #70b32d;
