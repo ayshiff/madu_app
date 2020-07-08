@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState } from 'react';
 import {
     View,
     ViewStyle,
@@ -15,8 +15,9 @@ import {
 import { connect } from 'react-redux';
 import { Screen, Button } from '../../../components';
 import { color } from '../../../theme';
-import styled from 'styled-components/native';
+import { Points } from "../../atoms//points/points";
 
+import styled from 'styled-components/native';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: color.white };
 
@@ -98,55 +99,92 @@ const ChallengeButton = styled.TouchableOpacity`
     width: 329px;
     height: 48px;
     border-radius: 40px;
-    background: #EE6538;
+    background: #ee6538;
     justify-content: center;
     align-items: center;
-`
+`;
 
 const ChallengeButtonContainer = styled.View`
     justify-content: center;
     align-items: center;
-`
+`;
 
 const ChallengeButtonText = styled.Text`
     color: #ffffff;
     font-weight: bold;
     font-size: 16px;
-`
+`;
 const AttendeesSuccessfulContainer = styled.View`
     margin-top: 30px;
     margin-left: 24px;
-`
+`;
 const AttendeesTitle = styled.Text`
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
-`
+`;
 
 const AttendeesNumber = styled.Text`
     color: #777777;
     margin-bottom: 25px;
-`
+`;
 
 const AttendeesProfilPicContainer = styled.View`
     flex-direction: row;
     width: 325px;
-`
+`;
 const AttendeesProfilPic = styled.Image`
     width: 100px;
     height: 100px;
     margin-right: 17px;
     margin-bottom: 50px;
-`
+`;
 
-// Modal test 
+// Modal test
 const AttendeesModalContainer = styled.View`
     height: 100%;
     width: 100%;
-    background-color: pink;
+    background: rgba(0, 0, 0, 0.9);
+`;
+
+const AttendeesModalProfilPic = styled.Image`
+    width: 358px;
+    height: 358px;
+    margin-top: 46px;
+    margin-bottom: 36px;
+    align-self: center;
+`
+const PointsContainer = styled.View`
+    align-self: center;
 `
 
-//  Modal Test 
+const AttendeesModalName = styled.Text`
+    color: #FFFFFF;
+    font-size: 24px;
+    line-height: 22px; 
+    margin-top: 58px;
+    margin-bottom:18px;  
+    align-self: center;
+
+`
+const AttendeesModalPreviousText = styled.Text`
+    color: #FFFFFF;
+    font-size: 17px;
+    line-height: 22px;
+`
+const AttendeesModalSeeProfilText = styled.Text`
+    color: #EE6538;
+    font-size: 17px;
+    line-height: 22px;    
+`
+
+const AttendeesButtonContainer = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+`
+//  Modal Test
 
 export interface ChallengeScreenProps {
     navigation: any;
@@ -167,7 +205,7 @@ const Challenge = (props: ChallengeScreenProps) => {
                     style={IMAGE_BACKGROUND}
                     source={require('../../../../../assets/meal-375-214.png')}
                 />
-                
+
                 <View style={INFORMATION_CONTAINER}>
                     <View style={POINT_WRAPPER}>
                         <View style={POINTS_CONTAINER}>
@@ -199,44 +237,65 @@ const Challenge = (props: ChallengeScreenProps) => {
                 </View>
                 <ChallengeButtonContainer>
                     <ChallengeButton>
-                        <ChallengeButtonText>Je relève le défi !</ChallengeButtonText>
+                        <ChallengeButtonText>
+                            Je relève le défi !
+                        </ChallengeButtonText>
                     </ChallengeButton>
                 </ChallengeButtonContainer>
-                <Text style={GREY_TEXT}>Quand vous réalisez un défi pensez à prendre une photo ou bien vous pouvez 
-                    l’immortaliser sur le moment pour partager avec vos collègues</Text>
+                <Text style={GREY_TEXT}>
+                    Quand vous réalisez un défi pensez à prendre une photo ou
+                    bien vous pouvez l’immortaliser sur le moment pour partager
+                    avec vos collègues
+                </Text>
 
                 <AttendeesSuccessfulContainer>
                     <AttendeesTitle>Ils l’ont fait !</AttendeesTitle>
                     <AttendeesNumber>5 participants</AttendeesNumber>
 
                     <AttendeesProfilPicContainer>
+
                         <Modal
                             animationType="slide"
                             transparent={true}
                             visible={modalVisible}
                         >
                             <AttendeesModalContainer>
-                                <Text>GG</Text>
+                                <AttendeesModalName>Léa Gouvier</AttendeesModalName>
+                                <PointsContainer>
+                                    <Points points={80}/>
+                                </PointsContainer>
+                                <AttendeesModalProfilPic
+                                source={require('../../../../../assets/lea-358-358.png')}
+                            />
+                            <AttendeesButtonContainer>
                                 <TouchableOpacity
                                     onPress={() => {
                                         setModalVisible(!modalVisible);
-                                    }}                                
+                                    }}
                                 >
-                                    <Text>Retour</Text>
+                                    <AttendeesModalPreviousText>Retour</AttendeesModalPreviousText>
                                 </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setModalVisible(!modalVisible);
+                                    }}
+                                >
+                                    <AttendeesModalSeeProfilText>Voir le profil</AttendeesModalSeeProfilText>
+                                </TouchableOpacity>                                
+                            </AttendeesButtonContainer>    
                             </AttendeesModalContainer>
-                        </Modal>                            
-                            <TouchableOpacity
-                                onPress={() => {
-                                    setModalVisible(true);
-                                }}                        
-                            >
-                                <AttendeesProfilPic
-                                    source={require('../../../../../assets/lea.png')}
-                                />
-                            </TouchableOpacity>
+                        </Modal>
 
-                    </AttendeesProfilPicContainer> 
+                        <TouchableOpacity
+                            onPress={() => {
+                                setModalVisible(true);
+                            }}
+                        >
+                            <AttendeesProfilPic
+                                source={require('../../../../../assets/lea.png')}
+                            />
+                        </TouchableOpacity>
+                    </AttendeesProfilPicContainer>
                 </AttendeesSuccessfulContainer>
             </Screen>
         </View>
