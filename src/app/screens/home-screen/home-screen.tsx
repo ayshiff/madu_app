@@ -95,10 +95,6 @@ const PointsTag = styled.View`
     background-color: #e3ffe8;
 `;
 
-const PointsText = styled.Text`
-    color: #70b32d;
-`;
-
 const TypeTag = styled.View`
     border-radius: 20px;
     border-color: #fe6d1a;

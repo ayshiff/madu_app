@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
 import { loginActions } from '../../actions/login.actions';
+import { VisitedPlacesScreen } from '../../components/templates/profile/visited-places';
+import { ChallengeDoneScreen } from '../../components/templates/profile/challenge-done';
 import styled from 'styled-components/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Points } from '../../components/atoms/points/points';
@@ -79,6 +81,10 @@ const RankingNumberContainer = styled.Text`
     flex-direction: row;
     margin-top: 5px;
 `;
+
+const RankingNumber = styled.Text`
+    margin-left: 4px;
+`
 const Up = styled.Image`
     margin-top: 4px;
     margin-right: 5px;
@@ -104,22 +110,6 @@ export interface SettingsScreenProps {
 }
 
 const Tab = createMaterialTopTabNavigator();
-
-const yay = () => {
-    return (
-        <View>
-            <Text>Yay !</Text>
-        </View>
-    );
-};
-
-const yit = () => {
-    return (
-        <View>
-            <Text>Yit !</Text>
-        </View>
-    );
-};
 
 export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
     <View style={FULL}>
@@ -155,7 +145,7 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
                                 <Up
                                     source={require('../../../../assets/up.png')}
                                 />
-                                <Text>4</Text>
+                                <RankingNumber>4</RankingNumber>
                             </RankingNumberContainer>
                         </Card>
                         <Card>
@@ -187,8 +177,8 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
                     }
                 }}
             >
-                <Tab.Screen name="défis accomplis" component={yay} />
-                <Tab.Screen name="lieux visités" component={yit} />
+                <Tab.Screen name="défis accomplis" component={ChallengeDoneScreen} />
+                <Tab.Screen name="lieux visités" component={VisitedPlacesScreen} />
             </Tab.Navigator>
         </Screen>
     </View>
