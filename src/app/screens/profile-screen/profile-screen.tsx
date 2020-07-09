@@ -111,84 +111,91 @@ export interface SettingsScreenProps {
 
 const Tab = createMaterialTopTabNavigator();
 
-export const Profile = ({ navigation, logout }: SettingsScreenProps) => (
-    <View style={FULL}>
-        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.white}>
-            <Header
-                // headerText="Profile Screen"
-                style={HEADER}
-                titleStyle={HEADER_TITLE}
-                rightIcon="logout"
-                onRightPress={() => {
-                    navigation.navigate('welcome');
-                    logout();
-                }}
-            />
-            <HeaderContainer>
-                <ProfileInformation>
-                    <ProfilePic
-                        source={require('../../../../assets/profile-pic.png')}
-                    />
-                    <ProfileName>Élodie Five</ProfileName>
-                    <Text>
-                        Responsable Marketing{' '}
-                        <Department>Communication</Department>
-                    </Text>
-                    <CardContainer>
-                        <Card>
-                            <Text>Total de point</Text>
-                            <Points points={2567} />
-                        </Card>
-                        <Card>
-                            <RankingText>Classement</RankingText>
-                            <RankingNumberContainer>
-                                <Up
-                                    source={require('../../../../assets/up.png')}
-                                />
-                                <RankingNumber>4</RankingNumber>
-                            </RankingNumberContainer>
-                        </Card>
-                        <Card>
-                            <InscriptionText>Inscription</InscriptionText>
-                            <DateContainer>
-                                <Clock
-                                    source={require('../../../../assets/clock.png')}
-                                />
-                                <Text>12/09/20</Text>
-                            </DateContainer>
-                        </Card>
-                    </CardContainer>
-                </ProfileInformation>
-            </HeaderContainer>
-            <Tab.Navigator
-                tabBarOptions={{
-                    activeTintColor: '#EE6538',
-                    inactiveTintColor: '#856B7F',
-                    indicatorStyle: {
-                        backgroundColor: '#EE6538',
-                        width: 136,
-                        left: '10%'
-                    },
-                    labelStyle: { fontSize: 12 },
-                    style: {
-                        backgroundColor: '#FAE3C8',
-                        borderBottomLeftRadius: 30,
-                        borderBottomRightRadius: 30
-                    }
-                }}
+export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
+    const navigateToSettings = () => navigation.navigate('profile-settings');
+
+    return (
+        <View style={FULL}>
+            <Screen
+                style={CONTAINER}
+                preset="scroll"
+                backgroundColor={color.white}
             >
-                <Tab.Screen
-                    name="défis accomplis"
-                    component={ChallengeDoneScreen}
+                <Header
+                    // headerText="Profile Screen"
+                    style={HEADER}
+                    titleStyle={HEADER_TITLE}
+                    rightIcon="settings"
+                    onRightPress={() => {
+                        navigateToSettings();
+                    }}
                 />
-                <Tab.Screen
-                    name="lieux visités"
-                    component={VisitedPlacesScreen}
-                />
-            </Tab.Navigator>
-        </Screen>
-    </View>
-);
+                <HeaderContainer>
+                    <ProfileInformation>
+                        <ProfilePic
+                            source={require('../../../../assets/profile-pic.png')}
+                        />
+                        <ProfileName>Élodie Five</ProfileName>
+                        <Text>
+                            Responsable Marketing{' '}
+                            <Department>Communication</Department>
+                        </Text>
+                        <CardContainer>
+                            <Card>
+                                <Text>Total de point</Text>
+                                <Points points={2567} />
+                            </Card>
+                            <Card>
+                                <RankingText>Classement</RankingText>
+                                <RankingNumberContainer>
+                                    <Up
+                                        source={require('../../../../assets/up.png')}
+                                    />
+                                    <RankingNumber>4</RankingNumber>
+                                </RankingNumberContainer>
+                            </Card>
+                            <Card>
+                                <InscriptionText>Inscription</InscriptionText>
+                                <DateContainer>
+                                    <Clock
+                                        source={require('../../../../assets/clock.png')}
+                                    />
+                                    <Text>12/09/20</Text>
+                                </DateContainer>
+                            </Card>
+                        </CardContainer>
+                    </ProfileInformation>
+                </HeaderContainer>
+                <Tab.Navigator
+                    tabBarOptions={{
+                        activeTintColor: '#EE6538',
+                        inactiveTintColor: '#856B7F',
+                        indicatorStyle: {
+                            backgroundColor: '#EE6538',
+                            width: 136,
+                            left: '10%'
+                        },
+                        labelStyle: { fontSize: 12 },
+                        style: {
+                            backgroundColor: '#FAE3C8',
+                            borderBottomLeftRadius: 30,
+                            borderBottomRightRadius: 30
+                        }
+                    }}
+                >
+                    <Tab.Screen
+                        name="défis accomplis"
+                        component={ChallengeDoneScreen}
+                    />
+                    <Tab.Screen
+                        name="lieux visités"
+                        component={VisitedPlacesScreen}
+                    />
+                </Tab.Navigator>
+            </Screen>
+        </View>
+    );
+};
 
 const mapStateToProps = (state: any) => ({
     logout: state.poi.list

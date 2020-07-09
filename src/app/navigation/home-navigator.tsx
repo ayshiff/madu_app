@@ -18,13 +18,19 @@ import {
 } from '../screens';
 import { Icon } from '../components';
 import { IconTypes } from '../components/atoms/icon/icons';
-import { MapParamList } from './types';
+import { MapParamList, ChallengeParamList, ProfileParamList } from './types';
 import { DetailScreen } from '../screens/detail-screen/detail-screen';
 import { PoiScreen } from '../screens/poi-screen/poi-screen';
 import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
+import { ChallengeScreen } from '../components/templates/challenge/challenge-main-step';
+import { ChallengePictureStepScreen } from '../components/templates/challenge/challenge-picture-step';
+import { ChallengeSuccessStepScreen } from '../components/templates/challenge/challenge-success-step';
+import { ProfileSettingsScreen } from '../components/templates/profile/profile-settings';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
+const ChallengeStack = createStackNavigator<ChallengeParamList>();
+const ProfileStack = createStackNavigator<ProfileParamList>();
 
 const ICON: ImageStyle = {
     width: 15,
@@ -47,6 +53,61 @@ const MapNavigator = React.forwardRef<
             <Stack.Screen name="poi" component={PoiScreen} />
             <Stack.Screen name="poi-success" component={PoiSuccessScreen} />
         </Stack.Navigator>
+    );
+});
+
+const ChallengeNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
+    return (
+        <ChallengeStack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true
+            }}
+        >
+            <ChallengeStack.Screen
+                name="home-challenge"
+                component={HomeScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge"
+                component={ChallengeScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge-picture"
+                component={ChallengePictureStepScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge-success"
+                component={ChallengeSuccessStepScreen}
+            />
+            <ChallengeStack.Screen
+                name="attendees-profile"
+                component={ProfileScreen}
+            />
+        </ChallengeStack.Navigator>
+    );
+});
+
+const ProfileNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
+    return (
+        <ProfileStack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true
+            }}
+        >
+            <ProfileStack.Screen name="profile" component={ProfileScreen} />
+            <ProfileStack.Screen
+                name="profile-settings"
+                component={ProfileSettingsScreen}
+            />
+        </ProfileStack.Navigator>
     );
 });
 
@@ -85,10 +146,10 @@ export const HomeNavigator = React.forwardRef<
                 inactiveTintColor: 'gray'
             }}
         >
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Home" component={ChallengeNavigator} />
             <Tab.Screen name="Map" component={MapNavigator} />
             <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Profile" component={ProfileNavigator} />
         </Tab.Navigator>
     );
 });

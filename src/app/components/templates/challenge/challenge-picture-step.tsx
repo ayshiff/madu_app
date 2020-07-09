@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import styled from 'styled-components/native';
 import { Points } from '../../atoms/points/points';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Full = styled.View`
     flex: 1;
@@ -81,6 +82,7 @@ export const ChallengePictureStep = (
     props: ChallengePictureStepScreenProps
 ) => {
     const { navigation } = props;
+    const navigateToSuccess = () => navigation.navigate('challenge-success');
 
     return (
         <Full>
@@ -106,9 +108,15 @@ export const ChallengePictureStep = (
             </ChallengePictureContainer>
 
             <ChallengePictureDisagreeContainer>
-                <ChallengePictureDisagree>
-                    Je ne souhaite pas poster d’image{' '}
-                </ChallengePictureDisagree>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigateToSuccess();
+                    }}
+                >
+                    <ChallengePictureDisagree>
+                        Je ne souhaite pas poster d’image{' '}
+                    </ChallengePictureDisagree>
+                </TouchableOpacity>
             </ChallengePictureDisagreeContainer>
         </Full>
     );

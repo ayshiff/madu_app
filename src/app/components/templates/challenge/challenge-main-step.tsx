@@ -193,10 +193,9 @@ const Challenge = (props: ChallengeScreenProps) => {
     const [modalVisible, setModalVisible] = useState(false);
     const { navigation } = props;
 
-    const navigateToChallengePictureStep = React.useMemo(
-        () => () => navigation.navigate('picture'),
-        [navigation]
-    );
+    const navigateToPicture = () => navigation.navigate('challenge-picture');
+    const navigateToProfile = () => navigation.navigate('attendees-profile');
+
     return (
         <View style={FULL}>
             <Screen preset="scroll" backgroundColor={color.transparent}>
@@ -235,7 +234,11 @@ const Challenge = (props: ChallengeScreenProps) => {
                     </Text>
                 </View>
                 <ChallengeButtonContainer>
-                    <ChallengeButton>
+                    <ChallengeButton
+                        onPress={() => {
+                            navigateToPicture();
+                        }}
+                    >
                         <ChallengeButtonText>
                             Je relève le défi !
                         </ChallengeButtonText>
@@ -280,6 +283,7 @@ const Challenge = (props: ChallengeScreenProps) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             setModalVisible(!modalVisible);
+                                            navigateToProfile();
                                         }}
                                     >
                                         <AttendeesModalSeeProfilText>

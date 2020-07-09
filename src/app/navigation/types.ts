@@ -27,3 +27,16 @@ export type MapParamList = {
     'poi-success': undefined;
     welcome: undefined;
 };
+
+export type ChallengeParamList = {
+    'home-challenge': undefined;
+    challenge: undefined;
+    'challenge-picture': undefined;
+    'challenge-success': undefined;
+    'attendees-profile': undefined;
+};
+
+export type ProfileParamList = {
+    profile: undefined;
+    'profile-settings': undefined;
+};

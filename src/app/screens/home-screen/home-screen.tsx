@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen } from '../../components';
 import { color, spacing } from '../../theme';
@@ -176,7 +176,8 @@ const MostVisitedPlacesName = styled.Text`
 export interface HomeScreenProps {
     navigation: any;
 }
-const Home = (/* props: HomeScreenProps */) => {
+const Home = ({ navigation }: HomeScreenProps) => {
+    const navigateToChallenge = () => navigation.navigate('challenge');
     return (
         <Full>
             <Screen preset="scroll" backgroundColor={color.transparent}>
@@ -200,20 +201,27 @@ const Home = (/* props: HomeScreenProps */) => {
                         <ChallengeSubtitle>
                             Nouveau challenge chaque dimanche soir à 18h
                         </ChallengeSubtitle>
-                        <ChallengeView>
-                            <ChallengePic
-                                source={require('../../../../assets/meal.png')}
-                            />
-                            <ChallengeInfo>
-                                <Text>Lundi c’est Veggie !</Text>
-                                <TypeTag>
-                                    <TypeText>Alimentation</TypeText>
-                                </TypeTag>
-                                <PointsTag>
-                                    <Points points={80} />
-                                </PointsTag>
-                            </ChallengeInfo>
-                        </ChallengeView>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigateToChallenge();
+                            }}
+                        >
+                            <ChallengeView>
+                                <ChallengePic
+                                    source={require('../../../../assets/meal.png')}
+                                />
+                                <ChallengeInfo>
+                                    <Text>Lundi c’est Veggie !</Text>
+                                    <TypeTag>
+                                        <TypeText>Alimentation</TypeText>
+                                    </TypeTag>
+                                    <PointsTag>
+                                        <Points points={80} />
+                                    </PointsTag>
+                                </ChallengeInfo>
+                            </ChallengeView>
+                        </TouchableOpacity>
                     </View>
                 </ChallengeContainer>
 

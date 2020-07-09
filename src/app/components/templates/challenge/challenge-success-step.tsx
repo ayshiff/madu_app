@@ -75,6 +75,7 @@ export const ChallengeSuccessStep = (
     props: ChallengeSuccessStepScreenProps
 ) => {
     const { navigation } = props;
+    const navigateToChallenge = () => navigation.navigate('challenge');
 
     return (
         <Full>
@@ -95,7 +96,11 @@ export const ChallengeSuccessStep = (
                 <ChallengeSuccessText>
                     N’hésitez pas à aller voir sur votre profil.
                 </ChallengeSuccessText>
-                <Button>
+                <Button
+                    onPress={() => {
+                        navigateToChallenge();
+                    }}
+                >
                     <ButtonText>Continuer</ButtonText>
                 </Button>
             </ChallengeSuccessContainer>
