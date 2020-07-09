@@ -37,7 +37,7 @@ export const WelcomeNavigatorWithoutContainer = React.forwardRef<
         screenOptions={{
             headerShown: false,
             gestureEnabled: true,
-            cardStyle: { backgroundColor: '#C8F1ED' }
+            cardStyle: { backgroundColor: '#FFF5EB' }
         }}
     >
         <Stack.Screen name="welcome" component={WelcomeScreen} />
