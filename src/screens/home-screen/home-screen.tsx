@@ -6,6 +6,7 @@ import { Screen } from 'madu/components';
 import { color } from 'madu/theme';
 import styled from 'styled-components/native';
 import { Points } from '../../components/atoms/points/points';
+import { GreenPoints } from '../../components/atoms/points/green-points';
 
 const Full = styled.View`
     flex: 1;
@@ -88,7 +89,6 @@ const PointsTag = styled.View`
     justify-content: center;
     padding-left: 14px;
     padding-right: 14px;
-    background-color: #e3ffe8;
 `;
 
 const TypeTag = styled.View`
@@ -174,6 +174,10 @@ const MostVisitedPlacesName = styled.Text`
     margin-left: 22px;
 `;
 
+const TagContainer = styled.View`
+    flex-direction: row;
+`
+
 export interface HomeScreenProps {
     navigation: any;
 }
@@ -214,12 +218,14 @@ const Home = ({ navigation }: HomeScreenProps) => {
                                 />
                                 <ChallengeInfo>
                                     <Text>Lundi c’est Veggie !</Text>
-                                    <TypeTag>
-                                        <TypeText>Alimentation</TypeText>
-                                    </TypeTag>
-                                    <PointsTag>
-                                        <Points points={80} />
-                                    </PointsTag>
+                                    <TagContainer>
+                                        <TypeTag>
+                                            <TypeText>Alimentation</TypeText>
+                                        </TypeTag>
+                                        <PointsTag>
+                                            <GreenPoints points={80} />
+                                        </PointsTag>
+                                    </TagContainer>
                                 </ChallengeInfo>
                             </ChallengeView>
                         </TouchableOpacity>

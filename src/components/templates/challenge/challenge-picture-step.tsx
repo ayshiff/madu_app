@@ -5,6 +5,7 @@ import { useState } from 'react';
 import styled from 'styled-components/native';
 import { Points } from '../../atoms/points/points';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { GreenPoints } from '../../atoms/points/green-points';
 
 const Full = styled.View`
     flex: 1;
@@ -93,7 +94,7 @@ export const ChallengePictureStep = (
                 <ChallengePictureSubtitle>
                     Gagne le double du butin en immortalisant ton exploit.
                 </ChallengePictureSubtitle>
-                <Points points={80} />
+                <GreenPoints points={80} />
 
                 <ChallengeTakePictureContainer>
                     <ChallengeTakePictureText>

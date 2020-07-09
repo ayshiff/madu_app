@@ -9,6 +9,8 @@ import { ChallengeDoneScreen } from '../../components/templates/profile/challeng
 import styled from 'styled-components/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Points } from '../../components/atoms/points/points';
+import { GreenPoints } from '../../components/atoms/points/green-points';
+
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
@@ -34,7 +36,7 @@ const HEADER_TITLE: TextStyle = {
 };
 
 const HeaderContainer = styled.View`
-    margin-top: -41px;
+    margin-top: -95px;
     height: 225px;
     background-color: #fae3c8;
 `;
@@ -117,7 +119,6 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
     return (
         <View style={FULL}>
             <Header
-                // headerText="Profile Screen"
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
                 rightIcon="settings"
@@ -137,8 +138,8 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                     </Text>
                     <CardContainer>
                         <Card>
-                            <Text>Total de point</Text>
-                            <Points points={2567} />
+                            <Text>Total de points</Text>
+                            <GreenPoints points={2567} />
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>

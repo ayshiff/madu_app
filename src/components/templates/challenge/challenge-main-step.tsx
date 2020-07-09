@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { Screen, Button } from '../../../components';
 import { color } from '../../../theme';
 import { Points } from '../../atoms//points/points';
+import { GreenPoints } from '../../atoms/points/green-points';
 
 import styled from 'styled-components/native';
 
@@ -201,10 +202,10 @@ const Challenge = (props: ChallengeScreenProps) => {
     return (
         <View style={FULL}>
             <Screen preset="scroll" backgroundColor={color.transparent}>
-                {/* <Image
+                <Image
                     style={IMAGE_BACKGROUND}
-                    source={require('../../../../../assets/meal-375-214.png')}
-                /> */}
+                    source={require('../../../assets/meal-375-214.png')}
+                />
 
                 <View style={INFORMATION_CONTAINER}>
                     <View style={POINT_WRAPPER}>
@@ -212,9 +213,7 @@ const Challenge = (props: ChallengeScreenProps) => {
                             <View style={TYPE_TAG}>
                                 <Text style={TYPE_TEXT}>Alimentation</Text>
                             </View>
-                            <View style={POINTS_TAG}>
-                                <Text style={POINTS_TEXT}>120🌱</Text>
-                            </View>
+                            <GreenPoints points={120}/>
                         </View>
                     </View>
                 </View>
@@ -273,11 +272,11 @@ const Challenge = (props: ChallengeScreenProps) => {
                                     Léa Gouvier
                                 </AttendeesModalName>
                                 <PointsContainer>
-                                    <Points points={80} />
+                                    <GreenPoints points={80} />
                                 </PointsContainer>
-                                {/* <AttendeesModalProfilPic
-                                    source={require('../../../../../assets/lea-358-358.png')}
-                                /> */}
+                                <AttendeesModalProfilPic
+                                    source={require('../../../assets/lea-358-358.png')}
+                                />
                                 <AttendeesButtonContainer>
                                     <TouchableOpacity
                                         onPress={() => {
@@ -307,9 +306,9 @@ const Challenge = (props: ChallengeScreenProps) => {
                                 setModalVisible(true);
                             }}
                         >
-                            {/* <AttendeesProfilPic
-                                source={require('../../../../../assets/lea.png')}
-                            /> */}
+                            <AttendeesProfilPic
+                                source={require('../../../assets/lea.png')}
+                            />
                         </TouchableOpacity>
                     </AttendeesProfilPicContainer>
                 </AttendeesSuccessfulContainer>
