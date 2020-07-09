@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import { Header, Button, Input } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { registerActions, IUserData } from 'madu/actions/register.actions';
+
+import { validateEmail } from 'madu/outils';
 
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -47,9 +49,13 @@ interface IData {
 const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const { navigation, userData, setUserData } = props;
     const [email, setEmail] = useState(userData.email || '');
+    const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    useEffect(() => {
+        setEmailError(!validateEmail(email));
+    }, [email]);
     const navigateToNextStep = () => {
         navigation.navigate('registerStepTwo');
     };
@@ -60,6 +66,9 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     };
 
     const goBack = () => navigation.goBack();
+
+    console.log(email, !validateEmail(email), emailError);
+
     return (
         <SafeAreaView style={CONTAINER}>
             <Header
@@ -73,6 +82,7 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 placeholder="Votre mail professionnel"
                 label="Mail professionnel"
                 value={email}
+                error={emailError ? 'Cet email n’est pas valide' : null}
                 onChangeText={(el: string) => setEmail(el)}
             />
             <Input
