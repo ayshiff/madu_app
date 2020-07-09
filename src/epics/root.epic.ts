@@ -3,10 +3,12 @@ import { registerEpics } from './register.epic';
 import { loginEpics } from './login.epic';
 import { poiEpics } from './poi.epic';
 import { challengeEpics } from './challenge.epic';
+import { profileEpics } from './profile.epic';
 
 export const rootEpic = combineEpics(
     registerEpics,
     loginEpics,
     poiEpics,
-    challengeEpics
+    challengeEpics,
+    profileEpics
 );

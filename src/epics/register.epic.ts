@@ -3,6 +3,7 @@ import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
 import { BACKEND_SERVICE_URL } from 'madu/const';
+import { loginActions, LoginActions } from 'madu/actions/login.actions';
 import type { dependencies } from '../app.store';
 import {
     RegisterTypes,
@@ -11,10 +12,10 @@ import {
 } from '../actions/register.actions';
 
 export const loadRegisterContent: Epic = (
-    action$: Observable<RegisterActions>,
+    action$: Observable<RegisterActions | LoginActions>,
     state$: Observable<any>,
     { ajax }: typeof dependencies
-): Observable<RegisterActions> => {
+): Observable<RegisterActions | LoginActions> => {
     return action$.pipe(
         ofType(RegisterTypes.Register),
         // TODO: remove any type
@@ -28,7 +29,13 @@ export const loadRegisterContent: Epic = (
                 body: JSON.stringify(arg)
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
-                    return of(registerActions.registerSuccess(data.response));
+                    return of(
+                        registerActions.registerSuccess(data.response),
+                        loginActions.login({
+                            email: arg.email,
+                            password: arg.password
+                        })
+                    );
                 }),
                 catchError((error: AjaxError) => {
                     return of(registerActions.registerFail(error));

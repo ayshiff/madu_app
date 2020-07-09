@@ -3,6 +3,7 @@ import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
 import { BACKEND_SERVICE_URL } from 'madu/const';
+import { profileActions, ProfileActions } from 'madu/actions/profile.actions';
 import type { dependencies } from '../app.store';
 import { PoiTypes, poiActions, PoiActions } from '../actions/poi.actions';
 
@@ -35,13 +36,17 @@ export const loadPoi: Epic = (
 
 export const loadPoiById: Epic = (
     action$: Observable<PoiActions>,
-    state$: Observable<any>,
+    state$: any,
     { ajax }: typeof dependencies
 ): Observable<PoiActions> => {
     return action$.pipe(
         ofType(PoiTypes.LoadPoiById),
         concatMap((action: any) => {
+            const headers = {
+                Authorization: `Bearer ${state$.value.login.accessToken}`
+            };
             return ajax({
+                headers,
                 url: `${BACKEND_SERVICE_URL}/${action.payload}`,
                 method: 'GET'
             }).pipe(
@@ -58,14 +63,19 @@ export const loadPoiById: Epic = (
 
 export const likePoi: Epic = (
     action$: Observable<PoiActions>,
-    state$: Observable<any>,
+    state$: any,
     { ajax }: typeof dependencies
 ): Observable<PoiActions> => {
     return action$.pipe(
         ofType(PoiTypes.LikePoi),
         concatMap((action: any) => {
+            const headers = {
+                Authorization: `Bearer ${state$.value.login.accessToken}`
+            };
+            const { poiId } = action.payload;
             return ajax({
-                url: `${BACKEND_SERVICE_URL}/poi/${action.poiId}/like`,
+                headers,
+                url: `${BACKEND_SERVICE_URL}/poi/${poiId}/like`,
                 method: 'POST'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
@@ -80,19 +90,27 @@ export const likePoi: Epic = (
 };
 
 export const visitPoi: Epic = (
-    action$: Observable<PoiActions>,
-    state$: Observable<any>,
+    action$: Observable<PoiActions | ProfileActions>,
+    state$: any,
     { ajax }: typeof dependencies
-): Observable<PoiActions> => {
+): Observable<PoiActions | ProfileActions> => {
     return action$.pipe(
         ofType(PoiTypes.VisitPoi),
         concatMap((action: any) => {
+            const headers = {
+                Authorization: `Bearer ${state$.value.login.accessToken}`
+            };
+            const { poiId } = action.payload;
             return ajax({
-                url: `${BACKEND_SERVICE_URL}/poi/${action.poiId}/visited`,
+                headers,
+                url: `${BACKEND_SERVICE_URL}/poi/${poiId}/visited`,
                 method: 'POST'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
-                    return of(poiActions.visitPoiSuccess(data.response));
+                    return of(
+                        poiActions.visitPoiSuccess(data.response),
+                        profileActions.profile()
+                    );
                 }),
                 catchError((error: AjaxError) => {
                     return of(poiActions.visitPoiFail(error));
@@ -102,4 +120,4 @@ export const visitPoi: Epic = (
     );
 };
 
-export const poiEpics = combineEpics(loadPoi, loadPoiById, likePoi);
+export const poiEpics = combineEpics(loadPoi, loadPoiById, likePoi, visitPoi);

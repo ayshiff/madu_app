@@ -76,13 +76,13 @@ export const poiActions = {
         ({ type: PoiTypes.LoadPoiFail, error } as const),
     likePoi: (poiId: string) =>
         ({ type: PoiTypes.LikePoi, payload: { poiId } } as const),
-    likePoiSuccess: (payload: IPointOfInterest[]) =>
+    likePoiSuccess: (payload: IPointOfInterest) =>
         ({ type: PoiTypes.LikePoiSuccess, payload } as const),
     likePoiFail: (error: AjaxError) =>
         ({ type: PoiTypes.LikePoiFail, error } as const),
     visitPoi: (poiId: string) =>
         ({ type: PoiTypes.VisitPoi, payload: { poiId } } as const),
-    visitPoiSuccess: (payload: IPointOfInterest[]) =>
+    visitPoiSuccess: (payload: IPointOfInterest) =>
         ({ type: PoiTypes.VisitPoiSuccess, payload } as const),
     visitPoiFail: (error: AjaxError) =>
         ({ type: PoiTypes.VisitPoiFail, error } as const),

@@ -94,4 +94,4 @@ export const addPicture: Epic = (
     );
 };
 
-export const profileEpics = combineEpics(loadProfile, editProfile);
+export const profileEpics = combineEpics(loadProfile, editProfile, addPicture);
