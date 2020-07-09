@@ -67,8 +67,6 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
 
     const goBack = () => navigation.goBack();
 
-    console.log(email, !validateEmail(email), emailError);
-
     return (
         <SafeAreaView style={CONTAINER}>
             <Header
