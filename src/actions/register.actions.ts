@@ -1,4 +1,5 @@
 import { AjaxError } from 'rxjs/ajax';
+import { ICompanyDomainResponse } from 'madu/store/register.reducer';
 import { ActionTypes } from '../core/actions.type';
 
 export enum RegisterTypes {
@@ -6,6 +7,7 @@ export enum RegisterTypes {
     Register = '[REGISTER] REGISTER',
     RegisterSuccess = '[REGISTER] REGISTER_SUCCESS',
     RegisterFail = '[REGISTER] REGISTER_FAIL',
+    ResetRegister = '[REGISTER] RESET',
     FetchCompany = '[REGISTER] FETCH_COMPANY',
     FetchCompanySuccess = '[REGISTER] FETCH_COMPANY_SUCCESS',
     FetchCompanyFail = '[REGISTER] FETCH_COMPANY_FAIL'
@@ -14,25 +16,19 @@ export enum RegisterTypes {
 export interface IUserData {
     email?: string;
     password?: string;
-    name?: string;
+    firstname?: string;
     lastname?: string;
     workplace?: string;
-    workDivision?: string;
+    department?: string;
     image?: string;
+    companyPosition?: string;
+    company?: ICompanyDomainResponse;
 }
 
 interface department {
     name: string;
     points: number;
 }
-
-export type ICompanyDataResponse = {
-    workplaces: string;
-    name: string;
-    domainName: string;
-    departments: department[];
-    id: string;
-};
 
 export type IregisterContentResponse = {
     roles: string[];
@@ -60,9 +56,10 @@ export const registerActions = {
         ({ type: RegisterTypes.RegisterSuccess, response } as const),
     registerFail: (error: AjaxError) =>
         ({ type: RegisterTypes.RegisterFail, error } as const),
+    resetRegister: () => ({ type: RegisterTypes.ResetRegister } as const),
     fetchCompany: ({ company }: { company: string }) =>
         ({ type: RegisterTypes.FetchCompany, payload: { company } } as const),
-    fetchCompanySuccess: (response: ICompanyDataResponse) =>
+    fetchCompanySuccess: (response: ICompanyDomainResponse) =>
         ({ type: RegisterTypes.FetchCompanySuccess, response } as const),
     fetchCompanyFail: (error: AjaxError) =>
         ({ type: RegisterTypes.FetchCompanyFail, error } as const)

@@ -183,7 +183,7 @@ export const Poi = ({
     React.useEffect(() => {
         setPoint(points[pointId]);
     }, [extracted, pointId, points]);
-    console.log(point);
+
     return (
         <Container>
             {point && (

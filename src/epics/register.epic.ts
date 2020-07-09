@@ -20,21 +20,39 @@ export const loadRegisterContent: Epic = (
         ofType(RegisterTypes.Register),
         // TODO: remove any type
         concatMap((action: any) => {
-            const { domainId, ...arg } = action.payload;
+            const {
+                email,
+                firstname,
+                lastname,
+                workplace,
+                department,
+                companyPosition,
+                password,
+                company
+            } = action.payload;
             const headers = { 'Content-Type': 'application/json' };
             return ajax({
                 headers,
-                url: `${BACKEND_SERVICE_URL}/companies/${domainId}/users`,
+                url: `${BACKEND_SERVICE_URL}/companies/${company.id}/users`,
                 method: 'POST',
-                body: JSON.stringify(arg)
+                body: JSON.stringify({
+                    email,
+                    firstname,
+                    lastname,
+                    workplace,
+                    department,
+                    companyPosition,
+                    password
+                })
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
                     return of(
                         registerActions.registerSuccess(data.response),
                         loginActions.login({
-                            email: arg.email,
-                            password: arg.password
-                        })
+                            email,
+                            password
+                        }),
+                        registerActions.resetRegister()
                     );
                 }),
                 catchError((error: AjaxError) => {

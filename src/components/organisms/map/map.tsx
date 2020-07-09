@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import MapView, { Circle, Marker, Callout } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
@@ -13,11 +13,9 @@ import {
 } from 'madu/screens/poi-screen/poi-screen';
 import { IProfile } from 'madu/actions/profile.actions';
 
-// const mockCover = require('madu/assets/mock_cover.png');
-
 const CustomCallout = styled(Callout)`
     width: 250px;
-    height: 150px;
+    height: 120px;
     background: #ffffff;
     border-radius: 50px;
 `;
@@ -29,22 +27,6 @@ const Visit = styled(OldText)`
     bottom: 0;
     right: 0;
 `;
-
-// Image style
-// const Wallpaper = styled.Image`
-//     height: 120px;
-//     width: 125px;
-//     resize-mode: contain;
-// `;
-
-// const WallpaperContainer = styled.Text`
-//     width: 125px;
-//     height: 125px;
-// `;
-
-// const Container = styled.View`
-//     flex-direction: row;
-// `;
 
 const styles = StyleSheet.create({
     container: {

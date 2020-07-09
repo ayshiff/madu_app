@@ -39,33 +39,36 @@ export interface RegisterStepThreeScreenProps extends RegisterScreenProps {
 }
 
 interface IData {
-    workDivision: string;
+    department: string;
 }
 
 const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const workPlaces = [
-        { label: 'test1', value: 'test1' },
-        { label: 'test2', value: 'test2' }
-    ];
+    const workPlaces =
+        userData && userData.company
+            ? userData.company.departments.map((el) => ({
+                  label: el.name,
+                  value: el.name
+              }))
+            : [];
 
-    const [workDivision, setWorkDivision] = useState(
-        userData.workDivision || ''
-    );
+    const [department, setDepartment] = useState(userData.department || '');
 
     const navigateToNextStep = () => {
         navigation.navigate('registerStepFour');
     };
 
     const handleNavigate = () => {
-        setUserData({ workDivision });
+        setUserData({ department });
         navigateToNextStep();
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
         <SafeAreaView style={CONTAINER}>
             <Header
-                headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
+                headerText={`${
+                    userData.company ? userData.company.name : 'On'
+                } vous souhaite la bienvenue sur l’app MADU`}
                 leftIcon="back"
                 onLeftPress={goBack}
                 style={HEADER}
@@ -77,13 +80,13 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 collègues.
             </Text>
             <DropdownMenu
-                title={workDivision || 'Département'}
+                title={department || 'Département'}
                 component={
                     <View>
                         {workPlaces.map((datum, index) => (
                             <TouchableOpacity
                                 onPress={() =>
-                                    setWorkDivision(workPlaces[index].value)
+                                    setDepartment(workPlaces[index].value)
                                 }
                                 key={index}
                                 style={{
@@ -118,7 +121,7 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 <Button
                     title="Suivant"
                     onPress={handleNavigate}
-                    disabled={!workDivision}
+                    disabled={!department}
                 />
             </View>
         </SafeAreaView>

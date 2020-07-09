@@ -45,10 +45,14 @@ interface IData {
 
 const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const workPlaces = [
-        { label: 'test1', value: 'test1' },
-        { label: 'test2', value: 'test2' }
-    ];
+
+    const workPlaces =
+        userData && userData.company
+            ? userData.company.workplaces.map((el) => ({
+                  label: el,
+                  value: el
+              }))
+            : [];
 
     const [workplace, setWorkplace] = useState(userData.workplace || '');
 
@@ -64,7 +68,9 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     return (
         <SafeAreaView style={CONTAINER}>
             <Header
-                headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
+                headerText={`${
+                    userData.company ? userData.company.name : 'On'
+                } vous souhaite la bienvenue sur l’app MADU`}
                 leftIcon="back"
                 onLeftPress={goBack}
                 style={HEADER}
