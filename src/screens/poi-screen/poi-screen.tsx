@@ -1,7 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import { TouchableOpacity, Dimensions, View } from 'react-native';
 import styled from 'styled-components/native';
-import { useState } from 'react';
 import { color } from 'madu/theme/color';
 import { OldText } from 'madu/components/atoms/old-text/old-text';
 import { Icon } from 'madu/components/atoms/icon/icon';
@@ -189,7 +189,13 @@ export const Poi = ({
             {point && (
                 <>
                     <View>
-                        <Wallpaper source={mockCover} />
+                        <Wallpaper
+                            source={
+                                point.images.length
+                                    ? { uri: point.images[0] }
+                                    : mockCover
+                            }
+                        />
                         <Close onPress={() => navigation.goBack()}>
                             <Icon style={StyledIcon} icon="close" />
                         </Close>

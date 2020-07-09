@@ -19,6 +19,7 @@ export interface IPointOfInterest {
     phone?: string;
     address: Address;
     email: string;
+    content: string;
     category: string;
     socialNetwork?: string;
     foodPreference: string[];
