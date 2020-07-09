@@ -7,7 +7,7 @@ import { OldText } from 'madu/components/atoms/old-text/old-text';
 import { Icon } from 'madu/components/atoms/icon/icon';
 import { OldButton } from 'madu/components/atoms/old-button/old-button';
 import { connect } from 'react-redux';
-import { poiActions } from 'madu/actions/poi.actions';
+import { poiActions, IPointOfInterest } from 'madu/actions/poi.actions';
 
 const mockCover = require('madu/assets/mock_cover.png');
 
@@ -157,6 +157,8 @@ export interface DetailScreenProps {
     loadContent: () => string;
     content: string;
     navigation: any;
+    points: any;
+    profile: any;
     route: any;
     visitPoi: (arg: string) => void;
     likePoi: (arg: string) => void;
@@ -166,97 +168,122 @@ export const Poi = ({
     navigation,
     route,
     visitPoi,
-    likePoi
+    likePoi,
+    points,
+    profile
 }: DetailScreenProps) => {
-    const navigateToSuccess = () => navigation.navigate('poi-success');
-    // const [counter, setCounter] = useState(0);
+    const navigateToSuccess = () => navigation.navigate('poi-success', profile);
 
-    const point = route.params;
+    const pointId = route.params;
 
+    const [point, setPoint] = React.useState<IPointOfInterest | null>(null);
+
+    const extracted = points[pointId];
+
+    React.useEffect(() => {
+        setPoint(points[pointId]);
+    }, [extracted, pointId, points]);
+    console.log(point);
     return (
         <Container>
-            <View>
-                <Wallpaper source={mockCover} />
-                <Close onPress={() => navigation.goBack()}>
-                    <Icon style={StyledIcon} icon="close" />
-                </Close>
-                <ActionContainer>
-                    <ActionOldButton
-                        onPress={() => {
-                            navigateToSuccess();
-                            setTimeout(() => {
-                                // setCounter((count) => count + 1)
-                                visitPoi(point.id);
-                            }, 500);
-                        }}
-                    >
-                        <OldText>J'y suis</OldText>
-                        {point.visits ? (
-                            <ActionOldButtonPlus>
-                                <OldText>{point.visits}</OldText>
-                            </ActionOldButtonPlus>
-                        ) : null}
-                    </ActionOldButton>
-                </ActionContainer>
-            </View>
-            <Middle>
-                <Header>
+            {point && (
+                <>
                     <View>
-                        <OldText preset="header">{point.name}</OldText>
-                        <Category preset="default">{point.category}</Category>
+                        <Wallpaper source={mockCover} />
+                        <Close onPress={() => navigation.goBack()}>
+                            <Icon style={StyledIcon} icon="close" />
+                        </Close>
+                        <ActionContainer>
+                            <ActionOldButton
+                                onPress={() => {
+                                    visitPoi(point.id);
+                                    navigateToSuccess();
+                                }}
+                            >
+                                <OldText>J'y suis</OldText>
+                                {point.visits ? (
+                                    <ActionOldButtonPlus>
+                                        <OldText>{point.visits}</OldText>
+                                    </ActionOldButtonPlus>
+                                ) : null}
+                            </ActionOldButton>
+                        </ActionContainer>
                     </View>
-                    <Community onPress={() => likePoi(point.id)}>
-                        <Like>
-                            <IconLink icon="like2" />
-                            <Likes preset="fieldLabel">28 j'aime</Likes>
-                        </Like>
-                        <Visit preset="fieldLabel">
-                            {point.visits || 0} visites
-                        </Visit>
-                    </Community>
-                </Header>
-                <PriceContainer>
-                    <OpenStatus preset="fieldLabel">Ouvert</OpenStatus>
-                    <PriceRange preset="fieldLabel">
-                        {point.priceRange}
-                    </PriceRange>
-                </PriceContainer>
-                <TagList>
-                    {point.poiType.map((poiType: string) => (
-                        <Tag key={poiType}>
-                            <TagText>{poiType}</TagText>
-                        </Tag>
-                    ))}
-                </TagList>
-                <Description preset="default">{point.description}</Description>
-            </Middle>
-            <Footer>
-                {/* Address */}
-                <Contact>
-                    <IconLink icon="pin" />
-                    <OldText preset="default">{point.address.value}</OldText>
-                </Contact>
-                {/* Web */}
-                <Contact>
-                    <IconLink icon="website" />
-                    <OldText style={{ color: '#EE6538' }} preset="default">
-                        {point.website}
-                    </OldText>
-                </Contact>
-                {/* Phone */}
-                <Contact>
-                    <IconLink icon="phone" />
-                    <OldText style={{ color: '#EE6538' }} preset="default">
-                        {point.phone}
-                    </OldText>
-                </Contact>
-            </Footer>
+                    <Middle>
+                        <Header>
+                            <View>
+                                <OldText preset="header">{point.name}</OldText>
+                                <Category preset="default">
+                                    {point.description}
+                                </Category>
+                            </View>
+                            <Community onPress={() => likePoi(point.id)}>
+                                <Like>
+                                    <IconLink icon="like2" />
+                                    <Likes preset="fieldLabel">
+                                        {point.likes.length} j'aime
+                                    </Likes>
+                                </Like>
+                                <Visit preset="fieldLabel">
+                                    {point.visits || 0} visites
+                                </Visit>
+                            </Community>
+                        </Header>
+                        <PriceContainer>
+                            <OpenStatus preset="fieldLabel">Ouvert</OpenStatus>
+                            <PriceRange preset="fieldLabel">
+                                {point.priceRange}
+                            </PriceRange>
+                        </PriceContainer>
+                        <TagList>
+                            {point.poiType.map((poiType: string) => (
+                                <Tag key={poiType}>
+                                    <TagText>{poiType}</TagText>
+                                </Tag>
+                            ))}
+                        </TagList>
+                        <Description preset="default">
+                            {point.content}
+                        </Description>
+                    </Middle>
+                    <Footer>
+                        {/* Address */}
+                        <Contact>
+                            <IconLink icon="pin" />
+                            <OldText preset="default">
+                                {point.address.value}
+                            </OldText>
+                        </Contact>
+                        {/* Web */}
+                        <Contact>
+                            <IconLink icon="website" />
+                            <OldText
+                                style={{ color: '#EE6538' }}
+                                preset="default"
+                            >
+                                {point.website}
+                            </OldText>
+                        </Contact>
+                        {/* Phone */}
+                        <Contact>
+                            <IconLink icon="phone" />
+                            <OldText
+                                style={{ color: '#EE6538' }}
+                                preset="default"
+                            >
+                                {point.phone}
+                            </OldText>
+                        </Contact>
+                    </Footer>
+                </>
+            )}
         </Container>
     );
 };
 
 const mapStateToProps = (state: any) => ({
-    points: state.poi.list
+    points: state.poi.list,
+    profile: state.profile
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

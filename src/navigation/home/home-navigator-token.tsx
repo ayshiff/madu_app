@@ -6,7 +6,7 @@ import {
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeNavigator } from './home-navigator';
-import { WelcomeNavigator } from '../welcome-navigator';
+import { WelcomeNavigatorWithoutContainer } from '../welcome-navigator';
 
 const StackWithoutToken = createStackNavigator();
 
@@ -25,7 +25,7 @@ export const HomeNavigatorWithToken = React.forwardRef<
             >
                 <StackWithoutToken.Screen
                     name="welcome"
-                    component={WelcomeNavigator}
+                    component={WelcomeNavigatorWithoutContainer}
                 />
                 <StackWithoutToken.Screen
                     name="default"

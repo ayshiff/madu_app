@@ -4,13 +4,16 @@ import MapView, { Circle, Marker, Callout } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { IPointOfInterest } from 'madu/actions/poi.actions';
-import { Text } from 'madu/components/atoms/text/text';
+import { OldText } from 'madu/components/atoms/old-text/old-text';
 import {
     Category,
     PriceContainer,
     OpenStatus,
     PriceRange
 } from 'madu/screens/poi-screen/poi-screen';
+import { IProfile } from 'madu/actions/profile.actions';
+
+// const mockCover = require('madu/assets/mock_cover.png');
 
 const CustomCallout = styled(Callout)`
     width: 250px;
@@ -19,10 +22,29 @@ const CustomCallout = styled(Callout)`
     border-radius: 50px;
 `;
 
-const Visit = styled(Text)`
+const Visit = styled(OldText)`
     color: #9e9e9e;
-    text-align: left;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 `;
+
+// Image style
+// const Wallpaper = styled.Image`
+//     height: 120px;
+//     width: 125px;
+//     resize-mode: contain;
+// `;
+
+// const WallpaperContainer = styled.Text`
+//     width: 125px;
+//     height: 125px;
+// `;
+
+// const Container = styled.View`
+//     flex-direction: row;
+// `;
 
 const styles = StyleSheet.create({
     container: {
@@ -37,16 +59,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const PARIS_LOCATION = {
-    latitude: 48.8534,
-    longitude: 2.3488,
-    latitudeDelta: 0.21,
-    longitudeDelta: 0.21
-};
-
 export interface MapProps {
     navigation: any;
     points: IPointOfInterest[];
+    profile: IProfile;
 }
 
 interface CategoryMarkers {
@@ -60,47 +76,62 @@ const categoryMarkers: CategoryMarkers = {
 };
 
 export const Map = (props: MapProps) => {
-    const { navigation, points } = props;
-    const [centerPoint] = useState<{
-        latitude: number;
-        longitude: number;
-        latitudeDelta: number;
-        longitudeDelta: number;
-    }>(PARIS_LOCATION);
+    const {
+        navigation,
+        points,
+        profile: {
+            company: { address }
+        }
+    } = props;
     const map = useRef(null);
 
     return (
         <View style={styles.container}>
-            <MapView region={centerPoint} ref={map} style={styles.mapStyle}>
+            <MapView
+                region={{
+                    latitude: address.lng,
+                    longitude: address.lat,
+                    latitudeDelta: 0.025,
+                    longitudeDelta: 0.025
+                }}
+                ref={map}
+                style={styles.mapStyle}
+            >
                 {/* Circle */}
                 <Circle
-                    center={centerPoint}
-                    radius={700}
+                    center={{
+                        latitude: address.lng,
+                        longitude: address.lat
+                    }}
+                    radius={1000}
                     strokeWidth={1.5}
-                    strokeColor="#FAAD14"
-                    fillColor="rgba(250, 173, 20, 0.1);"
+                    strokeColor="#856B7F"
+                    fillColor="rgba(133, 107, 127, 0.1)"
                 />
-                {points && points.length
-                    ? points.map((point: any) => (
+                {Object.values(points) && Object.values(points).length
+                    ? Object.values(points).map((point: any) => (
                           <Marker
                               key={point.id}
                               title={point.name}
                               description={point.description}
                               icon={categoryMarkers[point.category]}
                               coordinate={{
-                                  latitude: point.address.lat,
-                                  longitude: point.address.lng
+                                  // lat-lng reversed in the backoffice
+                                  latitude: point.address.lng,
+                                  longitude: point.address.lat
                               }}
                               onCalloutPress={(e) => {
                                   e.stopPropagation();
-                                  navigation.navigate('poi', point);
+                                  navigation.navigate('poi', point.id);
                               }}
                           >
                               <CustomCallout tooltip>
                                   <View>
-                                      <Text preset="header">{point.name}</Text>
+                                      <OldText preset="header">
+                                          {point.name}
+                                      </OldText>
                                       <Category preset="default">
-                                          {point.category}
+                                          {point.description}
                                       </Category>
                                   </View>
                                   <PriceContainer>
@@ -110,8 +141,8 @@ export const Map = (props: MapProps) => {
                                       <PriceRange preset="fieldLabel">
                                           {point.priceRange}
                                       </PriceRange>
+                                      <Visit>{point.visits} visites</Visit>
                                   </PriceContainer>
-                                  <Visit preset="fieldLabel">67 visites</Visit>
                               </CustomCallout>
                           </Marker>
                       ))
