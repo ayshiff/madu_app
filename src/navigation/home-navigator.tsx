@@ -3,15 +3,14 @@ import {
     NavigationContainer,
     NavigationContainerRef
 } from '@react-navigation/native';
-
+import styled from 'styled-components';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { ImageStyle } from 'react-native';
+import { ImageStyle, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
     HomeScreen,
     MapScreen,
-    ContentScreen,
     ProfileScreen,
     LeaderboardScreen,
     WelcomeScreen
@@ -27,9 +26,20 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
 
 const ICON: ImageStyle = {
-    width: 15,
-    height: 15
+    width: 18,
+    height: 18
 };
+const ELLIPSE_ICON: ImageStyle = {
+    width: 15,
+    height: 15,
+    position: 'absolute',
+    left: 7,
+    bottom: 0
+};
+
+const IconWrapper = styled(View)`
+    position: relative;
+`;
 
 const MapNavigator = React.forwardRef<
     NavigationContainerRef,
@@ -57,30 +67,43 @@ export const HomeNavigator = React.forwardRef<
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: () => {
+                tabBarIcon: ({ focused }: any) => {
                     let iconName;
+                    let active;
 
                     switch (route.name) {
                         case 'Home':
-                            iconName = 'explorer';
+                            iconName = focused ? 'home_active' : 'home';
+                            active = focused;
                             break;
                         case 'Settings':
-                            iconName = 'profile';
+                            iconName = focused ? 'user_active' : 'user';
+                            active = focused;
                             break;
                         case 'Map':
-                            iconName = 'map';
-                            break;
-                        case 'Content':
-                            iconName = 'content';
+                            iconName = focused ? 'explore_active' : 'explore';
+                            active = focused;
                             break;
                         case 'Leaderboard':
-                            iconName = 'content';
+                            iconName = focused ? 'crown_active' : 'crown';
+                            active = focused;
                             break;
                         default:
-                            iconName = 'explorer';
+                            iconName = focused ? 'home_active' : 'home';
+                            active = focused;
                             break;
                     }
-                    return <Icon icon={iconName as IconTypes} style={ICON} />;
+                    return (
+                        <IconWrapper>
+                            <Icon icon={iconName as IconTypes} style={ICON} />
+                            {active && (
+                                <Icon
+                                    style={ELLIPSE_ICON}
+                                    icon={'active_ellipse' as IconTypes}
+                                />
+                            )}
+                        </IconWrapper>
+                    );
                 }
             })}
             tabBarOptions={{
@@ -90,7 +113,6 @@ export const HomeNavigator = React.forwardRef<
         >
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Map" component={MapNavigator} />
-            <Tab.Screen name="Content" component={ContentScreen} />
             <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
