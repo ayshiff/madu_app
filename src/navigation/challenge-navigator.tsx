@@ -7,10 +7,9 @@ import {
 } from '@react-navigation/native';
 
 import { ChallengePictureStepScreen } from '../components/templates/challenge/challenge-picture-step';
-import { ChallengeScreen } from '../screens/challenge-screen/challenge-screen';
-import { ChallengeParamList } from './types';
+import { ChallengeScreen } from '../components/templates/challenge/challenge-main-step';
 
-const Stack = createStackNavigator<ChallengeParamList>();
+const Stack = createStackNavigator();
 
 export const ChallengeNavigator = React.forwardRef<
     NavigationContainerRef,

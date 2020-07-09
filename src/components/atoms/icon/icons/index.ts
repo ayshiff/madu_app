@@ -18,6 +18,7 @@ export const icons = {
     website: require('./website.png'),
     logout: require('./logout.png'),
     like: require('./like.png'),
+    like2: require('./like2.png'),
     // Map icons
     map_bar: require('./map_bar.png'),
     map_experience: require('./map_experience.png'),

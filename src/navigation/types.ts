@@ -10,12 +10,12 @@ export type PrimaryParamList = {
 export type WelcomeParamList = {
     welcome: undefined;
     register: undefined;
-    'register-step-one': undefined;
-    'register-step-two': undefined;
-    'register-step-three': undefined;
-    'register-step-four': undefined;
-    'register-step-five': undefined;
-    'register-step-six': undefined;
+    registerStepOne: undefined;
+    registerStepTwo: undefined;
+    registerStepThree: undefined;
+    registerStepFour: undefined;
+    registerStepFive: undefined;
+    registerStepSix: undefined;
     login: undefined;
     home: undefined;
 };

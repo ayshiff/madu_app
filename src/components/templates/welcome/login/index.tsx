@@ -46,6 +46,7 @@ const Login = (props: LoginScreenProps) => {
     const { navigation, login } = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { userData } = props;
 
     const navigateToNextStep = React.useMemo(
         () => () => navigation.navigate('home'),
@@ -53,10 +54,13 @@ const Login = (props: LoginScreenProps) => {
     );
     const handleNavigate = () => {
         login({ email, password });
-        if (props.userData.accessToken) {
+    };
+
+    React.useEffect(() => {
+        if (userData.accessToken) {
             navigateToNextStep();
         }
-    };
+    }, [userData, navigateToNextStep]);
 
     return (
         <SafeAreaView style={CONTAINER}>

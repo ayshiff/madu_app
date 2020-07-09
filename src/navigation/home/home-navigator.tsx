@@ -12,15 +12,14 @@ import {
     HomeScreen,
     MapScreen,
     ProfileScreen,
-    LeaderboardScreen,
-    WelcomeScreen
-} from '../screens';
-import { Icon } from '../components';
-import { IconTypes } from '../components/atoms/icon/icons';
-import { MapParamList } from '../app/navigation/types';
-import { DetailScreen } from '../screens/detail-screen/detail-screen';
-import { PoiScreen } from '../screens/poi-screen/poi-screen';
-import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
+    LeaderboardScreen
+} from 'madu/screens';
+import { Icon } from 'madu/components';
+import { IconTypes } from 'madu/components/atoms/icon/icons';
+import { DetailScreen } from 'madu/screens/detail-screen/detail-screen';
+import { PoiScreen } from 'madu/screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from 'madu/screens/poi-success-screen/poi-success-screen';
+import { MapParamList } from '../types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
@@ -72,19 +71,19 @@ export const HomeNavigator = React.forwardRef<
                     let active;
 
                     switch (route.name) {
-                        case 'Home':
+                        case 'Accueil':
                             iconName = focused ? 'home_active' : 'home';
                             active = focused;
                             break;
-                        case 'Settings':
+                        case 'Profil':
                             iconName = focused ? 'user_active' : 'user';
                             active = focused;
                             break;
-                        case 'Map':
+                        case 'Explorer':
                             iconName = focused ? 'explore_active' : 'explore';
                             active = focused;
                             break;
-                        case 'Leaderboard':
+                        case 'Classement':
                             iconName = focused ? 'crown_active' : 'crown';
                             active = focused;
                             break;
@@ -111,22 +110,10 @@ export const HomeNavigator = React.forwardRef<
                 inactiveTintColor: 'gray'
             }}
         >
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Map" component={MapNavigator} />
-            <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Accueil" component={HomeScreen} />
+            <Tab.Screen name="Explorer" component={MapNavigator} />
+            <Tab.Screen name="Classement" component={LeaderboardScreen} />
+            <Tab.Screen name="Profil" component={ProfileScreen} />
         </Tab.Navigator>
-    );
-});
-
-export const HomeNavigatorWithContainer = React.forwardRef<
-    NavigationContainerRef,
-    Partial<React.ComponentProps<typeof NavigationContainer>>
->((props, ref) => {
-    return (
-        <NavigationContainer {...props} ref={ref}>
-            <HomeNavigator />
-            <Stack.Screen name="welcome" component={WelcomeScreen} />
-        </NavigationContainer>
     );
 });
