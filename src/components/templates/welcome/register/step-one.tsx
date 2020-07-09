@@ -55,7 +55,9 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
-        setEmailError(!validateEmail(email));
+        if (email.length) {
+            setEmailError(!validateEmail(email));
+        }
     }, [email]);
     const navigateToNextStep = () => {
         navigation.navigate('registerStepTwo');
