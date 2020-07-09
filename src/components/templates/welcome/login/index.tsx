@@ -69,7 +69,6 @@ const Login = (props: LoginScreenProps) => {
                 placeholder="Adresse mail professionnel"
                 label="Adresse mail professionnel"
                 value={email}
-                style={{ borderColor: '#fff' }}
                 onChangeText={(el: string) => setEmail(el)}
             />
             <Input

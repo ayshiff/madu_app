@@ -44,6 +44,7 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
         labelTx,
         label,
         error,
+        errorMessage,
         preset = 'default',
         style: styleOverride,
         inputStyle: inputStyleOverride,
@@ -79,9 +80,9 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
                 style={inputStyle}
                 ref={forwardedRef}
             />
-            {error && (
+            {error && errorMessage && (
                 <Text textSize={13} color="#ff647c">
-                    {error}
+                    {errorMessage}
                 </Text>
             )}
         </View>

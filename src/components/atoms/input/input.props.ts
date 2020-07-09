@@ -38,5 +38,6 @@ export interface TextFieldProps extends TextInputProps {
 
     forwardedRef?: any;
 
-    error?: string | null;
+    error?: boolean;
+    errorMessage?: string;
 }
