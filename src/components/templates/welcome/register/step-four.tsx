@@ -36,23 +36,25 @@ export interface RegisterStepFourScreenProps extends RegisterScreenProps {
 }
 
 interface IData {
-    name: string;
+    firstname: string;
     lastname: string;
-    job: string;
+    companyPosition: string;
 }
 
 const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
     const { navigation, userData, setUserData } = props;
-    const [name, setName] = React.useState(userData.name || '');
+    const [firstName, setFirstName] = React.useState(userData.firstname || '');
     const [lastname, setSurname] = React.useState(userData.lastname || '');
-    const [job, setJob] = React.useState(userData.job || '');
+    const [companyPosition, setCompanyPosition] = React.useState(
+        userData.companyPosition || ''
+    );
 
     const navigateToNextStep = () => {
         navigation.navigate('registerStepFive');
     };
 
     const handleNavigate = () => {
-        setUserData({ name, lastname, job });
+        setUserData({ firstname: firstName, lastname, companyPosition });
         navigateToNextStep();
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
@@ -66,10 +68,10 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                 titleStyle={HEADER_TITLE}
             />
             <Input
-                value={name}
+                value={firstName}
                 placeholder="Nom"
                 label="Nom"
-                onChangeText={(el: string) => setName(el)}
+                onChangeText={(el: string) => setFirstName(el)}
             />
             <Input
                 value={lastname}
@@ -78,10 +80,10 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                 onChangeText={(el: string) => setSurname(el)}
             />
             <Input
-                value={job}
+                value={companyPosition}
                 placeholder="Votre poste de travail"
                 label="Poste"
-                onChangeText={(el: string) => setJob(el)}
+                onChangeText={(el: string) => setCompanyPosition(el)}
             />
             <View
                 style={{
@@ -93,7 +95,7 @@ const RegisterStepFour = (props: RegisterStepFourScreenProps) => {
                 <Button
                     title="Suivant"
                     onPress={handleNavigate}
-                    disabled={!name || !lastname || !job}
+                    disabled={!firstName || !lastname || !companyPosition}
                 />
             </View>
         </SafeAreaView>

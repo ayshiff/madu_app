@@ -9,7 +9,7 @@ import { color, spacing } from 'madu/theme';
 import { ImagePickerRegister } from 'madu/components/molecules/image-picker/image-picker';
 import { Text } from 'madu/components/atoms/text/text';
 import { CameraComponent } from 'madu/components/atoms/camera/camera';
-import { registerActions } from 'madu/actions/register.actions';
+import { registerActions, IUserData } from 'madu/actions/register.actions';
 import { RegisterScreenProps } from './step-one';
 
 const IMAGE_CONTAINER: ViewStyle = {
@@ -54,19 +54,16 @@ interface IData {
 }
 export interface RegisterStepFiveScreenProps extends RegisterScreenProps {
     setUserData: (data: IData) => void;
+    register: (data: IUserData) => void;
 }
 
 export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
-    const { navigation, setUserData, userData } = props;
+    const { navigation, setUserData, userData, register } = props;
     const [isTakingImage, setTakingImage] = useState(false);
     const [isChosingImage, setChosingImage] = useState(false);
-    const navigateToNextStep = () => {
-        navigation.navigate('registerStepSix');
-        setTakingImage(false);
-        setChosingImage(false);
-    };
 
     const navigateToHome = () => {
+        register(userData);
         navigation.navigate('home');
         setTakingImage(false);
         setChosingImage(false);
@@ -145,7 +142,8 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
+    setUserData: (data: IData) => dispatch(registerActions.setUserData(data)),
+    register: (data: IUserData) => dispatch(registerActions.register(data))
 });
 
 export const RegisterStepFiveScreen = connect(

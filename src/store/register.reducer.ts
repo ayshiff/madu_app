@@ -1,26 +1,39 @@
-import {
-    RegisterActions,
-    RegisterTypes,
-    ICompanyDomainResponse
-} from '../actions/register.actions';
+import { RegisterActions, RegisterTypes } from '../actions/register.actions';
 
 export const defaultState: IRegisterState = {
     email: '',
     password: '',
-    name: '',
+    firstName: '',
     lastname: '',
     workplace: '',
-    workDivision: '',
-    image: ''
+    companyPosition: '',
+    image: '',
+    department: '',
+    companyId: ''
+};
+
+type Department = {
+    name: string;
+    points: number;
+};
+
+export type ICompanyDomainResponse = {
+    workplaces: string[];
+    name: string;
+    domainName: string;
+    departments: Department[];
+    id: string;
 };
 
 export type IRegisterState = {
     email: string;
     password: string;
-    name: string;
+    companyId: string;
+    firstName: string;
     lastname: string;
     workplace: string;
-    workDivision: string;
+    department: string;
+    companyPosition: string;
     image: string;
     isRegistered?: boolean;
     company?: ICompanyDomainResponse;
@@ -46,6 +59,8 @@ export const registerReducer = (
                 ...registerState,
                 company: action.response
             };
+        case RegisterTypes.ResetRegister:
+            return defaultState;
         default:
             return registerState;
     }

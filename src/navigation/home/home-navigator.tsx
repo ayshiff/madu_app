@@ -11,17 +11,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {
     HomeScreen,
     MapScreen,
-    ContentScreen,
     ProfileScreen,
-    LeaderboardScreen,
-    WelcomeScreen
-} from '../screens';
-import { Icon } from '../components';
-import { IconTypes } from '../components/atoms/icon/icons';
-import { MapParamList } from '../app/navigation/types';
-import { DetailScreen } from '../screens/detail-screen/detail-screen';
-import { PoiScreen } from '../screens/poi-screen/poi-screen';
-import { PoiSuccessScreen } from '../screens/poi-success-screen/poi-success-screen';
+    LeaderboardScreen
+} from 'madu/screens';
+import { Icon } from 'madu/components';
+import { IconTypes } from 'madu/components/atoms/icon/icons';
+import { DetailScreen } from 'madu/screens/detail-screen/detail-screen';
+import { PoiScreen } from 'madu/screens/poi-screen/poi-screen';
+import { PoiSuccessScreen } from 'madu/screens/poi-success-screen/poi-success-screen';
+import { MapParamList } from '../types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
@@ -67,13 +65,13 @@ export const HomeNavigator = React.forwardRef<
                         case 'Settings':
                             iconName = 'profile';
                             break;
-                        case 'Map':
+                        case 'Explorer':
                             iconName = 'map';
                             break;
                         case 'Content':
                             iconName = 'content';
                             break;
-                        case 'Leaderboard':
+                        case 'Classement':
                             iconName = 'content';
                             break;
                         default:
@@ -89,22 +87,9 @@ export const HomeNavigator = React.forwardRef<
             }}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Map" component={MapNavigator} />
-            <Tab.Screen name="Content" component={ContentScreen} />
-            <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
+            <Tab.Screen name="Explorer" component={MapNavigator} />
+            <Tab.Screen name="Classement" component={LeaderboardScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
-    );
-});
-
-export const HomeNavigatorWithContainer = React.forwardRef<
-    NavigationContainerRef,
-    Partial<React.ComponentProps<typeof NavigationContainer>>
->((props, ref) => {
-    return (
-        <NavigationContainer {...props} ref={ref}>
-            <HomeNavigator />
-            <Stack.Screen name="welcome" component={WelcomeScreen} />
-        </NavigationContainer>
     );
 });

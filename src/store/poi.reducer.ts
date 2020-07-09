@@ -1,23 +1,30 @@
 import { IPointOfInterest, PoiTypes, PoiActions } from '../actions/poi.actions';
+import { indexer } from './utils';
+import { IndexedObject } from './image.reducer';
 
 export const defaultState: IPoiState = {
-    list: []
+    list: {}
 };
 
 export type IPoiState = {
-    list: IPointOfInterest[];
+    list: IndexedObject<IPointOfInterest>;
 };
 
 export const poiReducer = (
-    loginState: IPoiState = defaultState,
+    poiState: IPoiState = defaultState,
     action: PoiActions
 ): IPoiState => {
     switch (action.type) {
         case PoiTypes.LoadPoiSuccess:
             return {
-                list: action.payload
+                list: indexer(action.payload)
+            };
+        case PoiTypes.VisitPoiSuccess:
+        case PoiTypes.LikePoiSuccess:
+            return {
+                list: { ...poiState.list, [action.payload.id]: action.payload }
             };
         default:
-            return loginState;
+            return poiState;
     }
 };
