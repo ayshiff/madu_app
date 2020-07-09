@@ -19,10 +19,17 @@ import { IconTypes } from 'madu/components/atoms/icon/icons';
 import { DetailScreen } from 'madu/screens/detail-screen/detail-screen';
 import { PoiScreen } from 'madu/screens/poi-screen/poi-screen';
 import { PoiSuccessScreen } from 'madu/screens/poi-success-screen/poi-success-screen';
-import { MapParamList } from '../types';
+import { ChallengeScreen } from 'madu/components/templates/challenge/challenge-main-step';
+import { ChallengePictureStepScreen } from 'madu/components/templates/challenge/challenge-picture-step';
+import { ChallengeSuccessStepScreen } from 'madu/components/templates/challenge/challenge-success-step';
+import { AttendeesStep } from 'madu/components/templates/challenge/attendees-step';
+import { ProfileSettingsScreen } from 'madu/components/templates/profile/profile-settings';
+import { MapParamList, ChallengeParamList, ProfileParamList } from '../types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<MapParamList>();
+const ChallengeStack = createStackNavigator<ChallengeParamList>();
+const ProfileStack = createStackNavigator<ProfileParamList>();
 
 const ICON: ImageStyle = {
     width: 18,
@@ -59,6 +66,65 @@ const MapNavigator = React.forwardRef<
     );
 });
 
+const ChallengeNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
+    return (
+        <ChallengeStack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true
+            }}
+        >
+            <ChallengeStack.Screen
+                name="home-challenge"
+                component={HomeScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge"
+                component={ChallengeScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge-picture"
+                component={ChallengePictureStepScreen}
+            />
+            <ChallengeStack.Screen
+                name="challenge-success"
+                component={ChallengeSuccessStepScreen}
+            />
+            <ChallengeStack.Screen
+                name="attendees-profile"
+                component={ProfileScreen}
+            />
+            <ChallengeStack.Screen
+                name="attendees-number"
+                component={AttendeesStep}
+            />
+        </ChallengeStack.Navigator>
+    );
+});
+
+const ProfileNavigator = React.forwardRef<
+    NavigationContainerRef,
+    Partial<React.ComponentProps<typeof NavigationContainer>>
+>(() => {
+    return (
+        <ProfileStack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true
+            }}
+        >
+            <ProfileStack.Screen name="profile" component={ProfileScreen} />
+            <ProfileStack.Screen
+                name="profile-settings"
+                component={ProfileSettingsScreen}
+            />
+        </ProfileStack.Navigator>
+    );
+});
+
 export const HomeNavigator = React.forwardRef<
     NavigationContainerRef,
     Partial<React.ComponentProps<typeof NavigationContainer>>
@@ -75,7 +141,7 @@ export const HomeNavigator = React.forwardRef<
                             iconName = focused ? 'home_active' : 'home';
                             active = focused;
                             break;
-                        case 'Profil':
+                        case 'Profile':
                             iconName = focused ? 'user_active' : 'user';
                             active = focused;
                             break;
@@ -110,10 +176,10 @@ export const HomeNavigator = React.forwardRef<
                 inactiveTintColor: 'gray'
             }}
         >
-            <Tab.Screen name="Accueil" component={HomeScreen} />
+            <Tab.Screen name="Home" component={ChallengeNavigator} />
             <Tab.Screen name="Explorer" component={MapNavigator} />
             <Tab.Screen name="Classement" component={LeaderboardScreen} />
-            <Tab.Screen name="Profil" component={ProfileScreen} />
+            <Tab.Screen name="Profile" component={ProfileNavigator} />
         </Tab.Navigator>
     );
 });

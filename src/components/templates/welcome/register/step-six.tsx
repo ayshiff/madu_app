@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Screen, Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { registerActions, IUserData } from 'madu/actions/register.actions';
+
 import { Text } from 'madu/components/atoms/text/text';
 import { RegisterScreenProps } from './step-one';
 
