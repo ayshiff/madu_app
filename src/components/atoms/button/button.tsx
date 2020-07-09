@@ -71,13 +71,13 @@ const buttonStyles = (props: ButtonProps) =>
                 borderRadius: 40,
                 borderWidth: 1,
                 alignSelf: 'stretch',
-                borderColor: props.borderColor || '#FE2A6A',
+                borderColor: props.borderColor || '#EE6538',
                 marginBottom: props.bottom || 0,
                 paddingHorizontal: props.paddingHorizontal || 15,
                 paddingVertical: props.paddingVertical || 15,
                 backgroundColor: props.backgroundColor
                     ? props.backgroundColor
-                    : '#FE2A6A',
+                    : '#EE6538',
                 flexDirection: 'row'
             },
             props.type === 'SECONDARY'

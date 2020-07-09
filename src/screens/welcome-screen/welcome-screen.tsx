@@ -25,11 +25,11 @@ export const WelcomeScreen = ({ navigation }: { navigation: any }) => {
             </Text>
 
             <Button
-                title="Se connecter"
-                onPress={navigateToLogin}
+                title="S'incrire"
+                onPress={navigateToRegister}
                 bottom={24}
             />
-            <Text onPress={navigateToRegister} textAlign="center" textSize={16}>
+            <Text onPress={navigateToLogin} textAlign="center" textSize={16}>
                 J'ai déjà un compte
             </Text>
         </MainLayout>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Button } from 'madu/components';
+import { Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { DropdownMenu } from 'madu/components/molecules/drop-down';
 import { registerActions } from 'madu/actions/register.actions';
@@ -10,7 +11,6 @@ import { Text } from 'madu/components/atoms/text/text';
 
 import { RegisterScreenProps } from './step-one';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -19,7 +19,7 @@ const TEXT: TextStyle = {
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
-    backgroundColor: color.transparent,
+    flex: 1,
     paddingHorizontal: spacing[4]
 };
 
@@ -50,7 +50,7 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
     ];
 
     const [workDivision, setWorkDivision] = useState(
-        userData.workDivision || '0'
+        userData.workDivision || ''
     );
 
     const navigateToNextStep = () => {
@@ -63,11 +63,7 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
-        <Screen
-            style={CONTAINER}
-            preset="scroll"
-            backgroundColor={color.transparent}
-        >
+        <SafeAreaView style={CONTAINER}>
             <Header
                 headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
                 leftIcon="back"
@@ -81,12 +77,14 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                 collègues.
             </Text>
             <DropdownMenu
-                title="Département"
+                title={workDivision || 'Département'}
                 component={
                     <View>
                         {workPlaces.map((datum, index) => (
                             <TouchableOpacity
-                                // onPress={onPressChoiceOrigin()}
+                                onPress={() =>
+                                    setWorkDivision(workPlaces[index].value)
+                                }
                                 key={index}
                                 style={{
                                     flexDirection: 'column',
@@ -110,8 +108,20 @@ const RegisterStepThree = (props: RegisterStepThreeScreenProps) => {
                     </View>
                 }
             />
-            <Button title="suivant" onPress={handleNavigate} />
-        </Screen>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
+            >
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!workDivision}
+                />
+            </View>
+        </SafeAreaView>
     );
 };
 

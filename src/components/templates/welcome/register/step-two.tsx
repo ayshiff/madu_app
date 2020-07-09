@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, ViewStyle, TextStyle, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Button } from 'madu/components';
+import { Header, Button } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { DropdownMenu } from 'madu/components/molecules/drop-down';
 import { Text } from 'madu/components/atoms/text/text';
@@ -18,6 +19,7 @@ const TEXT: TextStyle = {
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
+    flex: 1,
     paddingHorizontal: spacing[4]
 };
 
@@ -26,6 +28,7 @@ const HEADER: TextStyle = {
     paddingBottom: spacing[4] + spacing[1],
     paddingHorizontal: 0
 };
+
 const HEADER_TITLE: TextStyle = {
     ...TEXT,
     ...BOLD,
@@ -59,7 +62,7 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
     };
     const goBack = React.useMemo(() => () => navigation.goBack(), [navigation]);
     return (
-        <Screen style={CONTAINER} preset="scroll">
+        <SafeAreaView style={CONTAINER}>
             <Header
                 headerText="L’Oréal vous souhaite la bienvenue sur l’app MADU"
                 leftIcon="back"
@@ -73,12 +76,14 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
             </Text>
             <View>
                 <DropdownMenu
-                    title="Lieu de travail"
+                    title={workplace || 'Lieu de travail'}
                     component={
                         <View>
                             {workPlaces.map((datum, index) => (
                                 <TouchableOpacity
-                                    // onPress={onPressChoiceOrigin()}
+                                    onPress={() =>
+                                        setWorkplace(workPlaces[index].value)
+                                    }
                                     key={index}
                                     style={{
                                         flexDirection: 'column',
@@ -103,8 +108,20 @@ const RegisterStepTwo = (props: RegisterStepTwoScreenProps) => {
                     }
                 />
             </View>
-            <Button title="suivant" onPress={handleNavigate} />
-        </Screen>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
+            >
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!workplace}
+                />
+            </View>
+        </SafeAreaView>
     );
 };
 

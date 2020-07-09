@@ -24,13 +24,6 @@ const CONTAINER: ViewStyle = {
 };
 
 // the base styling for the TextInput
-const INPUT: TextStyle = {
-    fontFamily: typography.primary,
-    color: color.text,
-    minHeight: 44,
-    fontSize: 18,
-    backgroundColor: color.palette.white
-};
 
 // currently we have no presets, but that changes quickly when you build your app.
 const PRESETS: { [name: string]: ViewStyle } = {
@@ -50,6 +43,7 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
         placeholder,
         labelTx,
         label,
+        error,
         preset = 'default',
         style: styleOverride,
         inputStyle: inputStyleOverride,
@@ -58,6 +52,16 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
     } = props;
     let containerStyle: ViewStyle = { ...CONTAINER, ...PRESETS[preset] };
     containerStyle = enhance(containerStyle, styleOverride);
+
+    const INPUT: TextStyle = {
+        fontFamily: typography.primary,
+        color: color.text,
+        minHeight: 44,
+        fontSize: 18,
+        backgroundColor: color.palette.white,
+        borderWidth: 1,
+        borderColor: error ? '#ff647c' : 'transparent'
+    };
 
     let inputStyle: TextStyle = INPUT;
     inputStyle = enhance(inputStyle, inputStyleOverride);
@@ -75,6 +79,11 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
                 style={inputStyle}
                 ref={forwardedRef}
             />
+            {error && (
+                <Text textSize={13} color="#ff647c">
+                    {error}
+                </Text>
+            )}
         </View>
     );
 };

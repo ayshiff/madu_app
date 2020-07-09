@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle, Dimensions } from 'react-native';
+import { View, ViewStyle, TextStyle, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { Screen, Header, Button, Input } from 'madu/components';
+import { Header, Button, Input } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { registerActions, IUserData } from 'madu/actions/register.actions';
 
-const { height } = Dimensions.get('screen');
+import { validateEmail } from 'madu/outils';
 
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -48,9 +49,13 @@ interface IData {
 const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const { navigation, userData, setUserData } = props;
     const [email, setEmail] = useState(userData.email || '');
+    const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    useEffect(() => {
+        setEmailError(!validateEmail(email));
+    }, [email]);
     const navigateToNextStep = () => {
         navigation.navigate('registerStepTwo');
     };
@@ -61,41 +66,57 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     };
 
     const goBack = () => navigation.goBack();
+
+    console.log(email, !validateEmail(email), emailError);
+
     return (
-        <Screen preset="scroll">
-            <View style={CONTAINER}>
-                <Header
-                    headerText="Créer mon compte"
-                    leftIcon="back"
-                    onLeftPress={goBack}
-                    style={HEADER}
-                    titleStyle={HEADER_TITLE}
+        <SafeAreaView style={CONTAINER}>
+            <Header
+                headerText="Créer mon compte"
+                leftIcon="back"
+                onLeftPress={goBack}
+                style={HEADER}
+                titleStyle={HEADER_TITLE}
+            />
+            <Input
+                placeholder="Votre mail professionnel"
+                label="Mail professionnel"
+                value={email}
+                error={emailError ? 'Cet email n’est pas valide' : null}
+                onChangeText={(el: string) => setEmail(el)}
+            />
+            <Input
+                placeholder="Votre mot de passe"
+                label="Mot de passe"
+                secureTextEntry
+                blurOnSubmit={false}
+                onSubmitEditing={() => Keyboard.dismiss()}
+                value={password}
+                onChangeText={(el: string) => setPassword(el)}
+            />
+            <Input
+                placeholder="Confirmer votre mot de passe"
+                label="Confirmer mot de passe"
+                secureTextEntry
+                blurOnSubmit={false}
+                onSubmitEditing={() => Keyboard.dismiss()}
+                value={confirmPassword}
+                onChangeText={(el: string) => setConfirmPassword(el)}
+            />
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
+            >
+                <Button
+                    title="Suivant"
+                    onPress={handleNavigate}
+                    disabled={!email || !password || !confirmPassword}
                 />
-                <Input
-                    placeholder="Votre mail professionnel"
-                    label="Mail professionnel"
-                    value={email}
-                    onChangeText={(el: string) => setEmail(el)}
-                />
-                <Input
-                    placeholder="Votre mot de passe"
-                    label="Mot de passe"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={(el: string) => setPassword(el)}
-                />
-                <Input
-                    placeholder="Confirmer votre mot de passe"
-                    label="Confirmer mot de passe"
-                    secureTextEntry
-                    value={confirmPassword}
-                    onChangeText={(el: string) => setConfirmPassword(el)}
-                />
-                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <Button title="Suivant" onPress={handleNavigate} />
-                </View>
             </View>
-        </Screen>
+        </SafeAreaView>
     );
 };
 

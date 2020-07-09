@@ -11,19 +11,20 @@ import {
 type dropdown = {
     image?: ImageSourcePropType;
     title: string;
-    subtitle: string;
     component: JSX.Element;
 };
 
-export const DropdownMenu = ({
-    image,
-    title,
-    subtitle,
-    component
-}: dropdown) => {
+export const DropdownMenu = ({ image, title, component }: dropdown) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const contextualDropDownStyles = styles(isOpen);
+    const openPanel = () => {
+        setIsOpen(true);
+    };
+
+    const closePanel = () => {
+        setIsOpen(false);
+    };
 
     const openOrClosePanel = () => {
         if (isOpen) {
@@ -31,14 +32,6 @@ export const DropdownMenu = ({
         } else {
             openPanel();
         }
-    };
-
-    const openPanel = () => {
-        setIsOpen(true);
-    };
-
-    const closePanel = () => {
-        setIsOpen(false);
     };
 
     return (
@@ -89,7 +82,6 @@ const styles = (isOpen: boolean) =>
                 justifyContent: 'space-between',
                 paddingHorizontal: 14,
                 paddingVertical: 14,
-                flex: 1,
                 backgroundColor: '#fff'
             },
             isOpen

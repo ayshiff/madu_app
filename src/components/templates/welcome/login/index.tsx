@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { View, ViewStyle, TextStyle } from 'react-native';
+import { ViewStyle, TextStyle, View } from 'react-native';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Screen, Header, Input, Button } from 'madu/components/index';
+import SafeAreaView from 'react-native-safe-area-view';
+
+import { Header, Input, Button } from 'madu/components/index';
 import { color, spacing } from 'madu/theme';
 import { loginActions } from 'madu/actions/login.actions';
 
-const FULL: ViewStyle = { flex: 1, backgroundColor: 'white' };
 const TEXT: TextStyle = {
     color: color.palette.black,
     fontFamily: 'Montserrat'
@@ -15,7 +16,7 @@ const TEXT: TextStyle = {
 const BOLD: TextStyle = { fontWeight: 'bold' };
 
 const CONTAINER: ViewStyle = {
-    backgroundColor: color.transparent,
+    flex: 1,
     paddingHorizontal: spacing[4]
 };
 
@@ -58,33 +59,40 @@ const Login = (props: LoginScreenProps) => {
     };
 
     return (
-        <View style={FULL}>
-            <Screen
-                style={CONTAINER}
-                preset="scroll"
-                backgroundColor={color.transparent}
+        <SafeAreaView style={CONTAINER}>
+            <Header
+                headerText="Connectez-vous"
+                style={HEADER}
+                titleStyle={HEADER_TITLE}
+            />
+            <Input
+                placeholder="Adresse mail professionnel"
+                label="Adresse mail professionnel"
+                value={email}
+                style={{ borderColor: '#fff' }}
+                onChangeText={(el: string) => setEmail(el)}
+            />
+            <Input
+                placeholder="Mot de passe"
+                label="Mot de passe"
+                secureTextEntry
+                value={password}
+                onChangeText={(el: string) => setPassword(el)}
+            />
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                    marginBottom: 40
+                }}
             >
-                <Header
-                    headerText="Connectez-vous"
-                    style={HEADER}
-                    titleStyle={HEADER_TITLE}
+                <Button
+                    title="Je me connecte"
+                    onPress={handleNavigate}
+                    disabled={!email || !password}
                 />
-                <Input
-                    placeholder="Adresse mail professionnel"
-                    label="Adresse mail professionnel"
-                    value={email}
-                    onChangeText={(el: string) => setEmail(el)}
-                />
-                <Input
-                    placeholder="Mot de passe"
-                    label="Mot de passe"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={(el: string) => setPassword(el)}
-                />
-                <Button title="Je me connecte" onPress={handleNavigate} />
-            </Screen>
-        </View>
+            </View>
+        </SafeAreaView>
     );
 };
 

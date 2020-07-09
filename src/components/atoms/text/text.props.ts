@@ -9,5 +9,6 @@ export interface TextProps extends TextProperties {
     txOptions?: object;
     text?: string;
     style?: TextStyle | TextStyle[];
+    color?: string;
     preset?: TextPresets;
 }

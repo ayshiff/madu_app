@@ -48,6 +48,7 @@ export type IregisterContentResponse = {
     department: string;
     id: string;
     company_id: string;
+    job: string;
 };
 
 // Our object that produce our action creators
