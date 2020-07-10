@@ -11,7 +11,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { Points } from '../../components/atoms/points/points';
 import { GreenPoints } from '../../components/atoms/points/green-points';
 
-
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
     fontFamily: 'Montserrat'
@@ -48,8 +47,8 @@ const Card = styled.View`
     border-radius: 6px;
     margin-top: 16px;
     margin-right: 6px;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 `;
 
 const ProfilePic = styled.Image`
@@ -76,12 +75,13 @@ const CardContainer = styled.View`
 `;
 
 const RankingText = styled.Text`
-    margin-top: -7px;
+    align-self: center;
 `;
 
 const RankingNumberContainer = styled.Text`
     flex-direction: row;
-    margin-top: 5px;
+    align-self: center;
+
 `;
 
 const RankingNumber = styled.Text`
@@ -93,11 +93,13 @@ const Up = styled.Image`
 `;
 
 const InscriptionText = styled.Text`
-    margin-top: -8px;
+    align-self: center;
+    
 `;
 const DateContainer = styled.View`
     flex-direction: row;
-    margin-top: 4px;
+    align-self: center;
+
 `;
 const Clock = styled.Image`
     margin-top: 4px;
@@ -138,14 +140,16 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                     </Text>
                     <CardContainer>
                         <Card>
-                            <Text>Total de points</Text>
-                            <GreenPoints points={2567} />
+                            <Text style={{alignSelf: "center"}}>Total de points</Text>
+                            <View style={{alignSelf: "center"}}>
+                                <GreenPoints points={2567} />
+                            </View>
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>
                             <RankingNumberContainer>
                                 <Up source={require('../../assets/up.png')} />
-                                <RankingNumber>4</RankingNumber>
+                                <RankingNumber>{` 4`}</RankingNumber>
                             </RankingNumberContainer>
                         </Card>
                         <Card>

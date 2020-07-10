@@ -70,7 +70,7 @@ const PointsNumber = styled.Text`
 
 const Leaf = styled.Image`
     margin-left: 4px;
-`
+`;
 
 export interface ChallengeSuccessStepScreenProps {
     navigation: any;
@@ -90,7 +90,7 @@ export const ChallengeSuccessStep = (
             <ChallengeSuccessContainer>
                 {/* <Pic source={require('../../../../../assets/meal.png')} /> */}
                 <PointsText>
-                    {`Vous avez gagné `}                      
+                    {`Vous avez gagné `}
                     <PointsNumber>160</PointsNumber>
                     <Leaf source={require('../../../assets/leaf.png')} />
                 </PointsText>

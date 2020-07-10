@@ -6,7 +6,7 @@ import { OldText } from '../old-text/old-text';
 const Container = styled.View`
     width: 69px;
     height: 22px;
-    background: #85A382;
+    background: #85a382;
     border-radius: 32px;
     flex-direction: row;
     justify-content: center;
@@ -16,14 +16,14 @@ const Container = styled.View`
 const StyledText = styled(OldText)`
     text-align: center;
     letter-spacing: -0.15px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 12px;
 `;
 
 const Leaf = styled.Image`
     width: 12px;
     height: 12px;
-`
+`;
 
 interface GreenPointsProps {
     points: number;
@@ -34,9 +34,7 @@ export const GreenPoints = (props: GreenPointsProps) => {
     return (
         <Container>
             <StyledText text={`${points}`} />
-            <Leaf
-                source={require('../../../assets/white-leaf.png')}
-            />
+            <Leaf source={require('../../../assets/white-leaf.png')} />
         </Container>
     );
 };

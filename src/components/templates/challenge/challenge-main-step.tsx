@@ -213,7 +213,7 @@ const Challenge = (props: ChallengeScreenProps) => {
                             <View style={TYPE_TAG}>
                                 <Text style={TYPE_TEXT}>Alimentation</Text>
                             </View>
-                            <GreenPoints points={120}/>
+                            <GreenPoints points={120} />
                         </View>
                     </View>
                 </View>

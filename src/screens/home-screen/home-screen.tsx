@@ -176,7 +176,7 @@ const MostVisitedPlacesName = styled.Text`
 
 const TagContainer = styled.View`
     flex-direction: row;
-`
+`;
 
 export interface HomeScreenProps {
     navigation: any;

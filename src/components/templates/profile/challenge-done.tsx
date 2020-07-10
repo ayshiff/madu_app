@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
 import { Points } from '../../../components/atoms/points/points';
+import { GreenPoints } from '../../../components/atoms/points/green-points';
+
 
 const Full = styled.View`
     flex: 1;
@@ -102,12 +104,12 @@ export const ChallengeDoneScreen = ({
                             </TypeTag>
                             <ChalengePointsAndTimeContainer>
                                 <PointsTag>
-                                    <Points points={80} />
+                                    <GreenPoints points={80} />
                                 </PointsTag>
                                 <DateContainer>
-                                    {/* <Clock
-                                        source={require('../../../clock.png')}
-                                    /> */}
+                                    <Clock
+                                        source={require('../../../assets/clock.png')}
+                                    />
                                     <Text>12/09/20</Text>
                                 </DateContainer>
                             </ChalengePointsAndTimeContainer>

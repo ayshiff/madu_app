@@ -92,16 +92,12 @@ export const ProfileSettingsScreen = ({
         <Full>
             <Screen preset="scroll" style={{ backgroundColor: '#FFF5EB' }}>
                 <Header>
-                    <Image
-                        source={require('../../../assets/arrow-left.png')}
-                    />
+                    <Image source={require('../../../assets/arrow-left.png')} />
                     <Save>Enregistrer</Save>
                 </Header>
                 <ProfilContainer>
                     <ProfilTitle>Profil</ProfilTitle>
-                    <ProfilPic
-                        source={require('../../../assets/filled.png')}
-                    />
+                    <ProfilPic source={require('../../../assets/filled.png')} />
                 </ProfilContainer>
                 <InputContainer>
                     <InputName>Prénom Nom</InputName>
