@@ -273,7 +273,6 @@ const Home = ({
                                     <TagContainer>
                                         <TypeTag>
                                             <TypeText>
-                                                {' '}
                                                 {challenges?.weekly?.category ||
                                                     ''}
                                             </TypeText>

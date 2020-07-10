@@ -13,7 +13,6 @@ import { color, spacing } from '../../theme';
 import { loginActions } from '../../actions/login.actions';
 import { VisitedPlacesScreen } from '../../components/templates/profile/visited-places';
 import { ChallengeDoneScreen } from '../../components/templates/profile/challenge-done';
-import { Points } from '../../components/atoms/points/points';
 import { GreenPoints } from '../../components/atoms/points/green-points';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
@@ -52,7 +51,7 @@ const Card = styled.View`
     border-radius: 6px;
     margin-top: 16px;
     margin-right: 6px;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
 `;
 
@@ -86,12 +85,18 @@ const RankingText = styled.Text`
 `;
 
 const RankingNumberContainer = styled.Text`
+    width: 4px;
+    height: 4px;
     flex-direction: row;
     align-self: center;
 `;
 
 const RankingNumber = styled.Text`
+    background: red;
+    width: 10px;
+    height: 10px;
     margin-left: 4px;
+    color: #000;
 `;
 const Up = styled.Image`
     margin-top: 4px;
@@ -150,13 +155,13 @@ export const Profile = ({
                     <CardContainer>
                         <Card>
                             <Text>Total de point</Text>
-                            <Points points={userData.points} />
+                            <GreenPoints points={userData.points} />
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>
                             <RankingNumberContainer>
                                 <Up source={require('../../assets/up.png')} />
-                                <RankingNumber>{`  4`}</RankingNumber>
+                                <RankingNumber>4</RankingNumber>
                             </RankingNumberContainer>
                         </Card>
                         <Card>
