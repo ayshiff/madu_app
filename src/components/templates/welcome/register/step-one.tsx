@@ -9,6 +9,7 @@ import { color, spacing } from 'madu/theme';
 import { registerActions, IUserData } from 'madu/actions/register.actions';
 
 import { validateEmail } from 'madu/outils';
+import { loadCompanyData } from 'madu/epics/register.epic';
 
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -47,7 +48,7 @@ interface IData {
 }
 
 const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
-    const { navigation, userData, setUserData } = props;
+    const { navigation, userData, setUserData, loadCompanyData } = props;
     const [email, setEmail] = useState(userData.email || '');
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
@@ -68,6 +69,7 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             return setPasswordError(true);
         }
         setUserData({ email, password });
+        loadCompanyData(email.split('@')[1]);
         navigateToNextStep();
     };
 
@@ -133,7 +135,9 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    setUserData: (data: IData) => dispatch(registerActions.setUserData(data))
+    setUserData: (data: IData) => dispatch(registerActions.setUserData(data)),
+    loadCompanyData: (company: string) =>
+        dispatch(registerActions.fetchCompany({ company }))
 });
 
 export const RegisterStepOneScreen = connect(

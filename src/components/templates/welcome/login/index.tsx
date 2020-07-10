@@ -50,6 +50,7 @@ const Login = (props: LoginScreenProps) => {
     const [emailError, setEmailError] = useState(false);
 
     const [password, setPassword] = useState('');
+    const { userData } = props;
 
     useEffect(() => {
         if (email.length) {
@@ -63,10 +64,13 @@ const Login = (props: LoginScreenProps) => {
     );
     const handleNavigate = () => {
         login({ email, password });
-        if (props.userData.accessToken) {
+    };
+
+    React.useEffect(() => {
+        if (userData.accessToken) {
             navigateToNextStep();
         }
-    };
+    }, [userData, navigateToNextStep]);
 
     return (
         <SafeAreaView style={CONTAINER}>

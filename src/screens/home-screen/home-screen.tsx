@@ -1,10 +1,11 @@
+/* eslint-disable global-require */
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen } from 'madu/components';
-import { color, spacing } from 'madu/theme';
+import { color } from 'madu/theme';
 import styled from 'styled-components/native';
-import { Points } from 'madu/components/atoms/points/points';
+import { Points } from '../../components/atoms/points/points';
 
 const Full = styled.View`
     flex: 1;
@@ -16,8 +17,8 @@ const Bold = styled.Text`
 `;
 
 const HeaderContainer = styled.View`
-    height: 225px;
-    background-color: #fec530;
+    height: 275px;
+    background-color: #fae3c8;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 `;
@@ -33,23 +34,19 @@ const Header = styled.View`
 `;
 
 const ChallengeContainer = styled.View`
-    margin-top: -80px;
+    margin-top: -115px;
     align-items: center;
 `;
 
 const ChallengeView = styled.View`
     height: 115px;
-    width: 250px;
+    width: 328px;
     margin-bottom: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 10px;
     flex-direction: row;
     justify-content: center;
     shadow-color: #000000;
-    shadow-offset: {
-        width: 0,
-        height: 1
-    };
     shadow-opacity: 1;
     shadow-radius: 3.84px;
     elevation: 6;
@@ -60,11 +57,6 @@ const ChallengeInfo = styled.View`
     margin-left: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
-`;
-
-const BusinessName = styled.Text`
-    color: #8e8e93;
-    margin-bottom: 5px;
 `;
 
 const ChallengePic = styled.Image`
@@ -80,7 +72,7 @@ const ChallengeTitle = styled.Text`
 `;
 
 const TextContainer = styled.View`
-    margin-top: 16px;
+    margin-top: 10px;
 `;
 
 const ProfilePic = styled.Image`
@@ -99,10 +91,6 @@ const PointsTag = styled.View`
     background-color: #e3ffe8;
 `;
 
-const PointsText = styled.Text`
-    color: #70b32d;
-`;
-
 const TypeTag = styled.View`
     border-radius: 20px;
     border-color: #fe6d1a;
@@ -117,21 +105,93 @@ const TypeText = styled.Text`
     color: #fe6d1a;
 `;
 
+const WhitePointsTag = styled.View`
+    margin-top: 8px;
+    background: #ffffff;
+    border-radius: 32px;
+    width: 59px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+`;
+
+const WhitePoints = styled.Text`
+    color: #85a382;
+    font-size: 12px;
+`;
+const ChallengeSubtitle = styled.Text`
+    font-size: 15px;
+    line-height: 20px;
+    color: #856b7f;
+    margin-top: -10px;
+    margin-bottom: 20px;
+`;
+
+const MostVisitedPlacesContainer = styled.View`
+    margin-top: 20px;
+    flex-direction: row;
+    width: 100%;
+`;
+
+const MostVisitedPlacesTitle = styled.Text`
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    color: #522c48;
+    margin-left: 40px;
+    margin-top: 40px;
+`;
+const MostVisitedPlacesPic = styled.Image`
+    height: 168px;
+    width: 135px;
+`;
+
+const MostVisitedPlacesNumberContainer = styled.View`
+    width: 88px;
+    height: 28px;
+    background: #fae3c8;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 22px;
+    margin-top: -12px;
+`;
+const MostVisitedPlacesNumberText = styled.Text`
+    color: #522c48;
+    font-size: 13px;
+    line-height: 16px;
+`;
+
+const MostVisitedPlacesCard = styled.View`
+    width: 135px;
+    margin-left: 10px;
+`;
+
+const MostVisitedPlacesName = styled.Text`
+    font-size: 12px;
+    line-height: 16px;
+    color: #522c48;
+    margin-left: 22px;
+`;
+
 export interface HomeScreenProps {
     navigation: any;
 }
-const Home = (/* props: HomeScreenProps */) => {
+const Home = ({ navigation }: HomeScreenProps) => {
+    const navigateToChallenge = () => navigation.navigate('challenge');
     return (
         <Full>
             <Screen preset="scroll" backgroundColor={color.transparent}>
                 <HeaderContainer>
                     <Header>
                         <TextContainer>
-                            <BusinessName>L’Oréal Paris</BusinessName>
                             <Bold>Bonjour Élodie</Bold>
+                            <WhitePointsTag>
+                                <WhitePoints>2567</WhitePoints>
+                            </WhitePointsTag>
                         </TextContainer>
                         <ProfilePic
-                            source={require('madu/assets/profile-pic.png')}
+                            source={require('../../assets/profile-pic.png')}
                         />
                     </Header>
                 </HeaderContainer>
@@ -139,22 +199,74 @@ const Home = (/* props: HomeScreenProps */) => {
                 <ChallengeContainer>
                     <View>
                         <ChallengeTitle>Défi de la semaine</ChallengeTitle>
-                        <ChallengeView>
-                            <ChallengePic
-                                source={require('madu/assets/meal.png')}
-                            />
-                            <ChallengeInfo>
-                                <Text>Lundi c’est Veggie !</Text>
-                                <TypeTag>
-                                    <TypeText>Alimentation</TypeText>
-                                </TypeTag>
-                                <PointsTag>
-                                    <Points points={80} />
-                                </PointsTag>
-                            </ChallengeInfo>
-                        </ChallengeView>
+                        <ChallengeSubtitle>
+                            Nouveau challenge chaque dimanche soir à 18h
+                        </ChallengeSubtitle>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigateToChallenge();
+                            }}
+                        >
+                            <ChallengeView>
+                                <ChallengePic
+                                    source={require('../../assets/meal.png')}
+                                />
+                                <ChallengeInfo>
+                                    <Text>Lundi c’est Veggie !</Text>
+                                    <TypeTag>
+                                        <TypeText>Alimentation</TypeText>
+                                    </TypeTag>
+                                    <PointsTag>
+                                        <Points points={80} />
+                                    </PointsTag>
+                                </ChallengeInfo>
+                            </ChallengeView>
+                        </TouchableOpacity>
                     </View>
                 </ChallengeContainer>
+
+                <View>
+                    <MostVisitedPlacesTitle>
+                        Lieux les plus visités
+                    </MostVisitedPlacesTitle>
+                    <MostVisitedPlacesContainer>
+                        <MostVisitedPlacesCard>
+                            <MostVisitedPlacesPic
+                                source={require('../../assets/place.png')}
+                            />
+                            <MostVisitedPlacesNumberContainer>
+                                <MostVisitedPlacesNumberText>
+                                    123 visites
+                                </MostVisitedPlacesNumberText>
+                            </MostVisitedPlacesNumberContainer>
+                            <MostVisitedPlacesName>
+                                Jay and Joy
+                            </MostVisitedPlacesName>
+                        </MostVisitedPlacesCard>
+                    </MostVisitedPlacesContainer>
+                </View>
+
+                <View>
+                    <MostVisitedPlacesTitle>
+                        Coups de coeur
+                    </MostVisitedPlacesTitle>
+                    <MostVisitedPlacesContainer>
+                        <MostVisitedPlacesCard>
+                            <MostVisitedPlacesPic
+                                source={require('../../assets/place.png')}
+                            />
+                            <MostVisitedPlacesNumberContainer>
+                                <MostVisitedPlacesNumberText>
+                                    123 visites
+                                </MostVisitedPlacesNumberText>
+                            </MostVisitedPlacesNumberContainer>
+                            <MostVisitedPlacesName>
+                                Jay and Joy
+                            </MostVisitedPlacesName>
+                        </MostVisitedPlacesCard>
+                    </MostVisitedPlacesContainer>
+                </View>
             </Screen>
         </Full>
     );

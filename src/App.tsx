@@ -10,6 +10,7 @@ import {
 
 import { WelcomeNavigator } from './navigation/welcome-navigator';
 import returnStoreAndPersistor from './app.store';
+import { HomeNavigatorWithToken } from './navigation/home/home-navigator-token';
 
 const { store, persistor } = returnStoreAndPersistor();
 
@@ -22,6 +23,7 @@ const App = () => {
 
     const startAppAsync = () => {
         return Font.loadAsync({
+            // eslint-disable-next-line global-require
             Montserrat: require('./theme/fonts/Montserrat-Regular.ttf')
         });
     };
@@ -35,13 +37,21 @@ const App = () => {
             />
         );
     }
+    const {
+        login: { accessToken }
+    } = store.getState();
+
     return (
         <Provider store={store as any}>
             <PersistGate persistor={persistor}>
                 <SafeAreaProvider
                     initialSafeAreaInsets={initialWindowSafeAreaInsets}
                 >
-                    <WelcomeNavigator />
+                    {accessToken ? (
+                        <HomeNavigatorWithToken />
+                    ) : (
+                        <WelcomeNavigator />
+                    )}
                 </SafeAreaProvider>
             </PersistGate>
         </Provider>

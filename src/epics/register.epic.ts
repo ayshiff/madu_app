@@ -2,6 +2,8 @@ import { of, Observable } from 'rxjs';
 import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
+import { BACKEND_SERVICE_URL } from 'madu/const';
+import { loginActions, LoginActions } from 'madu/actions/login.actions';
 import type { dependencies } from '../app.store';
 import {
     RegisterTypes,
@@ -9,46 +11,49 @@ import {
     registerActions
 } from '../actions/register.actions';
 
-const MOCK_URL = 'http://www.mocky.io/v2/5eba6a622f00004f4c3c37d2';
-
-// POST
-// /companies/${id}/users
-// {
-// 	"email": "corentin.croizat@hetic.net",
-// 	"firstname": "corentin",
-// 	"lastname": "croizat",
-//   "workplace": "Progrès",
-//   "department": "first",
-//   "password": "password"
-// }
-
-// {
-//     "roles": [
-//         "user"
-//     ],
-//     "email": "corentin.croizat@hetic.net",
-//     "firstname": "corentin",
-//     "lastname": "croizat"
-//   "workplace": "Progrès",
-//   "department": "first",,
-//     "id": "6c12d736-6339-42b7-8850-d2a8d8de8462",
-//     "company_id": "68720aab-bde3-4953-9aaf-9c3151801e44"
-// }
-
 export const loadRegisterContent: Epic = (
-    action$: Observable<RegisterActions>,
+    action$: Observable<RegisterActions | LoginActions>,
     state$: Observable<any>,
     { ajax }: typeof dependencies
-): Observable<RegisterActions> => {
+): Observable<RegisterActions | LoginActions> => {
     return action$.pipe(
         ofType(RegisterTypes.Register),
-        concatMap(() => {
+        // TODO: remove any type
+        concatMap((action: any) => {
+            const {
+                email,
+                firstname,
+                lastname,
+                workplace,
+                department,
+                companyPosition,
+                password,
+                company
+            } = action.payload;
+            const headers = { 'Content-Type': 'application/json' };
             return ajax({
-                url: MOCK_URL,
-                method: 'GET'
+                headers,
+                url: `${BACKEND_SERVICE_URL}/companies/${company.id}/users`,
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    firstname,
+                    lastname,
+                    workplace,
+                    department,
+                    companyPosition,
+                    password
+                })
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
-                    return of(registerActions.registerSuccess(data.response));
+                    return of(
+                        registerActions.registerSuccess(data.response),
+                        loginActions.login({
+                            email,
+                            password
+                        }),
+                        registerActions.resetRegister()
+                    );
                 }),
                 catchError((error: AjaxError) => {
                     return of(registerActions.registerFail(error));
@@ -58,16 +63,17 @@ export const loadRegisterContent: Epic = (
     );
 };
 
-export const loadCompanyDomain: Epic = (
+export const loadCompanyData: Epic = (
     action$: Observable<RegisterActions>,
     state$: Observable<any>,
     { ajax }: typeof dependencies
 ): Observable<RegisterActions> => {
     return action$.pipe(
         ofType(RegisterTypes.FetchCompany),
-        concatMap(() => {
+        concatMap((action: any) => {
+            const { company } = action.payload;
             return ajax({
-                url: MOCK_URL,
+                url: `${BACKEND_SERVICE_URL}/companies/domain/${company}`,
                 method: 'GET'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
@@ -83,7 +89,4 @@ export const loadCompanyDomain: Epic = (
     );
 };
 
-export const registerEpics = combineEpics(
-    loadRegisterContent,
-    loadCompanyDomain
-);
+export const registerEpics = combineEpics(loadRegisterContent, loadCompanyData);

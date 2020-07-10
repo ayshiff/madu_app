@@ -2,6 +2,8 @@ import { of, Observable } from 'rxjs';
 import { Epic, ofType, combineEpics } from 'redux-observable';
 import { concatMap, mergeMap, catchError } from 'rxjs/operators';
 import { AjaxResponse, AjaxError } from 'rxjs/ajax';
+import { BACKEND_SERVICE_URL } from 'madu/const';
+import { ProfileActions, profileActions } from 'madu/actions/profile.actions';
 import type { dependencies } from '../app.store';
 import {
     LoginTypes,
@@ -9,19 +11,17 @@ import {
     loginActions
 } from '../actions/login.actions';
 
-const URL = 'http://madu.mrfvrl.fr:3000';
-
 export const loadLoginContent: Epic = (
-    action$: Observable<LoginActions>,
+    action$: Observable<LoginActions | ProfileActions>,
     state$: Observable<any>,
     { ajax }: typeof dependencies
-): Observable<LoginActions> => {
+): Observable<LoginActions | ProfileActions> => {
     return action$.pipe(
         ofType(LoginTypes.Login),
         concatMap((action: any) => {
             const { email, password } = action.payload;
             return ajax({
-                url: `${URL}/auth/login`,
+                url: `${BACKEND_SERVICE_URL}/auth/login`,
                 method: 'POST',
                 body: {
                     email,
@@ -30,7 +30,8 @@ export const loadLoginContent: Epic = (
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
                     return of(
-                        loginActions.loginSuccess(data.response.access_token)
+                        loginActions.loginSuccess(data.response.access_token),
+                        profileActions.profile()
                     );
                 }),
                 catchError((error: AjaxError) => {
