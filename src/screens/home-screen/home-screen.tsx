@@ -236,7 +236,7 @@ const Home = ({
                         >
                             <ChallengeView>
                                 {userData.challenges.find(
-                                    (el) => el.id === challenges.weekly.id
+                                    (el) => el.id === challenges?.weekly?.id
                                 ) && (
                                     <Icon
                                         style={{
