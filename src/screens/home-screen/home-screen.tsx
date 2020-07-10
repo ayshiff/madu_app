@@ -62,6 +62,8 @@ const ChallengeInfo = styled.View`
 const ChallengePic = styled.Image`
     height: 115px;
     width: 115px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 `;
 
 const ChallengeTitle = styled.Text`
@@ -181,12 +183,10 @@ const ChallengeCardTitle = styled.Text`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-`
+`;
 const ChallengeDate = styled.Text`
     margin-right: 10px;
-`
-
-
+`;
 
 export interface HomeScreenProps {
     navigation: any;
@@ -201,7 +201,7 @@ const Home = ({ navigation }: HomeScreenProps) => {
                         <TextContainer>
                             <Bold>Bonjour Élodie</Bold>
                             <WhitePointsTag>
-                                <WhitePoints points={2567}/>
+                                <WhitePoints points={2567} />
                             </WhitePointsTag>
                         </TextContainer>
                         <ProfilePic
@@ -227,7 +227,9 @@ const Home = ({ navigation }: HomeScreenProps) => {
                                     source={require('../../assets/meal.png')}
                                 />
                                 <ChallengeInfo>
-                                    <ChallengeCardTitle>Lundi c’est Veggie !</ChallengeCardTitle>
+                                    <ChallengeCardTitle>
+                                        Lundi c’est Veggie !
+                                    </ChallengeCardTitle>
                                     <TagContainer>
                                         <TypeTag>
                                             <TypeText>Alimentation</TypeText>
