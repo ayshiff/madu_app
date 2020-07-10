@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import { View, TextInput, TextStyle, ViewStyle } from 'react-native';
+import {
+    View,
+    TextInput,
+    TextStyle,
+    ViewStyle,
+    TouchableOpacity
+} from 'react-native';
 import { mergeAll, flatten } from 'ramda';
 import styled from 'styled-components';
 
@@ -93,15 +99,17 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
                     style={inputStyle}
                     ref={forwardedRef}
                 />
-                {onHideClick && <HideIcon icon="hide" onPress={onHideClick} />}
+                {onHideClick && (
+                    <TouchableOpacity onPress={onHideClick} activeOpacity={1}>
+                        <HideIcon icon="hide" />
+                    </TouchableOpacity>
+                )}
             </InputContainer>
             {error && errorMessage && (
                 <Text textSize={13} color="#ff647c">
                     {errorMessage}
                 </Text>
             )}
-        
-           
         </View>
     );
 };
