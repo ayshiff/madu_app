@@ -19,7 +19,7 @@ import { Close, StyledIcon } from 'madu/screens/poi-screen/poi-screen';
 import { IProfile } from 'madu/actions/profile.actions';
 import { Screen, Button, Icon } from '../..';
 import { color } from '../../../theme';
-import { Points } from '../../atoms/points/points';
+import { GreenPoints } from '../../atoms/points/green-points';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#FFFFFF' };
 
@@ -304,11 +304,11 @@ const Challenge = (props: ChallengeScreenProps) => {
                                     Léa Gouvier
                                 </AttendeesModalName>
                                 <PointsContainer>
-                                    <Points points={80} />
+                                    <GreenPoints points={80} />
                                 </PointsContainer>
-                                {/* <AttendeesModalProfilPic
-                                    source={require('../../../../../assets/lea-358-358.png')}
-                                /> */}
+                                <AttendeesModalProfilPic
+                                    source={require('../../../assets/lea-358-358.png')}
+                                />
                                 <AttendeesButtonContainer>
                                     <TouchableOpacity
                                         onPress={() => {
@@ -338,9 +338,9 @@ const Challenge = (props: ChallengeScreenProps) => {
                                 setModalVisible(true);
                             }}
                         >
-                            {/* <AttendeesProfilPic
-                                source={require('../../../../../assets/lea.png')}
-                            /> */}
+                            <AttendeesProfilPic
+                                source={require('../../../assets/lea.png')}
+                            />
                         </TouchableOpacity>
                     </AttendeesProfilPicContainer>
                 </AttendeesSuccessfulContainer>

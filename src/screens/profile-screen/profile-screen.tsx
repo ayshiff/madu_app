@@ -13,7 +13,7 @@ import { color, spacing } from '../../theme';
 import { loginActions } from '../../actions/login.actions';
 import { VisitedPlacesScreen } from '../../components/templates/profile/visited-places';
 import { ChallengeDoneScreen } from '../../components/templates/profile/challenge-done';
-import { Points } from '../../components/atoms/points/points';
+import { GreenPoints } from '../../components/atoms/points/green-points';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#F3F8FF' };
 const TEXT: TextStyle = {
@@ -39,7 +39,7 @@ const HEADER_TITLE: TextStyle = {
 };
 
 const HeaderContainer = styled.View`
-    margin-top: -41px;
+    margin-top: -95px;
     height: 225px;
     background-color: #fae3c8;
 `;
@@ -51,8 +51,8 @@ const Card = styled.View`
     border-radius: 6px;
     margin-top: 16px;
     margin-right: 6px;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
 `;
 
 const ProfilePic = styled.Image`
@@ -81,16 +81,22 @@ const CardContainer = styled.View`
 `;
 
 const RankingText = styled.Text`
-    margin-top: -7px;
+    align-self: center;
 `;
 
 const RankingNumberContainer = styled.Text`
+    width: 4px;
+    height: 4px;
     flex-direction: row;
-    margin-top: 5px;
+    align-self: center;
 `;
 
 const RankingNumber = styled.Text`
+    background: red;
+    width: 10px;
+    height: 10px;
     margin-left: 4px;
+    color: #000;
 `;
 const Up = styled.Image`
     margin-top: 4px;
@@ -98,11 +104,11 @@ const Up = styled.Image`
 `;
 
 const InscriptionText = styled.Text`
-    margin-top: -8px;
+    align-self: center;
 `;
 const DateContainer = styled.View`
     flex-direction: row;
-    margin-top: 4px;
+    align-self: center;
 `;
 const Clock = styled.Image`
     margin-top: 4px;
@@ -127,7 +133,6 @@ export const Profile = ({
     return (
         <View style={FULL}>
             <Header
-                // headerText="Profile Screen"
                 style={HEADER}
                 titleStyle={HEADER_TITLE}
                 rightIcon="settings"
@@ -150,7 +155,7 @@ export const Profile = ({
                     <CardContainer>
                         <Card>
                             <Text>Total de point</Text>
-                            <Points points={userData.points} />
+                            <GreenPoints points={userData.points} />
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>

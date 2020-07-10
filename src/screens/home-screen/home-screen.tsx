@@ -8,7 +8,8 @@ import { color } from 'madu/theme';
 import styled from 'styled-components/native';
 import { challengeActions } from 'madu/actions/challenge.actions';
 import { poiActions } from 'madu/actions/poi.actions';
-import { Points } from '../../components/atoms/points/points';
+import { WhitePoints } from '../../components/atoms/points/white-points';
+import { GreenPoints } from '../../components/atoms/points/green-points';
 
 const Full = styled.View`
     flex: 1;
@@ -48,7 +49,6 @@ const ChallengeView = styled.View`
     background-color: #ffffff;
     border-radius: 10px;
     flex-direction: row;
-    justify-content: center;
     shadow-color: #000000;
     shadow-opacity: 1;
     shadow-radius: 3.84px;
@@ -63,10 +63,10 @@ const ChallengeInfo = styled.View`
 `;
 
 const ChallengePic = styled.Image`
-    margin-top: 20px;
-    height: 75px;
-    width: 75px;
-    border-radius: 20px;
+    height: 115px;
+    width: 115px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 `;
 
 const ChallengeTitle = styled.Text`
@@ -92,7 +92,6 @@ const PointsTag = styled.View`
     justify-content: center;
     padding-left: 14px;
     padding-right: 14px;
-    background-color: #e3ffe8;
 `;
 
 const TypeTag = styled.View`
@@ -102,6 +101,7 @@ const TypeTag = styled.View`
     align-items: center;
     justify-content: center;
     width: 100px;
+    margin-right: 6px;
 `;
 
 const TypeText = styled.Text`
@@ -119,10 +119,10 @@ const WhitePointsTag = styled.View`
     align-items: center;
 `;
 
-const WhitePoints = styled.Text`
-    color: #85a382;
-    font-size: 12px;
-`;
+// const WhitePoints = styled.Text`
+//     color: #85a382;
+//     font-size: 12px;
+// `;
 const ChallengeSubtitle = styled.Text`
     font-size: 15px;
     line-height: 20px;
@@ -180,6 +180,19 @@ const MostVisitedPlacesName = styled.Text`
     margin-left: 22px;
 `;
 
+const TagContainer = styled.View`
+    flex-direction: row;
+`;
+
+const ChallengeCardTitle = styled.Text`
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+`;
+const ChallengeDate = styled.Text`
+    margin-right: 10px;
+`;
+
 export interface HomeScreenProps {
     navigation: any;
     challenges: any;
@@ -234,6 +247,7 @@ const Home = ({
                                 navigateToChallenge();
                             }}
                         >
+                            {console.log(challenges)}
                             <ChallengeView>
                                 {userData.challenges.find(
                                     (el) => el.id === challenges?.weekly?.id
@@ -253,21 +267,29 @@ const Home = ({
                                     source={{ uri: challenges?.weekly?.photo }}
                                 />
                                 <ChallengeInfo>
-                                    <Text>
+                                    <ChallengeCardTitle>
                                         {challenges?.weekly?.title || ''}
-                                    </Text>
-                                    <TypeTag>
-                                        <TypeText>
-                                            {challenges?.weekly?.category || ''}
-                                        </TypeText>
-                                    </TypeTag>
-                                    <PointsTag>
-                                        <Points
-                                            points={
-                                                challenges?.weekly?.points || 0
-                                            }
-                                        />
-                                    </PointsTag>
+                                    </ChallengeCardTitle>
+                                    <TagContainer>
+                                        <TypeTag>
+                                            <TypeText>
+                                                {challenges?.weekly?.category ||
+                                                    ''}
+                                            </TypeText>
+                                        </TypeTag>
+                                        <PointsTag>
+                                            <GreenPoints
+                                                points={
+                                                    challenges?.weekly
+                                                        ?.points || 0
+                                                }
+                                            />
+                                        </PointsTag>
+                                    </TagContainer>
+                                    <TagContainer>
+                                        <ChallengeDate>22/06/20</ChallengeDate>
+                                        <Text>5 participants</Text>
+                                    </TagContainer>
                                 </ChallengeInfo>
                             </ChallengeView>
                         </TouchableOpacity>

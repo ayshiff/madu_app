@@ -1,17 +1,8 @@
 import * as React from 'react';
-import {
-    View,
-    ViewStyle,
-    TextStyle,
-    Text,
-    Image,
-    TouchableOpacity
-} from 'react-native';
 import { connect } from 'react-redux';
-import { useState } from 'react';
 import styled from 'styled-components/native';
 import { IProfile } from 'madu/actions/profile.actions';
-import { Points } from '../../atoms/points/points';
+import { GreenPoints } from '../../atoms/points/green-points';
 
 const Full = styled.View`
     flex: 1;
@@ -68,6 +59,10 @@ const PointsNumber = styled.Text`
     margin right: 4px;
 `;
 
+const Leaf = styled.Image`
+    margin-left: 4px;
+`;
+
 export interface ChallengeSuccessStepScreenProps {
     navigation: any;
     profile: IProfile;
@@ -82,14 +77,14 @@ export const ChallengeSuccessStep = (
     return (
         <Full>
             <PointContainer>
-                <Points points={profile.points} />
+                <GreenPoints points={profile.points} />
             </PointContainer>
             <ChallengeSuccessContainer>
                 {/* <Pic source={require('../../../../../assets/meal.png')} /> */}
                 <PointsText>
-                    Vous avez gagné
+                    {`Vous avez gagné `}
                     <PointsNumber>160</PointsNumber>
-                    {/* <Image source={require('../../../../../assets/leaf.png')} /> */}
+                    <Leaf source={require('../../../assets/leaf.png')} />
                 </PointsText>
                 <ChallengeSuccessText>
                     Félicitations ! Voilà qui a du vous faire monter dans le

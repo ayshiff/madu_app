@@ -28,11 +28,11 @@ const ProfilContainer = styled.View`
     margin-left: 22px;
 `;
 
-// const ProfilPic = styled.Image`
-//     align-self: center;
-//     margin-top: 20px;
-//     margin-bottom: 28px;
-// `;
+const ProfilPic = styled.Image`
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 28px;
+`;
 
 const ProfilTitle = styled.Text`
     font-weight: bold;
@@ -115,9 +115,7 @@ export const ProfileSettings = ({
         <Full>
             <Screen preset="scroll" style={{ backgroundColor: '#FFF5EB' }}>
                 <Header>
-                    {/* <Image
-                        source={require('../../../assets/arrow-left.png')}
-                    /> */}
+                    <Image source={require('../../../assets/arrow-left.png')} />
                     <Save
                         onPress={() =>
                             update({
@@ -135,9 +133,7 @@ export const ProfileSettings = ({
                 </Header>
                 <ProfilContainer>
                     <ProfilTitle>Profil</ProfilTitle>
-                    {/* <ProfilPic
-                        source={require('../../../assetsfilled.png')}
-                    /> */}
+                    <ProfilPic source={require('../../../assets/filled.png')} />
                 </ProfilContainer>
                 <InputContainer>
                     <InputName>Prénom Nom</InputName>
