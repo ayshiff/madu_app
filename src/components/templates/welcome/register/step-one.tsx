@@ -52,8 +52,10 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const [email, setEmail] = useState(userData.email || '');
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
+    const [passwordHidden, setPasswordHidden] = useState(true);
     const [passwordError, setPasswordError] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
 
     useEffect(() => {
         if (email.length) {
@@ -95,7 +97,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             <Input
                 placeholder="Votre mot de passe"
                 label="Mot de passe"
-                secureTextEntry
+                onHideClick={() => setPasswordHidden(!passwordHidden)}
+                secureTextEntry={passwordHidden}
                 blurOnSubmit={false}
                 error={passwordError}
                 onSubmitEditing={() => Keyboard.dismiss()}
@@ -105,7 +108,10 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             <Input
                 placeholder="Confirmer votre mot de passe"
                 label="Confirmer mot de passe"
-                secureTextEntry
+                onHideClick={() =>
+                    setConfirmPasswordHidden(!confirmPasswordHidden)
+                }
+                secureTextEntry={confirmPasswordHidden}
                 blurOnSubmit={false}
                 error={passwordError}
                 errorMessage="Les mots de passe ne sont pas équivalent"

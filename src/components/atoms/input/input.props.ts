@@ -38,6 +38,9 @@ export interface TextFieldProps extends TextInputProps {
 
     forwardedRef?: any;
 
-    error?: boolean;
+
+    error?: string | null;
+    onHideClick?: () => void;
+      error?: boolean;
     errorMessage?: string;
 }

@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 export const icons = {
+    hide: require('./hide.png'),
     home: require('./home.png'),
     home_active: require('./home_active.png'),
     crown: require('./crown.png'),
