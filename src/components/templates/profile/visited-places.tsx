@@ -53,9 +53,8 @@ const VisitedPlacesPic = styled.Image`
 `;
 
 export interface VisitedPlacesScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    visits: any[];
 }
 
 const VisitedPlacesNumber = styled.Text`
@@ -63,28 +62,34 @@ const VisitedPlacesNumber = styled.Text`
 `;
 
 export const VisitedPlacesScreen = ({
-    navigation
+    navigation,
+    visits
 }: VisitedPlacesScreenProps) => {
     return (
         <Full>
-            <VisitedPlacesScreenContainer>
-                <VisitedPlacesInformationContainer>
-                    <VisitedPlacesInformation>
-                        <VisitedPlacesPic
-                            source={require('../../../assets/profile-pic.png')}
-                        />
-                        <View>
-                            <VisitedPlacesName>Kapunka</VisitedPlacesName>
-                            <VisitedPlacesType>
-                                Restaurant thai vegan
-                            </VisitedPlacesType>
-                        </View>
-                    </VisitedPlacesInformation>
-                </VisitedPlacesInformationContainer>
-                <VisitedPlacesNumberContainer>
-                    <VisitedPlacesNumber>3 Visites</VisitedPlacesNumber>
-                </VisitedPlacesNumberContainer>
-            </VisitedPlacesScreenContainer>
+            {visits &&
+                visits.map((visit) => (
+                    <VisitedPlacesScreenContainer key={visit.id}>
+                        <VisitedPlacesInformationContainer>
+                            <VisitedPlacesInformation>
+                                <VisitedPlacesPic
+                                    source={require('../../../assets/profile-pic.png')}
+                                />
+                                <View>
+                                    <VisitedPlacesName>
+                                        {visit.name}
+                                    </VisitedPlacesName>
+                                    <VisitedPlacesType>
+                                        {visit.description}
+                                    </VisitedPlacesType>
+                                </View>
+                            </VisitedPlacesInformation>
+                        </VisitedPlacesInformationContainer>
+                        <VisitedPlacesNumberContainer>
+                            <VisitedPlacesNumber>3 Visites</VisitedPlacesNumber>
+                        </VisitedPlacesNumberContainer>
+                    </VisitedPlacesScreenContainer>
+                ))}
         </Full>
     );
 };

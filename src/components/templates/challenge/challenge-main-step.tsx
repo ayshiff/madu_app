@@ -13,11 +13,12 @@ import {
     TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Screen, Button } from '../../../components';
-import { color } from '../../../theme';
-import { Points } from '../../atoms//points/points';
-
 import styled from 'styled-components/native';
+import { challengeActions } from 'madu/actions/challenge.actions';
+import { Close, StyledIcon } from 'madu/screens/poi-screen/poi-screen';
+import { Screen, Button, Icon } from '../..';
+import { color } from '../../../theme';
+import { Points } from '../../atoms/points/points';
 
 const FULL: ViewStyle = { flex: 1, backgroundColor: '#FFFFFF' };
 
@@ -95,7 +96,7 @@ const POINTS_TEXT: TextStyle = {
     color: '#70B32D'
 };
 
-const ChallengeButton = styled.TouchableOpacity`
+const ChallengeButton = styled.View`
     width: 329px;
     height: 48px;
     border-radius: 40px;
@@ -104,7 +105,7 @@ const ChallengeButton = styled.TouchableOpacity`
     align-items: center;
 `;
 
-const ChallengeButtonContainer = styled.View`
+const ChallengeButtonContainer = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `;
@@ -187,11 +188,13 @@ const AttendeesButtonContainer = styled.View`
 
 export interface ChallengeScreenProps {
     navigation: any;
+    challenge: any;
+    validateChallenge: (arg: string) => void;
 }
 
 const Challenge = (props: ChallengeScreenProps) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const { navigation } = props;
+    const { navigation, challenge, validateChallenge } = props;
 
     const navigateToPicture = () => navigation.navigate('challenge-picture');
     const navigateToProfile = () => navigation.navigate('attendees-profile');
@@ -201,46 +204,41 @@ const Challenge = (props: ChallengeScreenProps) => {
     return (
         <View style={FULL}>
             <Screen preset="scroll" backgroundColor={color.transparent}>
-                {/* <Image
+                <Image
                     style={IMAGE_BACKGROUND}
-                    source={require('../../../../../assets/meal-375-214.png')}
-                /> */}
+                    source={{ uri: challenge.photo }}
+                />
+                <Close onPress={() => navigation.goBack()}>
+                    <Icon style={StyledIcon} icon="close" />
+                </Close>
 
                 <View style={INFORMATION_CONTAINER}>
                     <View style={POINT_WRAPPER}>
                         <View style={POINTS_CONTAINER}>
                             <View style={TYPE_TAG}>
-                                <Text style={TYPE_TEXT}>Alimentation</Text>
+                                <Text style={TYPE_TEXT}>
+                                    {challenge.category}
+                                </Text>
                             </View>
                             <View style={POINTS_TAG}>
-                                <Text style={POINTS_TEXT}>120🌱</Text>
+                                <Text style={POINTS_TEXT}>
+                                    {challenge.points}🌱
+                                </Text>
                             </View>
                         </View>
                     </View>
                 </View>
                 <View style={TEXT_CONTAINER}>
-                    <Text style={BLACK_TEXT}>Lundi c’est Veggie !</Text>
-                    <Text style={GREY_TEXT}>
-                        Chaque Français consomme 87 kg de viande et 34 kg de
-                        poisson par an. À lʼéchelle mondiale, lʼélevage
-                        représente près de 15 % des émissions de gaz à effet de
-                        serre dʼorigine humaine et lʼONU estime que la
-                        consommation de viande va grimper de 76 % dʼici 2050.
-                    </Text>
-                    <Text style={GREY_TEXT}>
-                        Chaque Français consomme 87 kg de viande et 34 kg de
-                        poisson par an. À lʼéchelle mondiale, lʼélevage
-                        représente près de 15 % des émissions de gaz à effet de
-                        serre dʼorigine humaine et lʼONU estime que la
-                        consommation de viande va grimper de 76 % dʼici 2050.
-                    </Text>
+                    <Text style={BLACK_TEXT}>{challenge.title}</Text>
+                    <Text style={GREY_TEXT}>{challenge.description}</Text>
                 </View>
-                <ChallengeButtonContainer>
-                    <ChallengeButton
-                        onPress={() => {
-                            navigateToPicture();
-                        }}
-                    >
+                <ChallengeButtonContainer
+                    onPress={() => {
+                        validateChallenge(challenge.id);
+                        navigateToPicture();
+                    }}
+                >
+                    <ChallengeButton>
                         <ChallengeButtonText>
                             Je relève le défi !
                         </ChallengeButtonText>
@@ -259,13 +257,15 @@ const Challenge = (props: ChallengeScreenProps) => {
                             navigateToAttendeesNumber();
                         }}
                     >
-                        <AttendeesNumber>5 participants</AttendeesNumber>
+                        <AttendeesNumber>
+                            {challenge.participants.length} participants
+                        </AttendeesNumber>
                     </TouchableOpacity>
 
                     <AttendeesProfilPicContainer>
                         <Modal
                             animationType="slide"
-                            transparent={true}
+                            transparent
                             visible={modalVisible}
                         >
                             <AttendeesModalContainer>
@@ -318,9 +318,14 @@ const Challenge = (props: ChallengeScreenProps) => {
     );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: any) => ({
+    challenge: state.challenge.weekly
+});
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch: any) => ({
+    validateChallenge: (challengeId: string) =>
+        dispatch(challengeActions.validateChallenge(challengeId))
+});
 
 export const ChallengeScreen = connect(
     mapStateToProps,

@@ -40,8 +40,8 @@ export const challengeActions = {
         ({ type: ChallengeTypes.ValidateChallengeSuccess, payload } as const),
     validateChallengeFail: (error: AjaxError) =>
         ({ type: ChallengeTypes.ValidateChallengeFail, error } as const),
-    loadWeeklyChallenge: (payload: string) =>
-        ({ type: ChallengeTypes.LoadWeeklyChallenge, payload } as const),
+    loadWeeklyChallenge: () =>
+        ({ type: ChallengeTypes.LoadWeeklyChallenge } as const),
     loadWeeklyChallengeSuccess: (payload: IChallenge) =>
         ({ type: ChallengeTypes.LoadWeeklyChallengeSuccess, payload } as const),
     loadWeeklyChallengeFail: (error: AjaxError) =>
