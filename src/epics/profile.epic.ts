@@ -46,7 +46,8 @@ export const editProfile: Epic = (
         ofType(ProfileTypes.EditProfile),
         concatMap((action: any) => {
             const headers = {
-                Authorization: `Bearer ${state$.value.login.accessToken}`
+                Authorization: `Bearer ${state$.value.login.accessToken}`,
+                'Content-Type': 'application/json'
             };
             return ajax({
                 headers,

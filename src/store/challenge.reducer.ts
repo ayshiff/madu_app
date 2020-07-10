@@ -20,6 +20,7 @@ export const challengeReducer = (
     switch (action.type) {
         case ChallengeTypes.LoadChallengeSuccess:
             return {
+                ...challengeState,
                 list: action.payload
             };
         case ChallengeTypes.LoadWeeklyChallengeSuccess:
