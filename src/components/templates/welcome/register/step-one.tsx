@@ -52,16 +52,22 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const [email, setEmail] = useState(userData.email || '');
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
+    const [passwordError, setPasswordError] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
-        setEmailError(!validateEmail(email));
+        if (email.length) {
+            setEmailError(!validateEmail(email));
+        }
     }, [email]);
     const navigateToNextStep = () => {
         navigation.navigate('registerStepTwo');
     };
 
     const handleNavigate = () => {
+        if (password !== confirmPassword) {
+            return setPasswordError(true);
+        }
         setUserData({ email, password });
         loadCompanyData(email.split('@')[1]);
         navigateToNextStep();
@@ -82,7 +88,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 placeholder="Votre mail professionnel"
                 label="Mail professionnel"
                 value={email}
-                error={emailError ? 'Cet email n’est pas valide' : null}
+                error={emailError}
+                errorMessage="Cet email n’est pas valide"
                 onChangeText={(el: string) => setEmail(el)}
             />
             <Input
@@ -90,6 +97,7 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 label="Mot de passe"
                 secureTextEntry
                 blurOnSubmit={false}
+                error={passwordError}
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={password}
                 onChangeText={(el: string) => setPassword(el)}
@@ -99,6 +107,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 label="Confirmer mot de passe"
                 secureTextEntry
                 blurOnSubmit={false}
+                error={passwordError}
+                errorMessage="Les mots de passe ne sont pas équivalent"
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={confirmPassword}
                 onChangeText={(el: string) => setConfirmPassword(el)}

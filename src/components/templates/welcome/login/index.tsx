@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { ViewStyle, TextStyle, View } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import { Header, Input, Button } from 'madu/components/index';
 import { color, spacing } from 'madu/theme';
 import { loginActions } from 'madu/actions/login.actions';
+
+import { validateEmail } from 'madu/outils';
 
 const TEXT: TextStyle = {
     color: color.palette.black,
@@ -45,8 +47,16 @@ interface IData {
 const Login = (props: LoginScreenProps) => {
     const { navigation, login } = props;
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
+
     const [password, setPassword] = useState('');
     const { userData } = props;
+
+    useEffect(() => {
+        if (email.length) {
+            setEmailError(!validateEmail(email));
+        }
+    }, [email]);
 
     const navigateToNextStep = React.useMemo(
         () => () => navigation.navigate('home'),
@@ -73,7 +83,8 @@ const Login = (props: LoginScreenProps) => {
                 placeholder="Adresse mail professionnel"
                 label="Adresse mail professionnel"
                 value={email}
-                style={{ borderColor: '#fff' }}
+                error={emailError}
+                errorMessage="Cet email n’est pas valide"
                 onChangeText={(el: string) => setEmail(el)}
             />
             <Input
