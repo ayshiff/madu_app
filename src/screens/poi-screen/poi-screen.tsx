@@ -182,7 +182,7 @@ export const Poi = ({
     React.useEffect(() => {
         setPoint(points[pointId]);
     }, [extracted, pointId, points]);
-
+    console.log(profile, point);
     return (
         <Container>
             {point && (
@@ -218,7 +218,15 @@ export const Poi = ({
                             </View>
                             <Community onPress={() => likePoi(point.id)}>
                                 <Like>
-                                    <IconLink icon="like2" />
+                                    <IconLink
+                                        icon={
+                                            point.likes.find(
+                                                (el) => el.id === profile.id
+                                            )
+                                                ? 'like2'
+                                                : 'like'
+                                        }
+                                    />
                                     <Likes preset="fieldLabel">
                                         {point.likes.length} j'aime
                                     </Likes>

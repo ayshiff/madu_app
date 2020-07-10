@@ -205,7 +205,6 @@ const Home = ({
         loadChallenge();
         loadPoi();
     }, [loadWeeklyChallenge, loadChallenge, loadPoi]);
-    console.log(userData);
     return (
         <Full>
             <Screen preset="scroll" backgroundColor={color.transparent}>
