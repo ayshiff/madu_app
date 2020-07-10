@@ -56,6 +56,7 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
         label,
         error,
         onHideClick,
+        errorMessage,
         preset = 'default',
         style: styleOverride,
         inputStyle: inputStyleOverride,
@@ -94,11 +95,13 @@ export const Input: React.FunctionComponent<TextFieldProps> = (props) => {
                 />
                 {onHideClick && <HideIcon icon="hide" onPress={onHideClick} />}
             </InputContainer>
-            {error && (
+            {error && errorMessage && (
                 <Text textSize={13} color="#ff647c">
-                    {error}
+                    {errorMessage}
                 </Text>
             )}
+        
+           
         </View>
     );
 };
