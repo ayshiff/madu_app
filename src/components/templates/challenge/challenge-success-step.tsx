@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import { Points } from '../../atoms/points/points';
 import styled from 'styled-components/native';
+import { IProfile } from 'madu/actions/profile.actions';
+import { Points } from '../../atoms/points/points';
 
 const Full = styled.View`
     flex: 1;
@@ -69,18 +70,19 @@ const PointsNumber = styled.Text`
 
 export interface ChallengeSuccessStepScreenProps {
     navigation: any;
+    profile: IProfile;
 }
 
 export const ChallengeSuccessStep = (
     props: ChallengeSuccessStepScreenProps
 ) => {
-    const { navigation } = props;
+    const { navigation, profile } = props;
     const navigateToChallenge = () => navigation.navigate('challenge');
 
     return (
         <Full>
             <PointContainer>
-                <Points points={2567} />
+                <Points points={profile.points} />
             </PointContainer>
             <ChallengeSuccessContainer>
                 {/* <Pic source={require('../../../../../assets/meal.png')} /> */}
@@ -108,7 +110,9 @@ export const ChallengeSuccessStep = (
     );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: any) => ({
+    profile: state.profile
+});
 
 const mapDispatchToProps = () => ({});
 

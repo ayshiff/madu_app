@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
-import { Points } from '../../../components/atoms/points/points';
+import { Points } from '../../atoms/points/points';
 
 const Full = styled.View`
     flex: 1;
@@ -79,42 +79,59 @@ const ChalengePointsAndTimeContainer = styled.View`
 `;
 
 export interface ChallengeDoneScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    challenges: any[];
 }
 
 export const ChallengeDoneScreen = ({
-    navigation
+    navigation,
+    challenges
 }: ChallengeDoneScreenProps) => {
     return (
         <Full>
-            <ChallengeContainer>
-                <View>
-                    <ChallengeView>
-                        <ChallengePic
-                            source={require('../../../assets/meal.png')}
-                        />
-                        <ChallengeInfo>
-                            <Text>Lundi c’est Veggie !</Text>
-                            <TypeTag>
-                                <TypeText>Alimentation</TypeText>
-                            </TypeTag>
-                            <ChalengePointsAndTimeContainer>
-                                <PointsTag>
-                                    <Points points={80} />
-                                </PointsTag>
-                                <DateContainer>
-                                    {/* <Clock
+            {challenges &&
+                challenges.map((challenge) => (
+                    <ChallengeContainer key={challenge?.id}>
+                        <View>
+                            <ChallengeView>
+                                <ChallengePic
+                                    source={
+                                        challenge?.photo
+                                            ? { uri: challenge.photo }
+                                            : require('../../../assets/meal.png')
+                                    }
+                                />
+                                <ChallengeInfo>
+                                    <Text>{challenge?.title}</Text>
+                                    <TypeTag>
+                                        <TypeText>
+                                            {challenge?.category}
+                                        </TypeText>
+                                    </TypeTag>
+                                    <ChalengePointsAndTimeContainer>
+                                        <PointsTag>
+                                            <Points
+                                                points={challenge?.points}
+                                            />
+                                        </PointsTag>
+                                        <DateContainer>
+                                            {/* <Clock
                                         source={require('../../../clock.png')}
                                     /> */}
-                                    <Text>12/09/20</Text>
-                                </DateContainer>
-                            </ChalengePointsAndTimeContainer>
-                        </ChallengeInfo>
-                    </ChallengeView>
-                </View>
-            </ChallengeContainer>
+                                            <Text>{`${new Date(
+                                                challenge.date
+                                            ).getDate()}/${new Date(
+                                                challenge.date
+                                            ).getMonth()}/${new Date(
+                                                challenge.date
+                                            ).getFullYear()} `}</Text>
+                                        </DateContainer>
+                                    </ChalengePointsAndTimeContainer>
+                                </ChallengeInfo>
+                            </ChallengeView>
+                        </View>
+                    </ChallengeContainer>
+                ))}
         </Full>
     );
 };

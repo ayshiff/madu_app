@@ -57,6 +57,7 @@ const LeaderboardDepartment = styled.Text`
     margin-top: 10px;
     font-size: 14px;
     font-weight: bold;
+    width: 150px;
 `;
 
 const LeaderboardProfilePic = styled.Image`
@@ -73,42 +74,44 @@ const LeaderboardCrown = styled.Image`
 `;
 
 export interface CollectiveLeaderboardScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    leaderboard: any[];
 }
 
 export const CollectiveLeaderboardScreen = ({
-    navigation
+    navigation,
+    leaderboard
 }: CollectiveLeaderboardScreenProps) => {
     return (
         <Full>
-            <LeaderboardContainer>
-                <LeaderboardInformation>
-                    <LeaderBoardRankContainer>
-                        <LeaderboardRank>1</LeaderboardRank>
-                        {/* <LeaderboardUp
+            {leaderboard?.map((el) => (
+                <LeaderboardContainer key={el.id}>
+                    <LeaderboardInformation>
+                        <LeaderBoardRankContainer>
+                            <LeaderboardRank>1</LeaderboardRank>
+                            {/* <LeaderboardUp
                             source={require('../../assets/up.png')}
                         /> */}
-                    </LeaderBoardRankContainer>
-                    <LeaderboardProfile>
-                        <LeaderboardProfilePic
-                            source={require('../../../assets/profile-pic.png')}
+                        </LeaderBoardRankContainer>
+                        <LeaderboardProfile>
+                            <LeaderboardProfilePic
+                                source={require('../../../assets/profile-pic.png')}
+                            />
+                            <View>
+                                <LeaderboardDepartment>
+                                    {el.department}
+                                </LeaderboardDepartment>
+                            </View>
+                        </LeaderboardProfile>
+                    </LeaderboardInformation>
+                    <LeaderboardPointsContainer>
+                        <LeaderboardCrown
+                            source={require('../../../assets/crown.png')}
                         />
-                        <View>
-                            <LeaderboardDepartment>
-                                Communication
-                            </LeaderboardDepartment>
-                        </View>
-                    </LeaderboardProfile>
-                </LeaderboardInformation>
-                <LeaderboardPointsContainer>
-                    <LeaderboardCrown
-                        source={require('../../../assets/crown.png')}
-                    />
-                    <Text>1567</Text>
-                </LeaderboardPointsContainer>
-            </LeaderboardContainer>
+                        <Text>{el.weeklyPoints}</Text>
+                    </LeaderboardPointsContainer>
+                </LeaderboardContainer>
+            ))}
         </Full>
     );
 };

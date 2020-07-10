@@ -107,7 +107,7 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                         />
                     </View>
                     <Text textSize={16} textAlign="center">
-                        Responsable Marketing • Communication
+                        {userData.companyPosition} • {userData.department}
                     </Text>
                     <Text>
                         Mettez dès à présent votre photo de profil pour que vos

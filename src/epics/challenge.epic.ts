@@ -8,6 +8,7 @@ import {
     challengeActions,
     ChallengeActions
 } from 'madu/actions/challenge.actions';
+import { ProfileActions, profileActions } from 'madu/actions/profile.actions';
 import type { dependencies } from '../app.store';
 
 export const loadChallenges: Epic = (
@@ -41,13 +42,17 @@ export const loadChallenges: Epic = (
 
 export const loadWeeklyChallenge: Epic = (
     action$: Observable<ChallengeActions>,
-    state$: Observable<any>,
+    state$: any,
     { ajax }: typeof dependencies
 ): Observable<ChallengeActions> => {
     return action$.pipe(
         ofType(ChallengeTypes.LoadWeeklyChallenge),
         concatMap(() => {
+            const headers = {
+                Authorization: `Bearer ${state$.value.login.accessToken}`
+            };
             return ajax({
+                headers,
                 url: `${BACKEND_SERVICE_URL}/challenges/weekly`,
                 method: 'GET'
             }).pipe(
@@ -67,20 +72,27 @@ export const loadWeeklyChallenge: Epic = (
 };
 
 export const validateChallenge: Epic = (
-    action$: Observable<ChallengeActions>,
-    state$: Observable<any>,
+    action$: Observable<ChallengeActions | ProfileActions>,
+    state$: any,
     { ajax }: typeof dependencies
-): Observable<ChallengeActions> => {
+): Observable<ChallengeActions | ProfileActions> => {
     return action$.pipe(
         ofType(ChallengeTypes.ValidateChallenge),
         concatMap((action: any) => {
+            const headers = {
+                Authorization: `Bearer ${state$.value.login.accessToken}`
+            };
             return ajax({
-                url: `${BACKEND_SERVICE_URL}/challenges/${action.challengeId}/validate`,
+                headers,
+                url: `${BACKEND_SERVICE_URL}/challenges/${action.payload.challengeId}/validate`,
                 method: 'POST'
             }).pipe(
                 mergeMap((data: AjaxResponse) => {
                     return of(
-                        challengeActions.validateChallengeSuccess(data.response)
+                        challengeActions.validateChallengeSuccess(
+                            data.response
+                        ),
+                        profileActions.profile()
                     );
                 }),
                 catchError((error: AjaxError) => {

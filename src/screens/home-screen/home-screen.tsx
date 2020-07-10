@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable global-require */
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Screen } from 'madu/components';
+import { Screen, Icon } from 'madu/components';
 import { color } from 'madu/theme';
 import styled from 'styled-components/native';
+import { challengeActions } from 'madu/actions/challenge.actions';
+import { poiActions } from 'madu/actions/poi.actions';
 import { Points } from '../../components/atoms/points/points';
 
 const Full = styled.View`
@@ -63,6 +66,7 @@ const ChallengePic = styled.Image`
     margin-top: 20px;
     height: 75px;
     width: 75px;
+    border-radius: 20px;
 `;
 
 const ChallengeTitle = styled.Text`
@@ -144,6 +148,8 @@ const MostVisitedPlacesTitle = styled.Text`
 const MostVisitedPlacesPic = styled.Image`
     height: 168px;
     width: 135px;
+    border-radius: 20px;
+    opacity: ${(props) => (props.isVisited ? 0.2 : 1)};
 `;
 
 const MostVisitedPlacesNumberContainer = styled.View`
@@ -176,18 +182,38 @@ const MostVisitedPlacesName = styled.Text`
 
 export interface HomeScreenProps {
     navigation: any;
+    challenges: any;
+    userData: any;
+    poi: any;
+    loadWeeklyChallenge: () => void;
+    loadChallenge: () => void;
+    loadPoi: () => void;
 }
-const Home = ({ navigation }: HomeScreenProps) => {
+const Home = ({
+    navigation,
+    loadWeeklyChallenge,
+    loadChallenge,
+    challenges,
+    userData,
+    loadPoi,
+    poi
+}: HomeScreenProps) => {
     const navigateToChallenge = () => navigation.navigate('challenge');
+
+    React.useEffect(() => {
+        loadWeeklyChallenge();
+        loadChallenge();
+        loadPoi();
+    }, [loadWeeklyChallenge, loadChallenge, loadPoi]);
     return (
         <Full>
             <Screen preset="scroll" backgroundColor={color.transparent}>
                 <HeaderContainer>
                     <Header>
                         <TextContainer>
-                            <Bold>Bonjour Élodie</Bold>
+                            <Bold>Bonjour {userData.firstname}</Bold>
                             <WhitePointsTag>
-                                <WhitePoints>2567</WhitePoints>
+                                <WhitePoints>{userData.points} 🌱</WhitePoints>
                             </WhitePointsTag>
                         </TextContainer>
                         <ProfilePic
@@ -209,16 +235,38 @@ const Home = ({ navigation }: HomeScreenProps) => {
                             }}
                         >
                             <ChallengeView>
+                                {userData.challenges.find(
+                                    (el) => el.id === challenges.weekly.id
+                                ) && (
+                                    <Icon
+                                        style={{
+                                            position: 'absolute',
+                                            top: 80,
+                                            left: 60,
+                                            opacity: 1,
+                                            zIndex: 99
+                                        }}
+                                        icon="challenge_done"
+                                    />
+                                )}
                                 <ChallengePic
-                                    source={require('../../assets/meal.png')}
+                                    source={{ uri: challenges?.weekly?.photo }}
                                 />
                                 <ChallengeInfo>
-                                    <Text>Lundi c’est Veggie !</Text>
+                                    <Text>
+                                        {challenges?.weekly?.title || ''}
+                                    </Text>
                                     <TypeTag>
-                                        <TypeText>Alimentation</TypeText>
+                                        <TypeText>
+                                            {challenges?.weekly?.category || ''}
+                                        </TypeText>
                                     </TypeTag>
                                     <PointsTag>
-                                        <Points points={80} />
+                                        <Points
+                                            points={
+                                                challenges?.weekly?.points || 0
+                                            }
+                                        />
                                     </PointsTag>
                                 </ChallengeInfo>
                             </ChallengeView>
@@ -231,19 +279,39 @@ const Home = ({ navigation }: HomeScreenProps) => {
                         Lieux les plus visités
                     </MostVisitedPlacesTitle>
                     <MostVisitedPlacesContainer>
-                        <MostVisitedPlacesCard>
-                            <MostVisitedPlacesPic
-                                source={require('../../assets/place.png')}
-                            />
-                            <MostVisitedPlacesNumberContainer>
-                                <MostVisitedPlacesNumberText>
-                                    123 visites
-                                </MostVisitedPlacesNumberText>
-                            </MostVisitedPlacesNumberContainer>
-                            <MostVisitedPlacesName>
-                                Jay and Joy
-                            </MostVisitedPlacesName>
-                        </MostVisitedPlacesCard>
+                        {Object.values(poi)
+                            ?.slice(0, 2)
+                            .map((challenge: any) => (
+                                <MostVisitedPlacesCard key={challenge.id}>
+                                    {userData.visits.find(
+                                        (el) => el.id === challenge.id
+                                    ) && (
+                                        <Icon
+                                            style={{
+                                                position: 'absolute',
+                                                top: 80,
+                                                left: 60,
+                                                opacity: 1
+                                            }}
+                                            icon="challenge_done"
+                                        />
+                                    )}
+                                    <MostVisitedPlacesPic
+                                        isVisited={userData.visits.find(
+                                            (el) => el.id === challenge.id
+                                        )}
+                                        source={{ uri: challenge.images[0] }}
+                                    />
+                                    <MostVisitedPlacesNumberContainer>
+                                        <MostVisitedPlacesNumberText>
+                                            {challenge.visits} visites
+                                        </MostVisitedPlacesNumberText>
+                                    </MostVisitedPlacesNumberContainer>
+                                    <MostVisitedPlacesName>
+                                        {challenge.name}
+                                    </MostVisitedPlacesName>
+                                </MostVisitedPlacesCard>
+                            ))}
                     </MostVisitedPlacesContainer>
                 </View>
 
@@ -252,19 +320,39 @@ const Home = ({ navigation }: HomeScreenProps) => {
                         Coups de coeur
                     </MostVisitedPlacesTitle>
                     <MostVisitedPlacesContainer>
-                        <MostVisitedPlacesCard>
-                            <MostVisitedPlacesPic
-                                source={require('../../assets/place.png')}
-                            />
-                            <MostVisitedPlacesNumberContainer>
-                                <MostVisitedPlacesNumberText>
-                                    123 visites
-                                </MostVisitedPlacesNumberText>
-                            </MostVisitedPlacesNumberContainer>
-                            <MostVisitedPlacesName>
-                                Jay and Joy
-                            </MostVisitedPlacesName>
-                        </MostVisitedPlacesCard>
+                        {Object.values(poi)
+                            ?.slice(0, 2)
+                            .map((challenge: any) => (
+                                <MostVisitedPlacesCard key={challenge.id}>
+                                    {userData.visits.find(
+                                        (el) => el.id === challenge.id
+                                    ) && (
+                                        <Icon
+                                            style={{
+                                                position: 'absolute',
+                                                top: 80,
+                                                left: 60,
+                                                opacity: 1
+                                            }}
+                                            icon="challenge_done"
+                                        />
+                                    )}
+                                    <MostVisitedPlacesPic
+                                        source={{ uri: challenge.images[0] }}
+                                        isVisited={userData.visits.find(
+                                            (el) => el.id === challenge.id
+                                        )}
+                                    />
+                                    <MostVisitedPlacesNumberContainer>
+                                        <MostVisitedPlacesNumberText>
+                                            {challenge.visits} visites
+                                        </MostVisitedPlacesNumberText>
+                                    </MostVisitedPlacesNumberContainer>
+                                    <MostVisitedPlacesName>
+                                        {challenge.name}
+                                    </MostVisitedPlacesName>
+                                </MostVisitedPlacesCard>
+                            ))}
                     </MostVisitedPlacesContainer>
                 </View>
             </Screen>
@@ -272,8 +360,16 @@ const Home = ({ navigation }: HomeScreenProps) => {
     );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: any) => ({
+    challenges: state.challenge,
+    userData: state.profile,
+    poi: state.poi.list
+});
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch: any) => ({
+    loadWeeklyChallenge: () => dispatch(challengeActions.loadWeeklyChallenge()),
+    loadChallenge: () => dispatch(challengeActions.loadChallenge()),
+    loadPoi: () => dispatch(poiActions.loadPoi())
+});
 
 export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(Home);
