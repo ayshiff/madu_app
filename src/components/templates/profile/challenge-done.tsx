@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import { Points } from '../../../components/atoms/points/points';
 import { GreenPoints } from '../../../components/atoms/points/green-points';
 
-
 const Full = styled.View`
     flex: 1;
     background-color: #ffffff;
@@ -17,7 +16,7 @@ const ChallengeContainer = styled.View`
 
 const ChallengeView = styled.View`
     height: 115px;
-    width: 290px;
+    width: 280px;
     margin-bottom: 10px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -50,7 +49,6 @@ const PointsTag = styled.View`
     justify-content: center;
     padding-left: 14px;
     padding-right: 14px;
-    background-color: #e3ffe8;
 `;
 
 const TypeTag = styled.View`

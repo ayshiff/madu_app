@@ -81,7 +81,6 @@ const RankingText = styled.Text`
 const RankingNumberContainer = styled.Text`
     flex-direction: row;
     align-self: center;
-
 `;
 
 const RankingNumber = styled.Text`
@@ -94,12 +93,10 @@ const Up = styled.Image`
 
 const InscriptionText = styled.Text`
     align-self: center;
-    
 `;
 const DateContainer = styled.View`
     flex-direction: row;
     align-self: center;
-
 `;
 const Clock = styled.Image`
     margin-top: 4px;
@@ -140,8 +137,10 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                     </Text>
                     <CardContainer>
                         <Card>
-                            <Text style={{alignSelf: "center"}}>Total de points</Text>
-                            <View style={{alignSelf: "center"}}>
+                            <Text style={{ alignSelf: 'center' }}>
+                                Total de points
+                            </Text>
+                            <View style={{ alignSelf: 'center' }}>
                                 <GreenPoints points={2567} />
                             </View>
                         </Card>
@@ -149,7 +148,7 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                             <RankingText>Classement</RankingText>
                             <RankingNumberContainer>
                                 <Up source={require('../../assets/up.png')} />
-                                <RankingNumber>{` 4`}</RankingNumber>
+                                <RankingNumber>{`  4`}</RankingNumber>
                             </RankingNumberContainer>
                         </Card>
                         <Card>

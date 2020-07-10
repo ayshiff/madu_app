@@ -1,11 +1,11 @@
 /* eslint-disable global-require */
 import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Screen } from 'madu/components';
 import { color } from 'madu/theme';
 import styled from 'styled-components/native';
-import { Points } from '../../components/atoms/points/points';
+import { WhitePoints } from '../../components/atoms/points/white-points';
 import { GreenPoints } from '../../components/atoms/points/green-points';
 
 const Full = styled.View`
@@ -46,7 +46,6 @@ const ChallengeView = styled.View`
     background-color: #ffffff;
     border-radius: 10px;
     flex-direction: row;
-    justify-content: center;
     shadow-color: #000000;
     shadow-opacity: 1;
     shadow-radius: 3.84px;
@@ -61,9 +60,8 @@ const ChallengeInfo = styled.View`
 `;
 
 const ChallengePic = styled.Image`
-    margin-top: 20px;
-    height: 75px;
-    width: 75px;
+    height: 115px;
+    width: 115px;
 `;
 
 const ChallengeTitle = styled.Text`
@@ -98,6 +96,7 @@ const TypeTag = styled.View`
     align-items: center;
     justify-content: center;
     width: 100px;
+    margin-right: 6px;
 `;
 
 const TypeText = styled.Text`
@@ -115,10 +114,10 @@ const WhitePointsTag = styled.View`
     align-items: center;
 `;
 
-const WhitePoints = styled.Text`
-    color: #85a382;
-    font-size: 12px;
-`;
+// const WhitePoints = styled.Text`
+//     color: #85a382;
+//     font-size: 12px;
+// `;
 const ChallengeSubtitle = styled.Text`
     font-size: 15px;
     line-height: 20px;
@@ -178,6 +177,17 @@ const TagContainer = styled.View`
     flex-direction: row;
 `;
 
+const ChallengeCardTitle = styled.Text`
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+`
+const ChallengeDate = styled.Text`
+    margin-right: 10px;
+`
+
+
+
 export interface HomeScreenProps {
     navigation: any;
 }
@@ -191,7 +201,7 @@ const Home = ({ navigation }: HomeScreenProps) => {
                         <TextContainer>
                             <Bold>Bonjour Élodie</Bold>
                             <WhitePointsTag>
-                                <WhitePoints>2567</WhitePoints>
+                                <WhitePoints points={2567}/>
                             </WhitePointsTag>
                         </TextContainer>
                         <ProfilePic
@@ -217,7 +227,7 @@ const Home = ({ navigation }: HomeScreenProps) => {
                                     source={require('../../assets/meal.png')}
                                 />
                                 <ChallengeInfo>
-                                    <Text>Lundi c’est Veggie !</Text>
+                                    <ChallengeCardTitle>Lundi c’est Veggie !</ChallengeCardTitle>
                                     <TagContainer>
                                         <TypeTag>
                                             <TypeText>Alimentation</TypeText>
@@ -225,6 +235,10 @@ const Home = ({ navigation }: HomeScreenProps) => {
                                         <PointsTag>
                                             <GreenPoints points={80} />
                                         </PointsTag>
+                                    </TagContainer>
+                                    <TagContainer>
+                                        <ChallengeDate>22/06/20</ChallengeDate>
+                                        <Text>5 participants</Text>
                                     </TagContainer>
                                 </ChallengeInfo>
                             </ChallengeView>
