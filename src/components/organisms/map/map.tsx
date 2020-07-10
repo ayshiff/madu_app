@@ -58,21 +58,15 @@ const categoryMarkers: CategoryMarkers = {
 };
 
 export const Map = (props: MapProps) => {
-    const {
-        navigation,
-        points,
-        profile: {
-            company: { address }
-        }
-    } = props;
+    const { navigation, points, profile } = props;
     const map = useRef(null);
 
     return (
         <View style={styles.container}>
             <MapView
                 region={{
-                    latitude: address.lng,
-                    longitude: address.lat,
+                    latitude: profile?.company?.address.lat,
+                    longitude: profile?.company?.address.lng,
                     latitudeDelta: 0.025,
                     longitudeDelta: 0.025
                 }}
@@ -82,8 +76,8 @@ export const Map = (props: MapProps) => {
                 {/* Circle */}
                 <Circle
                     center={{
-                        latitude: address.lng,
-                        longitude: address.lat
+                        latitude: profile?.company?.address.lat,
+                        longitude: profile?.company?.address.lng
                     }}
                     radius={1000}
                     strokeWidth={1.5}
@@ -99,8 +93,8 @@ export const Map = (props: MapProps) => {
                               icon={categoryMarkers[point.category]}
                               coordinate={{
                                   // lat-lng reversed in the backoffice
-                                  latitude: point.address.lng,
-                                  longitude: point.address.lat
+                                  latitude: point.address.lat,
+                                  longitude: point.address.lng
                               }}
                               onCalloutPress={(e) => {
                                   e.stopPropagation();

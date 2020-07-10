@@ -52,16 +52,24 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const [email, setEmail] = useState(userData.email || '');
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
+    const [passwordHidden, setPasswordHidden] = useState(true);
+    const [passwordError, setPasswordError] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
 
     useEffect(() => {
-        setEmailError(!validateEmail(email));
+        if (email.length) {
+            setEmailError(!validateEmail(email));
+        }
     }, [email]);
     const navigateToNextStep = () => {
         navigation.navigate('registerStepTwo');
     };
 
     const handleNavigate = () => {
+        if (password !== confirmPassword) {
+            return setPasswordError(true);
+        }
         setUserData({ email, password });
         loadCompanyData(email.split('@')[1]);
         navigateToNextStep();
@@ -82,14 +90,17 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
                 placeholder="Votre mail professionnel"
                 label="Mail professionnel"
                 value={email}
-                error={emailError ? 'Cet email n’est pas valide' : null}
+                error={emailError}
+                errorMessage="Cet email n’est pas valide"
                 onChangeText={(el: string) => setEmail(el)}
             />
             <Input
                 placeholder="Votre mot de passe"
                 label="Mot de passe"
-                secureTextEntry
+                onHideClick={() => setPasswordHidden(!passwordHidden)}
+                secureTextEntry={passwordHidden}
                 blurOnSubmit={false}
+                error={passwordError}
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={password}
                 onChangeText={(el: string) => setPassword(el)}
@@ -97,8 +108,13 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             <Input
                 placeholder="Confirmer votre mot de passe"
                 label="Confirmer mot de passe"
-                secureTextEntry
+                onHideClick={() =>
+                    setConfirmPasswordHidden(!confirmPasswordHidden)
+                }
+                secureTextEntry={confirmPasswordHidden}
                 blurOnSubmit={false}
+                error={passwordError}
+                errorMessage="Les mots de passe ne sont pas équivalent"
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={confirmPassword}
                 onChangeText={(el: string) => setConfirmPassword(el)}

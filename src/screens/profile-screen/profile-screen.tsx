@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { View, ViewStyle, TextStyle, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {
+    profileActions,
+    EditProfilePayload,
+    IProfile
+} from 'madu/actions/profile.actions';
 import { Screen, Header } from '../../components';
 import { color, spacing } from '../../theme';
 import { loginActions } from '../../actions/login.actions';
 import { VisitedPlacesScreen } from '../../components/templates/profile/visited-places';
 import { ChallengeDoneScreen } from '../../components/templates/profile/challenge-done';
-import styled from 'styled-components/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Points } from '../../components/atoms/points/points';
 import { GreenPoints } from '../../components/atoms/points/green-points';
 
@@ -60,7 +65,9 @@ const ProfileName = styled.Text`
     font-weight: bold;
     font-size: 24px;
     margin-top: 9px;
+    text-align: center;
     color: #162d4b;
+    width: 100%;
 `;
 const Department = styled.Text`
     color: #ee6538;
@@ -104,15 +111,18 @@ const Clock = styled.Image`
 `;
 
 export interface SettingsScreenProps {
-    loadContent: () => string;
-    content: string;
+    update: (payload: EditProfilePayload) => string;
+    userData: IProfile;
     navigation: any;
-    logout: () => void;
 }
 
 const Tab = createMaterialTopTabNavigator();
 
-export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
+export const Profile = ({
+    navigation,
+    userData,
+    update
+}: SettingsScreenProps) => {
     const navigateToSettings = () => navigation.navigate('profile-settings');
 
     return (
@@ -130,19 +140,17 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                     <ProfilePic
                         source={require('../../assets/profile-pic.png')}
                     />
-                    <ProfileName>Élodie Five</ProfileName>
+                    <ProfileName>
+                        {userData.firstname} {userData.lastname}
+                    </ProfileName>
                     <Text>
-                        Responsable Marketing{' '}
-                        <Department>Communication</Department>
+                        {userData.companyPosition}{' '}
+                        <Department>{userData.department}</Department>
                     </Text>
                     <CardContainer>
                         <Card>
-                            <Text style={{ alignSelf: 'center' }}>
-                                Total de points
-                            </Text>
-                            <View style={{ alignSelf: 'center' }}>
-                                <GreenPoints points={2567} />
-                            </View>
+                            <Text>Total de point</Text>
+                            <Points points={userData.points} />
                         </Card>
                         <Card>
                             <RankingText>Classement</RankingText>
@@ -180,25 +188,36 @@ export const Profile = ({ navigation, logout }: SettingsScreenProps) => {
                     }
                 }}
             >
-                <Tab.Screen
-                    name="défis accomplis"
-                    component={ChallengeDoneScreen}
-                />
-                <Tab.Screen
-                    name="lieux visités"
-                    component={VisitedPlacesScreen}
-                />
+                <Tab.Screen name="défis accomplis">
+                    {(props) => (
+                        <ChallengeDoneScreen
+                            {...props}
+                            challenges={userData.challenges}
+                            navigation={navigation}
+                        />
+                    )}
+                </Tab.Screen>
+                <Tab.Screen name="lieux visités">
+                    {(props) => (
+                        <VisitedPlacesScreen
+                            {...props}
+                            visits={userData.visits}
+                            navigation={navigation}
+                        />
+                    )}
+                </Tab.Screen>
             </Tab.Navigator>
         </View>
     );
 };
 
 const mapStateToProps = (state: any) => ({
-    logout: state.poi.list
+    userData: state.profile
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    logout: () => dispatch(loginActions.logout())
+    update: (payload: EditProfilePayload) =>
+        dispatch(profileActions.editProfile(payload))
 });
 
 export const ProfileScreen = connect(

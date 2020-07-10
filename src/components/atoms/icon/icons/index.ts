@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 export const icons = {
+    hide: require('./hide.png'),
     home: require('./home.png'),
     home_active: require('./home_active.png'),
     crown: require('./crown.png'),
@@ -23,7 +24,8 @@ export const icons = {
     map_bar: require('./map_bar.png'),
     map_experience: require('./map_experience.png'),
     map_shop: require('./map_shop.png'),
-    map_restoration: require('./map_restoration.png')
+    map_restoration: require('./map_restoration.png'),
+    challenge_done: require('./challenge_done.png')
 };
 
 export type IconTypes = keyof typeof icons;

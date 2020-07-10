@@ -14,9 +14,10 @@ export const profileReducer = (
 ): IProfileState => {
     switch (action.type) {
         case ProfileTypes.ProfileSuccess:
-        case ProfileTypes.EditProfileSuccess:
         case ProfileTypes.AddPictureSuccess:
             return action.payload;
+        case ProfileTypes.EditProfileSuccess:
+            return { ...profileState, ...action.payload };
         default:
             return profileState;
     }
