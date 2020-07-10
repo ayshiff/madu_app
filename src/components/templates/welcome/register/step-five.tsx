@@ -107,11 +107,13 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                             }
                         />
                     </View>
+
                     <Text textSize={24} textAlign="center" fontWeight="bold">
-                        Elodie Five
+                      {userData.firstName} {userData.lastName}
                     </Text>
-                    <Text textSize={16} textAlign="center" bottom={60}>
-                        Responsable Marketing • Communication
+
+                    <Text textSize={16} textAlign="center">
+                        {userData.companyPosition} • {userData.department}
                     </Text>
                     <Text textSize={18} bottom={20}>
                         Mettez dès à présent votre photo de profil pour que vos

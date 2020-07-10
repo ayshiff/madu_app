@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
+import { connect } from 'react-redux';
 
 const Full = styled.View`
     flex: 1;
@@ -50,41 +51,62 @@ const VisitedPlacesPic = styled.Image`
     width: 48px;
     height: 48px;
     margin-right: 11px;
+    border-radius: 24px;
 `;
 
 export interface VisitedPlacesScreenProps {
-    loadContent: () => string;
-    content: string;
     navigation: any;
+    visits: any[];
+    poi: any;
 }
 
 const VisitedPlacesNumber = styled.Text`
     color: #fe8eb1;
 `;
 
-export const VisitedPlacesScreen = ({
-    navigation
+export const VisitedPlaces = ({
+    navigation,
+    visits,
+    poi
 }: VisitedPlacesScreenProps) => {
     return (
         <Full>
-            <VisitedPlacesScreenContainer>
-                <VisitedPlacesInformationContainer>
-                    <VisitedPlacesInformation>
-                        <VisitedPlacesPic
-                            source={require('../../../assets/profile-pic.png')}
-                        />
-                        <View>
-                            <VisitedPlacesName>Kapunka</VisitedPlacesName>
-                            <VisitedPlacesType>
-                                Restaurant thai vegan
-                            </VisitedPlacesType>
-                        </View>
-                    </VisitedPlacesInformation>
-                </VisitedPlacesInformationContainer>
-                <VisitedPlacesNumberContainer>
-                    <VisitedPlacesNumber>3 Visites</VisitedPlacesNumber>
-                </VisitedPlacesNumberContainer>
-            </VisitedPlacesScreenContainer>
+            {visits &&
+                visits.map((visit) => (
+                    <VisitedPlacesScreenContainer key={visit.id}>
+                        <VisitedPlacesInformationContainer>
+                            <VisitedPlacesInformation>
+                                <VisitedPlacesPic
+                                    source={{ uri: poi[visit.id].images[0] }}
+                                />
+                                <View>
+                                    <VisitedPlacesName>
+                                        {visit.name}
+                                    </VisitedPlacesName>
+                                    <VisitedPlacesType>
+                                        {visit.description}
+                                    </VisitedPlacesType>
+                                </View>
+                            </VisitedPlacesInformation>
+                        </VisitedPlacesInformationContainer>
+                        <VisitedPlacesNumberContainer>
+                            <VisitedPlacesNumber>
+                                {poi[visit.id].visits} Visites
+                            </VisitedPlacesNumber>
+                        </VisitedPlacesNumberContainer>
+                    </VisitedPlacesScreenContainer>
+                ))}
         </Full>
     );
 };
+
+const mapStateToProps = (state: any) => ({
+    poi: state.poi.list
+});
+
+const mapDispatchToProps = () => ({});
+
+export const VisitedPlacesScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(VisitedPlaces);

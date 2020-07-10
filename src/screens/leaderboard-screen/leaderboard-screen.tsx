@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { color } from '../../theme/color';
 import styled from 'styled-components/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { leaderboardActions } from 'madu/actions/leaderboard.actions';
+import { connect } from 'react-redux';
+import { color } from '../../theme/color';
 import { IndividualLeaderboardScreen } from '../../components/templates/leaderboard/individual-leaderboard';
 import { CollectiveLeaderboardScreen } from '../../components/templates/leaderboard/collective-leaderboard';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Full = styled.View`
     flex: 1;
@@ -38,14 +40,27 @@ const HeaderTimer = styled.Text`
 `;
 
 export interface LeaderboardScreenProps {
-    loadContent: () => string;
+    loadLeaderboard: (payload: string) => void;
     content: string;
     navigation: any;
+    userData: any;
+    leaderboard: any;
 }
 
 const Tab = createMaterialTopTabNavigator();
 
-export const LeaderboardScreen = ({ navigation }: LeaderboardScreenProps) => {
+export const Leaderboard = ({
+    navigation,
+    userData,
+    leaderboard,
+    loadLeaderboard
+}: LeaderboardScreenProps) => {
+    React.useEffect(() => {
+        if (userData.company.id) {
+            loadLeaderboard(userData.company.id);
+        }
+    }, [loadLeaderboard, leaderboard, userData]);
+
     return (
         <Full>
             <HeaderContainer>
@@ -72,15 +87,39 @@ export const LeaderboardScreen = ({ navigation }: LeaderboardScreenProps) => {
                     }
                 }}
             >
-                <Tab.Screen
-                    name="individuel"
-                    component={IndividualLeaderboardScreen}
-                />
-                <Tab.Screen
-                    name="collectif"
-                    component={CollectiveLeaderboardScreen}
-                />
+                <Tab.Screen name="individuel">
+                    {(props) => (
+                        <IndividualLeaderboardScreen
+                            {...props}
+                            leaderboard={leaderboard.users}
+                        />
+                    )}
+                </Tab.Screen>
+
+                <Tab.Screen name="collectif">
+                    {(props) => (
+                        <CollectiveLeaderboardScreen
+                            {...props}
+                            leaderboard={leaderboard.users}
+                        />
+                    )}
+                </Tab.Screen>
             </Tab.Navigator>
         </Full>
     );
 };
+
+const mapStateToProps = (state: any) => ({
+    userData: state.profile,
+    leaderboard: state.leaderboard
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    loadLeaderboard: (payload: string) =>
+        dispatch(leaderboardActions.leaderboard(payload))
+});
+
+export const LeaderboardScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Leaderboard);

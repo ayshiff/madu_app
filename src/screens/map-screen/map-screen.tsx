@@ -25,6 +25,7 @@ export const MapComponent: React.FunctionComponent<MapScreenProps> = ({
     React.useEffect(() => {
         loadPoi();
     }, [loadPoi]);
+
     return (
         <View style={FULL}>
             <Map profile={profile} points={points} navigation={navigation} />

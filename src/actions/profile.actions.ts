@@ -52,9 +52,8 @@ type Company = {
     status: string;
 };
 
-type EditProfilePayload = {
+export type EditProfilePayload = {
     email: string;
-    password: string;
     firstname: string;
     lastname: string;
     companyPosition: string;

@@ -9,8 +9,6 @@ import { OldButton } from 'madu/components/atoms/old-button/old-button';
 import { connect } from 'react-redux';
 import { poiActions, IPointOfInterest } from 'madu/actions/poi.actions';
 
-const mockCover = require('madu/assets/mock_cover.png');
-
 /** Styled components */
 
 const Container = styled.View`
@@ -18,7 +16,7 @@ const Container = styled.View`
     background-color: ${color.background};
 `;
 
-const StyledIcon = {
+export const StyledIcon = {
     width: 40,
     height: 40
 };
@@ -34,7 +32,7 @@ const Contact = styled.View`
     align-items: center;
 `;
 
-const Close = styled(TouchableOpacity)`
+export const Close = styled(TouchableOpacity)`
     position: absolute;
     top: 15px;
     right: 15px;
@@ -49,6 +47,7 @@ const Footer = styled.View`
 
 const Wallpaper = styled.Image`
     width: ${Dimensions.get('window').width}px;
+    height: 240px;
     resize-mode: cover;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -183,19 +182,13 @@ export const Poi = ({
     React.useEffect(() => {
         setPoint(points[pointId]);
     }, [extracted, pointId, points]);
-
+    console.log(profile, point);
     return (
         <Container>
             {point && (
                 <>
                     <View>
-                        <Wallpaper
-                            source={
-                                point.images.length
-                                    ? { uri: point.images[0] }
-                                    : mockCover
-                            }
-                        />
+                        <Wallpaper source={{ uri: point.images[0] }} />
                         <Close onPress={() => navigation.goBack()}>
                             <Icon style={StyledIcon} icon="close" />
                         </Close>
@@ -225,7 +218,15 @@ export const Poi = ({
                             </View>
                             <Community onPress={() => likePoi(point.id)}>
                                 <Like>
-                                    <IconLink icon="like2" />
+                                    <IconLink
+                                        icon={
+                                            point.likes.find(
+                                                (el) => el.id === profile.id
+                                            )
+                                                ? 'like2'
+                                                : 'like'
+                                        }
+                                    />
                                     <Likes preset="fieldLabel">
                                         {point.likes.length} j'aime
                                     </Likes>

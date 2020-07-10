@@ -4,6 +4,7 @@ import { loginReducer } from './login.reducer';
 import { poiReducer } from './poi.reducer';
 import { challengeReducer } from './challenge.reducer';
 import { profileReducer } from './profile.reducer';
+import { leaderboardReducer } from './leaderboard.reducer';
 
 export interface AppStore {
     register: ReturnType<typeof registerReducer>;
@@ -11,6 +12,7 @@ export interface AppStore {
     poi: ReturnType<typeof poiReducer>;
     challenge: ReturnType<typeof challengeReducer>;
     profile: ReturnType<typeof profileReducer>;
+    leaderboard: ReturnType<typeof leaderboardReducer>;
 }
 
 export const rootReducer: Reducer<AppStore> = combineReducers({
@@ -18,5 +20,6 @@ export const rootReducer: Reducer<AppStore> = combineReducers({
     login: loginReducer,
     poi: poiReducer,
     challenge: challengeReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    leaderboard: leaderboardReducer
 });

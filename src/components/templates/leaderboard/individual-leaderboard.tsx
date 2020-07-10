@@ -57,6 +57,7 @@ const LeaderboardProfileName = styled.Text`
     margin-top: 4px;
     font-size: 14px;
     font-weight: bold;
+    width: 150px;
 `;
 
 const LeaderboardProfilDepartment = styled.Text`
@@ -78,45 +79,47 @@ const LeaderboardCrown = styled.Image`
 `;
 
 export interface IndividualLeaderboardScreenProps {
-    loadContent: () => string;
-    content: string;
+    leaderboard: any[];
     navigation: any;
 }
 
 export const IndividualLeaderboardScreen = ({
-    navigation
+    navigation,
+    leaderboard
 }: IndividualLeaderboardScreenProps) => {
     return (
         <Full>
-            <LeaderboardContainer>
-                <LeaderboardInformation>
-                    <LeaderBoardRankContainer>
-                        <LeaderboardRank>1</LeaderboardRank>
-                        {/* <LeaderboardUp
+            {leaderboard?.map((el) => (
+                <LeaderboardContainer key={el.id}>
+                    <LeaderboardInformation>
+                        <LeaderBoardRankContainer>
+                            <LeaderboardRank>1</LeaderboardRank>
+                            {/* <LeaderboardUp
                             source={require('../../../assets/up.png')}
                         /> */}
-                    </LeaderBoardRankContainer>
-                    <LeaderboardProfile>
-                        <LeaderboardProfilePic
-                            source={require('../../../assets/profile-pic.png')}
+                        </LeaderBoardRankContainer>
+                        <LeaderboardProfile>
+                            <LeaderboardProfilePic
+                                source={require('../../../assets/profile-pic.png')}
+                            />
+                            <View>
+                                <LeaderboardProfileName>
+                                    {el.firstname} {el.lastname}
+                                </LeaderboardProfileName>
+                                <LeaderboardProfilDepartment>
+                                    {el.department}
+                                </LeaderboardProfilDepartment>
+                            </View>
+                        </LeaderboardProfile>
+                    </LeaderboardInformation>
+                    <LeaderboardPointsContainer>
+                        <LeaderboardCrown
+                            source={require('../../../assets/crown.png')}
                         />
-                        <View>
-                            <LeaderboardProfileName>
-                                Elodie Five
-                            </LeaderboardProfileName>
-                            <LeaderboardProfilDepartment>
-                                Communication
-                            </LeaderboardProfilDepartment>
-                        </View>
-                    </LeaderboardProfile>
-                </LeaderboardInformation>
-                <LeaderboardPointsContainer>
-                    <LeaderboardCrown
-                        source={require('../../../assets/crown.png')}
-                    />
-                    <Text>320</Text>
-                </LeaderboardPointsContainer>
-            </LeaderboardContainer>
+                        <Text>{el.weeklyPoints}</Text>
+                    </LeaderboardPointsContainer>
+                </LeaderboardContainer>
+            ))}
         </Full>
     );
 };
