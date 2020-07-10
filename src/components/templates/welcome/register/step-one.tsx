@@ -52,7 +52,9 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
     const [email, setEmail] = useState(userData.email || '');
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState(userData.password || '');
+    const [passwordHidden, setPasswordHidden] = useState(true);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(true);
 
     useEffect(() => {
         setEmailError(!validateEmail(email));
@@ -88,7 +90,8 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             <Input
                 placeholder="Votre mot de passe"
                 label="Mot de passe"
-                secureTextEntry
+                onHideClick={() => setPasswordHidden(!passwordHidden)}
+                secureTextEntry={passwordHidden}
                 blurOnSubmit={false}
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={password}
@@ -97,7 +100,10 @@ const RegisterStepOne = (props: RegisterStepOneScreenProps) => {
             <Input
                 placeholder="Confirmer votre mot de passe"
                 label="Confirmer mot de passe"
-                secureTextEntry
+                onHideClick={() =>
+                    setConfirmPasswordHidden(!confirmPasswordHidden)
+                }
+                secureTextEntry={confirmPasswordHidden}
                 blurOnSubmit={false}
                 onSubmitEditing={() => Keyboard.dismiss()}
                 value={confirmPassword}

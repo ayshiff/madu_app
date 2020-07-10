@@ -46,6 +46,7 @@ const Login = (props: LoginScreenProps) => {
     const { navigation, login } = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isHidden, setIsHidden] = useState<boolean>(true);
     const { userData } = props;
 
     const navigateToNextStep = React.useMemo(
@@ -61,7 +62,6 @@ const Login = (props: LoginScreenProps) => {
             navigateToNextStep();
         }
     }, [userData, navigateToNextStep]);
-
     return (
         <SafeAreaView style={CONTAINER}>
             <Header
@@ -79,7 +79,8 @@ const Login = (props: LoginScreenProps) => {
             <Input
                 placeholder="Mot de passe"
                 label="Mot de passe"
-                secureTextEntry
+                onHideClick={() => setIsHidden(!isHidden)}
+                secureTextEntry={isHidden}
                 value={password}
                 onChangeText={(el: string) => setPassword(el)}
             />

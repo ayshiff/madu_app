@@ -18,4 +18,5 @@ export interface IconProps {
      */
 
     icon: IconTypes;
+    onPress?: () => void;
 }
