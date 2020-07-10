@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import { challengeActions } from 'madu/actions/challenge.actions';
 import { Close, StyledIcon } from 'madu/screens/poi-screen/poi-screen';
+import { IProfile } from 'madu/actions/profile.actions';
 import { Screen, Button, Icon } from '../..';
 import { color } from '../../../theme';
 import { Points } from '../../atoms/points/points';
@@ -95,6 +96,24 @@ const POINTS_TAG: ViewStyle = {
 const POINTS_TEXT: TextStyle = {
     color: '#70B32D'
 };
+
+const ChallengeDoneButton = styled.View`
+    width: 200px;
+    height: 48px;
+    background: #d0f2e9;
+    border-radius: 17px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+`;
+
+const ChallengeDoneButtonText = styled.Text`
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    color: #162d4b;
+    width: 158px;
+`;
 
 const ChallengeButton = styled.View`
     width: 329px;
@@ -190,11 +209,12 @@ export interface ChallengeScreenProps {
     navigation: any;
     challenge: any;
     validateChallenge: (arg: string) => void;
+    userData: IProfile;
 }
 
 const Challenge = (props: ChallengeScreenProps) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const { navigation, challenge, validateChallenge } = props;
+    const { navigation, challenge, validateChallenge, userData } = props;
 
     const navigateToPicture = () => navigation.navigate('challenge-picture');
     const navigateToProfile = () => navigation.navigate('attendees-profile');
@@ -232,18 +252,29 @@ const Challenge = (props: ChallengeScreenProps) => {
                     <Text style={BLACK_TEXT}>{challenge.title}</Text>
                     <Text style={GREY_TEXT}>{challenge.description}</Text>
                 </View>
-                <ChallengeButtonContainer
-                    onPress={() => {
-                        validateChallenge(challenge.id);
-                        navigateToPicture();
-                    }}
-                >
-                    <ChallengeButton>
-                        <ChallengeButtonText>
-                            Je relève le défi !
-                        </ChallengeButtonText>
-                    </ChallengeButton>
-                </ChallengeButtonContainer>
+                {challenge.participants.find((el) => el.id === userData.id) ? (
+                    <ChallengeButtonContainer>
+                        <ChallengeDoneButton>
+                            <ChallengeDoneButtonText>
+                                Défi validé
+                            </ChallengeDoneButtonText>
+                            <Icon icon="challenge_done" />
+                        </ChallengeDoneButton>
+                    </ChallengeButtonContainer>
+                ) : (
+                    <ChallengeButtonContainer
+                        onPress={() => {
+                            validateChallenge(challenge.id);
+                            navigateToPicture();
+                        }}
+                    >
+                        <ChallengeButton>
+                            <ChallengeButtonText>
+                                Je relève le défi !
+                            </ChallengeButtonText>
+                        </ChallengeButton>
+                    </ChallengeButtonContainer>
+                )}
                 <Text style={GREY_TEXT}>
                     Quand vous réalisez un défi pensez à prendre une photo ou
                     bien vous pouvez l’immortaliser sur le moment pour partager
@@ -319,7 +350,8 @@ const Challenge = (props: ChallengeScreenProps) => {
 };
 
 const mapStateToProps = (state: any) => ({
-    challenge: state.challenge.weekly
+    challenge: state.challenge.weekly,
+    userData: state.profile
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

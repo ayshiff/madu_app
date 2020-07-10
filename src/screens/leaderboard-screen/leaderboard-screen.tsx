@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { color } from '../../theme/color';
 import styled from 'styled-components/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { color } from '../../theme/color';
 import { IndividualLeaderboardScreen } from '../../components/templates/leaderboard/individual-leaderboard';
 import { CollectiveLeaderboardScreen } from '../../components/templates/leaderboard/collective-leaderboard';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Full = styled.View`
     flex: 1;

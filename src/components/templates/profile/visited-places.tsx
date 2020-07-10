@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
+import { connect } from 'react-redux';
 
 const Full = styled.View`
     flex: 1;
@@ -50,20 +51,23 @@ const VisitedPlacesPic = styled.Image`
     width: 48px;
     height: 48px;
     margin-right: 11px;
+    border-radius: 24px;
 `;
 
 export interface VisitedPlacesScreenProps {
     navigation: any;
     visits: any[];
+    poi: any;
 }
 
 const VisitedPlacesNumber = styled.Text`
     color: #fe8eb1;
 `;
 
-export const VisitedPlacesScreen = ({
+export const VisitedPlaces = ({
     navigation,
-    visits
+    visits,
+    poi
 }: VisitedPlacesScreenProps) => {
     return (
         <Full>
@@ -73,7 +77,7 @@ export const VisitedPlacesScreen = ({
                         <VisitedPlacesInformationContainer>
                             <VisitedPlacesInformation>
                                 <VisitedPlacesPic
-                                    source={require('../../../assets/profile-pic.png')}
+                                    source={{ uri: poi[visit.id].images[0] }}
                                 />
                                 <View>
                                     <VisitedPlacesName>
@@ -86,10 +90,23 @@ export const VisitedPlacesScreen = ({
                             </VisitedPlacesInformation>
                         </VisitedPlacesInformationContainer>
                         <VisitedPlacesNumberContainer>
-                            <VisitedPlacesNumber>3 Visites</VisitedPlacesNumber>
+                            <VisitedPlacesNumber>
+                                {poi[visit.id].visits} Visites
+                            </VisitedPlacesNumber>
                         </VisitedPlacesNumberContainer>
                     </VisitedPlacesScreenContainer>
                 ))}
         </Full>
     );
 };
+
+const mapStateToProps = (state: any) => ({
+    poi: state.poi.list
+});
+
+const mapDispatchToProps = () => ({});
+
+export const VisitedPlacesScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(VisitedPlaces);
