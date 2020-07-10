@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import SafeAreaView from 'react-native-safe-area-view';
 
-import { Header, Button } from 'madu/components';
+import { Header, Button, ButtonWrapper } from 'madu/components';
 import { color, spacing } from 'madu/theme';
 import { ImagePickerRegister } from 'madu/components/molecules/image-picker/image-picker';
 import { Text } from 'madu/components/atoms/text/text';
@@ -19,6 +19,7 @@ const IMAGE_CONTAINER: ViewStyle = {
     backgroundColor: 'white',
     width: 80,
     height: 80,
+    marginBottom: 25,
     borderRadius: 100
 };
 
@@ -106,22 +107,27 @@ export const RegisterStepFive = (props: RegisterStepFiveScreenProps) => {
                             }
                         />
                     </View>
-                    <Text textSize={16} textAlign="center">
+                    <Text textSize={24} textAlign="center" fontWeight="bold">
+                        Elodie Five
+                    </Text>
+                    <Text textSize={16} textAlign="center" bottom={60}>
                         Responsable Marketing • Communication
                     </Text>
-                    <Text>
+                    <Text textSize={18} bottom={20}>
                         Mettez dès à présent votre photo de profil pour que vos
                         collègues vous reconnaissent. {'\n'} Et gagnez vos
                         premiers points !
                     </Text>
-                    <Button
-                        title="Choisir une photo"
-                        onPress={() => setChosingImage(true)}
-                    />
-                    <Button
-                        title="Prendre une photo"
-                        onPress={() => setTakingImage(true)}
-                    />
+                    <ButtonWrapper>
+                        <Button
+                            title="Choisir une photo"
+                            onPress={() => setChosingImage(true)}
+                        />
+                        <Button
+                            title="Prendre une photo"
+                            onPress={() => setTakingImage(true)}
+                        />
+                    </ButtonWrapper>
                     <View
                         style={{
                             flex: 1,

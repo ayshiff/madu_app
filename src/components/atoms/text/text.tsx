@@ -9,6 +9,7 @@ export const Text = ({
     textAlign,
     color,
     bottom,
+    fontWeight,
     onPress
 }: TextProps) => {
     return (
@@ -18,6 +19,7 @@ export const Text = ({
             textAlign={textAlign}
             color={color}
             onPress={onPress}
+            fontWeight={fontWeight}
         >
             {children}
         </StyledText>
@@ -25,10 +27,12 @@ export const Text = ({
 };
 
 const StyledText = styled(ReactNativeText)`
-    color: ${(props: any) => (props.color ? props.color : '#000')};
-    font-size: ${(props: any) =>
+    color: ${(props: TextProps) => (props.color ? props.color : '#000')};
+    font-size: ${(props: TextProps) =>
         props.textSize ? `${props.textSize}px` : '10px'};
-    margin-bottom: ${(props: any) =>
+    font-weight: ${(props: TextProps) =>
+        props.fontWeight ? props.fontWeight : 'normal'};
+    margin-bottom: ${(props: TextProps) =>
         props.bottom ? `${props.bottom}px` : '10px'};
-    text-align: ${(props: any) => props.textAlign || 'left'};
+    text-align: ${(props: TextProps) => props.textAlign || 'left'};
 `;
